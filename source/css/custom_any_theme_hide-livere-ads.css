@@ -1,0 +1,4 @@
+/* Do not show livere ads. */
+#taboola-livere{
+    display: none;
+}

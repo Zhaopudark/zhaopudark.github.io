@@ -1,0 +1,11 @@
+projects:
+  menu: '项目'
+  title: '项目'
+  subtitle: '项目'
+  post_total: '共计 %d 个项目'
+
+docs:
+  menu: '文档'
+  title: '文档'
+  subtitle: '文档'
+  post_total: '共计 %d 个文档'

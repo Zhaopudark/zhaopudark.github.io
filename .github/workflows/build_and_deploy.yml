@@ -1,0 +1,62 @@
+name: Build And Deploy To GitHub Pages
+
+on: 
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  build_and_upload:
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-update-conda: true
+          python-version: 3.12
+          activate-environment: blog_dev
+          environment-file: ./etc/environment.yml
+      - name: Build
+        shell: pwsh
+        run: |
+          npm ci && npm install -g hexo-cli
+          pandoc -v
+          pip list
+          mkdir logs
+          hexo clean
+          hexo generate
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: github-pages
+          path: "public/"
+  deploy_to_github_pages:
+    # Add a dependency to the build job
+    needs: build_and_upload
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # or specific "vX.X.X" version tag for this action
+      
+    
+    
+    # - name: Baidu Push
+    #   run: curl -H 'Content-Type:text/plain' --data-binary @sitemap.txt "http://data.zz.baidu.com/urls?site=https://little-train.com&token=EY493WfyjGVhW6IM"
+    # - name: Bing Push
+    #   run: curl -X POST "https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=${{ secrets.BING_API_KEY }}" -H "Content-Type: application/json" -d '{"siteUrl":"https://little-train.com","urlList":["https://little-train.com/sitemap.txt"]}'
+    # - name: Google Push
+    #   run: curl -H 'Content-Type: text/plain' --data-binary @sitemap.txt "http://www.google.com/ping?sitemap=https://little-train.com/sitemap.txt"

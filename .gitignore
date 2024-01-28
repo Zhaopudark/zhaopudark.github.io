@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+db.json
+*.log
+node_modules/
+public/
+python/
+.deploy*/
+_multiconfig.yml
+__pycache__/
+logs/
+helper/
+.vscode/

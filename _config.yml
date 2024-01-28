@@ -1,0 +1,181 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: Little Train's Blog
+subtitle: 'Recording, Sharing, Communicating and Learning'
+description: '长风破浪会有时, 打铁还需自身硬。'
+keywords:
+  - Machine Learning
+  - Deep Learning
+  - Generative Model
+  - Medical Imaging
+  - Python
+  - Tensorflow
+  - Pytorch
+  - Windows
+  - WSL2
+author: Pu Zhao
+language:
+  - zh-CN
+  - en
+timezone: 'Asia/Shanghai'
+
+# URL
+## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
+url: https://little-train.com
+permalink: posts/:abbrlink.html
+permalink_defaults:
+pretty_urls:
+  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
+  trailing_html: true # Set to false to remove trailing '.html' from permalinks
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link:
+  enable: true # Open external links in new tab
+  field: site # Apply to the whole site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+syntax_highlighter: highlight.js # 只有为空时，才由渲染器接管代码部分的渲染。因此，通常导致pandoc过滤器始终无法识别到任何代码块。
+highlight:
+  auto_detect: false
+  line_number: true
+  line_threshold: 0
+  tab_replace: ''
+  exclude_languages:
+    - mermaid  # 排除mermaid语言，才可以使得自定义的mermaid渲染部分正常工作
+  wrap: true
+  hljs: false
+prismjs:
+  preprocess: true
+  line_number: true
+  line_threshold: 0
+  tab_replace: ''
+
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Metadata elements
+## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+meta_generator: true
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+## updated_option supports 'mtime', 'date', 'empty'
+updated_option: 'mtime'
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 10
+pagination_dir: page
+
+# Include / Exclude file(s)
+## include:/exclude: options only apply to the 'source/' folder
+include:
+exclude:
+ignore:
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+theme: butterfly
+
+# Deployment
+## Docs: https://hexo.io/docs/one-command-deployment
+deploy:
+  type: ''
+
+
+pandoc: # https://github.com/hexojs/hexo-renderer-pandoc
+  args:
+    - '-f'
+    - gfm
+    - '-t'
+    - html
+    - '--mathjax'
+    - '--filter'
+    - "md2html-enhance-link-like-filter"
+    - '--filter'
+    - "md2html-hash-anchor-and-internal-link-filter"
+    
+feed: # https://github.com/hexojs/hexo-generator-sitemap
+  enable: true
+  type:
+    - atom
+  path:
+    - atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+  icon: icon.png
+  autodiscovery: true
+  template:
+sitemap: # https://github.com/hexojs/hexo-generator-sitemap
+  path: 
+    - sitemap.txt
+    - sitemap.xml
+  # template: ./sitemap_template.xml
+  # template_txt: ./sitemap_template.txt
+  rel: false
+  tags: true
+  categories: true
+search:
+  path: search.xml
+  field: post
+  content: true
+  template: 
+
+hide_posts:
+  # Should hexo-hide-posts be enabled.
+  enable: true
+
+  # The front-matter key for flagging hidden posts.
+  # You can change the filter name if you like.
+  filter: hide
+
+  # Add "noindex" meta tag to prevent hidden posts from being indexed by search engines.
+  noindex: true
+
+  # Generators in the allowlist will have access to the hidden posts.
+  # Common generators in Hexo: 'index', 'tag', 'category', 'archive', 'sitemap', 'feed'
+  allowlist_generators: []
+
+  # Generators in the blocklist can *not* access the hidden posts.
+  # The allowlist has higher priority than the blocklist, if both set.
+  blocklist_generators: ['*']
