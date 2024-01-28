@@ -518,7 +518,7 @@ giscus:
     data-reactions-enabled: true
     data-emit-metadata: true
     data-input-position: "top"
-    data-lang: "zh-CN"
+    # data-lang: "zh-CN"
     crossorigin: "anonymous"
 
 
