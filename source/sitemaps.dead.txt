@@ -1,7 +1,7 @@
-https://little-train.com/404.html
 https://little-train.com/Docs/Readme2.markdown
 https://little-train.com/Readme1.md
 https://little-train.com/about/
+https://little-train.com/app_location/staticwebapp.config.json
 https://little-train.com/archives/
 https://little-train.com/archives/2022/10/
 https://little-train.com/archives/2022/10/index.html
@@ -30,7 +30,6 @@ https://little-train.com/categories/Personal-Experiences/page/2/
 https://little-train.com/categories/Personal-Experiences/page/2/index.html
 https://little-train.com/categories/Topics/index.html
 https://little-train.com/categories/algorithm/
-https://little-train.com/categories/index.html
 https://little-train.com/categories/建站基础/
 https://little-train.com/categories/建站基础/index.html
 https://little-train.com/comments/
@@ -38,7 +37,6 @@ https://little-train.com/comments/index.html
 https://little-train.com/index.html
 https://little-train.com/lib/pdf/web/viewer.html
 https://little-train.com/link/
-https://little-train.com/link/index.html
 https://little-train.com/links/
 https://little-train.com/littletrainhomepage-07cd8fedf1f5.json
 https://little-train.com/page/2/
@@ -92,6 +90,7 @@ https://little-train.com/posts/fce44304
 https://little-train.com/posts/fce44304.html
 https://little-train.com/posts/yyy
 https://little-train.com/projects/
+https://little-train.com/projects/index.html
 https://little-train.com/rss2.xml
 https://little-train.com/search.xml
 https://little-train.com/sitemap.xml
@@ -115,7 +114,6 @@ https://little-train.com/tags/Msys2/
 https://little-train.com/tags/Msys2/index.html
 https://little-train.com/tags/Pip/
 https://little-train.com/tags/Pip/index.html
-https://little-train.com/tags/PowerShell/
 https://little-train.com/tags/PowerShell/index.html
 https://little-train.com/tags/Python/index.html
 https://little-train.com/tags/Tools/
@@ -126,7 +124,6 @@ https://little-train.com/tags/Windows/page/2/
 https://little-train.com/tags/Windows/page/2/index.html
 https://little-train.com/tags/Zotero/
 https://little-train.com/tags/Zotero/index.html
-https://little-train.com/tags/index.html
 https://little-train.com/tags/公约/
 https://little-train.com/tags/公约/index.html
 https://little-train.com/yyy

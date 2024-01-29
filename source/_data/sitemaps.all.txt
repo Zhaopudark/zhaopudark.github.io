@@ -68,6 +68,7 @@ https://little-train.com/posts/7fdde8eb.html
 https://little-train.com/posts/8527ab53.html
 https://little-train.com/posts/96545e30
 https://little-train.com/posts/96545e30.html
+https://little-train.com/posts/98626aad.html
 https://little-train.com/posts/9a1192fa
 https://little-train.com/posts/9a1192fa.html
 https://little-train.com/posts/9b627e5.html
@@ -119,6 +120,7 @@ https://little-train.com/tags/Computer-Vision/
 https://little-train.com/tags/Computer-Vision/index.html
 https://little-train.com/tags/Conda/
 https://little-train.com/tags/Conda/index.html
+https://little-train.com/tags/DDNS/
 https://little-train.com/tags/Deep-Learning/
 https://little-train.com/tags/Deep-Learning/index.html
 https://little-train.com/tags/File-System/
