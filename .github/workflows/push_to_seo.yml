@@ -31,6 +31,5 @@ jobs:
       - name: push to google
         shell: pwsh
         run: |
-          $content = ${{ secrets.GOOGLE_API_JSON }}
-          $content | Set-Content -Path "google_api_json.json"
+          ${{ secrets.GOOGLE_API_JSON }} > google_api_json.json
           python python/push_google_seo.py ./sitemap.txt ./sitemap.dead.txt ./google_api_json.json
