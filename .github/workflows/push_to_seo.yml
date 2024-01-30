@@ -6,8 +6,10 @@ on:
     - cron:  '0 0 * * *' 
 
 jobs:
-  post_deploy_test:
+  push_to_seo:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
     steps:
       - uses: actions/checkout@v4
       - name: Build
