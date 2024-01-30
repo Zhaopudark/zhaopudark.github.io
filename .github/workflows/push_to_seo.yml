@@ -22,4 +22,4 @@ jobs:
         shell: pwsh
         run: |
           Invoke-WebRequest -Uri ${{ secrets.SITEMAP_URL }} -Outfile ./sitemap.txt
-          python python/push_to_baidu.py -./sitemap.txt ${{ secrets.BAIDU_SEO_TOKEN }}
+          python python/push_baidu_seo.py -./sitemap.txt ${{ secrets.BAIDU_SEO_TOKEN }}
