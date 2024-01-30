@@ -1,8 +1,7 @@
 name: Push to SEO
 
 on: 
-  workflow_run:
-    workflow_dispatch:
+  workflow_dispatch:
   schedule:
     - cron:  '0 0 * * *' 
 
