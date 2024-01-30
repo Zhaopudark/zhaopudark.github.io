@@ -1,13 +1,11 @@
 import requests
 import typeguard
 import urllib.parse
-from  pandoc_filter.utils import TracingLogger
+
 import logging
 
 @typeguard.typechecked
 def push_baidu_seo(site:str,token:str,urls:list[str]):
-    
-    logger = TracingLogger(name='logs/push_log',level=logging.INFO)
     # 定义请求头
     headers = {
         'Content-Type': 'text/plain',
@@ -20,8 +18,8 @@ def push_baidu_seo(site:str,token:str,urls:list[str]):
     # 发送POST请求
     response = requests.post('http://data.zz.baidu.com/urls', headers=headers, params=params, data="\r\n".join(urls))
     # 打印响应内容
-    logger.logger.info(response.status_code)  # 打印响应状态码
-    logger.logger.info(response.text)  # 打印响应内容
+    logging.info(response.status_code)  # 打印响应状态码
+    logging.info(response.text)  # 打印响应内容
 
 if __name__ == "__main__":
     

@@ -1,4 +1,3 @@
 typeguard
 requests
-pandoc_filter --pre
 panflute

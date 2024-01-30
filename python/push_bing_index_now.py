@@ -1,12 +1,10 @@
 import requests
 import typeguard
 import urllib.parse
-from  pandoc_filter.utils import TracingLogger
 import logging
+
 @typeguard.typechecked
 def push_bing_index_now(site:str,token:str,urls:list[str]):
-    
-    logger = TracingLogger(name='logs/push_log',level=logging.INFO)
     # 定义请求头
     headers = {
         'Content-Type': 'application/json; charset=utf-8',
@@ -19,12 +17,11 @@ def push_bing_index_now(site:str,token:str,urls:list[str]):
         "keyLocation": f"https://{site}/{token}.txt",
         "urlList": urls
     }
-
     # 发送POST请求
     response = requests.post('https://api.indexnow.org/IndexNow', headers=headers, json=data)
     # 打印响应内容
-    logger.logger.info(response.status_code)  # 打印响应状态码
-    logger.logger.info(response.text)  # 打印响应内容
+    logging.info(response.status_code)  # 打印响应状态码
+    logging.info(response.text)  # 打印响应内容
 
 if __name__ == "__main__":
     
