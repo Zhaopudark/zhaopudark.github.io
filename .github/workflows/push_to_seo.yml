@@ -31,5 +31,5 @@ jobs:
       - name: push to google
         shell: pwsh
         run: |
-          ${{ secrets.GOOGLE_SEO_TOKEN }} > google_api_json.json
-          python python/push_google_seo.py ./sitemap.txt ./sitemap.dead.txt google_api_json.json
+          ${{ secrets.GOOGLE_API_JSON }} > google_api_json.json
+          python python/push_google_seo.py ./sitemap.txt ./sitemap.dead.txt ./google_api_json.json
