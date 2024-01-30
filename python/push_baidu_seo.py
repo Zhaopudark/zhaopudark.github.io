@@ -2,8 +2,6 @@ import requests
 import typeguard
 import urllib.parse
 
-import logging
-
 @typeguard.typechecked
 def push_baidu_seo(site:str,token:str,urls:list[str]):
     # 定义请求头
@@ -18,8 +16,8 @@ def push_baidu_seo(site:str,token:str,urls:list[str]):
     # 发送POST请求
     response = requests.post('http://data.zz.baidu.com/urls', headers=headers, params=params, data="\r\n".join(urls))
     # 打印响应内容
-    logging.info(response.status_code)  # 打印响应状态码
-    logging.info(response.text)  # 打印响应内容
+    print(response.status_code)  # 打印响应状态码
+    print(response.text)  # 打印响应内容
 
 if __name__ == "__main__":
     

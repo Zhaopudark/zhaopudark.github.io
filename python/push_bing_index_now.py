@@ -1,7 +1,6 @@
 import requests
 import typeguard
 import urllib.parse
-import logging
 
 @typeguard.typechecked
 def push_bing_index_now(site:str,token:str,urls:list[str]):
@@ -20,8 +19,8 @@ def push_bing_index_now(site:str,token:str,urls:list[str]):
     # 发送POST请求
     response = requests.post('https://api.indexnow.org/IndexNow', headers=headers, json=data)
     # 打印响应内容
-    logging.info(response.status_code)  # 打印响应状态码
-    logging.info(response.text)  # 打印响应内容
+    print(response.status_code)  # 打印响应状态码
+    print(response.text)  # 打印响应内容
 
 if __name__ == "__main__":
     
