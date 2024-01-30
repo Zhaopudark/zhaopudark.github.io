@@ -10,14 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5 
+      with:
+        python-version: '3.12' 
+        cache: 'pip' # caching pip dependencies
+    - run: |
+        pip install -r etc/requirements.txt
     steps:
-      - uses: actions/checkout@v4
-      - name: Build
+      - name: push to baidu
         shell: pwsh
         run: |
-          Write-Host ${{ secrets.BAIDU_SEO_TOKEN }}
-          Write-Host ${{ env.BAIDU_SEO_TOKEN }}
-          Write-Host ${{ env.secrets.BAIDU_SEO_TOKEN }}
-          Write-Host ${{ secrets.INDEX_NOW_TOKEN }}
-          Write-Host ${{ env.INDEX_NOW_TOKEN }}
-          Write-Host ${{ env.secrets.INDEX_NOW_TOKEN }}
+          Invoke-WebRequest -Uri ${{ secrets.SITEMAP_URL }} -Outfile ./sitemap.txt
+          python python/push_to_baidu.py -./sitemap.txt ${{ secrets.BAIDU_SEO_TOKEN }}
