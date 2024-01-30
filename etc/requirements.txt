@@ -1,3 +1,5 @@
 typeguard
 requests
 panflute
+httplib2
+oauth2client
