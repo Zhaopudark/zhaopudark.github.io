@@ -9,6 +9,7 @@ jobs:
   post_deploy_test:
     runs-on: ubuntu-latest
     steps:
+      - name: Build
         shell: pwsh
         run: |
           Write-Host ${{ secrets.BAIDU_SEO_TOKEN }}
