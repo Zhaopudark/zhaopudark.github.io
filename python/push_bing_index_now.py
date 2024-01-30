@@ -3,22 +3,25 @@ import typeguard
 import urllib.parse
 from  pandoc_filter.utils import TracingLogger
 import logging
-
 @typeguard.typechecked
-def push_baidu_seo(site:str,token:str,urls:list[str]):
+def push_bing_index_now(site:str,token:str,urls:list[str]):
     
     logger = TracingLogger(name='logs/push_log',level=logging.INFO)
     # 定义请求头
     headers = {
-        'Content-Type': 'text/plain',
+        'Content-Type': 'application/json; charset=utf-8',
+        'Host': 'api.indexnow.org'
     }
-    # 定义请求参数
-    params = {
-        'site': site,
-        'token': token,
+    # 定义要发送的数据
+    data = {
+        "host": site,
+        "key": token,
+        "keyLocation": f"https://{site}/{token}.txt",
+        "urlList": urls
     }
+
     # 发送POST请求
-    response = requests.post('http://data.zz.baidu.com/urls', headers=headers, params=params, data="\r\n".join(urls))
+    response = requests.post('https://api.indexnow.org/IndexNow', headers=headers, json=data)
     # 打印响应内容
     logger.logger.info(response.status_code)  # 打印响应状态码
     logger.logger.info(response.text)  # 打印响应内容
@@ -29,7 +32,7 @@ if __name__ == "__main__":
     
     # 检查命令行参数是否包含文件名
     if len(sys.argv) != 3:
-        print("Usage: python push_baidu_seo.py sitemap_txt_path token")
+        print("Usage: python push_bing_index_now.py sitemap_txt_path token")
         sys.exit(1)
 
     sitemap_txt_path = sys.argv[1]
@@ -48,9 +51,4 @@ if __name__ == "__main__":
             site_counts[site] = site_counts.get(site, 0) + 1
     site = max(site_counts, key=site_counts.get) # default iterator is on keys
 
-    push_baidu_seo(site=site,token=token,urls=urls)
-    
-    
-
-
-
+    push_bing_index_now(site=site,token=token,urls=urls)
