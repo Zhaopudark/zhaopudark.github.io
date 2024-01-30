@@ -1,0 +1,16 @@
+name: Push to SEO
+
+on: 
+  workflow_run:
+    workflow_dispatch:
+  schedule:
+    - cron:  '0 0 * * *' 
+
+jobs:
+  post_deploy_test:
+    runs-on: ubuntu-latest
+    steps:
+        shell: pwsh
+        run: |
+          Write-Host ${{ secrets.BAIDU_SEO_TOKEN }}
+          Write-Host ${{ secrets.INDEX_NOW_TOKEN }}
