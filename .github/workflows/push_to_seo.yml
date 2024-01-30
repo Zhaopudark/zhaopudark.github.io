@@ -12,12 +12,12 @@ jobs:
       name: github-pages
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5 
+      - uses: conda-incubator/setup-miniconda@v3
         with:
-          python-version: '3.11' 
-          cache: 'pip' # caching pip dependencies
-      - run: |
-          pip install -r ./etc/requirements.txt
+          auto-update-conda: true
+          python-version: 3.12
+          activate-environment: blog_dev
+          environment-file: ./etc/environment.yml
       - name: push to baidu
         shell: pwsh
         run: |
