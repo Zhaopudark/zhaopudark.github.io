@@ -7,7 +7,7 @@ math: true
 mathjax: true
 sitemap: false
 title: Formatting Test
-updated: "2024-01-28 11:27:55"
+updated: "2024-01-31 16:34:10"
 ---
 
 用于测试关键的若干Markdown语法或Markdown标记是否被正确渲染为预期的html。
@@ -441,7 +441,9 @@ alt="Level-of-concepts" />
 \begin{equation}\tag{3}
 e=mc^2
 \end{equation}
-$$ {% endnote %}
+$$
+
+{% endnote %}
 
 # Tabs
 
