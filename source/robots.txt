@@ -26,7 +26,6 @@ Disallow: /archives/2023/12/page/2/
 Disallow: /archives/2023/12/page/2/index.html
 Disallow: /archives/index.html
 Disallow: /archives/page/2/
-Disallow: /atom.xml
 Disallow: /categories/
 Disallow: /categories/Personal-Experiences/index.html
 Disallow: /categories/Personal-Experiences/page/2/
@@ -96,7 +95,6 @@ Disallow: /projects/
 Disallow: /projects/index.html
 Disallow: /rss2.xml
 Disallow: /search.xml
-Disallow: /sitemap.xml
 Disallow: /tags/
 Disallow: /tags/Algorithm/index.html
 Disallow: /tags/Backup/

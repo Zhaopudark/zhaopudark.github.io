@@ -23,7 +23,6 @@ https://little-train.com/archives/2023/12/page/2/
 https://little-train.com/archives/2023/12/page/2/index.html
 https://little-train.com/archives/index.html
 https://little-train.com/archives/page/2/
-https://little-train.com/atom.xml
 https://little-train.com/categories/
 https://little-train.com/categories/Personal-Experiences/index.html
 https://little-train.com/categories/Personal-Experiences/page/2/
@@ -93,7 +92,6 @@ https://little-train.com/projects/
 https://little-train.com/projects/index.html
 https://little-train.com/rss2.xml
 https://little-train.com/search.xml
-https://little-train.com/sitemap.xml
 https://little-train.com/tags/
 https://little-train.com/tags/Algorithm/index.html
 https://little-train.com/tags/Backup/

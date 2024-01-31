@@ -35,12 +35,23 @@ if __name__ == "__main__":
                 new_set.add(temp)
                 scheme_set.add(urllib.parse.urlparse(temp).scheme)
                 netloc_set.add(urllib.parse.urlparse(temp).netloc)
+    site_counts = {}
+    for url in new_set:
+        parsed_url = urllib.parse.urlparse(url)
+        site = parsed_url.netloc
+        if site:
+            site_counts[site] = site_counts.get(site, 0) + 1
+    site = max(site_counts, key=site_counts.get) # default iterator is on keys
+    new_set.add(f"https://{site}/sitemap.xml")
+    new_set.add(f"https://{site}/sitemap.txt")
+    new_set.add(f"https://{site}/atom.xml")
+    new_set.add(f"https://{site}/index.xml")
     
     all_set.update(new_set)
     with open(all_sitmap_path, 'w', encoding='utf-8') as file:
         for item in sorted(all_set):
             file.write(f"{item}\n")
-    
+   
     dead_set = all_set - new_set
     with open(dead_sitmap_path, 'w', encoding='utf-8') as file:
         for item in sorted(dead_set):
