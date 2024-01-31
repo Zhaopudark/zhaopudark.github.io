@@ -12,7 +12,7 @@ tags:
 title: Derived from splitting data into 3 parts, a better way to divide
   a list of same type elements into ‘n’ parts according to ratios,
   without repetition or leaking
-updated: "2024-01-05 15:20:02"
+updated: "2024-01-31 16:12:06"
 ---
 
 This article discusses an operation that originated in machine learning,
@@ -381,16 +381,19 @@ forms:
   $R(f_3)=\{x|-\frac{n}{2}\leq x\leq\frac{n}{2},x\in \mathbb{Z}\}$. See
   [appendix A.3](#A.3) for analysis process.
 
-{% note primary %} So, any $round(\cdot)$ function will result in a
-maximum difference of about $0.5n$ in $\sum_{i=1}^{n}y_i$ to $N$. If
-back to original dividing problem, there will be a difference up to
-$0.5n$ in the total number of elements in divided parts to original
-total number. That is to say, up to $0.5n$ elements may be missed. So,
-we cannot just use $round(\cdot)$ function directly to divide elements
-in $L$. {% endnote %} And, combine [appendix A.1](#A.1),[appendix
-A.2](#A.2) and [appendix A.3](#A.3), we can find the following about the
-function$\eqref{round}$:
+{% note primary %}
 
+So, any $round(\cdot)$ function will result in a maximum difference of
+about $0.5n$ in $\sum_{i=1}^{n}y_i$ to $N$. If back to original dividing
+problem, there will be a difference up to $0.5n$ in the total number of
+elements in divided parts to original total number. That is to say, up
+to $0.5n$ elements may be missed. So, we cannot just use $round(\cdot)$
+function directly to divide elements in $L$.
+
+{% endnote %}
+
+And, combine [appendix A.1](#A.1),[appendix A.2](#A.2) and [appendix
+A.3](#A.3), we can find the following about the function$\eqref{round}$:
 $$
 \begin{equation}\label{round_range}\tag{6}
 \begin{aligned}
