@@ -33,7 +33,7 @@ https://little-train.com/categories/建站基础/
 https://little-train.com/categories/建站基础/index.html
 https://little-train.com/comments/
 https://little-train.com/comments/index.html
-https://little-train.com/index.html
+https://little-train.com/index.xml
 https://little-train.com/lib/pdf/web/viewer.html
 https://little-train.com/link/
 https://little-train.com/links/

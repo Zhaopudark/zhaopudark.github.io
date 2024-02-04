@@ -36,7 +36,7 @@ Disallow: /categories/建站基础/
 Disallow: /categories/建站基础/index.html
 Disallow: /comments/
 Disallow: /comments/index.html
-Disallow: /index.html
+Disallow: /index.xml
 Disallow: /lib/pdf/web/viewer.html
 Disallow: /link/
 Disallow: /links/

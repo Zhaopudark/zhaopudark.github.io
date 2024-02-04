@@ -45,18 +45,19 @@ if __name__ == "__main__":
     new_set.add(f"https://{site}/sitemap.xml")
     new_set.add(f"https://{site}/sitemap.txt")
     new_set.add(f"https://{site}/atom.xml")
-    new_set.add(f"https://{site}/index.xml")
-    
+    new_set.add(f"https://{site}/index.html")
     all_set.update(new_set)
+    
     with open(all_sitmap_path, 'w', encoding='utf-8') as file:
         for item in sorted(all_set):
             file.write(f"{item}\n")
-   
+    
     dead_set = all_set - new_set
+
     with open(dead_sitmap_path, 'w', encoding='utf-8') as file:
         for item in sorted(dead_set):
             file.write(f"{item}\n")
-    
+    # print(dead_set)
     with open(robot_txt_path, 'w', encoding='utf-8') as file:
         for scheme,netloc in itertools.product(sorted(scheme_set),sorted(netloc_set)):
             file.write(f"Sitemap: {scheme}://{netloc}/sitemap.xml\n")
