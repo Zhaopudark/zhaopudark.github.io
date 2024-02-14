@@ -65,3 +65,5 @@ if __name__ == "__main__":
         file.write(f"User-agent: *\n")
         for item in sorted(dead_set):
             file.write(f"Disallow: {urllib.parse.urlparse(item).path}\n")
+        for item in sorted(new_set):
+            file.write(f"Allow: {urllib.parse.urlparse(item).path}\n")
