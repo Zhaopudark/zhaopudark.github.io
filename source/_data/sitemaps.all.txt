@@ -112,6 +112,7 @@ https://little-train.com/rss2.xml
 https://little-train.com/search.xml
 https://little-train.com/sitemap.txt
 https://little-train.com/sitemap.xml
+https://little-train.com/sitemaps.dead.txt
 https://little-train.com/tags/
 https://little-train.com/tags/Algorithm/
 https://little-train.com/tags/Algorithm/index.html

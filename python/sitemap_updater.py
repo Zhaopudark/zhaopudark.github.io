@@ -46,6 +46,7 @@ if __name__ == "__main__":
     new_set.add(f"https://{site}/sitemap.txt")
     new_set.add(f"https://{site}/atom.xml")
     new_set.add(f"https://{site}/index.html")
+    new_set.add(f"https://{site}/sitemaps.dead.txt")
     all_set.update(new_set)
     
     with open(all_sitmap_path, 'w', encoding='utf-8') as file:
