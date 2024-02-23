@@ -81,19 +81,20 @@ if __name__ == "__main__":
     import sys
     
     # 检查命令行参数是否包含文件名
-    if len(sys.argv) != 6:
-        print("Usage: python markdown_deployer.py <sitmap_all_path> <posts_path> <sitmap_path> <sitmap_dead_path> <robot_txt_path>")
+    if len(sys.argv) != 7:
+        print("Usage: python markdown_deployer.py <sitemap_all_path> <posts_path> <sitemap_xml_path> <sitemap_txt_path> <sitemap_dead_path> <robot_txt_path>")
         sys.exit(1)
     print(sys.argv)
     
-    sitmap_all_path = sys.argv[1]
+    sitemap_all_path = sys.argv[1]
     posts_path = sys.argv[2]
-    sitmap_path = sys.argv[3]
-    sitmap_dead_path = sys.argv[4]
-    robot_txt_path = sys.argv[5]
+    sitemap_xml_path = sys.argv[3]
+    sitemap_txt_path = sys.argv[4]
+    sitemap_dead_path = sys.argv[5]
+    robot_txt_path = sys.argv[6]
     
     all_set = set()
-    with open(sitmap_all_path, 'r', encoding='utf-8') as file:
+    with open(sitemap_all_path, 'r', encoding='utf-8') as file:
         for line in file:
             temp = line.strip(' \r\n')
             if temp:
@@ -108,8 +109,10 @@ if __name__ == "__main__":
     site = max(site_counts, key=site_counts.get) # default iterator is on keys
 
     date_with_urls = get_date_with_urls(posts_path)
-    dump_site_maps_to_xml(sitmap_path, date_with_urls)
+    dump_site_maps_to_xml(sitemap_xml_path, date_with_urls)
+    
     new_set = set([url for _,url in date_with_urls])
+    dump_site_maps_to_txt(sitemap_txt_path, new_set)
     
     new_set.add(f"https://{site}/sitemap.xml")
     new_set.add(f"https://{site}/atom.xml")
@@ -120,11 +123,10 @@ if __name__ == "__main__":
     new_set.add(f"https://{site}/ads.txt")
 
     all_set.update(new_set)
-    
-    dump_site_maps_to_txt(sitmap_all_path, all_set)
+    dump_site_maps_to_txt(sitemap_all_path, all_set)
     
     dead_set = all_set - new_set
-    dump_site_maps_to_txt(sitmap_dead_path, dead_set)
+    dump_site_maps_to_txt(sitemap_dead_path, dead_set)
 
     with open(robot_txt_path, 'w', encoding='utf-8') as file:
         file.write(f"Sitemap: https://{site}/sitemap.xml\n")
