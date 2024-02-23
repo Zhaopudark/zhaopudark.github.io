@@ -34,20 +34,7 @@ def finalize(doc:pf.Doc=None,**kwargs):
     
 #     return pf.run_filters(actions= [math_filter,figure_filter,footnote_filter,internal_link_filter],finalize=_finalize,doc=doc,**kwargs)
 
-
-if __name__ == "__main__":
-    
-    import sys
-    
-    # 检查命令行参数是否包含文件名
-    if len(sys.argv) != 3:
-        print("Usage: python markdown_deployer.py <notes_dir> <target_dir>")
-        sys.exit(1)
-    print(sys.argv)
-    
-    notes_dir = sys.argv[1]
-    target_dir = sys.argv[2]
-
+def main(notes_dir,target_dir):
     global_abbrlink_file_recoder = {}
     for file_path in pathlib.Path(notes_dir).glob('**/*.md'):
         try:
@@ -72,4 +59,16 @@ if __name__ == "__main__":
             logging.error(e)
         finally:
             f.close()
+
+if __name__ == "__main__":
+    
+    import sys
+    # 检查命令行参数是否包含文件名
+    if len(sys.argv) != 3:
+        print("Usage: python markdown_deployer.py <notes_dir> <target_dir>")
+        sys.exit(1)
+    print(sys.argv)
+    main(notes_dir=sys.argv[1],target_dir=sys.argv[2])
+
+    
         

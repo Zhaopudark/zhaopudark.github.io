@@ -33,24 +33,23 @@ def push_google_seo(sitemap_txt_path:str,sitemap_dead_txt_path:str,json_key_path
                 # logger.info(json.dumps(content))
                 response, content = http.request(ENDPOINT, method="POST", body=json.dumps(content))
                 print(f"response: {response}")
-
-if __name__ == "__main__":
-    
-    import sys
-    
-    # 检查命令行参数是否包含文件名
-    if len(sys.argv) != 4:
-        print("Usage: python push_google_seo.py sitemap_txt_path sitemap_dead_txt_path json_key_path")
-        sys.exit(1)
-
-    sitemap_txt_path = sys.argv[1]
-    sitemap_dead_txt_path = sys.argv[2]
-    json_key_path = sys.argv[3]
-    
+                
+def main(sitemap_txt_path,sitemap_dead_txt_path,json_key_path):
     push_google_seo(
         sitemap_txt_path=sitemap_txt_path,
         sitemap_dead_txt_path=sitemap_dead_txt_path,
         json_key_path=json_key_path)
+
+if __name__ == "__main__":
+    
+    import sys
+    # 检查命令行参数是否包含文件名
+    if len(sys.argv) != 4:
+        print("Usage: python push_google_seo.py sitemap_txt_path sitemap_dead_txt_path json_key_path")
+        sys.exit(1)
+    main(sitemap_txt_path=sys.argv[1],
+         sitemap_dead_txt_path=sys.argv[2],
+         json_key_path=sys.argv[3])
     
     
 

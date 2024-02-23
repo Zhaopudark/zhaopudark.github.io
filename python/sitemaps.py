@@ -12,7 +12,7 @@ import datetime
 from collections import namedtuple
 
 @typeguard.typechecked
-def get_date_with_urls(posts_path:str)->list[tuple[datetime.datetime,str]]:
+def get_date_with_urls(posts_path:str,site:str)->list[tuple[datetime.datetime,str]]:
     date_with_urls = []
     for file_path in pathlib.Path(posts_path).glob('**/*.md'):
         try:
@@ -76,23 +76,7 @@ def dump_site_maps_to_txt(file_path:str, urls_set:set[str]):
         for item in sorted(urls_set):
             f.write(f"{item}\n")
 
-            
-if __name__ == "__main__":
-    import sys
-    
-    # 检查命令行参数是否包含文件名
-    if len(sys.argv) != 7:
-        print("Usage: python markdown_deployer.py <sitemap_all_path> <posts_path> <sitemap_xml_path> <sitemap_txt_path> <sitemap_dead_path> <robot_txt_path>")
-        sys.exit(1)
-    print(sys.argv)
-    
-    sitemap_all_path = sys.argv[1]
-    posts_path = sys.argv[2]
-    sitemap_xml_path = sys.argv[3]
-    sitemap_txt_path = sys.argv[4]
-    sitemap_dead_path = sys.argv[5]
-    robot_txt_path = sys.argv[6]
-    
+def main(sitemap_all_path,posts_path,sitemap_xml_path,sitemap_txt_path,sitemap_dead_path,robot_txt_path):
     all_set = set()
     with open(sitemap_all_path, 'r', encoding='utf-8') as file:
         for line in file:
@@ -108,7 +92,7 @@ if __name__ == "__main__":
             site_counts[site] = site_counts.get(site, 0) + 1
     site = max(site_counts, key=site_counts.get) # default iterator is on keys
 
-    date_with_urls = get_date_with_urls(posts_path)
+    date_with_urls = get_date_with_urls(posts_path,site)
     dump_site_maps_to_xml(sitemap_xml_path, date_with_urls)
     
     new_set = set([url for _,url in date_with_urls])
@@ -135,4 +119,27 @@ if __name__ == "__main__":
             file.write(f"Disallow: {urllib.parse.urlparse(item).path}\n")
         for item in sorted(new_set):
             file.write(f"Allow: {urllib.parse.urlparse(item).path}\n")
+if __name__ == "__main__":
+    import sys
+    
+    # 检查命令行参数是否包含文件名
+    if len(sys.argv) != 7:
+        print("Usage: python markdown_deployer.py <sitemap_all_path> <posts_path> <sitemap_xml_path> <sitemap_txt_path> <sitemap_dead_path> <robot_txt_path>")
+        sys.exit(1)
+    print(sys.argv)
+    
+    # sitemap_all_path = sys.argv[1]
+    # posts_path = sys.argv[2]
+    # sitemap_xml_path = sys.argv[3]
+    # sitemap_txt_path = sys.argv[4]
+    # sitemap_dead_path = sys.argv[5]
+    # robot_txt_path = sys.argv[6]
+    
+    main(sitemap_all_path=sys.argv[1],
+        posts_path=sys.argv[2],
+        sitemap_xml_path=sys.argv[3],
+        sitemap_txt_path=sys.argv[4],
+        sitemap_dead_path=sys.argv[5],
+        robot_txt_path=sys.argv[6])
+    
    

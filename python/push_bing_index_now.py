@@ -22,18 +22,7 @@ def push_bing_index_now(site:str,token:str,urls:list[str]):
     print(response.status_code)  # 打印响应状态码
     print(response.text)  # 打印响应内容
 
-if __name__ == "__main__":
-    
-    import sys
-    
-    # 检查命令行参数是否包含文件名
-    if len(sys.argv) != 3:
-        print("Usage: python push_bing_index_now.py sitemap_txt_path token")
-        sys.exit(1)
-
-    sitemap_txt_path = sys.argv[1]
-    token = sys.argv[2]
-    
+def main(sitemap_txt_path,token):
     with open(sitemap_txt_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
     site_counts = {}
@@ -48,3 +37,14 @@ if __name__ == "__main__":
     site = max(site_counts, key=site_counts.get) # default iterator is on keys
 
     push_bing_index_now(site=site,token=token,urls=urls)
+
+if __name__ == "__main__":
+    
+    import sys
+    # 检查命令行参数是否包含文件名
+    if len(sys.argv) != 3:
+        print("Usage: python push_bing_index_now.py sitemap_txt_path token")
+        sys.exit(1)
+    main(sitemap_txt_path=sys.argv[1],token=sys.argv[2])
+    
+    
