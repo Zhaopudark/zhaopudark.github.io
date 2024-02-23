@@ -1,11 +1,9 @@
 ---
 abbrlink: d36d5fbd
 date: "2023-10-25 16:22:36"
-hidden: true
 hide: true
 math: true
 mathjax: true
-sitemap: false
 title: Formatting Test
 updated: "2024-01-31 16:34:10"
 ---

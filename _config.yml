@@ -146,15 +146,7 @@ feed: # https://github.com/hexojs/hexo-generator-sitemap
   icon: icon.png
   autodiscovery: true
   template:
-sitemap: # https://github.com/hexojs/hexo-generator-sitemap
-  path: 
-    - sitemap.txt
-    - sitemap.xml
-  # template: ./sitemap_template.xml
-  # template_txt: ./sitemap_template.txt
-  rel: true
-  tags: true
-  categories: true
+
 search:
   path: search.xml
   field: post

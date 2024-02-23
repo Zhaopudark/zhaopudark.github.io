@@ -4,6 +4,7 @@ https://little-train.com/Docs/Readme2.markdown
 https://little-train.com/Readme1.md
 https://little-train.com/about/
 https://little-train.com/about/index.html
+https://little-train.com/ads.txt
 https://little-train.com/app_location/staticwebapp.config.json
 https://little-train.com/archives/
 https://little-train.com/archives/2022/10/
@@ -40,6 +41,7 @@ https://little-train.com/categories/建站基础/
 https://little-train.com/categories/建站基础/index.html
 https://little-train.com/comments/
 https://little-train.com/comments/index.html
+https://little-train.com/ddaa8128e40b45f9a08905b37f52607a.txt
 https://little-train.com/index.html
 https://little-train.com/index.xml
 https://little-train.com/lib/pdf/web/viewer.html
@@ -108,6 +110,7 @@ https://little-train.com/posts/fce44304.html
 https://little-train.com/posts/yyy
 https://little-train.com/projects/
 https://little-train.com/projects/index.html
+https://little-train.com/robots.txt
 https://little-train.com/rss2.xml
 https://little-train.com/search.xml
 https://little-train.com/sitemap.txt

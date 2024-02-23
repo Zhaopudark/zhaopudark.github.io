@@ -12,9 +12,6 @@ import pandoc_filter
 def finalize(doc:pf.Doc=None,**kwargs):
     # metadata_dict =  doc.get_metadata() # See http://scorreia.com/software/panflute/code.html#:~:text=add%20attributes%20freely-,get_metadata,-(%5Bkey
     # doc.metadata = pf.MetaMap(**metadata_dict)
-    if (doc.get_metadata(key='hide',default=False)):
-        doc.metadata['sitemap'] = False
-        doc.metadata['hidden'] = True
 
     runtime_dict:dict = doc.runtime_dict
     if runtime_dict.get('math'):
