@@ -157,6 +157,7 @@ Allow: /posts/7d227c9.html
 Allow: /posts/8527ab53.html
 Allow: /posts/98626aad.html
 Allow: /posts/9f6c2fd1.html
+Allow: /posts/e11578be.html
 Allow: /posts/e1329018.html
 Allow: /posts/ebaccba2.html
 Allow: /robots.txt
