@@ -7,7 +7,7 @@ tags:
 - Windows
 - DDNS
 title: 【PowerShell模组开发日志】Windows DDNS, 将本机IPv6推送到阿里云DNS
-updated: "2024-01-25 12:56:41"
+updated: "2024-02-25 15:04:04"
 ---
 
 本文是PowerShell模组
@@ -84,7 +84,7 @@ aliyun configure
 # Default Language [zh]: zh
 ```
 
-{% note warning%}
+{% note warning %}
 
 安全性警告：上述配置会在
 [`${Home}/.aliyun/config.json`](https://github.com/aliyun/aliyun-cli/issues/63#issuecomment-391181479)
@@ -152,7 +152,7 @@ Install-Module -Name PSComputerManagementZp -Force
     将安装模组、获取对应pattern的IPv6、添加或者更新主机记录、移除模组这四个主要流程进行了打包。用户在自己的环境中使用时，根据上文描述进行修改即可。最终，`abc.xxx.xxx`
     将被解析为本机的IPv6地址。
 
-    {% note primary%}
+    {% note primary %}
 
     `PSComputerManagementZp` 模组提供的 `Get-TemporaryIPV6ByPattern`
     函数会检测所有符合筛选条件的本机IPv6地址，形成列表，并优先给出最后一条记录。也就是说，一般情况下，优先给出临时IPv6。至于这个特性是否降低了风险，用户可以自己定夺。本文不作评价

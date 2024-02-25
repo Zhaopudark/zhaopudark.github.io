@@ -7,7 +7,7 @@ tags:
 - Windows
 - Environment Variables
 title: "【PowerShell模组开发日志】环境变量路径`$Env:Path`的简单管理(添加、删除、去重)"
-updated: "2024-02-24 19:02:55"
+updated: "2024-02-25 15:02:44"
 ---
 
 本文是PowerShell模组
@@ -212,11 +212,11 @@ Merge-RedundantEnvPathFromCurrentMachineToCurrentUser
   Remove-PathFromCurrentMachineEnvPath -Path 'C:\Program Files\Git\cmd'
   ```
 
-  {% note primary %}
+{% note primary %}
 
-  上述命令会变量所有`$Env:Path`子项，当检测到子项值与给定的输入`$Path`一致时，对其进行删除操作。判断一致的逻辑与PowerShell字符串的[相等运算符](https://learn.microsoft.com/zh-cn/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-7.4#equality-operators)一致。
+上述命令会变量所有`$Env:Path`子项，当检测到子项值与给定的输入`$Path`一致时，对其进行删除操作。判断一致的逻辑与PowerShell字符串的[相等运算符](https://learn.microsoft.com/zh-cn/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-7.4#equality-operators)一致。
 
-  {% endnote %}
+{% endnote %}
 
 ## 将匹配某个Pattern的路径从`$Env:Path`中删除
 

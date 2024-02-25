@@ -5,7 +5,7 @@ hide: true
 math: true
 mathjax: true
 title: Formatting Test
-updated: "2024-01-31 16:34:10"
+updated: "2024-02-25 15:19:18"
 ---
 
 用于测试关键的若干Markdown语法或Markdown标记是否被正确渲染为预期的html。
@@ -435,7 +435,9 @@ alt="Level-of-concepts" />
 
 链接 [`typoraio.cn`](https://support.typoraio.cn/Links/)
 
-公式 $E=mc^2$ $$
+公式 $E=mc^2$
+
+$$
 \begin{equation}\tag{3}
 e=mc^2
 \end{equation}
