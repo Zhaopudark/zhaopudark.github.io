@@ -7,7 +7,7 @@ tags:
 - Windows
 - SDDL
 title: 【PowerShell模组开发日志】简单重置`SDDL`以解决ReFS或者NTFS中的授权问题
-updated: "2024-02-27 18:52:26"
+updated: "2024-02-27 19:46:15"
 ---
 
 作为Windows用户，会经常涉及两个实现了[高级安全功能](https://learn.microsoft.com/zh-cn/windows-server/storage/refs/refs-overview#the-following-features-are-available-with-refs-and-ntfs)的文件系统，[ReFS](https://learn.microsoft.com/zh-cn/windows-server/storage/refs/refs-overview)和[NTFS](https://en.wikipedia.org/wiki/NTFS)，但也给普通用户带来了和授权有关的使用问题。例如，“重装系统后，新系统用户没有对旧系统用户文件/文件夹的授权”。更具体地，当用户重装了Windows系统，但是选择保留文件时，未格式化的磁盘上的旧系统用户文件夹，依旧保留着对旧用户的授权，而没有对新系统用户开放授权（即使以同一个微软账号登录，也会视为一个新的用户）。这就是一种用户侧感知到的授权问题。
@@ -182,7 +182,7 @@ updated: "2024-02-27 18:52:26"
 >
 >   - D:型式为`dacl_flags(string_ace1)(string_ace2)... (string_acen)`
 >
->   - S:型式为sacl_flags(string_ace1)(string_ace2)… (string_acen)
+>   - S:型式为`sacl_flags(string_ace1)(string_ace2)... (string_acen)`
 >
 > - dacl_flags: 应用于 DACL 的安全描述符控件标志。
 >   有关这些控件标志的说明，请参阅
