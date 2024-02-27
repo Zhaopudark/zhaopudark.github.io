@@ -7,7 +7,7 @@ tags:
 - Windows
 - SDDL
 title: 【PowerShell模组开发日志】简单重置`SDDL`以解决ReFS或者NTFS中的授权问题
-updated: "2024-02-27 19:46:15"
+updated: "2024-02-27 20:20:17"
 ---
 
 作为Windows用户，会经常涉及两个实现了[高级安全功能](https://learn.microsoft.com/zh-cn/windows-server/storage/refs/refs-overview#the-following-features-are-available-with-refs-and-ntfs)的文件系统，[ReFS](https://learn.microsoft.com/zh-cn/windows-server/storage/refs/refs-overview)和[NTFS](https://en.wikipedia.org/wiki/NTFS)，但也给普通用户带来了和授权有关的使用问题。例如，“重装系统后，新系统用户没有对旧系统用户文件/文件夹的授权”。更具体地，当用户重装了Windows系统，但是选择保留文件时，未格式化的磁盘上的旧系统用户文件夹，依旧保留着对旧用户的授权，而没有对新系统用户开放授权（即使以同一个微软账号登录，也会视为一个新的用户）。这就是一种用户侧感知到的授权问题。
@@ -75,18 +75,15 @@ updated: "2024-02-27 19:46:15"
 >   其中包含有关已登录用户的信息。[^8]
 >   [安全描述符](https://learn.microsoft.com/zh-cn/windows/desktop/SecGloss/s-gly)包含与安全对象关联的安全信息。安全描述符可以包含以下安全信息：[^9]
 >
-> - 所有者和主组的 [安全标识符(Security
->   identifiers)](https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-identifiers)
->   (SIDs)。[^10]
->
-> - 一个 [自由访问控制列表(Discretionary Access Control
->   List)(DACL)](https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control-lists#:~:text=%E7%B1%BB%E5%9E%8B%E7%9A%84%20ACL%EF%BC%9A-,DACL,-%E5%92%8C%20SACL%E3%80%82)
->   ，指定允许或拒绝的特定用户或组的访问权限。[^11]
->
-> - 一个 [系统访问控制列表(System Access Control
->   List)(SACL)](https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control-lists#:~:text=ACL%EF%BC%9ADACL%20%E5%92%8C-,SACL,-%E3%80%82)，指定为对象生成审核记录的访问尝试的类型。[^12]
->
-> - 一组控制位，用于限定安全描述符或其单个成员的含义。[^13]
+>   - 所有者和主组的 [安全标识符(Security
+>     identifiers)](https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-identifiers)
+>     (SIDs)。[^10]
+>   - 一个 [自由访问控制列表(Discretionary Access Control
+>     List)(DACL)](https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control-lists#:~:text=%E7%B1%BB%E5%9E%8B%E7%9A%84%20ACL%EF%BC%9A-,DACL,-%E5%92%8C%20SACL%E3%80%82)
+>     ，指定允许或拒绝的特定用户或组的访问权限。[^11]
+>   - 一个 [系统访问控制列表(System Access Control
+>     List)(SACL)](https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control-lists#:~:text=ACL%EF%BC%9ADACL%20%E5%92%8C-,SACL,-%E3%80%82)，指定为对象生成审核记录的访问尝试的类型。[^12]
+>   - 一组控制位，用于限定安全描述符或其单个成员的含义。[^13]
 >
 > - [安全标识符(Security
 >   identifiers)(SID)](https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-identifiers):
@@ -184,18 +181,18 @@ updated: "2024-02-27 19:46:15"
 >
 >   - S:型式为`sacl_flags(string_ace1)(string_ace2)... (string_acen)`
 >
-> - dacl_flags: 应用于 DACL 的安全描述符控件标志。
->   有关这些控件标志的说明，请参阅
->   [**SetSecurityDescriptorControl**](https://learn.microsoft.com/zh-cn/windows/win32/api/securitybaseapi/nf-securitybaseapi-setsecuritydescriptorcontrol)
->   函数。 dacl_flags字符串可以是以下字符串的零个或多个串联。
+>   - dacl_flags: 应用于 DACL 的安全描述符控件标志。
+>     有关这些控件标志的说明，请参阅
+>     [**SetSecurityDescriptorControl**](https://learn.microsoft.com/zh-cn/windows/win32/api/securitybaseapi/nf-securitybaseapi-setsecuritydescriptorcontrol)
+>     函数。 dacl_flags字符串可以是以下字符串的零个或多个串联。
 >
-> - sacl_flags: 应用于 SACL 的安全描述符控件标志。
->   sacl_flags字符串使用与dacl_flags字符串相同的控制位字符串。
+>   - sacl_flags: 应用于 SACL 的安全描述符控件标志。
+>     sacl_flags字符串使用与dacl_flags字符串相同的控制位字符串。
 >
-> - string_ace: 描述安全描述符 DACL 或 SACL 中的 ACE 的字符串。 有关 ACE
->   字符串格式的说明，请参阅 [ACE
->   字符串](https://learn.microsoft.com/zh-cn/windows/win32/secauthz/ace-strings)。
->   每个 ACE 字符串都用括号(())括起来。
+>   - string_ace: 描述安全描述符 DACL 或 SACL 中的 ACE 的字符串。 有关
+>     ACE 字符串格式的说明，请参阅 [ACE
+>     字符串](https://learn.microsoft.com/zh-cn/windows/win32/secauthz/ace-strings)。
+>     每个 ACE 字符串都用括号(())括起来。
 
 有了上述的基本概念，我们可以按照如下方式，进行一个通俗化的理解：
 
