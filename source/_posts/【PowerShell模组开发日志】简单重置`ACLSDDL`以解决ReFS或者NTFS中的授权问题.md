@@ -7,7 +7,7 @@ tags:
 - Windows
 - SDDL
 title: 【PowerShell模组开发日志】简单重置`SDDL`以解决ReFS或者NTFS中的授权问题
-updated: "2024-02-27 17:43:34"
+updated: "2024-02-27 18:10:06"
 ---
 
 作为Windows用户，会经常设计两个实现了[高级安全功能](https://learn.microsoft.com/zh-cn/windows-server/storage/refs/refs-overview#the-following-features-are-available-with-refs-and-ntfs)的文件系统，[ReFS](https://learn.microsoft.com/zh-cn/windows-server/storage/refs/refs-overview)和[NTFS](https://en.wikipedia.org/wiki/NTFS)，但也给普通用户带来了和授权有关的使用问题。例如，“重装系统后，新系统用户没有对旧系统用户文件/文件夹的授权”。更具体地，当用户重装了Windows系统，但是选择保留文件时，未格式化的磁盘上的旧系统用户文件夹，依旧保留着对旧用户的授权，而没有对新系统用户开放授权（即使以同一个微软账号登录，也会视为一个新的用户）。这就是一种用户侧感知到的授权问题。
@@ -320,48 +320,48 @@ aria-hidden="true">递归的重置NTFS或ReFS磁盘<code>X:/</code>中所有内�
 - 副作用：会同时修改一些驱动器中条目(文件或文件夹)的属性，不一定满足所有用户的特殊需求。
 - 风险：不推荐在多用户登录的计算机上使用，因为会有可能破坏其他用户的授权信息。
 
-[^1]: avinashcraft. 2023. 《授权 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/authorization-portal.
+[^1]: avinashcraft. 2023. 《授权 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/authorization-portal
 
-[^2]: alvinashcraft. 2023. 《访问控制 (授权) - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control.
+[^2]: alvinashcraft. 2023. 《访问控制 (授权) - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control
 
-[^3]: alvinashcraft. 2023. 《访问控制模型 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control-model.
+[^3]: alvinashcraft. 2023. 《访问控制模型 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control-model
 
-[^4]: alvinashcraft. 2023. 《访问控制模型的各个部分 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control-components.
+[^4]: alvinashcraft. 2023. 《访问控制模型的各个部分 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control-components
 
-[^5]: alvinashcraft. 2023. 《安全对象 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/securable-objects.
+[^5]: alvinashcraft. 2023. 《安全对象 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/securable-objects
 
-[^6]: alvinashcraft. 2023. 《访问控制模型的各个部分 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control-components.
+[^6]: alvinashcraft. 2023. 《访问控制模型的各个部分 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control-components
 
-[^7]: alvinashcraft. 2023. 《访问令牌 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-tokens.
+[^7]: alvinashcraft. 2023. 《访问令牌 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-tokens
 
-[^8]: alvinashcraft. 2023. 《访问控制模型的各个部分 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control-components.
+[^8]: alvinashcraft. 2023. 《访问控制模型的各个部分 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control-components
 
-[^9]: alvinashcraft. 2023. 《安全描述符 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-descriptors.
+[^9]: alvinashcraft. 2023. 《安全描述符 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-descriptors
 
-[^10]: alvinashcraft. 2023. 《安全描述符 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-descriptors.
+[^10]: alvinashcraft. 2023. 《安全描述符 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-descriptors
 
-[^11]: alvinashcraft. 2023. 《安全描述符 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-descriptors.
+[^11]: alvinashcraft. 2023. 《安全描述符 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-descriptors
 
-[^12]: alvinashcraft. 2023. 《安全描述符 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-descriptors.
+[^12]: alvinashcraft. 2023. 《安全描述符 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-descriptors
 
-[^13]: alvinashcraft. 2023. 《安全描述符 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-descriptors.
+[^13]: alvinashcraft. 2023. 《安全描述符 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-descriptors
 
-[^14]: alvinashcraft. 2023. 《安全标识符 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-identifiers.
+[^14]: alvinashcraft. 2023. 《安全标识符 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-identifiers
 
-[^15]: 《Access-control list - Wikipedia》. 不详. 见于 2024年2月27日. https://en.wikipedia.org/wiki/Access-control_list.
+[^15]: 《Access-control list - Wikipedia》. 不详. 见于 2024年2月27日. https://en.wikipedia.org/wiki/Access-control_list
 
-[^16]: alvinashcraft. 2023. 《访问控制列表 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control-lists.
+[^16]: alvinashcraft. 2023. 《访问控制列表 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control-lists
 
-[^17]: 《SACL与DACL概述》. 不详. ChatGPT. 见于 2024年2月27日. https://chat.openai.com.
+[^17]: 《SACL与DACL概述》. 不详. ChatGPT. 见于 2024年2月27日. https://chat.openai.com
 
-[^18]: alvinashcraft. 2023. 《访问控制条目 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control-entries.
+[^18]: alvinashcraft. 2023. 《访问控制条目 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/access-control-entries
 
-[^19]: alvinashcraft. 2023. 《AccessCheck 的工作原理 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/how-dacls-control-access-to-an-object.
+[^19]: alvinashcraft. 2023. 《AccessCheck 的工作原理 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/how-dacls-control-access-to-an-object
 
-[^20]: alvinashcraft. 2023. 《线程和安全对象之间的交互 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/interaction-between-threads-and-securable-objects.
+[^20]: alvinashcraft. 2023. 《线程和安全对象之间的交互 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/interaction-between-threads-and-securable-objects
 
-[^21]: alvinashcraft. 2023. 《ACL 和 ACE - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/dacls-and-aces.
+[^21]: alvinashcraft. 2023. 《ACL 和 ACE - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/dacls-and-aces
 
-[^22]: alvinashcraft. 2023. 《AccessCheck 的工作原理 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/how-dacls-control-access-to-an-object.
+[^22]: alvinashcraft. 2023. 《AccessCheck 的工作原理 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/how-dacls-control-access-to-an-object
 
-[^23]: alvinashcraft. 2023. 《安全描述符定义语言 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-descriptor-definition-language.
+[^23]: alvinashcraft. 2023. 《安全描述符定义语言 - Win32 apps》. 2023年6月13日. https://learn.microsoft.com/zh-cn/windows/win32/secauthz/security-descriptor-definition-language
