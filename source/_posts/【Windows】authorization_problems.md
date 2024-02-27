@@ -7,7 +7,7 @@ tags:
 - File System
 title: Reset ACL/SDDL to deal with authorization problems in ReFS or
   NTFS
-updated: "2024-01-05 02:11:19"
+updated: "2024-02-27 14:58:35"
 ---
 
 This article records my procedures for dealing with authorization
@@ -492,16 +492,10 @@ install the model and do as:
 
 ``` powershell
 #Requires -Version 7.0
-#Requires -RunAsAdministrator
-try {    
-    Import-Module PSComputerManagementZp -Scope Local -Force
-    Reset-Authorization 'D:\'
-    Remove-Module PSComputerManagementZp
-}
-catch {
-    Write-Logs  "Set-Authorization Exception: $PSItem"
-    Write-Logs  "Operation has been skipped on $Path."
-}
+#Requires -RunAsAdministrator   
+Import-Module PSComputerManagementZp -Scope Local -Force
+Reset-Authorization 'D:\'
+Remove-Module PSComputerManagementZp
 ```
 
 For more details, you can check [Appendix](#Appendix) for 3 key points:

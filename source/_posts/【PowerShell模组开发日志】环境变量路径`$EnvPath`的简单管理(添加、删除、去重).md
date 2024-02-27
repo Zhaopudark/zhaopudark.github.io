@@ -7,7 +7,7 @@ tags:
 - Windows
 - Environment Variables
 title: "【PowerShell模组开发日志】环境变量路径`$Env:Path`的简单管理(添加、删除、去重)"
-updated: "2024-02-25 15:02:44"
+updated: "2024-02-26 10:07:10"
 ---
 
 本文是PowerShell模组
@@ -131,6 +131,8 @@ Install-Module -Name PSComputerManagementZp -Force
 
 以下所有函数，都基于一个自定义的类
 [EnvPath](https://github.com/Zhaopudark/PSComputerManagementZp/blob/main/Module/Public/Classes/EnvPath.ps1)，该类被初始化时，会自动对每个层级的`$Env:Path`内部去重，删除空值和点值`.`
+
+面向`Process`级别`$Env:Path`的函数，同样适用于Linux和Mac系统中，已被[PSComputerManagementZp](https://github.com/Zhaopudark/PSComputerManagementZp)支持，并通过了测试。
 
 {% endnote %}
 

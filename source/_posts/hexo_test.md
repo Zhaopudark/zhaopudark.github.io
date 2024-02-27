@@ -5,7 +5,7 @@ hide: true
 math: true
 mathjax: true
 title: Formatting Test
-updated: "2024-02-25 15:19:18"
+updated: "2024-02-27 16:10:33"
 ---
 
 用于测试关键的若干Markdown语法或Markdown标记是否被正确渲染为预期的html。
@@ -526,7 +526,7 @@ $$
 
 # 脚注
 
-合并脚注
+## 合并脚注
 
 which1.[^1]
 
@@ -534,8 +534,14 @@ which2.[^2]
 
 which3.[^3]
 
+## 脚注中带有链接
+
+footnot.[^4]
+
 [^1]: Deep Learning with Intel® AVX-512 and Intel® DL Boost https://www.intel.cn/content/www/cn/zh/developer/articles/guide/deep-learning-with-avx512-and-dl-boost.html www.intel.cn
 
 [^2]: Deep Learning with Intel® AVX-512 and Intel® DL Boost https://www.intel.cn/content/www/cn/zh/developer/articles/guide/deep-learning-with-avx512-and-dl-boost.html www.intel.cn
 
 [^3]: Deep Learning with Intel® AVX-512 and Intel® DL Boost https://www.intel.cn/content/www/cn/zh/developer/articles/guide/deep-learning-with-avx512-and-dl-boost.html www.intel.cn
+
+[^4]: 技术文档 \[技术文档 \| Microsoft Learn\](https://learn.microsoft.com/zh-cn/docs/)
