@@ -7,10 +7,10 @@ tags:
 - Windows
 - SDDL
 title: 【PowerShell模组开发日志】简单重置`SDDL`以解决ReFS或者NTFS中的授权问题
-updated: "2024-02-27 18:10:06"
+updated: "2024-02-27 18:52:26"
 ---
 
-作为Windows用户，会经常设计两个实现了[高级安全功能](https://learn.microsoft.com/zh-cn/windows-server/storage/refs/refs-overview#the-following-features-are-available-with-refs-and-ntfs)的文件系统，[ReFS](https://learn.microsoft.com/zh-cn/windows-server/storage/refs/refs-overview)和[NTFS](https://en.wikipedia.org/wiki/NTFS)，但也给普通用户带来了和授权有关的使用问题。例如，“重装系统后，新系统用户没有对旧系统用户文件/文件夹的授权”。更具体地，当用户重装了Windows系统，但是选择保留文件时，未格式化的磁盘上的旧系统用户文件夹，依旧保留着对旧用户的授权，而没有对新系统用户开放授权（即使以同一个微软账号登录，也会视为一个新的用户）。这就是一种用户侧感知到的授权问题。
+作为Windows用户，会经常涉及两个实现了[高级安全功能](https://learn.microsoft.com/zh-cn/windows-server/storage/refs/refs-overview#the-following-features-are-available-with-refs-and-ntfs)的文件系统，[ReFS](https://learn.microsoft.com/zh-cn/windows-server/storage/refs/refs-overview)和[NTFS](https://en.wikipedia.org/wiki/NTFS)，但也给普通用户带来了和授权有关的使用问题。例如，“重装系统后，新系统用户没有对旧系统用户文件/文件夹的授权”。更具体地，当用户重装了Windows系统，但是选择保留文件时，未格式化的磁盘上的旧系统用户文件夹，依旧保留着对旧用户的授权，而没有对新系统用户开放授权（即使以同一个微软账号登录，也会视为一个新的用户）。这就是一种用户侧感知到的授权问题。
 
 一般地，新用户需要手动给与授权，以便于获取旧用户文件夹中的内容。如果这个过程可以以一定的标准自动执行，将极大地方便重装系统但是保留文件的用户。在实践中，我们发现，如果能够简单地重置目标对象的**SDDL**，就可以在不甚了解[计算机安全](https://en.wikipedia.org/wiki/Computer_security)这个大议题的情况下，让和作者本人一样的纯小白用户也能理解并解决其遇到的授权问题。这就是本文的核心动机。后文将简单地介绍**SDDL**，给出借助PowerShell模组
 [PSComputerManagementZp](https://github.com/Zhaopudark/PSComputerManagementZp)，重置[ReFS](https://learn.microsoft.com/zh-cn/windows-server/storage/refs/refs-overview)和
