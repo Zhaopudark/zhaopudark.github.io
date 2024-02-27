@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import pathlib
 import logging
-
+import threading
 import asyncio
 import functools
 import datetime
@@ -37,7 +37,7 @@ def finalize(doc:pf.Doc=None,**kwargs):
 #     return pf.run_filters(actions= [math_filter,figure_filter,footnote_filter,internal_link_filter],finalize=_finalize,doc=doc,**kwargs)
 
 
-async def convert_md2md(markdown_content:str,file_path:str,target_dir:str):
+def convert_md2md(markdown_content:str,file_path:str,target_dir:str):
     doc = pf.convert_text(markdown_content,input_format='markdown',output_format='panflute',standalone=True)
     if doc.get_metadata():
         output_path = pathlib.Path(f"{target_dir}/{file_path.name}")
@@ -54,14 +54,11 @@ async def convert_md2md(markdown_content:str,file_path:str,target_dir:str):
             doc_path=file_path,
             finalize=finalize)
     
-async def main(notes_dir,target_dir):
-    tasks = []
+def main(notes_dir,target_dir):
     for file_path in pathlib.Path(notes_dir).glob('**/*.md'):
         with open(file_path, "r", encoding="utf-8") as f:
             markdown_content = f.read()
-        tasks.append(convert_md2md(markdown_content,file_path,target_dir))
-    await asyncio.gather(*tasks)
-    
+        convert_md2md(markdown_content,file_path,target_dir)
 
 if __name__ == "__main__":
     
@@ -72,7 +69,7 @@ if __name__ == "__main__":
         sys.exit(1)
     print(sys.argv)
     
-    asyncio.run(main(notes_dir=sys.argv[1],target_dir=sys.argv[2]))
+    main(notes_dir=sys.argv[1],target_dir=sys.argv[2])
 
     
         
