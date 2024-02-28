@@ -26,14 +26,6 @@ jobs:
           mkdir logs
           hexo clean
           hexo generate
-      - name: Setup ossutil
-        uses: manyuanrong/setup-ossutil@v3.0
-        with:
-          endpoint: ${{ secrets.OSS_ENDPOINT_NAME }}
-          access-key-id: ${{ secrets.OSS_ACCESS_KEY_ID }}
-          access-key-secret: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
-          sts-token: ""
-      - run: ossutil sync public/ oss://${{ secrets.OSS_BUCKET_NAME }}/ --delete --force
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
