@@ -127,8 +127,6 @@ pandoc: # https://github.com/hexojs/hexo-renderer-pandoc
     - html
     - '--mathjax'
     - '--filter'
-    - "md2html-enhance-link-like-filter"
-    - '--filter'
     - "md2html-hash-anchor-and-internal-link-filter"
     
 feed: # https://github.com/hexojs/hexo-generator-sitemap

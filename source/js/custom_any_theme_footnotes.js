@@ -35,7 +35,7 @@
             let spanElement = document.createElement('span')
             spanElement.appendChild(document.createTextNode(' | '))
             new_link = link.cloneNode(true)
-            // new_link.innerHTML = `↩︎<sup>${String.fromCharCode(96 + count)}</sup>`
+            // new_link.innerHTML = `<sup>${String.fromCharCode(96 + count)}</sup>`
             // new_link.innerHTML = '↩︎'
             spanElement.appendChild(new_link)
             return spanElement
@@ -51,29 +51,35 @@
             //querySelector 却可以直接返回一个元素，在这里更方便
             let ref_bak_p = ref_bak.querySelector('p')
             let ref_bak_a = ref_bak_p.querySelector("a.footnote-back[role='doc-backlink']")
-            let ref_bak_p_text = ref_bak_a.previousSibling;
-            
-            
+            let ref_bak_p_text = ref_bak_p.textContent || ref_bak_p.innerText;
+            // 匹配链接的正则表达式
+            let linkRegex = /(https?:\/\/[^\s]+)/g;
+            // 提取链接
+            let maybe_link = ref_bak_p_text.match(linkRegex)||ref_bak_p_text;
+
             ref_bak_a.setAttribute('id',ref_bak.getAttribute('id'))
             ref_bak.removeAttribute('id')
             
-            let base64_encoded_text = btoa(encodeURIComponent(ref_bak_p_text.textContent)).toString(); // 因为可能会有base64不支持的字符，所以需要先进行编码
+            let base64_encoded_text = btoa(encodeURIComponent(ref_bak_p_text)).toString(); // 因为可能会有base64不支持的字符，所以需要先进行编码
             if (!footnote_stamp_content_map.has(base64_encoded_text)){
                 footnote_stamp_content_map.set(base64_encoded_text,ref_bak)
                 footnote_stamp_count_map.set(base64_encoded_text,1)
                 footnote_stamp_index_map.set(base64_encoded_text,footnote_stamp_content_map.size)
+                
                 ref_bak_p.replaceChild(getNewSpanToReplaceLink(ref_bak_a,footnote_stamp_count_map.get(base64_encoded_text),footnote_stamp_index_map.get(base64_encoded_text)), ref_bak_a)
+                
             }else{
                 let old_ref_bak = footnote_stamp_content_map.get(base64_encoded_text)
 
                 footnote_stamp_count_map.set(base64_encoded_text, footnote_stamp_count_map.get(base64_encoded_text)+ 1);
-
+                
                 old_ref_bak.querySelector('p').appendChild(getNewSpanToReplaceLink(ref_bak_a,footnote_stamp_count_map.get(base64_encoded_text),footnote_stamp_index_map.get(base64_encoded_text)))
                 ref_bak.remove()
-                let ref_sup = ref.querySelector('sup');
-                ref_sup.innerHTML = Array.from(footnote_stamp_content_map.keys()).indexOf(base64_encoded_text)+1
+                // let ref_sup = ref.querySelector('sup');
+                // ref_sup.innerHTML = Array.from(footnote_stamp_content_map.keys()).indexOf(base64_encoded_text)+1
             }
-            
+            let ref_sup = ref.querySelector('sup')
+            ref_sup.innerHTML = footnote_stamp_index_map.get(base64_encoded_text)
             // console.log(base64_encoded_text) 
             // console.log(atob(base64_encoded_text))
             // console.log(decodeURIComponent(atob(base64_encoded_text)))
