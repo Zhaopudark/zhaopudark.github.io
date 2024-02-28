@@ -27,7 +27,7 @@ jobs:
           hexo clean
           hexo generate
       - name: Setup ossutil
-        uses: manyuanrong/setup-ossutil@v2
+        uses: manyuanrong/setup-ossutil@v3.0
         with:
           endpoint: ${{ secrets.OSS_ENDPOINT_NAME }}
           access-key-id: ${{ secrets.OSS_ACCESS_KEY_ID }}
