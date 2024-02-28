@@ -26,6 +26,14 @@ jobs:
           mkdir logs
           hexo clean
           hexo generate
+      - name: Setup ossutil
+        uses: manyuanrong/setup-ossutil@v2
+        with:
+          endpoint: ${{ secrets.OSS_ENDPOINT_NAME }}
+          access-key-id: ${{ secrets.OSS_ACCESS_KEY_ID }}
+          access-key-secret: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+          sts-token: ""
+      - run: ossutil sync public/ oss://{{ secrets.OSS_BUCKET_NAME }}/ --delete --force
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -51,12 +59,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4 # or specific "vX.X.X" version tag for this action
-      
-    
-    
-    # - name: Baidu Push
-    #   run: curl -H 'Content-Type:text/plain' --data-binary @sitemap.txt "http://data.zz.baidu.com/urls?site=https://little-train.com&token=EY493WfyjGVhW6IM"
-    # - name: Bing Push
-    #   run: curl -X POST "https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=${{ secrets.BING_API_KEY }}" -H "Content-Type: application/json" -d '{"siteUrl":"https://little-train.com","urlList":["https://little-train.com/sitemap.txt"]}'
-    # - name: Google Push
-    #   run: curl -H 'Content-Type: text/plain' --data-binary @sitemap.txt "http://www.google.com/ping?sitemap=https://little-train.com/sitemap.txt"
