@@ -5,7 +5,7 @@ hide: true
 math: true
 mathjax: true
 title: Formatting Test
-updated: "2024-02-27 16:10:33"
+updated: "2024-03-14 20:23:00"
 ---
 
 用于测试关键的若干Markdown语法或Markdown标记是否被正确渲染为预期的html。
@@ -247,7 +247,7 @@ updated: "2024-02-27 16:10:33"
 # 数学公式的基本概念
 
 - 需要在pandoc生成命令中，添加 –mathjax 才能启用公式
-- 公式中 和
+- 公式中 `\label` 和`\tag`区别
   - `\label` 用于打上内部标签，配合引用`\ref{标签}`
   - `\tag`
     用于显式地对公式编号。是一种外部展示。文本课件公式的编号，和引用时对公式的指代。

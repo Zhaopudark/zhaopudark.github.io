@@ -122,12 +122,14 @@ deploy:
 pandoc: # https://github.com/hexojs/hexo-renderer-pandoc
   args:
     - '-f'
-    - gfm
+    - markdown
     - '-t'
     - html
     - '--mathjax'
     - '--filter'
     - "md2html-hash-anchor-and-internal-link-filter"
+    - '--filter'
+    - "md2html-increase-header-level-filter"
     
 feed: # https://github.com/hexojs/hexo-generator-sitemap
   enable: true

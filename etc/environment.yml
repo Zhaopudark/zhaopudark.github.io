@@ -3,6 +3,6 @@ channels:
   - defaults
 dependencies:
   - nodejs>=20 -c conda-forge
-  - pandoc>=3.1.12.1 -c conda-forge
+  - pandoc>=3.1.12.2 -c conda-forge
   - pip:
-      - pandoc-filter>=0.2.12
+      - pandoc-filter>=0.2.13
