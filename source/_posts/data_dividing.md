@@ -12,7 +12,7 @@ tags:
 title: Derived from splitting data into 3 parts, a better way to divide
   a list of same type elements into ‘n’ parts according to ratios,
   without repetition or leaking
-updated: "2024-02-25 15:14:29"
+updated: "2024-03-16 11:39:25"
 ---
 
 This article discusses an operation that originated in machine learning,
@@ -257,7 +257,7 @@ into parts by proportions, we need to do the following things:
         \text{known:}~~~~&n,N \in \mathbb{Z^+}, n \leq N\\
         &p\in \mathbb{R},~p\geq 1\\
         &r = [r_1,r_2,...,r_n]\in \mathbb{R+^n},\|r\|_{1}=1\\
-        \text{minimize:}~~~~&(\sum_{i=1}^n |y_i-r_{i}N |^{p})^{\frac{1}{p}}&y = [y_1,y_2,...,y_n]\in \mathbb{N^n}\\
+        \text{minimize:}~~~~&(\sum_{i=1}^n |y_i-r_{i}N |^{p})^{\frac{1}{p}}\\
         \text{subject to:}~~~~&~y = [y_1,y_2,...,y_n]\in \mathbb{N^n}\\
         &\sum_{i=1}^{n}y_i=N\\
         \end{aligned}
@@ -448,8 +448,9 @@ function as:
     &p\in \mathbb{R},~p\geq 1\\
     &r = [r_1,r_2,...,r_n]\in \mathbb{R+^n},\|r\|_{1}=1\\
     &m=N-\sum_{i=1}^n round(r_iN)\\
-    \text{minimize:}~~~~&(\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}&b = [b_1,b_2,...,b_n]\in \mathbb{Z^n}\\
-    \text{subject to:}~~~~~&[round(r_1N)+b_1,round(r_2N)+b_2,...,round(r_nN)+b_n]\in \mathbb{N^n}\\
+    \text{minimize:}~~~~&(\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\\
+    \text{subject to:}~~~~~&b = [b_1,b_2,...,b_n]\in \mathbb{Z^n}\\
+    &[round(r_1N)+b_1,round(r_2N)+b_2,...,round(r_nN)+b_n]\in \mathbb{N^n}\\
     &\sum_{i=1}^n b_i=m\\
     \end{aligned}
   \end{equation}
@@ -534,8 +535,9 @@ based on this function as:
     &p\in \mathbb{R},~p\geq 1\\
     &r = [r_1,r_2,...,r_n]\in \mathbb{R+^n},\|r\|_{1}=1\\
     &m=N-\sum_{i=1}^n floor(r_iN)\\
-    \text{minimize:}~~~~&(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}&b = [b_1,b_2,...,b_n]\in \mathbb{Z^n}\\
-    \text{subject to:}~~~~&[floor(r_1N)+b_1,floor(r_2N)+b_2,...,floor(r_nN)+b_n]\in \mathbb{N^n}\\
+    \text{minimize:}~~~~&(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\\
+    \text{subject to:}~~~~&b = [b_1,b_2,...,b_n]\in \mathbb{Z^n}\\
+    &[floor(r_1N)+b_1,floor(r_2N)+b_2,...,floor(r_nN)+b_n]\in \mathbb{N^n}\\
     &\sum_{i=1}^n b_i=m\\
     \end{aligned}
   \end{equation}
