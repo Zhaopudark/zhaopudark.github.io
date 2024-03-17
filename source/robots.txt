@@ -62,6 +62,7 @@ Disallow: /posts/7f7f1263
 Disallow: /posts/7f7f1263.html
 Disallow: /posts/7fdde8eb
 Disallow: /posts/7fdde8eb.html
+Disallow: /posts/8527ab53.html
 Disallow: /posts/96545e30
 Disallow: /posts/96545e30.html
 Disallow: /posts/9a1192fa
@@ -155,8 +156,9 @@ Allow: /posts/1759cd56.html
 Allow: /posts/2862656e.html
 Allow: /posts/394edaa0.html
 Allow: /posts/48cdc71b.html
+Allow: /posts/4df1fb5a.html
+Allow: /posts/4f6afcf2.html
 Allow: /posts/7d227c9.html
-Allow: /posts/8527ab53.html
 Allow: /posts/98626aad.html
 Allow: /posts/9f6c2fd1.html
 Allow: /posts/e11578be.html

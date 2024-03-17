@@ -1,11 +1,11 @@
 ---
-abbrlink: 8527ab53
+abbrlink: 4df1fb5a
 categories: Personal Experiences
 date: "2023-10-25 16:22:37"
 tags:
 - Python
-title: Progress bar with multiple backends.
-updated: "2023-11-12 04:02:01"
+title: Progress bar with multiple backends
+updated: "2024-03-16 12:14:05"
 ---
 
 This article introduces a simple manner about integrating different
