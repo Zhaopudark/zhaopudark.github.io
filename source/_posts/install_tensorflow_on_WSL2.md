@@ -8,7 +8,7 @@ tags:
 - Keras
 - TensorFlow
 title: Install TensorFlow(GPU) on WSL2
-updated: "2024-03-17 17:52:34"
+updated: "2024-03-17 18:25:09"
 ---
 
 This article introduces my solutions/methods of installing and using
@@ -69,7 +69,7 @@ easily transferred.
 
 I wish more and more people could use Keras(3.x) as me, making this
 community bigger and stronger and ultimately benefiting each of us.
-Therefore, I share my my solutions/methods of installing and using
+Therefore, I share my solutions/methods of installing and using
 [TensorFlow(GPU)(2.6.1)](https://github.com/tensorflow/tensorflow/releases/tag/v2.16.1),
 with
 [keras(3.0.5)](https://github.com/keras-team/keras/releases/tag/v3.0.5)
@@ -93,7 +93,7 @@ on WSL2 correctly.
 Anyone who is familiar with Linux and bash shell can easily transfer my
 following procedures to their own production environments. If you are a
 novice in Linux, you can take all of my following procedures and do not
-consider any customization.
+consider too much customization.
 
 ## Install VS Code and the WSL extension
 
@@ -105,6 +105,7 @@ Any way will be ok, as long as we can start Windows’s VS Code in WSL2’s
 shell (default is bash) by the following command:
 
 ``` bash
+# bash
 cd $Home
 code .
 ```
