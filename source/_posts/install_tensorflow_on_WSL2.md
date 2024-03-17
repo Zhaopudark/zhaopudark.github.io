@@ -8,7 +8,7 @@ tags:
 - Keras
 - TensorFlow
 title: Install TensorFlow(GPU) on WSL2
-updated: "2024-03-17 13:52:07"
+updated: "2024-03-17 17:52:34"
 ---
 
 This article introduces my solutions/methods of installing and using
@@ -530,6 +530,10 @@ The specific version number is:
 - WSL2: `2.0.14.0`
 
 - WSL2’s Linux system：`Ubuntu22.04`
+
+- PowerShell: `7.4.1`
+
+- PSComputerManagementZp: `0.1.3`
 
 - Conda: `24.1.2`
 
