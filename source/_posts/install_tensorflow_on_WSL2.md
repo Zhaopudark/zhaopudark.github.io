@@ -8,7 +8,7 @@ tags:
 - Keras
 - TensorFlow
 title: Install TensorFlow(GPU) on WSL2
-updated: "2024-03-17 18:25:09"
+updated: "2024-03-17 19:39:43"
 ---
 
 This article introduces my solutions/methods of installing and using
@@ -16,6 +16,28 @@ This article introduces my solutions/methods of installing and using
 with
 [keras(3.0.5)](https://github.com/keras-team/keras/releases/tag/v3.0.5)
 on WSL2.
+
+My specific environment (version number) is:
+
+- WSL2: `2.0.14.0`
+
+- WSL2’s Linux system：`Ubuntu22.04`
+
+- PowerShell: `7.4.1`
+
+- PSComputerManagementZp: `0.1.3`
+
+- Conda: `24.1.2`
+
+- Cuda: `12.4.0`
+
+- Cudnn: `8.9.7.29`
+
+- Python: `3.12.2`
+
+- TensorFlow: `2.16.1`
+
+- Keras: `3.0.5`
 
 <!-- more -->
 
@@ -319,7 +341,7 @@ conda create -n ml python=3.12
   code ./etc/conda
   ```
 
-  The script file`./activate.d/env_activate.ps1` will be run when
+  The script file`./activate.d/env_activate.ps1` will be run when
   `conda activate`, so we can configure it as the following:
 
   ``` powershell
@@ -424,9 +446,9 @@ conda create -n ml python=3.12
     ```
 
     Modify the line 41 from
-    `SMS ?= 35 50 53 60 61 62 $(SMS_VOLTA) $(SMS_A100)` to
-    `SMS ?= 50 53 60 61 62 $(SMS_VOLTA) $(SMS_A100)`, i.e., delete
-    `35` from `SMS`.
+    `SMS ?= 35 50 53 60 61 62 $(SMS_VOLTA) $(SMS_A100)` to
+    `SMS ?= 50 53 60 61 62 $(SMS_VOLTA) $(SMS_A100)`, i.e., delete `35`
+    from `SMS`.
 
   - Then we can continue to compile and test:
 
@@ -526,7 +548,7 @@ on WSL2. Different from normal tutorials, I use conda to manage an
 environment to install cuda and cudnn. Then, I install TensorFlow(GPU)
 to this environment.
 
-The specific version number is:
+The specific environment (version number) is:
 
 - WSL2: `2.0.14.0`
 
