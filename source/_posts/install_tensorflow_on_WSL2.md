@@ -8,7 +8,7 @@ tags:
 - Keras
 - TensorFlow
 title: Install TensorFlow(GPU) on WSL2
-updated: "2024-03-17 19:43:35"
+updated: "2024-03-23 22:36:22"
 ---
 
 This article introduces my solutions/methods of installing and using
@@ -127,7 +127,7 @@ code .
   Learn](https://learn.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.4)
 
   ``` bash
-  ## bash
+  #!/bin/bash
   sudo apt update && sudo apt upgrade
 
   # Install pre-requisite packages.
@@ -160,6 +160,7 @@ code .
   “Make `pwsh` the default shell of WSL2”.)
 
   ``` bash
+  #!/bin/bash
   # exit pwsh, still in bash
   cd $Home
   code ~/.profile
@@ -168,6 +169,7 @@ code .
   Then, append `pwsh` to the `~/.profile` as:
 
   ``` bash
+  #!/bin/bash
   # the default umask is set in /etc/profile; for setting the umask
   # for ssh logins, install and configure the libpam-umask package.
   #umask 022
@@ -198,7 +200,7 @@ some advantage of this module. The installation refer to
 [here](https://github.com/Zhaopudark/PSComputerManagementZp#installation):
 
 ``` powershell
-# pwsh
+#!/bin/pwsh
 Install-Module -Name PSComputerManagementZp -Force
 ```
 
@@ -207,7 +209,7 @@ Install-Module -Name PSComputerManagementZp -Force
 Refer to [here](https://docs.anaconda.com/free/miniconda/):
 
 ``` powershell
-# pwsh
+#!/bin/pwsh
 cd $Home
 mkdir -p ~/miniconda3
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
@@ -218,7 +220,7 @@ rm -rf ~/miniconda3/miniconda.sh
 After installing, initialize miniconda for `pwsh`:
 
 ``` powershell
-# pwsh
+#!/bin/pwsh
 ~/miniconda3/bin/conda init powershell
 ```
 
@@ -255,7 +257,7 @@ We can create a conda environment (my env is named `ml`) with Python
 3.12:
 
 ``` powershell
-# pwsh
+#!/bin/pwsh
 conda create -n ml python=3.12
 ```
 
@@ -266,7 +268,7 @@ conda create -n ml python=3.12
   with channel `nvidia`:
 
   ``` powershell
-  # pwsh
+  #!/bin/pwsh
   conda activate ml
   conda install cuda=12.4 -c nvidia
   ```
@@ -284,7 +286,7 @@ conda create -n ml python=3.12
   - Then, we can copy the cudnn installer from Windows to WSL2:
 
     ``` powershell
-    #pwsh
+    #!/bin/pwsh
     cp /mnt/c/Users/user/Downloads/cudnn-linux-x86_64-8.9.7.29_cuda12-archive.tar.xz $Home/
     ```
 
@@ -297,7 +299,7 @@ conda create -n ml python=3.12
   - Decompress the cudnn installer and copy its items to our `ml` env:
 
     ``` powershell
-    #pwsh
+    #!/bin/pwsh
     conda activate ml
     cd $HOME
     tar -xvf ./cudnn-linux-x86_64-8.9.7.29_cuda12-archive.tar.xz
@@ -313,6 +315,7 @@ conda create -n ml python=3.12
   and create 2 configuration files as:
 
   ``` powershell
+  #!/bin/pwsh
   conda activate ml
   cd $Env:CONDA_PREFIX
   mkdir -p ./etc/conda/activate.d # `-p` is for multi-level directory
@@ -324,6 +327,7 @@ conda create -n ml python=3.12
   Edit the above 2 scripts by VS Code:
 
   ``` powershell
+  #!/bin/pwsh
   conda activate ml
   cd $Env:CONDA_PREFIX
   code ./etc/conda
@@ -333,6 +337,7 @@ conda create -n ml python=3.12
   `conda activate`, so we can configure it as the following:
 
   ``` powershell
+  #!/bin/pwsh
   # $Env:CONDA_PREFIX/etc/conda/activate.d/env_activate.ps1
   Register-AndBackupEnvItemForConda -Name 'CUDA_PATH' -Value $Env:CONDA_PREFIX
 
@@ -352,6 +357,7 @@ conda create -n ml python=3.12
   configure it as the following:
 
   ``` powershell
+  #!/bin/pwsh
   # $Env:CONDA_PREFIX/etc/conda/deactivate.d/env_deactivate.ps1
   Unregister-WithBackupEnvItemForConda -Name 'CUDA_PATH'
   Unregister-WithBackupEnvItemForConda -Name 'LD_LIBRARY_PATH'
@@ -382,7 +388,7 @@ conda create -n ml python=3.12
   First, check `nvcc`:
 
   ``` powershell
-  # pwsh
+  #!/bin/pwsh
   conda activate ml
   nvcc -V
   ```
@@ -399,7 +405,7 @@ conda create -n ml python=3.12
   Then, check cuda compiling:
 
   ``` powershell
-  # pwsh
+  #!/bin/pwsh
   conda activate ml
   cd $HOME
   git clone https://github.com/NVIDIA/cuda-samples.git
@@ -419,7 +425,7 @@ conda create -n ml python=3.12
   - Clone `cudnn_samples_v8` codes and install `libfreeimage-dev`
 
     ``` powershell
-    # pwsh
+    #!/bin/pwsh
     conda activate ml
     cd $HOME
     git clone https://github.com/johnpzh/cudnn_samples_v8.git
@@ -430,6 +436,7 @@ conda create -n ml python=3.12
     point of the file`$Home/cudnn_samples_v8/samples_common.mk`:
 
     ``` powershell
+    #!/bin/pwsh
     code $Home/cudnn_samples_v8/samples_common.mk
     ```
 
@@ -441,7 +448,7 @@ conda create -n ml python=3.12
   - Then we can continue to compile and test:
 
     ``` powershell
-    # pwsh
+    #!/bin/pwsh
     conda activate ml
     cd $HOME
     cd cudnn_samples_v8/mnistCUDNN/
@@ -457,7 +464,7 @@ If the above steps have been done well, the remaining steps will be very
 easy:
 
 ``` powershell
-# pwsh
+#!/bin/pwsh
 conda activate ml
 pip install tensorflow[and-cuda]
 ```
@@ -465,6 +472,7 @@ pip install tensorflow[and-cuda]
 Check the version of tensorflow and keras :
 
 ``` powershell
+#!/bin/pwsh
 pip show tensorflow keras
 ```
 
@@ -479,7 +487,7 @@ keras</figcaption>
 And test the installation:
 
 ``` powershell
-# pwsh
+#!/bin/pwsh
 python
 ```
 
