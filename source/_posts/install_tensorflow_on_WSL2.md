@@ -8,7 +8,7 @@ tags:
 - Keras
 - TensorFlow
 title: Install TensorFlow(GPU) on WSL2
-updated: "2024-03-28 21:14:46"
+updated: "2024-03-28 21:16:20"
 ---
 
 This article introduces my solutions/methods of installing and using
@@ -88,7 +88,7 @@ problems.
 
 # Preparation
 
-Maybe different from norm tutorials, my solutions do use
+Maybe different from general tutorials, my solutions do use
 [conda](https://docs.anaconda.com/free/miniconda/index.html),
 [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.4)
 and PowerShell module
