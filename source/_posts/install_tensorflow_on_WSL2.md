@@ -8,7 +8,7 @@ tags:
 - Keras
 - TensorFlow
 title: Install TensorFlow(GPU) on WSL2
-updated: "2024-03-23 22:36:22"
+updated: "2024-03-28 21:12:58"
 ---
 
 This article introduces my solutions/methods of installing and using
@@ -115,7 +115,7 @@ Any way will be ok, as long as we can start Windows’s VS Code in WSL2’s
 shell (default is bash) by the following command:
 
 ``` bash
-# bash
+#!/bin/bash
 cd $Home
 code .
 ```
