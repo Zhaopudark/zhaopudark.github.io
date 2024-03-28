@@ -8,7 +8,7 @@ tags:
 - Keras
 - TensorFlow
 title: Install TensorFlow(GPU) on WSL2
-updated: "2024-03-28 21:12:58"
+updated: "2024-03-28 21:14:46"
 ---
 
 This article introduces my solutions/methods of installing and using
@@ -179,7 +179,7 @@ code .
   pwsh
   ```
 
-​save the `~/.profile` and exit VS Code.
+  save the `~/.profile` and exit VS Code.
 
 - Restart WSL2, then, we will automatically in `pwsh` when login to
   WSL2.
