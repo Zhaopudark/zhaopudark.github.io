@@ -153,6 +153,7 @@ Allow: /atom.xml
 Allow: /ddaa8128e40b45f9a08905b37f52607a.txt
 Allow: /index.html
 Allow: /posts/1759cd56.html
+Allow: /posts/1c60e1d2.html
 Allow: /posts/2862656e.html
 Allow: /posts/394edaa0.html
 Allow: /posts/48cdc71b.html
