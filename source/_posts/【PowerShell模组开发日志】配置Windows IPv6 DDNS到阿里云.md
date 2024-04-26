@@ -7,7 +7,7 @@ tags:
 - Windows
 - DDNS
 title: 【PowerShell模组开发日志】Windows DDNS, 将本机IPv6推送到阿里云DNS
-updated: "2024-02-25 15:04:04"
+updated: "2024-04-25 01:42:21"
 ---
 
 本文是PowerShell模组

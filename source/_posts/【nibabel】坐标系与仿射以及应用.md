@@ -9,7 +9,7 @@ tags:
 - Machine Learning
 - Computer Vision
 title: About `coordinate systems and affines` in Nibabel
-updated: "2024-01-08 15:46:13"
+updated: "2024-04-25 15:50:06"
 ---
 
 There are many continuously updated Python libraries that can be used or

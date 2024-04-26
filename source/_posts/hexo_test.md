@@ -5,7 +5,7 @@ hide: true
 math: true
 mathjax: true
 title: Formatting Test
-updated: "2024-03-14 20:23:00"
+updated: "2024-04-25 01:40:04"
 ---
 
 用于测试关键的若干Markdown语法或Markdown标记是否被正确渲染为预期的html。
@@ -338,13 +338,13 @@ $$
 x+y\newline y+z
 $$
 
-使用`aligned` 块换行
+使用`split` 块换行
 
 $$
-\begin{aligned}
+\begin{split}
 &x+y \\
 &y+z
-\end{aligned}
+\end{split}
 $$
 
 ## 公式块（行间公式）中遇到中文
