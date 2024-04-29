@@ -5,7 +5,7 @@ hide: true
 math: true
 mathjax: true
 title: Formatting Test
-updated: "2024-04-29 16:08:12"
+updated: "2024-04-29 17:08:09"
 ---
 
 用于测试关键的若干Markdown语法或Markdown标记是否被正确渲染为预期的html。
@@ -289,14 +289,20 @@ e=mc^2
 
 $$
 \begin{equation}\tag{1}
-e=mc^2
+e=mc^2\\
+\end{equation}
+$$
+
+$$
+\begin{equation}\tag{2}
+\cancel{\Delta}
 \end{equation}
 $$
 
 ## 公式块（行间公式）标注和引用
 
 $$
-\begin{equation}\label{eq1}\tag{2}
+\begin{equation}\label{eq1}\tag{3}
 e=mc^2
 \end{equation}
 $$
@@ -440,7 +446,7 @@ alt="Level-of-concepts" />
 公式 $E=mc^2$
 
 $$
-\begin{equation}\tag{3}
+\begin{equation}\tag{4}
 e=mc^2
 \end{equation}
 $$

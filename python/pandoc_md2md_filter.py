@@ -55,7 +55,7 @@ def convert_md2md(markdown_content:str,file_path:str,target_dir:str):
             finalize=finalize)
     
 def main(notes_dir,target_dir):
-    for file_path in pathlib.Path(notes_dir).glob('**/*.md'):
+    for file_path in pathlib.Path(notes_dir).glob('**/hexo_test.md'):
         with open(file_path, "r", encoding="utf-8") as f:
             markdown_content = f.read()
         convert_md2md(markdown_content,file_path,target_dir)
