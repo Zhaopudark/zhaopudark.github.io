@@ -84,6 +84,7 @@ Disallow: /posts/c05ef92b
 Disallow: /posts/c05ef92b.html
 Disallow: /posts/c19e73aa
 Disallow: /posts/c19e73aa.html
+Disallow: /posts/cc810a0d.html
 Disallow: /posts/d065d8af.html
 Disallow: /posts/d0d884a0
 Disallow: /posts/d0d884a0.html

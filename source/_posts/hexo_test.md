@@ -5,7 +5,7 @@ hide: true
 math: true
 mathjax: true
 title: Formatting Test
-updated: "2024-04-25 01:40:04"
+updated: "2024-04-29 16:08:12"
 ---
 
 用于测试关键的若干Markdown语法或Markdown标记是否被正确渲染为预期的html。
@@ -430,6 +430,8 @@ alt="Level-of-concepts" />
 {% note success %}
 
 文字 或者 `markdown` 均可
+
+[header links](#脚注)
 
 链接 [typoraio.cn](https://support.typoraio.cn/Links/)
 
