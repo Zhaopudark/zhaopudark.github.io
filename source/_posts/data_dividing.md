@@ -12,7 +12,7 @@ tags:
 title: Derived from splitting data into 3 parts, a better way to divide
   a list of same type elements into ‘n’ parts according to ratios,
   without repetition or leaking
-updated: "2024-04-29 20:01:06"
+updated: "2024-04-29 23:26:12"
 ---
 
 This article discusses an operation that originated in machine learning,
