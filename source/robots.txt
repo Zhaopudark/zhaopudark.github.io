@@ -51,21 +51,13 @@ Disallow: /page/2/
 Disallow: /page/2/index.html
 Disallow: /posts/1757b5a2
 Disallow: /posts/1757b5a2.html
-Disallow: /posts/1759cd56.html
 Disallow: /posts/17b34613.html
-Disallow: /posts/1c60e1d2.html
-Disallow: /posts/2862656e.html
 Disallow: /posts/28760591.html
 Disallow: /posts/28e1d1cc.html
 Disallow: /posts/346f3a8e
 Disallow: /posts/346f3a8e.html
-Disallow: /posts/394edaa0.html
-Disallow: /posts/48cdc71b.html
-Disallow: /posts/4df1fb5a.html
-Disallow: /posts/4f6afcf2.html
 Disallow: /posts/66b1be3d
 Disallow: /posts/66b1be3d.html
-Disallow: /posts/7d227c9.html
 Disallow: /posts/7f7f1263
 Disallow: /posts/7f7f1263.html
 Disallow: /posts/7fdde8eb
@@ -73,12 +65,10 @@ Disallow: /posts/7fdde8eb.html
 Disallow: /posts/8527ab53.html
 Disallow: /posts/96545e30
 Disallow: /posts/96545e30.html
-Disallow: /posts/98626aad.html
 Disallow: /posts/9a1192fa
 Disallow: /posts/9a1192fa.html
 Disallow: /posts/9b627e5.html
 Disallow: /posts/9f6c2fd1
-Disallow: /posts/9f6c2fd1.html
 Disallow: /posts/<a href=
 Disallow: /posts/[Install WSL | Microsoft Docs](https://docs.microsoft.com/en-us/windows/wsl/install)
 Disallow: /posts/a303f9aa
@@ -101,11 +91,8 @@ Disallow: /posts/d0d884a0.html
 Disallow: /posts/d13c6a40
 Disallow: /posts/d13c6a40.html
 Disallow: /posts/d36d5fbd.html
-Disallow: /posts/e11578be.html
-Disallow: /posts/e1329018.html
 Disallow: /posts/e99215c7.html
 Disallow: /posts/ea07a866.html
-Disallow: /posts/ebaccba2.html
 Disallow: /posts/f06fd56f.html
 Disallow: /posts/f6d96f0.html
 Disallow: /posts/f76966e4
@@ -166,6 +153,19 @@ Allow: /ads.txt
 Allow: /atom.xml
 Allow: /ddaa8128e40b45f9a08905b37f52607a.txt
 Allow: /index.html
+Allow: /posts/1759cd56.html
+Allow: /posts/1c60e1d2.html
+Allow: /posts/2862656e.html
+Allow: /posts/394edaa0.html
+Allow: /posts/48cdc71b.html
+Allow: /posts/4df1fb5a.html
+Allow: /posts/4f6afcf2.html
+Allow: /posts/7d227c9.html
+Allow: /posts/98626aad.html
+Allow: /posts/9f6c2fd1.html
+Allow: /posts/e11578be.html
+Allow: /posts/e1329018.html
+Allow: /posts/ebaccba2.html
 Allow: /robots.txt
 Allow: /sitemap.xml
 Allow: /sitemaps.dead.txt
