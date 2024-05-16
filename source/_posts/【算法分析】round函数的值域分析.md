@@ -8,7 +8,7 @@ tags:
 - Mathematics
 - Algorithm
 title: Analyses of round function.
-updated: "2024-05-16 09:19:23"
+updated: "2024-05-16 09:24:33"
 ---
 
 This article does a mathematical abstraction of the
@@ -70,7 +70,7 @@ first, and then give out some cases that use the rounding function,
 along with some analyses, whose results may be very helpful in the
 derivation of some computer algorithms.
 
-# Definition of $round(\cdot) \mathbb{R}\rightarrow \mathbb{Z}$
+# Definition of $round(\cdot):\mathbb{R}\rightarrow \mathbb{Z}$
 
 According to the **rounding rules** of **Floating-Point Arithmetic**
 that defined in [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754),
