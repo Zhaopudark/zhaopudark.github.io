@@ -52,6 +52,7 @@ Disallow: /page/2/index.html
 Disallow: /posts/1757b5a2
 Disallow: /posts/1757b5a2.html
 Disallow: /posts/17b34613.html
+Disallow: /posts/2855d9ad.html
 Disallow: /posts/28760591.html
 Disallow: /posts/28e1d1cc.html
 Disallow: /posts/346f3a8e
@@ -155,6 +156,7 @@ Allow: /ddaa8128e40b45f9a08905b37f52607a.txt
 Allow: /index.html
 Allow: /posts/1759cd56.html
 Allow: /posts/1c60e1d2.html
+Allow: /posts/2.56e27.html
 Allow: /posts/2862656e.html
 Allow: /posts/394edaa0.html
 Allow: /posts/48cdc71b.html

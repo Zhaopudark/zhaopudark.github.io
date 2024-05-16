@@ -12,7 +12,7 @@ tags:
 title: Derived from splitting data into 3 parts, a better way to divide
   a list of same type elements into ‘n’ parts according to ratios,
   without repetition or leaking
-updated: "2024-04-29 23:26:12"
+updated: "2024-05-16 09:04:49"
 ---
 
 This article discusses an operation that originated in machine learning,
@@ -365,7 +365,7 @@ $f(r,n,N):\{\mathbb{R}^n,\mathbb{Z}^+,\mathbb{Z}^+\}\rightarrow\{\mathbb{Z}\}$,
 
 - $F_{r,n,N}=\{(r,n,N)| n\in \mathbb{Z}^+,N \in \mathbb{Z}^+, n \le N, r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$
   $$
-  \begin{equation}\label{round}\tag{5}
+  \begin{equation}\label{round_f}\tag{5}
   f(r,n,N)=[\sum_{i=1}^n round(r_{i}N)]-N, \text{where } (r,n,N) \in F_{r,n,N}
   \end{equation}
   $$
@@ -399,7 +399,7 @@ to $0.5n$ elements may be missed. So, we cannot just use $round(\cdot)$
 function directly to divide elements in $L$.
 
 And, combine [appendix A.1](#A.1),[appendix A.2](#A.2) and [appendix
-A.3](#A.3), we can find a conclusion about the function$\eqref{round}$
+A.3](#A.3), we can find a conclusion about the function$\eqref{round_f}$
 that:
 
 $$
@@ -471,6 +471,7 @@ $round(\cdot)$ function as:
     \text{known:}~~~~&n,N \in \mathbb{Z}^+, n \le N\\
     &p\in \mathbb{R},~p\ge 1\\
     &r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\\
+    &round(\cdot)\in \{\eqref{round_1}\eqref{round_2},\eqref{round_3}\}\\
     &m=N-\sum_{i=1}^n round(r_iN)\\
     \text{minimize:}~~~~&(\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\\
     \text{subject to:}~~~~~&b = [b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n\\
@@ -550,7 +551,7 @@ that based on this function as:
 
 - If in non-negative domain, the $floor(\cdot)$ function’s mathematical
   representation is as: $$
-  \begin{equation}\tag{9}
+  \begin{equation}\label{floor}\tag{9}
   \forall x \in \mathbb{R}^+\cup\{0\}, floor(x)=\lfloor x\rfloor
   \end{equation}
   $$
@@ -565,7 +566,7 @@ that based on this function as:
 
   - $F_{r,n,N}=\{(r,n,N)| n\in \mathbb{Z}^+,N \in \mathbb{Z}^+, n \le N, r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$
     $$
-    \begin{equation}\label{floor}\tag{10}
+    \begin{equation}\label{floor_f}\tag{10}
     f(r,n,N)=[\sum_{i=1}^n floor(r_{i}N)]-N, \text{where } (r,n,N) \in F_{r,n,N}
     \end{equation}
     $$
@@ -581,7 +582,7 @@ that based on this function as:
     See [appendix A.7](#A.7) for analysis process.
 
   - Also from [appendix A.7](#A.7), we can find a conclusion about the
-    function $\eqref{floor}$ that: $$
+    function $\eqref{floor_f}$ that: $$
     \begin{equation}\label{floor_conclusion}\tag{11}
     \begin{split}
       \forall & n \in \mathbb{Z}^+,\\
@@ -1051,545 +1052,6 @@ are five **rounding rules**:
 >   - **Round toward −∞** - directed rounding towards negative infinity
 >     (also known as *rounding down* or *floor*).[^5]
 
-## A.1
-
-- Given $round(x)$, where
-  $\forall x \in \mathbb{R}^+\cup\{0\},~round(x)=\begin{cases} \lfloor x\rfloor, \text{if }x-\lfloor x\rfloor<0.5 \\ \lceil x\rceil, \text{if }x-\lfloor x\rfloor \ge 0.5 \end{cases}$,
-  as $\eqref{round_1}$.
-- Let
-  $F_{r,n,N}=\{(r,n,N)|n \in\mathbb{Z}^+,N \in\mathbb{Z}^+, n \le N,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$
-- $\forall n \in \mathbb{Z}^+$, let
-  $F_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
-- Given
-  $f(r,n,N)=[\sum_{i=1}^n round(r_{i}N)]-N, \text{ where } (r,n,N) \in F_{r,n,N}$.
-- $\forall n \in \mathbb{Z}^+$, try to find the value range set
-  $R(f,n)=\{f(r,n,N)|(r,N)\in F_{r,N}\}$.
-
-Take the following steps:
-
-1.  $\forall x \in \mathbb{R}^+\cup\{0\}, -0.5 < round(x)-x\le 0.5$
-
-    Proof:
-
-    $\forall x \in \mathbb{R}^+\cup\{0\}$
-
-    - If $x-\lfloor x\rfloor<0.5$, $round(x)-x=\lfloor x\rfloor-x$.
-      - There are $\lfloor x\rfloor-x>-0.5$,
-      - and, $\lfloor x\rfloor-x\le 0$.
-      - So, $-0.5 < round(x)-x\le 0$.
-    - If $x-\lfloor x\rfloor\ge 0.5$, so $x\notin \mathbb{Z}$, so,
-      $round(x)-x=\lceil x\rceil-x=\lfloor x\rfloor+1-x$.
-      - There are $\lfloor x\rfloor+1-x\le -0.5+1=0.5$,
-      - and $\lceil x\rceil-x>0$.
-      - So, $0 < round(x)-x\le 0.5$.
-    - So, combine the above 2 conditions, there is
-      $-0.5 < round(x)-x\le 0.5$
-
-    So, `1` is proofed.
-
-2.  $\forall n \in \mathbb{Z}^+$,
-    $R(f,n)=\{f(r,n,N)|(r,N)\in F_{r,N}\}\subseteq \{x|x\in (-\frac{n}{2},\frac{n}{2}],x\in \mathbb{Z}\}$.
-
-    Proof:
-
-    $\forall n \in \mathbb{Z}^+$
-
-    - Obviously, $\forall (r,N)\in F_{r,N}, \sum_{i=1}^{n}r_iN=N$.
-    - So,
-      $f(r,n,N)=[\sum_{i=1}^n round(r_{i}N)]-N=[\sum_{i=1}^n round(r_{i}N)-r_{i}N],\text{where } (r,N)\in F_{r,N}$.
-    - According to `1`, there will be
-      $\forall i \in \{i|i\in [1,n],i \in \mathbb{Z}\}, -0.5<round(r_{i}N)-r_{i}N\le 0.5$.
-    - So,
-      $\forall (r,N)\in F_{r,N}, -0.5n<\sum_{i=1}^n round(r_{i}N)-r_{i}N\le 0.5n$,
-    - i.e., $\forall (r,N)\in F_{r,N}, -0.5n < f(r,n,N)\le 0.5n$.
-    - And obviously, there is $f(r,n,N)\in \mathbb{Z}$,
-    - so,
-      $R(f,n)=\{f(r,n,N)|(r,N)\in F_{r,N}\} \subseteq \{x|x\in (-\frac{n}{2},\frac{n}{2}],x\in \mathbb{Z}\}$
-
-    So, `2` is proofed.
-
-3.  $\forall n \in \mathbb{Z}^+$,
-    $\{x|x\in (-\frac{n}{2},\frac{n}{2}],x\in \mathbb{Z}\}\subseteq R(f,n)=\{f(r,n,N)|(r,N)\in F_{r,N}\}$.
-
-    Proof:
-
-    $\forall n \in \mathbb{Z}^+$
-
-    - Obviously, $\forall (r,N)\in F_{r,N}, \sum_{i=1}^{n}r_iN=N$.
-
-    - So,
-      $f(r,n,N)=[\sum_{i=1}^n round(r_{i}N)]-N=[\sum_{i=1}^n round(r_{i}N)-r_{i}N],\text{where } (r,N)\in F_{r,N}$.
-
-    - So, if $n=2k, k\in \mathbb{Z}^+$, then,
-
-      - $\forall t\in \{t | t\in[0,k], t\in \mathbb{Z}\}$, let: $$
-        \begin{split}
-        &N=2k\\
-        &r=[r_1,r_2,\ldots,r_n],\\
-        &~\forall i \in \{i|i\in[1,t],i\in \mathbb{Z}\}, r_i=\frac{1}{N},round(r_iN)-r_iN=round(1)-1=0,\\
-        &~\forall i \in \{i|i\in[t+1,k],i\in \mathbb{Z}\}, r_i=\frac{1.5}{N},round(r_iN)-r_iN=round(1.5)-1.5=0.5,\\
-        &~\forall i \in \{i|i\in[k+1,k+t],i\in \mathbb{Z}\} r_i=\frac{1}{N},round(r_iN)-r_iN=round(1)-1=0,\\
-        &~\forall i \in \{i|i\in[k+t+1,2k],i\in \mathbb{Z}\}, r_i=\frac{0.5}{N},round(r_iN)-r_iN=round(0.5)-0.5=0.5\\
-        &~\sum_{i}^{n}r_i=\frac{t+1.5(k-t)+t+0.5(k-t)}{N}=\frac{2k}{N}=1
-        \end{split}
-        $$
-
-        - Obviously, $(r,N)\in F_{r,N}$.
-
-        - Then $$
-          \begin{split}
-          f(r,n,N)&=[\sum_{i=1}^n round(r_{i}N)-r_{i}N]\\
-          &=t*0+(k-t)*0.5+t*0+(k-t)*0.5\\
-          &=k-t
-          \end{split}
-          $$
-
-        - So, $\{x|x\in[0,k],x\in \mathbb{Z}\}\subseteq R(f,n)$
-
-      - $\forall t\in \{t|t\in[1,k-1],t\in \mathbb{Z}\}, \exists \Delta \rightarrow 0^+$,
-        let: $$
-        \begin{split}
-        &N=2k\\
-        &r=[r_1,r_2,\ldots,r_n],\\
-        &~\forall i \in \{i|i\in[1,t],i\in \mathbb{Z}\}, r_i=\frac{1.5-\Delta}{N},round(r_iN)-r_iN=round(1.5-\Delta)-(1.5-\Delta)=-0.5+\Delta\\
-        &~\forall i \in \{t+1\}, r_i=\frac{1+t\Delta}{N},round(r_iN)-r_iN=round(1+t\Delta)-(1+t\Delta)=-t\Delta\\
-        &~\forall i \in \{i|i\in[t+2,k],i\in \mathbb{Z}\}, r_i=\frac{1}{N},round(r_iN)-r_iN=round(1)-(1)=0\\
-        &~\forall i \in \{i|i\in[k+1,k+t],i\in \mathbb{Z}\} r_i=\frac{0.5-\Delta}{N},round(r_iN)-r_iN=round(0.5-\Delta)-(0.5-\Delta)=-0.5+\Delta\\
-        &~\forall i \in \{k+t+1\}, r_i=\frac{1+t\Delta}{N},round(r_iN)-r_iN=round(1+t\Delta)-(1+t\Delta)=-t\Delta\\
-        &~\forall i \in \{i|i\in[k+t+2,2k],i\in \mathbb{Z}\}, r_i=\frac{1}{N},round(r_iN)-r_iN=round(1)-(1)=0\\
-        &~\sum_{i}^{n}r_i=\frac{t(1.5-\Delta)+1+t\Delta+k-t-1+t(0.5-\Delta)+1+t\Delta+k-t-1}{N}\\
-        &~=\frac{1.5t\cancel{-t\Delta}\cancel{+1}\cancel{+t\Delta}+k-t\cancel{-1}+0.5t\cancel{-t\Delta}\cancel{+1}+\cancel{t\Delta}+k-t\cancel{-1}}{N}=1
-        \end{split}
-        $$
-
-        - Obviously, $(r,N)\in F_{r,N}$.
-
-        - Then $$
-          \begin{split}
-          f(r,n,N)&=[\sum_{i=1}^n round(r_{i}N)-r_{i}N]\\
-          &=t*(-0.5+\Delta)-t\Delta+(k-t-1)*0\\
-          &~~~~+t*(-0.5+\Delta)-t\Delta+(k-t-1)*0\\
-          &=-t
-          \end{split}
-          $$
-
-        - So, $\{x|x\in[-k+1,-1],x\in \mathbb{Z}\}\subseteq R(f,n)$
-
-        Therefore, there is
-        $\{x|x\in[-k+1,k],x \in \mathbb{Z}\}\subseteq R(f,n)$.
-
-      So,
-      $\{x|x\in (-\frac{n}{2},\frac{n}{2}],x\in \mathbb{Z}\}\subseteq R(f,n)$.
-
-    - And, if $n=2k-1,k\in \mathbb{Z}^+$, then,
-
-      - $\forall t\in \{t|t\in [1,k], t \in \mathbb{Z}\}$, let: $$
-        \begin{split}
-        &N=2k\\
-        &r=[r_1,r_2,\ldots,r_n],\\
-        &~~\forall i \in \{1\}, r_i=\frac{2}{N},round(r_iN)-r_iN=round(2)-2=0,\\
-        &~\forall i \in \{i|i \in [2,t],i \in \mathbb{Z}\}, r_i=\frac{1}{N},round(r_iN)-r_iN=round(1)-1=0,\\
-        &~\forall i \in \{i|i \in [t+1,k],i \in \mathbb{Z}\}, r_i=\frac{1.5}{N},round(r_iN)-r_iN=round(1.5)-1.5=0.5,\\
-        &~\forall i \in \{i|i \in [k+1,k+t-1],i \in \mathbb{Z}\}, r_i=\frac{1}{N},round(r_iN)-r_iN=round(1)-1=0,\\
-        &~\forall i \in \{i|i \in [k+t,2k-1],i\in \mathbb{Z}\}, r_i=\frac{0.5}{N},round(r_iN)-r_iN=round(0.5)-0.5=0.5\\
-        &~\sum_{i}^{n}r_i=\frac{2+t-1+1.5(k-t)+t-1+0.5(k-t)}{N}=1
-        \end{split}
-        $$
-
-        - Obviously, $(r,N)\in F_{r,N}$.
-
-        - Then $$
-          \begin{split}
-          f(r,n,N)&=[\sum_{i=1}^n round(r_{i}N)-r_{i}N]\\
-          &=0+(t-1)*0+(k-t)*0.5+(t-1)*0+(k-t)*0.5\\
-          &=k-t
-          \end{split}
-          $$
-
-        - So, $\{x|x\in[0,k-1],x\in \mathbb{Z}\}\subseteq R(f,n)$
-
-      - $\forall t\in \{t|t\in [2,k], t \in \mathbb{Z}\}$, let: $$
-        \begin{split}
-        &N=2k\\
-        &r=[r_1,r_2,\ldots,r_n],\\
-        &~\forall i \in \{1\}, r_i=\frac{2}{N},round(r_iN)-r_iN=round(2)-2=0,\\
-        &~\forall i \in \{i|i\in [2,t],i\in \mathbb{Z}\}, r_i=\frac{1.5-\Delta}{N},round(r_iN)-r_iN=round(1.5-\Delta)-(1.5-\Delta)=-0.5+\Delta\\
-        &~\forall i \in \{t+1\}, r_i=\frac{1+(t-1)\Delta}{N},round(r_iN)-r_iN=round(1+(t-1)\Delta)-(1+(t-1)\Delta)=-(t-1)\Delta\\
-        &~\forall i \in \{i|i\in [t+2,k],i\in \mathbb{Z}\}, r_i=\frac{1}{N},round(r_iN)-r_iN=round(1)-(1)=0\\
-        &~\forall i \in \{i|i\in [k+1,k+t-1],i\in \mathbb{Z}\},r_i=\frac{0.5-\Delta}{N},round(r_iN)-r_iN=round(0.5-\Delta)-(0.5-\Delta)=-0.5+\Delta\\
-        &~\forall i \in \{k+t\}, r_i=\frac{1+(t-1)\Delta}{N},round(r_iN)-r_iN=round(1+(t-1)\Delta)-(1+(t-1)\Delta)=-(t-1)\Delta\\
-        &~\forall i \in \{i|i\in [k+t+1,2k-1],i\in \mathbb{Z}\}, r_i=\frac{1}{N},round(r_iN)-r_iN=round(1)-(1)=0\\
-        &~\sum_{i}^{n}r_i=\frac{2+(t-1)*(1.5-\Delta)+1+(t-1)\Delta+(k-t-1)+(t-1)*(0.5-\Delta)+1+(t-1)t\Delta+k-t-1}{4k}\\
-        &~=\frac{2+(t-1)*(2-2\Delta)+2+2(t-1)\Delta+2(k-t-1)}{4k}=\frac{\cancel{2}\cancel{+2t}\cancel{-2}\cancel{-2t\Delta}\cancel{+2\Delta}\cancel{+2}\cancel{+2t\Delta}\cancel{-2\Delta}+2k\cancel{-2t}\cancel{-2}}{N}=1
-        \end{split}
-        $$
-
-        - Obviously, $(r,N)\in F_{r,N}$.
-
-        - Then $$
-          \begin{split}
-          f(r,n,N)&=[\sum_{i=1}^n round(r_{i}N)-r_{i}N]\\
-          &=0+(t-1)*(-0.5+\Delta)-(t-1)\Delta+(k-t-1)*0\\
-          &~~~~+(t-1)*(-0.5+\Delta)-(t-1)\Delta+(k-t-1)*0\\
-          &=(t-1)*(-0.5+\Delta-\Delta-0.5+\Delta-\Delta)\\
-          &=1-t
-          \end{split}
-          $$
-
-        - So, $\{x|x\in[-k+1,-1],x\in \mathbb{Z}\}\subseteq R(f,n)$
-
-        Therefore, there is
-        $\{x|x\in[-k+1,k-1],x \in \mathbb{Z}\}\subseteq R(f,n)$.
-
-      So,
-      $\{x|x\in (-\frac{n}{2},\frac{n}{2}],x\in \mathbb{Z}\}\subseteq R(f,n)$.
-
-    So, `3` is proofed.
-
-4.  Combine `2` and `3`:
-    $\forall n \in \mathbb{Z}^+, R(f,n)=\{f(r,n,N)|(r,N)\in F_{r,N}\}=\{x|x\in (-\frac{n}{2},\frac{n}{2}],x\in \mathbb{Z}\}$.
-
-## A.2
-
-- Given $round(x)$, where
-  $\forall x \in \mathbb{R}^+\cup\{0\},~round(x)=\begin{cases}
-                  \lfloor x\rfloor, \text{if }x-\lfloor x\rfloor \le 0.5 \\
-                  \lceil x\rceil, \text{if }x-\lfloor x\rfloor > 0.5
-                  \end{cases}$, as $\eqref{round_2}$.
-- Let
-  $F_{r,n,N}=\{(r,n,N)|n \in\mathbb{Z}^+,N \in\mathbb{Z}^+, n \le N,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
-- $\forall n \in \mathbb{Z}^+$, let
-  $F_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
-- Given
-  $f(r,n,N)=[\sum_{i=1}^n round(r_{i}N)]-N, \text{ where } (r,n,N) \in F_{r,n,N}$.
-- $\forall n \in \mathbb{Z}^+$, try to find the value range set
-  $R(f,n)=\{f(r,n,N)|(r,N)\in F_{r,N}\}$.
-
-Take the following steps:
-
-1.  $\forall x \in \mathbb{R}^+\cup\{0\}, -0.5 \le round(x)-x < 0.5$
-
-    Proof:
-
-    $\forall x \in \mathbb{R}^+\cup\{0\}$
-
-    - If $x-\lfloor x\rfloor \le 0.5$, $round(x)-x=\lfloor x\rfloor-x$.
-      - There are $\lfloor x\rfloor-x \ge -0.5$,
-      - and, $\lfloor x\rfloor-x\le 0$.
-      - So, $-0.5 \le round(x)-x \le 0$.
-    - If $x-\lfloor x\rfloor > 0.5$, so $x\notin \mathbb{Z}$, so,
-      $round(x)-x=\lceil x\rceil-x=\lfloor x\rfloor+1-x$.
-      - There are $\lfloor x\rfloor+1-x< -0.5+1=0.5$,
-      - and $\lceil x\rceil-x>0$.
-      - So, $0 < round(x)-x< 0.5$.
-    - So, combine the above 2 conditions, there is
-      $-0.5 \le round(x)-x < 0.5$
-
-    So, `1` is proofed.
-
-2.  $\forall n \in \mathbb{Z}^+$,
-    $R(f,n)=\{f(r,n,N)|(r,N)\in F_{r,N}\}\subseteq \{x|x\in [-\frac{n}{2},\frac{n}{2}),x\in \mathbb{Z}\}$.
-
-    Proof:
-
-    $\forall n \in \mathbb{Z}^+$
-
-    - Obviously, $\forall (r,N)\in F_{r,N}, \sum_{i=1}^{n}r_iN=N$.
-    - So,
-      $f(r,n,N)=[\sum_{i=1}^n round(r_{i}N)]-N=[\sum_{i=1}^n round(r_{i}N)-r_{i}N],\text{where } (r,N)\in F_{r,N}$.
-    - According to `1`, there will be
-      $\forall i \in \{i|i\in [1,n],i \in \mathbb{Z}\}, -0.5\le round(r_{i}N)-r_{i}N< 0.5$.
-    - So,
-      $\forall (r,N)\in F_{r,N}, -0.5n \le \sum_{i=1}^n round(r_{i}N)-r_{i}N< 0.5n$,
-    - i.e., $\forall (r,N)\in F_{r,N}, -0.5n \le f(r,n,N)< 0.5n$.
-    - And obviously, there is $f(r,n,N)\in \mathbb{Z}$,
-    - so,
-      $R(f,n)=\{f(r,n,N)|(r,N)\in F_{r,N}\} \subseteq \{x|x\in [-\frac{n}{2},\frac{n}{2}),x\in \mathbb{Z}\}$
-
-    So, `2` is proofed.
-
-3.  $\forall n \in \mathbb{Z}^+$,
-    $\{x|x\in [-\frac{n}{2},\frac{n}{2}),x\in \mathbb{Z}\}\subseteq R(f,n)=\{f(r,n,N)|(r,N)\in F_{r,N}\}$.
-
-    Proof:
-
-    $\forall n \in \mathbb{Z}^+$
-
-    - Obviously, $\forall (r,N)\in F_{r,N}, \sum_{i=1}^{n}r_iN=N$.
-
-    - So,
-      $f(r,n,N)=[\sum_{i=1}^n round(r_{i}N)]-N=[\sum_{i=1}^n round(r_{i}N)-r_{i}N],\text{where } (r,N)\in F_{r,N}$.
-
-    - So, if $n=2k, k\in \mathbb{Z}^+$, then,
-
-      - $\forall t\in \{t | t\in[0,k], t\in \mathbb{Z}\}$, let: $$
-        \begin{split}
-        &N=2k\\
-        &r=[r_1,r_2,\ldots,r_n],\\
-        &~\forall i \in \{i|i\in[1,t],i\in \mathbb{Z}\}, r_i=\frac{1}{N},round(r_iN)-r_iN=round(1)-1=0,\\
-        &~\forall i \in \{i|i\in[t+1,k],i\in \mathbb{Z}\}, r_i=\frac{1.5}{N},round(r_iN)-r_iN=round(1.5)-1.5=-0.5,\\
-        &~\forall i \in \{i|i\in[k+1,k+t],i\in \mathbb{Z}\} r_i=\frac{1}{N},round(r_iN)-r_iN=round(1)-1=0,\\
-        &~\forall i \in \{i|i\in[k+t+1,2k],i\in \mathbb{Z}\}, r_i=\frac{0.5}{N},round(r_iN)-r_iN=round(0.5)-0.5=-0.5\\
-        &~\sum_{i}^{n}r_i=\frac{t+1.5(k-t)+t+0.5(k-t)}{N}=1
-        \end{split}
-        $$
-
-        - Obviously, $(r,N)\in F_{r,N}$.
-
-        - Then $$
-          \begin{split}
-          f(r,n,N)&=[\sum_{i=1}^n round(r_{i}N)-r_{i}N]\\
-          &=t*0-(k-t)*0.5+t*0-(k-t)*0.5\\
-          &=-k+t
-          \end{split}
-          $$
-
-        - So, $\{x|x\in[-k,0],x\in \mathbb{Z}\}\subseteq R(f,n)$.
-
-      - $\forall t\in \{t\in[1,k-1],t\in \mathbb{Z}\}, \exists \Delta \rightarrow 0^+$,
-        let: $$
-        \begin{split}
-        &N=2k\\
-        &r=[r_1,r_2,\ldots,r_n],\\
-        &~\forall i \in \{i|i\in[1,t],i\in \mathbb{Z}\}, r_i=\frac{1.5+\Delta}{N},round(r_iN)-r_iN=round(1.5+\Delta)-(1.5+\Delta)=0.5-\Delta\\
-        &~\forall i \in \{t+1\}, r_i=\frac{1-t\Delta}{N},round(r_iN)-r_iN=round(1-t\Delta)-(1-t\Delta)=t\Delta\\
-        &~\forall i \in \{i|i\in[t+2,k],i\in \mathbb{Z}\}, r_i=\frac{1}{N},round(r_iN)-r_iN=round(1)-(1)=0\\
-        &~\forall i \in \{i|i\in[k+1,k+t],i\in \mathbb{Z}\} r_i=\frac{0.5+\Delta}{N},round(r_iN)-r_iN=round(0.5+\Delta)-(0.5+\Delta)=0.5_\Delta\\
-        &~\forall i \in \{k+t+1\}, r_i=\frac{1-t\Delta}{N},round(r_iN)-r_iN=round(1-t\Delta)-(1-t\Delta)=t\Delta\\
-        &~\forall i \in \{i|i\in[k+t+2,2k],i\in \mathbb{Z}\}, r_i=\frac{1}{N},round(r_iN)-r_iN=round(1)-(1)=0\\
-        &~\sum_{i}^{n}r_i=\frac{t(1.5+\Delta)+1-t\Delta+k-t-1+t(0.5+\Delta)+1-t\Delta+k-t-1}{N}\\
-        &~=\frac{1.5t\cancel{+t\Delta}\cancel{+1}\cancel{-t\Delta}+k-t\cancel{-1}+0.5t\cancel{+t\Delta}\cancel{+1}\cancel{-t\Delta}+k-t\cancel{-1}}{N}=1
-        \end{split}
-        $$
-
-        - Obviously, $(r,N)\in F_{r,N}$.
-
-        - Then $$
-          \begin{split}
-          f(r,n,N)&=[\sum_{i=1}^n round(r_{i}N)-r_{i}N]\\
-          &=t*(0.5-\Delta)+t\Delta+(k-t-1)*0\\
-          &~~~~+t*(0.5-\Delta)+t\Delta+(k-t-1)*0\\
-          &=t
-          \end{split}
-          $$
-
-        - So, $\{x|x\in[1,k-1],x\in \mathbb{Z}\}\subseteq R(f,n)$.
-
-        Therefore, there is
-        $\{x|x\in[-k,k-1],x \in \mathbb{Z}-k\}\subseteq R(f,n)$.
-
-      So,
-      $\{x|x\in [-\frac{n}{2},\frac{n}{2}),x\in \mathbb{Z}\}\subseteq R(f,n)$.
-
-    - And, if $n=2k-1,k\in \mathbb{Z}^+$, then,
-
-      - $\forall t\in \{t|t\in [1,k], t \in \mathbb{Z}\}$, let: $$
-        \begin{split}
-        &N=2k\\
-        &r=[r_1,r_2,\ldots,r_n],\\
-        &~~\forall i \in \{1\}, r_i=\frac{2}{N},round(r_iN)-r_iN=round(2)-2=0,\\
-        &~\forall i \in \{i|i \in [2,t],i \in \mathbb{Z}\}, r_i=\frac{1}{N},round(r_iN)-r_iN=round(1)-1=0,\\
-        &~\forall i \in \{i|i \in [t+1,k],i \in \mathbb{Z}\}, r_i=\frac{1.5}{N},round(r_iN)-r_iN=round(1.5)-1.5=-0.5,\\
-        &~\forall i \in \{i|i \in [k+1,k+t-1],i \in \mathbb{Z}\} r_i=\frac{1}{N},round(r_iN)-r_iN=round(1)-1=0,\\
-        &~\forall i \in \{i|i \in [k+t,2k-1],i\in \mathbb{Z}\}, r_i=\frac{0.5}{N},round(r_iN)-r_iN=round(0.5)-0.5=-0.5\\
-        &~\sum_{i}^{n}r_i=\frac{2+t-1+1.5(k-t)+t-1+0.5(k-t)}{N}=1
-        \end{split}
-        $$
-
-        - Obviously, $(r,N)\in F_{r,N}$.
-
-        - Then $$
-          \begin{split}
-          f(r,n,N)&=[\sum_{i=1}^n round(r_{i}N)-r_{i}N]\\
-          &=t0+(t-1)*0-(k-t)*0.5+(t-1)*0-(k-t)*0.5\\
-          &=-k+t
-          \end{split}
-          $$
-
-        - So, $\{x|x\in[-k+1,0],x\in \mathbb{Z}\}\subseteq R(f,n)$
-
-      - $\forall t\in \{t|t\in [2,k], t \in \mathbb{Z}\}$, let: $$
-        \begin{split}
-        &N=2k\\
-        &r=[r_1,r_2,\ldots,r_n],\\
-        &~\forall i \in \{1\}, r_i=\frac{2}{N},round(r_iN)-r_iN=round(2)-2=0,\\
-        &~\forall i \in \{i|i\in [2,t],i\in \mathbb{Z}\}, r_i=\frac{1.5+\Delta}{N},round(r_iN)-r_iN=round(1.5+\Delta)-(1.5+\Delta)=0.5-\Delta\\
-        &~\forall i \in \{t+1\}, r_i=\frac{1-(t-1)\Delta}{N},round(r_iN)-r_iN=round(1-(t-1)\Delta)-(1-(t-1)\Delta)=(t-1)\Delta\\
-        &~\forall i \in \{i|i\in [t+2,k],i\in \mathbb{Z}\}, r_i=\frac{1}{N},round(r_iN)-r_iN=round(1)-(1)=0\\
-        &~\forall i \in \{i|i\in [k+1,k+t-1],i\in \mathbb{Z}\} r_i=\frac{0.5+\Delta}{N},round(r_iN)-r_iN=round(0.5+\Delta)-(0.5+\Delta)=0.5-\Delta\\
-        &~\forall i \in \{k+t\}, r_i=\frac{1-(t-1)\Delta}{N},round(r_iN)-r_iN=round(1-(t-1)\Delta)-(1-(t-1)\Delta)=(t-1)\Delta\\
-        &~\forall i \in \{i|i\in [k+t+1,2k-1],i\in \mathbb{Z}\}, r_i=\frac{1}{N},round(r_iN)-r_iN=round(1)-(1)=0\\
-        &~\sum_{i}^{n}r_i=\frac{2+(t-1)*(1.5+\Delta)+1-(t-1)\Delta+k-t-1+(t-1)*(0.5+\Delta)+1-(t-1)t\Delta+k-t-1}{N}\\
-        &~=\frac{2+(t-1)*(2+2\Delta)+2-2(t-1)\Delta+2(k-t-1)}{N}=\frac{\cancel{2}\cancel{+2t}\cancel{-2}\cancel{+2t\Delta}\cancel{-2\Delta}\cancel{+2}\cancel{-2t\Delta}\cancel{+2\Delta}+2k\cancel{-2t}\cancel{-2}}{N}=1
-        \end{split}
-        $$
-
-        - Obviously, $(r,N)\in F_{r,N}$.
-
-        - Then $$
-          \begin{split}
-          f(r,n,N)&=[\sum_{i=1}^n round(r_{i}N)-r_{i}N]\\
-          &=0+(t-1)*(0.5-\Delta)+(t-1)\Delta+(k-t-1)*0\\
-          &~~~~+(t-1)*(0.5-\Delta)+(t-1)\Delta+(k-t-1)*0\\
-          &=(t-1)*(0.5-\Delta+\Delta+0.5-\Delta+\Delta)\\
-          &=t-1
-          \end{split}
-          $$
-
-        - So, $\{x|x\in[1,k-1],x\in \mathbb{Z}\}\subseteq R(f,n)$
-
-        Therefore, there is
-        $\{x|x\in[-k+1,k-1],x \in \mathbb{Z}\}\subseteq R(f,n)$.
-
-      So,
-      $\{x|x\in [-\frac{n}{2},\frac{n}{2}),x\in \mathbb{Z}\} \subseteq R(f,n)$.
-
-    So, `3` is proofed.
-
-4.  Combine `2` and `3`:
-    $\forall n \in \mathbb{Z}^+, R(f,n)=\{f(r,n,N)|(r,N)\in F_{r,N}\}=\{x|x\in [-\frac{n}{2},\frac{n}{2}),x\in \mathbb{Z}\}$
-
-## A.3
-
-- Given $round(x)$, where
-  $\forall x \in \mathbb{R}^+\cup\{0\},round(x)=\begin{cases}
-         \lfloor x\rfloor, &\text{if }&x-\lfloor x\rfloor<0.5 \\
-         \lfloor x\rfloor,&\text{if }&x-\lfloor x\rfloor=0.5,\lfloor x\rfloor \mod 2=0\\
-         \lceil x\rceil, &\text{if }&x-\lfloor x\rfloor=0.5,\lceil x\rceil\mod 2= 0\\
-         \lceil x\rceil, &\text{if }&x-\lfloor x\rfloor>0.5
-         \end{cases}$, as $\eqref{round_3}$.
-- Let
-  $F_{r,n,N}=\{(r,n,N)|n \in\mathbb{Z}^+,N \in\mathbb{Z}^+, n \le N,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
-- $\forall n \in \mathbb{Z}^+$, let
-  $F_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
-- Given
-  $f(r,n,N)=[\sum_{i=1}^n round(r_{i}N)]-N, \text{ where } (r,n,N) \in F_{r,n,N}$.
-- $\forall n \in \mathbb{Z}^+$, try to find the value range set
-  $R(f,n)=\{f(r,n,N)|(r,N)\in F_{r,N}\}$.
-
-Take the following steps:
-
-1.  $\forall x \in \mathbb{R}^+\cup\{0\}, -0.5 \le round(x)-x\le 0.5$
-
-    Proof:
-
-    $\forall x \in \mathbb{R}^+\cup\{0\}$
-
-    - If $x-\lfloor x\rfloor<0.5$, $round(x)-x=\lfloor x\rfloor-x$.
-      - There are $\lfloor x\rfloor-x>-0.5$,
-      - and, $\lfloor x\rfloor-x\le 0$.
-      - So, $-0.5 < \lfloor x\rfloor-x\le 0$,
-      - i.e., $-0.5 < round(x)-x\le 0$.
-    - If $x-\lfloor x\rfloor=0.5,\lfloor x\rfloor \mod 2=0$,
-      $round(x)-x=\lfloor x\rfloor-x= -0.5$
-      - i.e., $round(x)-x = -0.5$.
-    - If $x-\lfloor x\rfloor=0.5,\lceil x\rceil \mod 2=0$, so
-      $x\notin \mathbb{Z}$，$round(x)-x=\lceil x\rceil-x =\lfloor x\rfloor+1-x=1-0.5=0.5$
-      - i.e., $round(x)-x = 0.5$.
-    - If $x-\lfloor x\rfloor> 0.5$, so $x\notin \mathbb{Z}$, so,
-      $round(x)-x=\lceil x\rceil-x=\lfloor x\rfloor+1-x$.
-      - There are $\lfloor x\rfloor+1-x< -0.5+1=0.5$,
-      - and $\lceil x\rceil-x>0$.
-      - So, $0 < round(x)-x< 0.5$.
-    - So, combine the above 4 conditions, there is
-      $-0.5 \le round(x)-x < 0.5$
-
-    So, `1` is proofed.
-
-2.  $\forall n \in \mathbb{Z}^+$,
-    $R(f,n)=\{f(r,n,N)|(r,N)\in F_{r,N}\}\subseteq \{x|x\in [-\frac{n}{2},\frac{n}{2}],x\in \mathbb{Z}\}$.
-
-    Proof:
-
-    $\forall n \in \mathbb{Z}^+$
-
-    - Obviously, $\forall (r,N)\in F_{r,N}, \sum_{i=1}^{n}r_iN=N$.
-    - So,
-      $f(r,n,N)=[\sum_{i=1}^n round(r_{i}N)]-N=[\sum_{i=1}^n round(r_{i}N)-r_{i}N],\text{where } (r,N)\in F_{r,N}$.
-    - According to `1`, there will be
-      $\forall i \in \{i|i\in [1,n],i \in \mathbb{Z}\}, -0.5\le round(r_{i}N)-r_{i}N\le 0.5$.
-    - So,
-      $\forall (r,N)\in F_{r,N}, -0.5n \le \sum_{i=1}^n round(r_{i}N)-r_{i}N \le 0.5n$,
-    - i.e.,$\forall (r,N)\in F_{r,N}, -0.5n \le f(r,n,N)\le 0.5n$.
-    - And obviously, there is $f(r,n,N)\in \mathbb{Z}$,
-    - so,
-      $R(f,n)=\{f(r,n,N)|(r,N)\in F_{r,N}\}\subseteq \{x|x\in [-\frac{n}{2},\frac{n}{2}],x\in \mathbb{Z}\}$.
-
-    So, `2` is proofed.
-
-3.  $\forall n \in \mathbb{Z}^+$,
-    $\{x|x\in [-\frac{n}{2},\frac{n}{2}],x\in \mathbb{Z}\}\subseteq R(f,n)=\{f(r,n,N)|(r,N)\in F_{r,N}\}$.
-
-    Proof:
-
-    $\forall n \in \mathbb{Z}^+$
-
-    - Obviously, $\forall (r,N)\in F_{r,N}, \sum_{i=1}^{n}r_iN=N$.
-
-    - So,
-      $f(r,n,N)=[\sum_{i=1}^n round(r_{i}N)]-N=[\sum_{i=1}^n round(r_{i}N)-r_{i}N],\text{where } (r,N)\in F_{r,N}$.
-
-    - So, if $n=2k, k\in \mathbb{Z}^+$, then,
-
-      - $\forall t\in \{t | t\in[0,2k], t\in \mathbb{Z}\}$, let: $$
-        \begin{split}
-        &N=3k+t\\
-        &r=[r_1,r_2,\ldots,r_n],\\
-        &~\forall i \in \{i|i\in[1,t],i\in \mathbb{Z}\}, r_i=\frac{2.5}{N},round(r_iN)-r_iN=round(2.5)-2.5=-0.5,\\
-        &~\forall i \in \{i|i\in[t+1,2k],i\in \mathbb{Z}\}, r_iN=\frac{1.5}{N},round(r_iN)-r_iN=round(1.5)-1.5=0.5\\
-        &~\sum_{i}^{n}r_i=\frac{2.5t+1.5(2k-t)}{N}=\frac{3k+t}{N}=1
-        \end{split}
-        $$
-
-        - Obviously, $(r,N)\in F_{r,N}$.
-
-        - Then $$
-          \begin{split}
-          f(r,n,N)&=[\sum_{i=1}^n round(r_{i}N)-r_{i}N]\\
-          &=-0.5t+(2k-t)*0.5\\
-          &=k-t
-          \end{split}
-          $$
-
-        - So, $\{x|x\in[-k,k],x\in \mathbb{Z}\}\subseteq R(f,n)$.
-
-      So,
-      $\{x|x\in [-\frac{n}{2},\frac{n}{2}],x\in \mathbb{Z}\}\subseteq R(f,n)$.
-
-    - And, if $n=2k-1,k\in \mathbb{Z}^+$, then,
-
-      - $\forall t\in \{t|t\in [1,2k-1], t \in \mathbb{Z}\}$, let: $$
-        \begin{split}
-        &N=3k+t \\
-        &r=[r_1,r_2,\ldots,r_n],\\
-        &~\forall i \in \{1\}, r_i=\frac{4}{N},round(r_iN)-r_iN=round(4)-4=0,\\
-        &~\forall i \in \{i|i\in [2,t],i \in \mathbb{Z}\}, r_i=\frac{2.5}{N},round(r_iN)-r_iN=round(2.5)-2.5=-0.5,\\
-        &~\forall i \in \{i|i\in [t+1,2k-1],i \in \mathbb{Z}\},r_iN=\frac{1.5}{N},round(r_iN)-r_iN=round(1.5)-1.5=0.5\\
-        &~\sum_{i}^{n}r_i=\frac{4+2.5(t-1)+1.5(2k-1-t)}{N}=\frac{3k+t}{N}=1
-        \end{split}
-        $$
-
-        - Obviously, $(r,N)\in F_{r,N}$.
-
-        - Then $$
-          \begin{split}
-          f(r,n,N)&=[\sum_{i=1}^n round(r_{i}N)-r_{i}N]\\
-          &=0-0.5(t-1)+(2k-1-t)*0.5\\
-          &=-0.5t+0.5+k-0.5-0.5t\\
-          &=k-t
-          \end{split}
-          $$
-
-        - So, $\{x|x\in[-k+1,k-1],x\in \mathbb{Z}\}\subseteq R(f,n)$.
-
-      So,
-      $\{x|x\in [-\frac{n}{2},\frac{n}{2}],x\in \mathbb{Z}\}\subseteq R(f,n)$.
-
-    So, `3` is proofed.
-
-4.  Combine `2` and `3`:
-    $\forall n \in \mathbb{Z}^+, R(f,n)=\{f(r,n,N)|(r,N)\in F_{r,N}\}=\{x|x\in [-\frac{n}{2},\frac{n}{2}],x\in \mathbb{Z}\}$.
-
 ## A.4
 
 - According to the NIP problem $\eqref{NIP_problem}$.
@@ -1668,401 +1130,783 @@ Take the following steps:
 
 ## Lemma 1
 
-$$
-\begin{equation}\label{lemma_1}\tag{14}
-\begin{split}
-\text{Lemma:}\\
-&\text{Given set }V_1,V_2,~\text{that }\empty \subsetneq V_1 \subseteq V_2,\\
-&~~~~\text{and given set }U\subset V_2, \complement_{V_2}U.\\
-&\text{If there is:}\\
-&~~\text{Assume }U \cap V_1 \ne \empty,\\
-&~~\text{it can be proofed that }U \cap V_1 \ne \empty \Rightarrow \complement_{V_2}U \cap V_1 \ne \empty.\\
-&\text{Then:}\\
-&~~\complement_{V_2}U \cap V_1 \ne \empty.\\
-\text{Proof:}\\
-&\text{If assumption }U \cap V_1 \ne \empty \text{ is valid},\\
-&~~\text{then}, U \cap V_1 \ne \empty \Rightarrow \complement_{V_2}U \cap V_1 \ne \empty~\text{leads to }\complement_{V_2}U \cap V_1 \ne \empty.\\
-&\text{If assumption }U \cap V_1 \ne \empty \text{ is not valid},\\
-&~~\text{then}, U \cap V_1=\empty,\text{also leads to }\complement_{V_2}U \cap V_1 \ne \empty.\\
-\end{split}
-\end{equation}
-$$
+- Assertion:
+  - Given set $V_1,V_2$, where $\empty \subsetneq V_1 \subseteq V_2$,
+  - and given set $U\subset V_2$,
+  - so, let $\complement_{V_2}U$ represents the complement of $U$ in
+    $V_2$​​​.
+  - If $U\cap V_1=\empty$,
+  - then, $\complement_{V_2}U \cap V_1 \ne \empty$.
+- Proof:
+  - Since $U\cap V_1=\empty$.
+  - If $U=\empty$,
+    - then $\complement_{V_2}U=V_2$.
+    - According to the assertion, there is
+      $\complement_{V_2}U \cap V_1 = V_2\cap V_1 = V_1\ne \empty$.
+  - If $U \ne \empty$,
+    - then, $\exists x\in V_1, x\notin U, x \in V_2$.
+    - So, $x \in \complement_{V_2}U \cap V_1$,
+    - i.e., $\complement_{V_2}U \cap V_1 \ne \empty$.
+
+  Therefore, the [Lemma 1](#lemma 1) is proofed.
 
 ## Lemma 2
 
-$$
-\begin{equation}\label{lemma_2}\tag{15}
-\begin{split}
-\text{Lemma: }&\\
-&\text{Given set }V_1,V_2,~\text{that }V_1 \subseteq V_2 \subseteq \mathbb{R}^n,\\
-&~~~~\text{where }V_1=\{x|\mathop{\arg\min}\limits_{x\in V_2}f(x)\}\ne \empty,\\
-&~~~~\text{and given set }U\subset V_2.\\
-&\text{If: }U \cap V_1 \ne \empty.\\
-&\text{Then: }\empty \ne \{x|\mathop{\arg\min}\limits_{x\in U}f(x)\}\subset V_1.\\
-\text{Proof: }&\text{Omitted}\\
-&\\
-\end{split}
-\end{equation}
-$$
+- Assertion:
 
-## Lemma 3
+  - Given set $V_1,V_2$, where $\empty \subsetneq V_1 \subseteq V_2$,
+  - and given set
+    $V^{*}_{1}=\{x|\mathop{\arg\min}\limits_{x\in V_1}f(x)\}$,
+    $V^{*}_{2}=\{x|\mathop{\arg\min}\limits_{x\in V_2}f(x)\}$.
+  - If $\exists x \in V^{*}_{2}$, and $x \in V_1$,
+    - then, $x \in V^{*}_{1} \subseteq V^{*}_{2}$.
 
-$$
-\begin{equation}\label{lemma_3}\tag{16}
-\begin{split}
-\text{Lemma: }&\\
-&\text{Given set }V_1,V_2,~\text{that }\empty~\ne V_1,V_1\subseteq V_2 \subseteq \mathbb{R}^n,\\
-&~~~~\text{and given set }V^{*}_{1}=\{x|\mathop{\arg\min}\limits_{x\in V_1}f(x)\},\\
-&~~~~\text{and given set }V^{*}_{2}=\{x|\mathop{\arg\min}\limits_{x\in V_2}f(x)\}.\\
-&\text{If: }\exists x \in V^{*}_{2}, \text{and }x \in V_1.\\
-&\text{Then: }x \in V^{*}_{1} \subseteq V^{*}_{2}.\\
-\text{Proof: }&~\text{Omitted}\\
-\end{split}
-\end{equation}
-$$
+- Proof:
+
+  - Obviously, there are $V_1^*\subseteq V_1 \subseteq V_2$, and
+    $V_2^*\subseteq V_2$.
+  - Since $\exists x \in V^{*}_{2}$, and $x \in V_1$,
+  - so, $V_1\cap V_2^* \ne \empty$.
+  - Assume $\exists \hat x \in V_1\cap V_2^*$ that
+    $\hat x \notin V_1^*$,
+    - so, $\hat x \in V_2^*, x\in V_1$, but $\hat x \notin V_1^*$.
+    - So, $\forall \hat y \in V_1^* \subseteq V_2$, there is
+      $f(\hat y)<f(\hat x)$.
+    - So, $\hat x \notin V_2^*$, which is contrary to the logic of the
+      above.
+    - So, the assumption is not valid.
+  - So, $\forall \hat x \in V_1\cap V_2^*$, there is $\hat x \in V_1^*$​,
+    i.e., $V_1\cap V_2^*\subseteq V_1^*$​.
+  - Assume $\exists \hat x \in V_1^*$ that
+    $\hat x \notin V_1\cap V_2^*$​,
+    - so, $\hat x \in V_1^*, x\in V_1$, but $\hat x \notin V_2^*$​.
+    - So, $\forall \hat y \in V_2^* \subseteq V_2$, there is
+      $f(\hat y)<f(\hat x)$​.
+    - So, $\forall \hat z \in V_1 \cap V_2^* \subseteq V_1$, there is
+      $f(\hat z)<f(\hat x)$.
+    - So, $\hat x \notin V_1^*$​, which is contrary to the logic of the
+      above.
+    - So, the assumption is not valid.
+  - So, $\forall \hat x \in V_1^*$, there is $\hat x \in V_1\cap V_2^*$,
+    i.e., $V_1^* \subseteq V_1\cap V_2^*$.
+  - Therefore, $V_1^*=V_1\cap V_2^*$​.
+  - So, $x \in V^{*}_{1} \subseteq V^{*}_{2}$
+
+  Therefore, the [Lemma 2](#lemma 2) is proofed.
 
 ## A.5
 
-$$
-\begin{equation}\label{function_i}\tag{17}
-\begin{split}
-&\text{Define a helper function and elaboration some features (conclusions) of it.}\\
-&\forall p\ge 1,~x \in [-0.5,0.5],~k\in \mathbb{N},\\
-&~~~~I(k,x) =\begin{cases}
-                |k+x|^{p}-|k+x-1|^{p},~k\ge 1, k \in \mathbb{Z},~x \in [-0.5,0.5]\\
-                0,~k=0,~x \in [-0.5,0.5]\\
-                |k+x|^{p}-|k+x+1|^{p},k\le -1, k \in \mathbb{Z},~x \in [-0.5,0.5]
-                \end{cases}.\\
-&\text{Since when }k\ge2,k \in \mathbb{Z},~x \in [-0.5,0.5],p\ge 1,\\
-&~~~~\text{there is }\frac{\partial[(k+x)^{p}-(k+x-1)^{p}]}{\partial x}=p(k+x)^{p-1}-p(k+x-1)^{p-1}\ge 0,\\
-&\text{and, when }k=1,k \in \mathbb{Z},~x \in [0,0.5],p\ge 1,\\
-&~~~~\text{there is }\frac{\partial[(1+x)^{p}-(x)^{p}]}{\partial x}=p(1+x)^{p-1}-p(x)^{p-1}\ge 0,\\
-&\text{and, when }k=1,k \in \mathbb{Z},~x \in [-0.5,0],p\ge 1,\\
-&~~~~\text{there is }\frac{\partial[(1+x)^{p}-(-x)^{p}]}{\partial x}=p(1+x)^{p-1}+p(-x)^{p-1}\ge 0.\\
-&\text{So, when }k\ge1,k \in \mathbb{Z},~x \in [-0.5,0.5],p\ge 1,\\
-&~~~~\text{the function }(|k+x|^{p}-|k+x-1|^{p})\text{is monotonically increasing W.R.T. x. }\\
-&\text{So for all } x_1,x_2\in [-0.5,0.5],\\
-&\text{when }k\ge2,\text{there is}\\
-&~~~~I(k,x_1)-I(k-1,x_2)=|k+x_1|^{p}-|k+x_1-1|^{p}-(|k-1+x_2|^{p}-|k+x_2-2|^{p})\\
-&~~~~\ge \min_{x_1}(|k+x_1|^{p}-|k+x_1-1|^{p})-\max_{x_2}(|k-1+x_2|^{p}-|k+x_2-2|^{p})\\
-&~~~~= (|k-0.5|^{p}-|k-1.5|^{p})-(|k-0.5|^{p}-|k-1.5|^{p})=0,\\
-&\text{and when }k=1,\text{there is}\\
-&~~~~I(k,x_1)-I(k-1,x_2)=|1+x_1|^{p}-|x_1|^{p}-0\ge |1-0.5|^{p}-|-0.5|^{p}=0.\\
-\\
-&\text{Similarly, we can obtain:}\\
-&\text{when }k\le -1,k \in \mathbb{Z},~x \in [-0.5,0.5],p\ge 1,\\
-&~~~~\text{the function }(|k+x|^{p}-|k+x+1|^{p})\text{is monotonically decreasing W.R.T. x. }\\
-&\text{So for all } x_1,x_2\in [-0.5,0.5],\\
-&\text{when }k\le-2,\text{there is}\\
-&~~~~I(k,x_1)-I(k+1,x_2)\ge 0,\\
-&\text{and when }k=-1,\text{there is}\\
-&~~~~I(k,x_1)-I(k+1,x_2)=|-1+x_1|^{p}-|x_1|^{p}-0=|-x_1+1|^{p}-|-x_1|^{p}\ge 0.\\
-\\
-&\text{To conclude:}\\
-&(1)\text{In the circumstance that }k \in \mathbb{Z},p\ge 1,\\
-&~~~~\forall x_1,x_2,\ldots,x_{\infty}\in [-0.5,0.5], \text{there are,}\\
-&~~~~~~~~0=I(0,x_1)\le I(-1,x_1)\le I(-2,x_2)\le\ldots \le I(-k_{\infty},x_{\infty}),\\
-&~~~~~~~~\text{and }0=I(0,x_1)\le I(1,x_1)\le I(2,x_2)\le\ldots \le I(k_{\infty},x_{\infty})\\
-&(2)\text{In the circumstance that }k\ge 1,k \in \mathbb{Z},~x \in [-0.5,0.5],p\ge 1,\\
-&~~~~\text{the function }I(k,x)~\text{is monotonically increasing W.R.T. x. }\\
-&(3)\text{In the circumstance that }k\le-1,k \in \mathbb{Z},~x \in [-0.5,0.5],p\ge 1,\\
-&~~~~\text{the function }I(k,x)~\text{is monotonically decreasing W.R.T. x. }\\
-\end{split}
-\end{equation}
-$$
+Define a helper function and elaboration some features (conclusions) of
+it.
+
+- $\forall p\ge 1,~x \in [-0.5,0.5],~k\in \mathbb{Z}$,
+
+- Define
+  $I(k,x) =\begin{cases}|k+x|^{p}-|k+x-1|^{p},~k\ge 1, k \in \mathbb{Z},~x \in [-0.5,0.5]\\
+  0,~k=0,~x \in [-0.5,0.5]\\ |k+x|^{p}-|k+x+1|^{p},k\le -1, k \in \mathbb{Z},~x \in [-0.5,0.5]\end{cases}$​
+
+- Analysis:
+
+  - If $k\ge2,k \in \mathbb{Z},~x \in [-0.5,0.5],p\ge 1$,
+
+    - $\frac{\partial I(k,x)}{\partial x}=\frac{\partial[(k+x)^{p}-(k+x-1)^{p}]}{\partial x}=p(k+x)^{p-1}-p(k+x-1)^{p-1}\ge 0$​.
+    - ($p=1$ leads to $0$ partial derivative)
+
+  - If $k=1,k \in \mathbb{Z},~x \in [0,0.5],p\ge 1$,
+
+    - $\frac{\partial I(k,x)}{\partial x}=\frac{\partial[(1+x)^{p}-(x)^{p}]}{\partial x}=p(1+x)^{p-1}-p(x)^{p-1}\ge 0$​.
+
+  - If $k=1,k \in \mathbb{Z},~x \in [-0.5,0],p\ge 1$,
+
+    - $\frac{\partial I(k,x)}{\partial x}=\frac{\partial[(1+x)^{p}-(-x)^{p}]}{\partial x}=p(1+x)^{p-1}+p(-x)^{p-1}\ge 0$​.
+
+  - $(I)\rightarrow$ So, when
+    $k\ge1,k \in \mathbb{Z},~x \in [-0.5,0.5],p\ge 1$,
+
+    - The function $I(k,x)=(|k+x|^{p}-|k+x-1|^{p})$ is non-strictly
+      monotonically increasing W.R.T. $x$.
+
+  - $(II)\rightarrow$ So, $\forall x_1,x_2\in [-0.5,0.5]$,
+
+    - when $k\ge 2$​, there is $$
+      \begin{split}
+      I(k,x_1)-I(k-1,x_2)&=|k+x_1|^{p}-|k+x_1-1|^{p}-(|k-1+x_2|^{p}-|k+x_2-2|^{p})\\
+      &\ge \min_{x_1}(|k+x_1|^{p}-|k+x_1-1|^{p})-\max_{x_2}(|k-1+x_2|^{p}-|k+x_2-2|^{p})\\
+      &~= (|k-0.5|^{p}-|k-1.5|^{p})-(|k-0.5|^{p}-|k-1.5|^{p})=0,
+      \end{split}
+      $$
+
+    - when $k=1$, there is
+      $I(k,x_1)-I(k-1,x_2)=|1+x_1|^{p}-|x_1|^{p}-0\ge |1-0.5|^{p}-|-0.5|^{p}=0$​
+
+  - If $k\le -2,k \in \mathbb{Z},~x \in [-0.5,0.5],p\ge 1$,
+
+    - $\frac{\partial I(k,x)}{\partial x}=\frac{\partial[(-k-x)^{p}-(-k-x-1)^{p}]}{\partial x}=-p(-k-x)^{p-1}+p(-k-x-1)^{p-1}\le 0$​.
+    - ($p=1$ leads to $0$ partial derivative)
+
+  - If $k=-1,k \in \mathbb{Z},~x \in [0,0.5],p\ge 1$,
+
+    - $\frac{\partial I(k,x)}{\partial x}=\frac{\partial[(1-x)^{p}-(x)^{p}]}{\partial x}=-p(1-x)^{p-1}-p(x)^{p-1}\le 0$​.
+
+  - If $k=-1,k \in \mathbb{Z},~x \in [-0.5,0],p\ge 1$,
+
+    - $\frac{\partial I(k,x)}{\partial x}=\frac{\partial[(1-x)^{p}-(-x)^{p}]}{\partial x}=-p(1-x)^{p-1}+p(-x)^{p-1}\le 0$​.
+
+  - $(III)\rightarrow$ So, when
+    $k\le -1,k \in \mathbb{Z},~x \in [-0.5,0.5],p\ge 1$,
+
+    - The function $I(k,x)=(|k+x|^{p}-|k+x+1|^{p})$ is non-strictly
+      monotonically decreasing W.R.T. $x$.
+
+  - $(IV)\rightarrow$ So, $\forall x_1,x_2\in [-0.5,0.5]$​,
+
+    - when $k\le-2$, there is $$
+      \begin{split}
+      I(k,x_1)-I(k+1,x_2)&=|k+x_1|^{p}-|k+x_1+1|^{p}-(|k+1+x_2|^{p}-|k+x_2+2|^{p})\\
+      &\ge \min_{x_1}(|k+x_1|^{p}-|k+x_1+1|^{p})-\max_{x_2}(|k+1+x_2|^{p}-|k+x_2+2|^{p})\\
+      &~= (|k+0.5|^{p}-|k+1.5|^{p})-(|k+0.5|^{p}-|k+1.5|^{p})=0,
+      \end{split}
+      $$
+
+    - when $k=-1$, there is
+      $I(k,x_1)-I(k+1,x_2)=|-1+x_1|^{p}-|x_1|^{p}-0\ge |-0.5+1|^{p}-|0.5|^{p}\ge 0$.
+
+- To conclude:
+
+  1.  In the circumstance that $k \in \mathbb{Z},p\ge 1$,
+      $\forall x_1,x_2,\ldots,x_{\infty}\in [-0.5,0.5]$, there are
+      - $0=I(0,x_1)\le I(-1,x_1)\le I(-2,x_2)\le\ldots \le I(-k_{\infty},x_{\infty})$,
+      - and,
+        $0=I(0,x_1)\le I(1,x_1)\le I(2,x_2)\le\ldots \le I(k_{\infty},x_{\infty})$
+  2.  In the circumstance that
+      $k\ge 1,k \in \mathbb{Z},~x \in [-0.5,0.5],p\ge 1$, the function
+      $I(k,x)$ is non-strictly monotonically increasing W.R.T. $x$.
+  3.  In the circumstance that
+      $k\le-1,k \in \mathbb{Z},~x \in [-0.5,0.5],p\ge 1$, the function
+      $I(k,x)$ is non-strictly monotonically decreasing W.R.T. $x$​.
+
+{% note info %}
+
+`non-strictly monotonically` arises from the fact that $p$ may be equal
+to $1$. This feature will greatly affect subsequent reasoning, negating
+many intuitively plausible inferences and leaving very weak limits and
+conclusions. All of the point is that $p$ may be equal to $1$.
+
+{% endnote %}
 
 ## A.6
 
-The proof procedure of solution 1 that based on `round()` function. For
-better readability, we divide the proof process into several parts. The
-first one is a pre-explanation, followed by assumptions and
-extrapolations step by step, until the conclusion is reached.
+To proof the $b$ in [solution 1](#Solution 1, based on round() function)
+is one of the solutions of problem $\eqref{NIP_problem_round}$.
+
+{% note info %}
+
+For better readability, we divide the proof process into several parts
+and analysis step by step, until the conclusion is reached.
+
+{% endnote %}
 
 1.  Preliminary illustrations:
 
-    $$
-    \begin{split}
-     &\text{Basing on \eqref{NIP_problem_round} and \eqref{solution_round}, try to proof the correctness of \eqref{solution_round}}\\
-     &\text{Known conditions:}\\
-     &~~~~n,N \in \mathbb{Z}^+, n \le N\\
-     &~~~~p\in \mathbb{R},~p\ge 1\\
-     &~~~~r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\\
-     &~~~~m=N-\sum_{i=1}^n round(r_iN)\\
-     &~~~~m \in \mathbb{Z},\text{and }-\frac{n}{2}\le m\le\frac{n}{2} (\text{according to conclusioin~\eqref{round_conclusion}})\\
-     &\text{Define }x=[x_1,x_2,\ldots,x_n], \forall i \in \{1,2,\ldots,n\},x_i = round(r_iN)-r_iN,\\
-     &~~~~\text{also from conclusion }\eqref{round_conclusion}, \text{there is }-0.5\le round(r_iN)-r_iN \le 0.5.\\
-     &\text{Without loss of generality, let }-0.5\le x_1\le x_2\le \ldots \le x_n \le 0.5.\\
-     &\text{Define }B_f=\{b|b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m,[round(r_1N)+b_1,round(r_2N)+b_2,\ldots,round(r_nN)+b_n]\in \mathbb{N}^n\}.\\
-     &\text{Define }B^{'}_f=\{b|b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m\}.\\
-     &\text{Define solutions set }B^{*}_f=\{b|b=\mathop{\arg\min}\limits_{b\in B_f}(\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}.\\
-     &\text{Define solutions set }B^{*'}_f=\{b|b=\mathop{\arg\min}\limits_{b\in B^{'}_f}(\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}.\\
-     &\text{If }m\ge 0, \text{then }\exists b=[m,0,\ldots,0]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m,\\
-     &~~~~\text{that make }[round(r_1N)+b_1,round(r_2N)+b_2,\ldots,round(r_nN)+b_n]\in \mathbb{N}^n,\\
-     &~~~~\text{and if }m< 0,\\
-     &~~~~\text{because }-\frac{n}{2}\le N-\sum_{i=1}^n round(r_iN)\le\frac{n}{2},\\
-     &~~~~\text{so, } \sum_{i=1}^n round(r_iN)-\frac{n}{2}\le N\le\frac{n}{2}+\sum_{i=1}^n round(r_iN),\\
-     &~~~~\text{therefore, }  \sum_{i=1}^n round(r_iN)\ge N-\frac{n}{2}\ge n-\frac{n}{2}=\frac{n}{2}\ge |m|,\\
-     &~~~~\text{so, } \text{accordding to specific }round(r_iN)~\forall i \in \{1,2,\ldots,n\},\text{there still }\exists b \in \mathbb{Z}^n,\sum_{i=1}^n b_i=m.\\
-     &~~~~\text{that make }[round(r_1N)+b_1,round(r_2N)+b_2,\ldots,round(r_nN)+b_n]\in \mathbb{N}^n,\text{i.e., } \exists b\in B_f,\\
-     &\text{Therefore, there is } \empty \ne B_f.\\
-     &\text{So, there are }B_f\subseteq B^{'}_f, \empty \ne B^{*}_f\subseteq B_f,~\empty\ne B^{*'}_f \subseteq B^{'}_f.\\
-     \end{split}
-    $$
+    - Known conditions:
 
-2.  Assumption 1:
+      - $n,N \in \mathbb{Z}^+, n \le N$
+      - $p\in \mathbb{R},~p\ge 1$
+      - $r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1$​
+      - $round(\cdot)\in \{\eqref{round_1},\eqref{round_2},\eqref{round_3}\}$​
+      - $m=N-\sum_{i=1}^n round(r_iN)$,
+        - From the conclusion $\eqref{round_conclusion}$, there are
+          $m \in \mathbb{Z},-\frac{n}{2}\le m\le\frac{n}{2}$.
+      - $x=[x_1,x_2,\ldots,x_n], \forall i \in \{1,2,\ldots,n\},x_i = round(r_iN)-r_iN$,
+        and $-0.5\le x_1\le x_2\le \ldots \le x_n \le 0.5$​
 
-    $$
-    \begin{split}
-     &\text{Assume that,}\exists b=[b_1,b_2,\ldots,b_n]\in B^{*'}_f \subseteq B^{'}_f,\\
-     &~~~~\text{and simultaneously }b\in B_1= \{b|b=[b_1,b_2,\ldots,b_n] \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m, \exists s,t, b_s\ge 1,b_t\le -1\}\subseteq B^{'}_f.\\
-     &\text{Without loss of generality, let }s<t.\\
-     &\text{So,there is }b=[\ldots,b_s,\ldots,b_t,\ldots] \in B^{*'}_f \cap B_1.\\
-     &\text{Define }b^{'}=[\ldots,b^{'}_s,\ldots.,b^{'}_t,\ldots]=[\ldots,b_s-1,\ldots,b_t+1,\ldots]\in B^{'}_f, \text{i.e.},~b^{'}_s=b_s-1,b^{'}_t=b_t+1,\\
-     &\text{therefore, there is } \sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
-     &~~~~=|round(r_sN)+b^{'}_s-r_{s}N |^{p}+|round(r_tN)+b^{'}_t-r_{t}N |^{p}-|round(r_sN)+b_s-r_{s}N |^{p}-|round(r_tN)+b_t-r_{t}N |^{p}\\
-     &~~~~=|round(r_sN)+b_s-1-r_{s}N |^{p}+|round(r_tN)+b_t+1-r_{t}N |^{p}-|round(r_sN)+b_s-r_{s}N |^{p}-|round(r_tN)+b_t-r_{t}N |^{p}.\\
-     &\text{According to helper functions and conclutions in \eqref{function_i} of appendix A.5, there is,}\\
-     &\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
-     &=-I(b_s,round(r_sN)-r_{s}N)-I(b_t,round(r_tN)-r_{t}N)\\
-     &\le -I(0,round(r_sN)-r_{s}N)-I(0,round(r_tN)-r_{t}N)\\
-     &=0+0=0,\\
-     &\text{so, } \sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}\le \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p},\\
-     &\text{i.e., } (\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}}\le (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}},\\
-     &\text{so, } b^{'}\in B^{*'}_f.\\
-     &\text{N.B.:There is }b^{'}\in B_1~\text{or }b^{'}\in\complement_{B^{'}_{f}}{B_1}.\text{If }b^{'}\in B_1,\text{we use $b^{'}$ to replace $b$ and repeat the above procedure,and then get }b^{''}.\\
-     &~~~~~~~~~~~\text{Obviously, with a finite number of iterations, we must be able to find a }b^{'...'},\\
-     &~~~~~~~~~~~\text{that }b^{'...'}\in \complement_{B^{'}_{f}}{B_1},\text{i.e.},~\complement_{B^{'}_{f}}{B_1}\cap B^{*'}_f \ne \empty.\\
-     &\text{Then, according to lemma $1$ \eqref{lemma_1}, whether the above assumption hold or not, there must be}\\
-     &~~~~\complement_{B^{'}_f}B_1 \cap B^{*'}_f \ne \empty.\\
-     \end{split}
-    $$
+    - Define $$
+      \begin{split}
+        B_f=\{b|&b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m,\\&[round(r_1N)+b_1,round(r_2N)+b_2,\ldots,round(r_nN)+b_n]\in \mathbb{N}^n\}
+        \end{split}
+      $$
 
-3.  Assumption 2:
+    - Define
+      $B^{'}_f=\{b|b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m\}$​.
 
-    $$
-    \begin{split}
-     &\text{Assume that,}\exists b=[b_1,b_2,\ldots,b_n]\in \complement_{B^{'}_f}B_1 \cap B^{*'}_f \subseteq B^{'}_f,\\
-     &~~~~\text{and simultaneously }b\in B_2= \{b|b=[b_1,b_2,\ldots,b_n],~ b_i \in \mathbb{Z},~\sum_{i=1}^n b_i = m, \exists s,~b_s\ge 2~or~\exists s,~b_s\le -2\}\subseteq B^{'}_f.\\
-     &\text{Since }b \in \complement_{B^{'}_f}B_1 \cap B^{*'}_f \cap B_2,\\
-     &\text{if }\exists~s,b_s\ge 2,then~\forall i \in \{1,2,\ldots,n\},\text{there is }b_{i}\ge 0,\\
-     &\text{and according to~\eqref{round_conclusion},there is }0\le \sum_{i=1}^n b_i \le \frac{n}{2},\\
-     &\text{therefore, }\exists t\ne s,\text{that }b_t=0.\\
-     &\text{Without loss of generality, let }s<t.\\
-     &\text{So,there is }b=[\ldots,b_s,\ldots,b_t,\ldots] \in \complement_{B^{'}_f}B_1 \cap B^{*'}_f \cap B_2.\\
-     &\text{Define }b^{'}=[\ldots,b^{'}_s,\ldots,b^{'}_t,\ldots]=[\ldots,b_s-1,\ldots,b_t+1,\ldots]\in \complement_{B^{'}_f}B_1, \text{i.e.},~b^{'}_s=b_s-1,b^{'}_t=b_t+1=0,\\
-     &\text{therefore, } \sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
-     &~~~~=|round(r_sN)+b^{'}_s-r_{s}N |^{p}+|round(r_tN)+b^{'}_t-r_{t}N |^{p}-|round(r_sN)+b_s-r_{s}N |^{p}-|round(r_tN)+b_t-r_{t}N |^{p}\\
-     &~~~~=|round(r_sN)+b_s-1-r_{s}N |^{p}+|round(r_tN)+1-r_{t}N |^{p}-|round(r_sN)+b_s-r_{s}N |^{p}-|round(r_tN)-r_{t}N |^{p}.\\
-     &\text{According to helper functions and conclutions in \eqref{function_i} of appendix A.5},\\
-     &\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
-     &=-I(b_s,round(r_sN)-r_{s}N)+I(1,round(r_tN)-r_{t}N)\\
-     &=-[I(b_s,round(r_sN)-r_{s}N)-I(1,round(r_tN)-r_{t}N)]\\
-     &\le0.\\
-     &\text{Similarly, we can obtain,}\\
-     &\text{If }\exists~s,b_s\le -2,\text{then for all } i \in \{1,2,\ldots,n\},\text{there is }b_{i}\le 0,\\
-     &\text{therefore, }\exists t\ne s,\text{that }b_t=0.\\
-     &\text{Without loss of generality, let }s<t.\\
-     &\text{So,there is }b=[\ldots,b_s,\ldots,b_t,\ldots] \in \complement_{B^{'}_f}B_1 \cap B^{*'}_f \cap B_2.\\
-     &\text{Define }b^{'}=[\ldots,b^{'}_s,\ldots,b^{'}_t,\ldots]=[\ldots,b_s+1,\ldots,b_t-1,\ldots]\in \complement_{B^{'}_f}B_1,\text{i.e.},~b^{'}_s=b_s+1,b^{'}_t=b_t-1=-1,\\
-     &\text{therefore, } \sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
-     &~~~~=|round(r_sN)+b^{'}_s-r_{s}N |^{p}+|round(r_tN)+b^{'}_t-r_{t}N |^{p}-|round(r_sN)+b_s-r_{s}N |^{p}-|round(r_tN)+b_t-r_{t}N |^{p}\\
-     &~~~~=|round(r_sN)+b_s+1-r_{s}N |^{p}+|round(r_tN)-1-r_{t}N |^{p}-|round(r_sN)+b_s-r_{s}N |^{p}-|round(r_tN)-r_{t}N |^{p}.\\
-     &\text{According to helper functions and conclutions in \eqref{function_i} of appendix A.5},\\
-     &\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
-     &=-I(b_s,round(r_sN)-r_{s}N)+I(-1,round(r_tN)-r_{t}N)\\
-     &=-[I(b_s,round(r_sN)-r_{s}N)-I(-1,round(r_tN)-r_{t}N)]\\
-     &\le0.\\
-     &\text{So, regardless of whether }\exists~s,b_s \ge2~\text{or }\exists~s,b_s \le -2,\\
-     &~~~~\text{there is }\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}\le \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p},\\
-     &\text{so, } (\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}}\le (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}},\\
-     &\text{therefore, } b^{'}\in B^{*'}_f.\\
-     &\text{N.B.:There is }b^{'}\in \complement_{B^{'}_f}B_1\cap B_2~\text{or }b^{'}\in\complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2}. \text{If }b^{'}\in \complement_{B^{'}_f}B_1\cap B_2,\text{we use $b^{'}$ to replace $b$ and repeat the above procedure}\\
-     &~~~~~~~~~~~\text{and then get }b^{''}.\text{Obviously, with a finite number of iterations, we must be able to find a }b^{'...'},\\
-     &~~~~~~~~~~~\text{that }b^{'...'}\in \complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2},\text{i.e.},~\complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2}\cap B^{*'}_f \ne \empty.\\
-     &\text{Then, according to lemma $1$\eqref{lemma_1}, whether the above assumption hold or not, there must be}\\
-     &~~~~\complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2}\cap B^{*'}_f \ne \empty.\\
-     \end{split}
-    $$
+    - Define solutions set
+      $B^{*}_f=\{b|b=\mathop{\arg\min}\limits_{b\in B_f}(\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}$.
 
-4.  Assumption 3:
+    - Define solutions set
+      $B^{*'}_f=\{b|b=\mathop{\arg\min}\limits_{b\in B^{'}_f}(\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}$​.
 
-    $$
-    \begin{split}
-     &\text{Assume that,} \exists b=[b_1,b_2,\ldots,b_n]\in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1 \cap B^{*'}_f\subseteq B^{'}_{f},\text{and simultaneously}\\
-     &~~~~b\in B_3= \{b|b=[b_1,b_2,\ldots,b_n],~ b_i \in \mathbb{Z},~\sum_{i=1}^n b_i = m, \exists s,t,~0\le b_s<b_t,x_s<x_t~or~\exists s,t,b_s<b_t\le 0,x_s<x_t\}\subseteq B^{'}_{f},\\
-     &\text{and because} -0.5\le x_1\le x_2\le \ldots \le x_n \le 0.5,\\
-     &\text{so, there must be }s<t.\\
-     &\text{Since }b \in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1 \cap B^{*'}_f \cap B_3,\\
-     &\text{if }\exists~0\le b_s<b_t,x_s<x_t,then~\forall i \in \{1,2,\ldots,n\},\text{there is }b_{i}\in \{0,1\},\\
-     &\text{therefore, }b_s=0, b_t = 1.\\
-     &\text{So, there is } b=[\ldots,b_s,\ldots,b_t,\ldots] \in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1 \cap B^{*'}_f \cap B_3.\\
-     &\text{Define }b^{'}=[\ldots,b^{'}_s,\ldots,b^{'}_t,\ldots]=[\ldots,b_s+1,\ldots,b_t-1,\ldots]\in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1,\text{i.e.},~b^{'}_s=b_s+1=1,b^{'}_t=b_t-1=0,\\
-     &\text{therefore, } \sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
-     &~~~~=|round(r_sN)+b^{'}_s-r_{s}N |^{p}+|round(r_tN)+b^{'}_t-r_{t}N |^{p}-|round(r_sN)+b_s-r_{s}N |^{p}-|round(r_tN)+b_t-r_{t}N |^{p}\\
-     &~~~~=|round(r_sN)+1-r_{s}N |^{p}+|round(r_tN)-r_{t}N |^{p}-|round(r_sN)-r_{s}N |^{p}-|round(r_tN)+1-r_{t}N |^{p}.\\
-     &\text{According to helper functions and conclutions in \eqref{function_i} of appendix A.5},\\
-     &\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
-     &=I(1,round(r_sN)-r_{s}N)-I(1,round(r_tN)-r_{t}N)\\
-     &=I(1,x_s)-I(1,x_t)\\
-     &\le 0, \text{since }x_s<x_t.\\
-     &\text{Similarly, we can obtain,}\\
-     &\text{if }\exists~0\le b_s<b_t,x_s<x_t,\text{then }\forall i \in \{1,2,\ldots,n\},\text{there is }b_{i}\in \{0,-1\},\\
-     &\text{so, }b_s=-1, b_t = 0.\\
-     &\text{So, there is }b=[\ldots,b_s,\ldots,b_t,\ldots] \in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1 \cap B^{*'}_f \cap B_3.\\
-     &\text{Define }b^{'}=[\ldots,b^{'}_s,\ldots,b^{'}_t,\ldots]=[\ldots,b_s+1,\ldots,b_t-1,\ldots]\in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1,\text{i.e.},~b^{'}_s=b_s+1=0,b^{'}_t=b_t-1=-1,\\
-     &\text{therefore, } \sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
-     &=|round(r_sN)+b^{'}_s-r_{s}N |^{p}+|round(r_tN)+b^{'}_t-r_{t}N |^{p}-|round(r_sN)+b_s-r_{s}N |^{p}-|round(r_tN)+b_t-r_{t}N |^{p}\\
-     &=|round(r_sN)-r_{s}N |^{p}+|round(r_tN)-1-r_{t}N |^{p}-|round(r_sN)-1-r_{s}N |^{p}-|round(r_tN)-r_{t}N |^{p}.\\
-     &\text{According to helper functions and conclutions in \eqref{function_i} of appendix A.5},\\
-     &\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
-     &=-I(-1,round(r_sN)-r_{s}N)+I(-1,round(r_tN)-r_{t}N)\\
-     &=-I(-1,x_s)+I(-1,x_t)\\
-     &\le 0, \text{since }x_s<x_t.\\
-     &\text{So, regardless of whether }\exists~0\le b_s<b_t,x_s<x_t~or~\exists~0\le b_s<b_t,x_s<x_t,\\
-     &~~~~\text{there is }\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}\le \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p},\\
-     &\text{so, } (\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}}\le (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}},\\
-     &\text{therefore, } b^{'}\in B^{*'}_f.\\
-     &\text{N.B.:There is }b^{'}\in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1\cap B_3~\text{or }b^{'}\in\complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_3}.\\
-     &~~~~~~~~~~~\text{If }b^{'}\in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1\cap B_3,\text{we use $b^{'}$ to replace $b$ and repeat the above procedure}\\
-     &~~~~~~~~~~~\text{and then get }b^{''}.\text{Obviously, with a finite number of iterations, we must be able to find a }b^{'...'},\\
-     &~~~~~~~~~~~\text{that }b^{'...'}\in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_3},\text{i.e.},~\complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_3}\cap B^{*'}_f \ne \empty.\\
-     &\text{Then, according to lemma $1$ \eqref{lemma_1}, whether the above assumption hold or not, there must be}\\
-     &~~~~\complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_f}B_2\cap\complement_{B^{'}_{f}}{B_1}\cap B^{*'}_f \ne \empty.\\
-     \end{split}
-    $$
+    - There is $\empty \ne B_f$​.
 
-5.  Consider a special $b$
+      Proof:
 
-    $$
-    \begin{split}
-     &\text{Define: }B_t= \complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1.\\
-     &\text{Konwn: }x = [x_1,x_2,\ldots,x_n], x_i = round(r_iN)-r_iN,-0.5\le x_1\le x_2\le \ldots \le x_n \le 0.5.\\ 
-     &\text{Konwn: }m=N-\sum_{i=1}^n round(r_iN), \text{and from conclusion }\eqref{round_conclusion}, \text{there are }m \in \mathbb{Z},\text{and }-\frac{n}{2}\le m\le\frac{n}{2}.\\ 
-     &~~~~(1)~\text{If }m>0, \text{then let }b=[b_1,b_2,\ldots,b_n]=[1,1,\ldots,1,0,0,\ldots,0],\\
-     &~~~~~~~~\text{whose the first $|m|$ elements are $ 1$ and the rest are $0$}.\\
-     &~~~~(2)~\text{If }m=0, \text{then let }b=[b_1,b_2,\ldots,b_n]=[0,0,\ldots,0].\\
-     &~~~~(3)~\text{If }m<0, \text{then let }b=[b_1,b_2,\ldots,b_n]=[0,0,\ldots,-1,-1,\ldots,-1],\\
-     &~~~~~~~~\text{whose the last $|m|$ elements are $-1$ and the rest are $0$}.\\
-     &\text{Obviously},~b\in B_t= \complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1.\\
-     \end{split}
-    $$
+      - If $m\ge 0$, then
+        $\exists b=[m,0,\ldots,0]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m$,
+        that make
+        $[round(r_1N)+b_1,round(r_2N)+b_2,\ldots,round(r_nN)+b_n]\in \mathbb{N}^n$.
+      - If $m< 0$,
+        - because
+          $-\frac{n}{2}\le m=N-\sum_{i=1}^n round(r_iN)\le\frac{n}{2}$,
+        - so, \$ *{i=1}^n round(r_iN)-N+*{i=1}^n round(r_iN)\$.
+        - therefore,
+          $\sum_{i=1}^n round(r_iN)\ge N-\frac{n}{2}\ge n-\frac{n}{2}=\frac{n}{2}\ge |m| = -m$​.
+        - let $t=\sum_{i=1}^n round(r_iN)+m\ge0$,
+        - then,
+          $\exists b=[t-round(r_1N),-round(r_2N),\ldots,-round(r_nN)]\in \mathbb{Z}^n$,
+          that make
+          $[round(r_1N)+b_1,round(r_2N)+b_2,\ldots,round(r_nN)+b_n]=[t,0,0,\ldots,0]\in \mathbb{N}^n$.
+        - Also, $\sum_{i=1}^n b_i=t-\sum_{i=1}^{n}round(r_iN)=m$.
+        - so, $b\in B_f$​.
 
-6.  Assumption 4 that proof the above $b\in B^{*'}_{f}$:
+      So, $\empty \ne B_f$ is proofed.
 
-    $$
-    \begin{split}
-     &\text{Assume that,}\exists b^{'}=[b^{'}_1,b^{'}_2,\ldots,b^{'}_n]\in B_t=\complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1, b^{'}\ne b,\\
-     &~~~~\text{that make} (\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}}<(\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}.\\
-     &\text{Define }f:\{\mathbb{Z}^+,\mathbb{Z}^-\cup\mathbb{Z}^+\}\rightarrow \mathbb{Z}^n,\\
-     &~~~~\forall i,v~~i\in\mathbb{Z}^+,i\le n, v\in \mathbb{Z}^-\cup\mathbb{Z}^+,\\
-     &~~~~f(i,v)=[0,0,\ldots,0,v,0,\ldots,0]\in \mathbb{N},\\
-     &~~~~\text{represents a vector whose the i-th element is $v$ and other elements are all }0.\\
-     \text{If }&m>0,\\
-     &\text{because }p\ge 1,p\in \mathbb{R},\\
-     &\text{therefore }(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})<(\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}),\\
-     &\text{and because }m>0,\\
-     &\text{so }b = [1,1,\ldots,1,0,0,\ldots,0],\\
-     &~~~~\text{whose the first $|m|$ elements are $1$ and the rest are }0.\\
-     &\text{Without loss of generality, let}\\
-     &~~~~b^{'} = b+f(s_1,-1)+f(s_2,-1)+\ldots+f(s_k,-1)+f(t_1,1)+f(t_2,1)+\ldots+f(t_k,1),\\
-     &~~~~\text{where }k \in \mathbb{Z}^+~1\le s_1<s_2<\ldots<s_k\le m<t_1<t_2<\ldots<t_k\le n,\\
-     &~~~~\text{and }\forall i\in \{1,2,\ldots,k\}~s_i,t_i \in \mathbb{Z},\\
-     &\text{therefore for all }i\in \{1,2,\ldots,k\},\text{there are }b_{s_i}=1,b_{t_i}=0,b^{'}_{s_i}=b_{s_i}-1=0,b^{'}_{t_i}=b_{t_i}+1=1,\\
-     &\text{so, }(\sum_{i=1}^k |round(r_{s_i}N)+b^{'}_{s_i}-r_{s_i}N |^{p}+|round(r_{t_i}N)+b^{'}_{t_i}-r_{t_i}N |^{p})\\
-     &~~~~<(\sum_{i=1}^k |round(r_{s_i}N)+b_{s_i}-r_{s_i}N |^{p}+|round(r_{t_i}N)+b_{t_i}-r_{t_i}N |^{p}),\\
-     (I)\rightarrow &\text{therefore}(\sum_{i=1}^k |round(r_{s_i}N)-r_{s_i}N |^{p}+|round(r_{t_i}N)+1-r_{t_i}N |^{p})\\
-     &~~~~~~~~<(\sum_{i=1}^k |round(r_{s_i}N)+1-r_{s_i}N |^{p}+|round(r_{t_i}N)-r_{t_i}N |^{p}),\\
-     &\text{and because for all }i\in \{1,2,\ldots,k\},\\
-     & |round(r_{s_i}N)-r_{s_i}N |^{p}+|round(r_{t_i}N)+1-r_{t_i}N |^{p}-|round(r_{s_i}N)+1-r_{s_i}N |^{p}-|round(r_{t_i}N)-r_{t_i}N |^{p}\\
-     &=-I(1,round(r_{s_i}N)-r_{s_i}N)+I(1,round(r_{t_i}N)-r_{t_i}N)\\
-     &=-I(1,x_{s_i})+I(1,x_{t_i})\\
-     &\ge 0,\text{since }b\in \complement_{B^{'}_{f}}{B_3},b_{s_i}>b_{t_i}, x_{s_i}\le x_{t_i},\\
-     &\text{therefore }(\sum_{i=1}^k |round(r_{s_i}N)-r_{s_i}N |^{p}+|round(r_{t_i}N)+1-r_{t_i}N |^{p})\\
-     &~~~~~~~~\ge (\sum_{i=1}^k |round(r_{s_i}N)+1-r_{s_i}N |^{p}+|round(r_{t_i}N)-r_{t_i}N |^{p}),\\
-     &\text{which is contradictory to (I), so the above assumption is not valid.}\\
-     \text{If }&m=0:\\
-     &\text{Obviously}, B_t= \complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1~\text{is a single-element set, there is }\nexists b^{'}\ne b, \text{that }b^{'}\in B_t,\\
-     &\text{so the above assumption is not valid.}\\
-     \text{If }&m<0:\\
-     &\text{because }p\ge 1,p\in \mathbb{R},\\
-     &\text{so }(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})<(\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}),\\
-     &b = [0,0,\ldots,-1,-1,\ldots,-1],\\
-     &~~~~\text{whose the last $|m|$ elements are $-1$, the rest are }0.\\
-     &\text{Without loss of generality, let},\\
-     &~~~~b^{'} = b+f(s_1,-1)+f(s_2,-1)+\ldots+f(s_k,-1)+f(t_1,1)+f(t_2,1)+\ldots+f(t_k,1),\\
-     &~~~~\text{where }k \in \mathbb{Z}^+~1\le s_1<s_2<\ldots<s_k<n-|m|+1\le t_1<t_2<\ldots<t_k\le n,\\
-     &~~~~\text{and }\forall i\in \{1,2,\ldots,k\}~s_i,t_i \in \mathbb{Z},\\
-     &\text{therefore for all }i\in \{1,2,\ldots,k\},\text{there are }b_{s_i}=0,b_{t_i}=-1,b^{'}_{s_i}=b_{s_i}-1=-1,b^{'}_{t_i}=b_{t_i}+1=0,\\
-     &\text{so } (\sum_{i=1}^k |round(r_{s_i}N)+b^{'}_{s_i}-r_{s_i}N |^{p}+|round(r_{t_i}N)+b^{'}_{t_i}-r_{t_i}N |^{p})\\
-     &~~~~<(\sum_{i=1}^k |round(r_{s_i}N)+b_{s_i}-r_{s_i}N |^{p}+|round(r_{t_i}N)+b_{t_i}-r_{t_i}N |^{p}),\\
-     (II)\rightarrow &\text{therefore} (\sum_{i=1}^k |round(r_{s_i}N)-1-r_{s_i}N |^{p}+|round(r_{t_i}N)-r_{t_i}N |^{p})\\
-     &~~~~~~~~<(\sum_{i=1}^k |round(r_{s_i}N)-r_{s_i}N |^{p}+|round(r_{t_i}N)-1-r_{t_i}N |^{p}),\\
-     &\text{and because for all }i\in \{1,2,\ldots,k\}, \text{there is }\\
-     &|round(r_{s_i}N)-1-r_{s_i}N |^{p}+|round(r_{t_i}N)-r_{t_i}N |^{p}-|round(r_{s_i}N)-r_{s_i}N |^{p}-|round(r_{t_i}N)-1-r_{t_i}N |^{p}\\
-     &=I(-1,round(r_{s_i}N)-r_{s_i}N)-I(-1,round(r_{t_i}N)-r_{t_i}N)\\
-     &=I(-1,x_{s_i})-I(-1,x_{t_i})\\
-     &\ge 0,\text{since }b\in \complement_{B^{'}_{f}}{B_3},b_{s_i}>b_{t_i}, x_{s_i}\le x_{t_i},\\
-     &\text{therefore }(\sum_{i=1}^k |round(r_{s_i}N)-r_{s_i}N |^{p}+|round(r_{t_i}N)+1-r_{t_i}N |^{p})\\
-     &~~~~\ge (\sum_{i=1}^k |round(r_{s_i}N)+1-r_{s_i}N |^{p}+|round(r_{t_i}N)-r_{t_i}N |^{p}),\\
-     &\text{which is contradictory to (II), so the above assumption is not valid.}\\
-     \text{So},&~\text{regardless of the value of $m$, the above assumption is always not valid, i.e.,}\\
-     &\text{there must be}\\
-     &b\in \{b|b=\mathop{\arg\min}\limits_{b\in B_t}(\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\},\\
-     &\text{also because } B_t \cap B^{*'}_f \ne \empty \text{ and } B_t \subseteq B^{'}_f,\\
-     &\text{and according to \eqref{lemma_2}, there must be}\\
-     &\empty \ne \{b|b=\mathop{\arg\min}\limits_{b\in B_t}(\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\} \subseteq B^{*'}_f,\\
-     &\text{therefore }b\in B^{*'}_f.
-     \end{split}
-    $$
+    So, there are
+    $B_f\subseteq B^{'}_f, \empty \ne B^{*}_f\subseteq B_f,~\empty\ne B^{*'}_f \subseteq B^{'}_f$
 
-7.  Consider if the specific $b$ satisfies that
-    $b\in B_f \subseteq B^{'}_f$:
+2.  Let
+    $B_1= \{b|b=[b_1,b_2,\ldots,b_n] \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m, \exists s,t \in \{1,2,\ldots,n\}, \text{ that } b_s\ge 1,b_t\le -1\}\subseteq B^{'}_f$,
+    then there will be
+    $\complement_{B^{'}_f}B_1 \cap B^{*'}_f \ne \empty$.
 
-    $$
-    \begin{split}
-     &\text{Konwn: }x = [x_1,x_2,\ldots,x_n], x_i = round(r_iN)-r_iN,-0.5\le x_1\le x_2\le \ldots \le x_n \le 0.5.\\ 
-     &\text{Konwn: }m=N-\sum_{i=1}^n round(r_iN), \text{and from conclusion }\eqref{round_conclusion}, \text{there are }m \in \mathbb{Z},\text{and }-\frac{n}{2}\le m\le\frac{n}{2}.\\ 
-     &\text{Try to proof the above $b$ satisfies that $b\in B_f \subseteq B^{'}_f$, i.e.,}\\
-     &~~~~\text{try to proof the above $b$ satisfies }[round(r_1N)+b_1,round(r_2N)+b_2,\ldots,round(r_nN)+b_n]\in \mathbb{N}^n\\
-     &(1)\text{If }m>0, \text{then }b=[b_1,b_2,\ldots,b_n]=[1,1,\ldots,1,0,0,\ldots,0],\\
-     &~~~~\text{whose the first $|m|$ elements are $1$ and the rest are }0,\\
-     &~~~~\text{then the constraint }[round(r_1N)+b_1,round(r_2N)+b_2,\ldots,round(r_nN)+b_n]\in \mathbb{N}^n \text{is valid.}\\
-     &(2)\text{If }m=0, \text{then }b=[b_1,b_2,\ldots,b_n]=[0,0,\ldots,0],\\
-     &~~~~\text{then the constraint }[round(r_1N)+b_1,round(r_2N)+b_2,\ldots,round(r_nN)+b_n]\in \mathbb{N}^n \text{is still valid.}\\
-     &(3)\text{If }m<0, \text{then }b=[b_1,b_2,\ldots,b_n]=[0,0,\ldots,-1,-1,\ldots,-1],\\
-     &~~~~~~~~\text{whose the last $|m|$ elements are $-1$ and the rest are }0,\\
-     &~~~~\text{and because }b\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m,\\
-     &~~~~\text{so }m\in \mathbb{Z}^-,\\
-     &~~~~\text{also because }\sum_{i=1}^n x_i=-m,-0.5\le x_1\le x_2\le \ldots \le x_n \le 0.5,\\
-     &~~~~\text{therefore, }\text{there must be for all }i \in \{n-2|m|+1,n-2|m|+2,\ldots,n\}~x_{i}\ge 0,\\
-     &~~~~\text{i.e., there must be for all}i \in \{n-2|m|+1,n-2|m|+2,\ldots,n\}~round(r_iN)\ge 1,\\
-     &~~~~\text{so for all }i \in \{1,2,\ldots,n-2|m|\}~round(r_iN)+b_i=round(r_iN)+0=round(r_iN),\\
-     &~~~~~\text{and for all }i \in \{n-2|m|+1,n-2|m|+2,\ldots,n-|m|\}~round(r_iN)+b_i=round(r_iN)+0=round(r_iN),\\
-     &~~~~~\text{and for all }i \in \{n-|m|+1,n-|m|+2,\ldots,n\}~round(r_iN)+b_i\ge 1-1 = 0,\\
-     &~~~~\text{therefore, }\text{the constraint }[round(r_1N)+b_1,round(r_2N)+b_2,\ldots,round(r_nN)+b_n]\in \mathbb{N}^n~\text{is still valid.}\\
-     \text{So},&~\text{regardless of the value of }m~,\\
-     &\text{the above $b$ always satisfies }[round(r_1N)+b_1,round(r_2N)+b_2,\ldots,round(r_nN)+b_n]\in \mathbb{N}^n,\text{i.e.},\\
-     &\text{the above $b$ satisfies that }b\in B_f \subseteq B^{'}_f.\\
-     \end{split}
-    $$
+    Proof:
 
-8.  Finally
+    - If there $\exists b=[b_1,b_2,\ldots,b_n]\in B^{*'}_f\cap B_1$.
 
-    $$
-    \begin{split}
-     &\text{Konwn: }x = [x_1,x_2,\ldots,x_n], x_i = round(r_iN)-r_iN,-0.5\le x_1\le x_2\le \ldots \le x_n \le 0.5.\\ 
-     &\text{Konwn: }m=N-\sum_{i=1}^n round(r_iN), \text{and from conclusion \eqref{round_conclusion}, there are }m \in \mathbb{Z},\text{and }-\frac{n}{2}\le m\le\frac{n}{2}.\\ 
-     &\text{Since the above vector $b$,i.e.,}\\
-     &~~~~(1)~\text{if }m>0, \text{then }b=[b_1,b_2,\ldots,b_n]=[1,1,\ldots,1,0,0,\ldots,0],\\
-     &~~~~~~~~\text{whose the first $|m|$ elements are $ 1$ and the rest are }0,\\
-     &~~~~(2)~\text{if }m=0, \text{then }b=[b_1,b_2,\ldots,b_n]=[0,0,\ldots,0],\\
-     &~~~~(3)~\text{if }m<0, \text{then }b=[b_1,b_2,\ldots,b_n]=[0,0,\ldots,-1,-1,\ldots,-1],\\
-     &~~~~~~~~\text{whose the last $|m|$ elements are $-1$ and the rest are }0,\\
-     &~~~~\text{that satisfies }b\in B^{*'}_f~\text{and }b\in B_f \subseteq B^{'}_f.\\
-     &\text{Then, according to \eqref{lemma_3}, the final conclusion can be drawn as}\\
-     &~~~~b\in B^{*}_f \subseteq B^{*'}_f.\\
-     \end{split}
-    $$
+      - Without loss of generality, let $s<t$​.
+
+      - So, there is
+        $b=[\ldots,b_s,\ldots,b_t,\ldots] \in B^{*'}_f \cap B_1$.
+
+      - Define
+        $b^{'}=[\ldots,b^{'}_s,\ldots.,b^{'}_t,\ldots]=[\ldots,b_s-1,\ldots,b_t+1,\ldots]$,
+        where
+        $b^{'}_s=b_s-1,b^{'}_t=b_t+1, \forall i \in \{i|i \in [1,n], i\in \mathbb{Z}, i \notin \{s,t\}\}, b^{'}_i=b_i$​​.
+
+      - Obviously, there is $b^{'}\in B^{'}_f$.
+
+      - Also, according to helper functions and conclusions in [appendix
+        A.5](#A.5), then: $$
+        \begin{split}
+        &\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
+        &=|b^{'}_s+x_s |^{p}+|b^{'}_t+x_t|^{p}-|b_s+x_s|^{p}-|b_t+x_t|^{p}\\
+        &=|b_s-1+x_s|^{p}+|b_t+1+x_t|^{p}-|b_s+x_s|^{p}-|b_t+x_t|^{p}\\
+        &=-(|b_s+x_s|^{p}-|b_s-1+x_s|^{p})-(|b_t+x_t|^{p}-|b_t+1+x_t|^{p})\\
+        &=-I(b_s,x_s)-I(b_t,x_t)\\
+        &\le -I(0,x_s)-I(0,x_t)\\
+        &=0+0=0.
+        \end{split}
+        $$
+
+      - so,
+        $\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}\le \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}$.
+
+      - Therefore,
+        $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}}\le (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$​.
+
+      - So, \$ b<sup>{’}B</sup>{\*’}\_f\$​.
+
+        {% note info %}
+
+        There is $b^{'}\in B_1$ or
+        $b^{'}\in\complement_{B^{'}_{f}}{B_1}$. If $b^{'}\in B_1$, we
+        use $b^{'}$ to replace $b$ and repeat the above procedure, and
+        then get $b^{''}$. Obviously, with a finite number of
+        iterations, we must be able to find a $b^{'\cdots'}$, that
+        $b^{'\cdots'}\in \complement_{B^{'}_{f}}{B_1}$ and \$
+        b<sup>{‘’}B</sup>{\*’}\_f\$.
+
+        {% endnote %}
+
+      - Therefore,
+        $\complement_{B^{'}_{f}}{B_1}\cap B^{*'}_f \ne \empty$.
+
+    - If $\empty = B^{*'}_f\cap B_1$, according to [Lemma 1](#lemma 1),
+      there is $\complement_{B^{'}_{f}}{B_1}\cap B^{*'}_f \ne \empty$.
+
+    So, regardless of whether $B^{*'}_f\cap B_1$ is empty or not, there
+    will always be
+    $\complement_{B^{'}_{f}}{B_1}\cap B^{*'}_f \ne \empty$.
+
+    So, `2` is proofed.
+
+3.  Let
+    $B_2= \{b|b \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m, \exists s \in \{1,2,\ldots,n\},\text{ that } b_s\ge 2~\text{or}~b_s\le -2\}\subseteq B^{'}_f$,
+    then there will be
+    $\complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2}\cap B^{*'}_f \ne \empty$.
+
+    Proof:
+
+    - The $\complement_{B^{'}_{f}}{B_1}\cap B^{*'}_f \ne \empty$ has
+      been proofed in `2`.
+
+    - If there
+      $\exists b=[b_1,b_2,\ldots,b_n]\in \complement_{B^{'}_f}B_1 \cap B^{*'}_f \cap B_2$​.
+
+      - If $\exists s \in \{1,2,\ldots,n\}$, that $b_s\ge 2$.
+
+        - Then, according to $\complement_{B^{'}_f}B_1$’s field, there
+          is $\forall i \in \{1,2,\ldots,n\}~b_{i}\ge 0$​.
+
+        - And according to $\eqref{round_conclusion}$, there is
+          $0\le \sum_{i=1}^n b_i \le \frac{n}{2}$.
+
+        - So, there $\exists t\ne s$, that $b_t=0$.
+
+        - Without loss of generality, let $s<t$,
+
+        - So,there is $b=[\ldots,b_s,\ldots,b_t,\ldots]$.
+
+        - Define
+          $b^{'}=[\ldots,b^{'}_s,\ldots,b^{'}_t,\ldots]=[\ldots,b_s-1,\ldots,b_t+1,\ldots]$,
+          where
+          $b^{'}_s=b_s-1,b^{'}_t=b_t+1, \forall i \in \{i|i \in [1,n], i\in \mathbb{Z}, i \notin \{s,t\}\}, b^{'}_i=b_i$.
+
+        - Obviously, there is $b^{'}\in \complement_{B^{'}_f}B_1$​.
+
+        - Also, according to helper functions and conclusions in
+          [appendix A.5](#A.5), then: $$
+          \begin{split}
+          &\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
+          &=|b^{'}_s+x_s|^{p}+|b^{'}_t+x_t|^{p}-|b_s+x_s|^{p}-|b_t+x_t|^{p}\\
+          &=|b_s-1+x_s|^{p}+|b_t+1+x_t|^{p}-|b_s+x_s|^{p}-|b_t+x_t|^{p}\\
+          &=-(|b_s+x_s|^{p}-|b_s-1+x_s|^{p})+(|b_t+1+x_t|^{p}-|b_t+x_t|^{p})\\
+          &=-I(b_s,x_s)+I(b_t+1,x_t)\\
+          &=-[I(b_s,x_s)-I(1,x_t)]\\
+          &\le0.
+          \end{split}
+          $$
+
+      - Similarly, if $\exists s \in \{1,2,\ldots,n\}$, that
+        $b_s\le -2$.
+
+        - Then, according to $\complement_{B^{'}_f}B_1$’s field, there
+          is $\forall i \in \{1,2,\ldots,n\}~b_{i}\le 0$​.
+
+        - And according to $\eqref{round_conclusion}$, there is
+          $0\ge \sum_{i=1}^n b_i \ge -\frac{n}{2}$.
+
+        - So, there $\exists t\ne s$, that $b_t=0$​.
+
+        - Without loss of generality, let $s<t$,
+
+        - So,there is $b=[\ldots,b_s,\ldots,b_t,\ldots]$.
+
+        - Define
+          $b^{'}=[\ldots,b^{'}_s,\ldots,b^{'}_t,\ldots]=[\ldots,b_s+1,\ldots,b_t-1,\ldots]$,
+          where
+          $b^{'}_s=b_s+1,b^{'}_t=b_t-1, \forall i \in \{i|i \in [1,n], i\in \mathbb{Z}, i \notin \{s,t\}\}, b^{'}_i=b_i$.
+
+        - Obviously, there is $b^{'}\in \complement_{B^{'}_f}B_1$​.
+
+        - Also, according to helper functions and conclusions in
+          [appendix A.5](#A.5), then: $$
+          \begin{split}
+          &\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
+          &=|b^{'}_s+x_s|^{p}+|b^{'}_t+x_t|^{p}-|b_s+x_s|^{p}-|b_t+x_t|^{p}\\
+          &=|b_s+1+x_s|^{p}+|b_t-1+x_t|^{p}-|b_s+x_s|^{p}-|b_t+x_t|^{p}\\
+          &=-(|b_s+x_s|^{p}-|b_s+1+x_s|^{p})+(|b_t-1+x_t|^{p}-|b_t+x_t|^{p})\\
+          &=-I(b_s,x_s)+I(b_t-1,x_t)\\
+          &=-[I(b_s,x_s)-I(-1,x_t)]\\
+          &\le0.
+          \end{split}
+          $$
+
+      - So, regardless of whether $\exists s$, that $b_s\ge 2$ or
+        $b_s\le -2$, there is
+        $\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}\le \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}$.
+
+      - Therefore,
+        $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}}\le (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
+
+      - So, $b^{'}\in B^{*'}_f$​.
+
+        {% note info %}
+
+        There is $b^{'}\in \complement_{B^{'}_f}B_1\cap B_2$ or
+        $b^{'}\in\complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2}$.
+        If $b^{'}\in \complement_{B^{'}_f}B_1\cap B_2$, we use $b^{'}$
+        to replace $b$ and repeat the above procedure, and then get
+        $b^{''}$. Obviously, with a finite number of iterations, we must
+        be able to find a $b^{'\cdots'}$, that
+        $b^{'\cdots'}\in \complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2}$
+        and \$ b<sup>{‘’}B</sup>{\*’}\_f\$.
+
+        {% endnote %}
+
+      - Therefore,
+        $\complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2}\cap B^{*'}_f \ne \empty$​.
+
+    - If $\empty = \complement_{B^{'}_f}B_1 \cap B^{*'}_f \cap B_2$,
+      according to [Lemma 1](#lemma 1), there is
+      $\complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2}\cap B^{*'}_f \ne \empty$.
+
+    So, regardless of whether
+    $\complement_{B^{'}_f}B_1 \cap B^{*'}_f \cap B_2$ is empty or not,
+    there will always be
+    $\complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2}\cap B^{*'}_f \ne \empty$.
+
+    So, `3` is proofed.
+
+4.  Let
+    $B_3= \{b|b \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m, \exists s,t \in \{1,2,\ldots,n \} s < t, x_s < x_t,\text{ that }0 \le b_s<b_t,\text{ or }b_s < b_t \le 0\}\subseteq B^{'}_{f}$,
+    then there will be
+    $\complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_f}B_2\cap\complement_{B^{'}_{f}}{B_1}\cap B^{*'}_f \ne \empty$.
+
+    Proof:
+
+    - The
+      $\complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2}\cap B^{*'}_f \ne \empty$​​
+      has been proofed in `3`.
+
+    - If there
+      $\exists b=[b_1,b_2,\ldots,b_n]\in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1 \cap B^{*'}_f\cap B_3$.
+
+      - If $\exists s,t \in \{1,2,\ldots,n \} s < t, x_s < x_t$, that
+        $0 \le b_s < b_t$.
+
+        - Then, according to
+          $\complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2}$’s
+          field, there is
+          $\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,1\}$​.
+
+        - So, $b_s=0, b_t = 1$.
+
+        - So, there is $b=[\ldots,b_s,\ldots,b_t,\ldots]$.
+
+        - Define
+          $b^{'}=[\ldots,b^{'}_s,\ldots,b^{'}_t,\ldots]=[\ldots,b_s+1,\ldots,b_t-1,\ldots]$,
+          where
+          $b^{'}_s=b_s+1,b^{'}_t=b_t-1, \forall i \in \{i|i \in [1,n], i\in \mathbb{Z}, i \notin \{s,t\}\}, b^{'}_i=b_i$.
+
+        - Obviously, there is
+          $\complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1$​.
+
+        - Also, according to helper functions and conclusions in
+          [appendix A.5](#A.5), then: $$
+          \begin{split}
+          &\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
+          &=|b^{'}_s+x_s|^{p}+|b^{'}_t+x_t|^{p}-|b_s+x_s|^{p}-|b_t+x_t|^{p}\\
+          &=|b_s+1+x_s|^{p}+|b_t-1+x_t|^{p}-|b_s+x_s|^{p}-|b_t+x_t|^{p}\\
+          &=(|b_s+1+x_s|^{p}-|b_s+x_s|^{p})-(|b_t+x_t|^{p}-|b_t-1+x_t|^{p})\\
+          &=I(b_t+1,x_s)-I(b_t,x_t)\\
+          &=I(1,x_s)-I(1,x_t)\\
+          &\le 0.
+          \end{split}
+          $$
+
+      - Similarly, if
+        $\exists s,t \in \{1,2,\ldots,n \} s < t, x_s < x_t$, that
+        $b_s < b_t \le 0$​.
+
+        - Then, according to
+          $\complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2}$’s
+          field, there is
+          $\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,-1\}$​.
+
+        - So，$b_s=-1, b_t = 0$.
+
+        - So, there is $b=[\ldots,b_s,\ldots,b_t,\ldots]$.
+
+        - Define
+          $b^{'}=[\ldots,b^{'}_s,\ldots,b^{'}_t,\ldots]=[\ldots,b_s+1,\ldots,b_t-1,\ldots]$,
+          where
+          $b^{'}_s=b_s+1,b^{'}_t=b_t-1, \forall i \in \{i|i \in [1,n], i\in \mathbb{Z}, i \notin \{s,t\}\}, b^{'}_i=b_i$​.
+
+        - Obviously, there is
+          $\complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1$​.
+
+        - Also, according to helper functions and conclusions in
+          [appendix A.5](#A.5), then: $$
+          \begin{split}
+          &\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
+          &=|b^{'}_s+x_s|^{p}+|b^{'}_t+x_t|^{p}-|b_s+x_s|^{p}-|b_t+x_t|^{p}\\
+          &=|b_s+1+x_s|^{p}+|b_t-1+x_t|^{p}-|b_s+x_s|^{p}-|b_t+x_t|^{p}\\
+          &=-(|b_s+x_s|^{p}-|b_s+1+x_s|^{p})+(|b_t-1+x_t|^{p}-|b_t+x_t|^{p})\\
+          &=-I(b_s,x_s)+I(b_t-1,x_t)\\
+          &=-I(-1,x_s)+I(-1,x_t)\\
+          &\le 0.
+          \end{split}
+          $$
+
+      - So, regardless of whether
+        $\exists s,t \in \{1,2,\ldots,n \} s < t, x_s \le x_t$, that
+        $0 \le b_s < b_t$ or $b_s < b_t \le 0$, there is
+        $\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}\le \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}$​.
+
+      - Therefore,
+        $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}}\le (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$​.
+
+      - So, $b^{'}\in B^{*'}_f$.
+
+        {% note info %}
+
+        There is
+        $b^{'}\in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1\cap B_3$
+        or
+        $b^{'}\in\complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_3}$.
+        If
+        $b^{'}\in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1\cap B_3$,
+        we use $b^{'}$ to replace $b$ and repeat the above procedure,
+        and then get $b^{''}$. Obviously, with a finite number of
+        iterations, we must be able to find a $b^{'\cdots'}$, that
+        $b^{'\cdots'}\in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_3}$
+        and \$ b<sup>{‘’}B</sup>{\*’}\_f\$​.
+
+        {% endnote %}
+
+      - Therefore,
+        $\complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_f}B_2\cap\complement_{B^{'}_{f}}{B_1}\cap B^{*'}_f \ne \empty$​.
+
+    - If
+      $\empty = \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1 \cap B^{*'}_f\cap B_3$,
+      according to [Lemma 1](#lemma 1), there is
+      $\complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_f}B_2\cap\complement_{B^{'}_{f}}{B_1}\cap B^{*'}_f \ne \empty$​.
+
+    So, regardless of whether
+    $\complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1 \cap B^{*'}_f\cap B_3$
+    is empty or not, there will always be
+    $\complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_f}B_2\cap\complement_{B^{'}_{f}}{B_1}\cap B^{*'}_f \ne \empty$​.
+
+    So, `4` is proofed.
+
+5.  Consider a special $b$​
+
+    - Known:
+      $B_1= \{b|b=[b_1,b_2,\ldots,b_n] \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m, \exists s,t \in \{1,2,\ldots,n\}, \text{ that } b_s\ge 1,b_t\le -1\}\subseteq B^{'}_f$.
+
+    - Known:
+      $B_2= \{b|b \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m, \exists s \in \{1,2,\ldots,n\},\text{ that } b_s\ge 2~\text{or}~b_s\le -2\}\subseteq B^{'}_f$.
+
+    - Known:
+      $B_3= \{b|b \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m, \exists s,t \in \{1,2,\ldots,n \} s < t, x_s < x_t,\text{ that }0 \le b_s<b_t,\text{ or }b_s < b_t \le 0\}\subseteq B^{'}_{f}$.
+
+    - Define
+      $B_t= \complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1$​.
+
+    - Known:
+      $x = [x_1,x_2,\ldots,x_n], x_i = round(r_iN)-r_iN,-0.5\le x_1\le x_2\le \ldots \le x_n \le 0.5$.
+
+    - Known: $m=N-\sum_{i=1}^n round(r_iN)$, and from
+      $\eqref{round_conclusion}$, there are
+      $m \in \mathbb{Z},\text{and }-\frac{n}{2}\le m\le\frac{n}{2}$​. $$
+      \begin{split}
+        &\text{Let } b=[b_1,b_2,\ldots,b_n]\\
+        &(1)~\text{If }m>0, \text{ then }\forall i \in \{i|i \in [1,|m|], i \in \mathbb{Z}^+\} b_i = 1, \forall j \in \{j|j \in [|m|+1,n], j \in \mathbb{Z}^+\} b_j = 0.\\
+        &(2)~\text{If }m=0, \text{ then }\forall i \in \{i|i \in [1,n], i \in \mathbb{Z}^+\} b_i = 0.\\
+        &(3)~\text{If }m<0, \text{ then }\forall i \in \{i|i \in [1,n-|m|], i \in \mathbb{Z}^+\} b_i = 0, \forall j \in \{j|j \in [n-|m|+1,n], j \in \mathbb{Z}^+\} b_j = -1.
+        \end{split}
+      $$
+
+    - Obviously,
+      $b\in B_t= \complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1$.
+
+6.  The special $b$ defined in `5` satisfies $b\in B^{*'}_{f}$.
+
+    Proof:
+
+    - Since
+      $b\in B_t= \complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1$​​.
+
+    - Define a mapping
+      $f(i,\delta):\{\mathbb{Z}^+,\mathbb{Z}^-\cup\mathbb{Z}^+\}\rightarrow \mathbb{Z}^n$:
+
+      - $\forall (i,\delta) \in \{(i,\delta)|i\in\mathbb{Z}^+,i\le n,\delta \in \mathbb{Z}^-\cup\mathbb{Z}^+\}$
+      - \$f(i,)=\[f_1,f_2,,f_n\]^n, f_i=,x {x\|x,x, x i} f_x = 0 \$.
+
+    - If $\exists b^{'}=[b^{'}_1,b^{'}_2,\ldots,b^{'}_n]\in B_t$, that
+      \$ b^{’}b\$​​.
+
+      - If $m>0$, so, $b=[1,1,\ldots,1,0,0,\ldots,0]$, where \$ i {i\|i
+        , i ^+} b_i = 1, j {j\|j , j ^+} b_j = 0\$
+
+        - Then, according to $B_t$’s field, there is
+          $\forall i \in \{1,2,\ldots,n\}~b^{'}_{i}\in \{0,1\}$​.
+
+        - Without loss of generality, let
+          $b^{'} = b+f(s_1,-1)+f(s_2,-1)+\ldots+f(s_k,-1)+f(t_1,1)+f(t_2,1)+\ldots+f(t_k,1)$,
+          where
+          $k \in \{k|k\in \mathbb{Z}^+, k\le \min(|m|,n-|m|)=|m|\},~1\le s_1<s_2<\ldots<s_k \le |m|< t_1<t_2<\ldots<t_k\le n$,
+          and $\forall i\in \{1,2,\ldots,k\}~s_i,t_i \in \mathbb{Z}$​
+
+        - $(I)\rightarrow$ So, $\forall i\in \{1,2,\ldots,k\}$, there
+          are
+          $b_{s_i}=1,b_{t_i}=0,b^{'}_{s_i}=b_{s_i}-1=0,b^{'}_{t_i}=b_{t_i}+1=1$,
+          $x_{s_i}\le x_{t_i}$and according to helper functions and
+          conclusions in [appendix A.5](#A.5), then: $$
+          \begin{split}
+          &\sum_{i=1}^k(|round(r_{s_i}N)+b^{'}_{s_i}-r_{s_i}N |^{p}+|round(r_{t_i}N)+b^{'}_{t_i}-r_{t_i}N |^{p})\\
+          &~~~~-\sum_{i=1}^k(|round(r_{s_i}N)+b_{s_i}-r_{s_i}N |^{p}+|round(r_{t_i}N)+b_{t_i}-r_{t_i}N |^{p})\\
+          &=\sum_{i=1}^k(|round(r_{s_i}N)+b^{'}_{s_i}-r_{s_i}N |^{p}+|round(r_{t_i}N)+b^{'}_{t_i}-r_{t_i}N |^{p}\\
+          &~~~~-|round(r_{s_i}N)+b_{s_i}-r_{s_i}N |^{p}+|round(r_{t_i}N)+b_{t_i}-r_{t_i}N |^{p})\\
+          &=\sum_{i=1}^k[|round(r_{s_i}N)-r_{s_i}N |^{p}+|round(r_{t_i}N)+1-r_{t_i}N |^{p}\\
+          &~~~~-(|round(r_{s_i}N)+1-r_{s_i}N |^{p}+|round(r_{t_i}N)-r_{t_i}N |^{p})]\\
+          &=\sum_{i=1}^k[-(|round(r_{s_i}N)+1-r_{s_i}N |^{p}-|round(r_{s_i}N)-r_{s_i}N|^{p})\\
+          &~~~~+(|round(r_{t_i}N)+1-r_{t_i}N |^{p}-|round(r_{t_i}N)-r_{t_i}N |^{p})]\\
+          &=\sum_{i=1}^k[-I(1,round(r_{s_i}N)-r_{s_i}N)+I(1,round(r_{t_i}N)-r_{t_i}N)]\\
+          &=\sum_{i=1}^k[-I(1,x_{s_i})+I(1,x_{t_i})]\\
+          & \ge 0
+          \end{split}
+          $$
+
+        - Assume the $b^{'}$ make
+          $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}}<(\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$​​.
+
+        - So,
+          $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})<(\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})$​,
+
+        - So, eliminate the identical terms, there will be: $$
+          \begin{split}
+          &\sum_{i=1}^k(|round(r_{s_i}N)+b^{'}_{s_i}-r_{s_i}N |^{p}+|round(r_{t_i}N)+b^{'}_{t_i}-r_{t_i}N |^{p})\\
+          &<\sum_{i=1}^k( |round(r_{s_i}N)+b_{s_i}-r_{s_i}N |^{p}+|round(r_{t_i}N)+b_{t_i}-r_{t_i}N |^{p})
+          \end{split}
+          $$ which is contradictory to $(I)$, so the above assumption is
+          not valid.
+
+        - So, $\forall b^{'}=[b^{'}_1,b^{'}_2,\ldots,b^{'}_n]\in B_t$,
+          that \$ b^{’}b\$, there will always be
+          $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ge (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
+
+        - So, $b\in B^{*'}_{f}$.
+
+      - If $m=0$, obviously,
+        $B_t= \complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1$
+        is a single-element set, there is $\nexists b^{'} \in B_t$, that
+        $b^{'}\ne b$. Omitted.
+
+      - If $m < 0$, so, $b=[0,0,\ldots,-1,-1,\ldots,-1]$, where
+        $\forall i \in \{i|i \in [1,n-|m|], i \in \mathbb{Z}^+\} b_i = 0, \forall j \in \{j|j \in [n-|m|+1,n], j \in \mathbb{Z}^+\} b_j = -1$.
+
+        - Then, according to $B_t$’s field, there is
+          $\forall i \in \{1,2,\ldots,n\}~b^{'}_{i}\in \{0,-1\}$.
+
+        - Without loss of generality, let
+          $b^{'} = b+f(s_1,-1)+f(s_2,-1)+\ldots+f(s_k,-1)+f(t_1,1)+f(t_2,1)+\ldots+f(t_k,1)$,
+          where
+          $k \in \{k|k\in \mathbb{Z}^+, k\le \min(|m|,n-|m|)=|m|\},~1\le s_1<s_2<\ldots<s_k < n-|m|+1 \le t_1<t_2<\ldots<t_k\le n$,
+          and $\forall i\in \{1,2,\ldots,k\}~s_i,t_i \in \mathbb{Z}$.
+
+        - $(II)\rightarrow$ So, $\forall i\in \{1,2,\ldots,k\}$, there
+          are
+          $b_{s_i}=0,b_{t_i}=-1,b^{'}_{s_i}=b_{s_i}-1=-1,b^{'}_{t_i}=b_{t_i}+1=0$,
+          $x_{s_i}\le x_{t_i}$​and according to helper functions and
+          conclusions in [appendix A.5](#A.5), then: $$
+          \begin{split}
+          &\sum_{i=1}^k(|round(r_{s_i}N)+b^{'}_{s_i}-r_{s_i}N |^{p}+|round(r_{t_i}N)+b^{'}_{t_i}-r_{t_i}N |^{p})\\
+          &~~~~-\sum_{i=1}^k(|round(r_{s_i}N)+b_{s_i}-r_{s_i}N |^{p}+|round(r_{t_i}N)+b_{t_i}-r_{t_i}N |^{p})\\
+          &=\sum_{i=1}^k(|round(r_{s_i}N)+b^{'}_{s_i}-r_{s_i}N |^{p}+|round(r_{t_i}N)+b^{'}_{t_i}-r_{t_i}N |^{p}\\
+          &~~~~-|round(r_{s_i}N)+b_{s_i}-r_{s_i}N |^{p}+|round(r_{t_i}N)+b_{t_i}-r_{t_i}N |^{p})\\
+          &=\sum_{i=1}^k[|round(r_{s_i}N)-1-r_{s_i}N |^{p}+|round(r_{t_i}N)-r_{t_i}N |^{p}\\
+          &~~~~-(|round(r_{s_i}N)-r_{s_i}N |^{p}+|round(r_{t_i}N)-1-r_{t_i}N |^{p})]\\
+          &=\sum_{i=1}^k[(|round(r_{s_i}N)-1-r_{s_i}N |^{p}-|round(r_{s_i}N)-r_{s_i}N|^{p})\\
+          &~~~~-(|round(r_{t_i}N)-1-r_{t_i}N |^{p}-|round(r_{t_i}N)-r_{t_i}N |^{p})]\\
+          &=\sum_{i=1}^k[I(-1,round(r_{s_i}N)-r_{s_i}N)-I(-1,round(r_{t_i}N)-r_{t_i}N)]\\
+          &=\sum_{i=1}^k[I(-1,x_{s_i})-I(-1,x_{t_i})]\\
+          & \ge 0
+          \end{split}
+          $$
+
+        - Assume the $b^{'}$ make
+          $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}}<(\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$​​.
+
+        - So,
+          $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})<(\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})$​,
+
+        - So, eliminate the identical terms, there will be: $$
+          \begin{split}
+          &\sum_{i=1}^k(|round(r_{s_i}N)+b^{'}_{s_i}-r_{s_i}N |^{p}+|round(r_{t_i}N)+b^{'}_{t_i}-r_{t_i}N |^{p})\\
+          &<\sum_{i=1}^k( |round(r_{s_i}N)+b_{s_i}-r_{s_i}N |^{p}+|round(r_{t_i}N)+b_{t_i}-r_{t_i}N |^{p})
+          \end{split}
+          $$ which is contradictory to $(II)$, so the above assumption
+          is not valid.
+
+        - So, $\forall b^{'}=[b^{'}_1,b^{'}_2,\ldots,b^{'}_n]\in B_t$,
+          that \$ b^{’}b\$, there will always be
+          $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ge (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
+
+        - So, $b\in B^{*'}_{f}$
+
+    - If $B_t=\{b\}$, and in `4`, it has been proofed that
+      $B_t \cap B^{*'}_f \ne \empty$, so, there is $b\in B^{*'}_{f}$​.
+
+      Therefore, regardless of the $B_t$ is a single-element set or not,
+      or what the value of $m$ is, the $b$ will always satisfied
+      $b\in B^{*'}_{f}$.
+
+    So, `6` is proofed.
+
+7.  The special $b$ defined in `5` satisfies
+    $b\in B_f \subseteq B^{'}_f$​.
+
+    Proof:
+
+    - Known:
+      $x = [x_1,x_2,\ldots,x_n], x_i = round(r_iN)-r_iN,-0.5\le x_1\le x_2\le \ldots \le x_n \le 0.5$.
+
+    - Known: $m=N-\sum_{i=1}^n round(r_iN)$, and from
+      $\eqref{round_conclusion}$, there are
+      $m \in \mathbb{Z},\text{and }-\frac{n}{2}\le m\le\frac{n}{2}$​.
+
+    - Consider $b=[b_1,b_2,\ldots,b_n]$. It is equivalent to proving
+      that $b$ satisfies the constrain of
+      $[round(r_1N)+b_1,round(r_2N)+b_2,\ldots,round(r_nN)+b_n]\in \mathbb{N}^n$.
+
+      - If $m>0$, so, $b=[1,1,\ldots,1,0,0,\ldots,0]$, where \$ i {i\|i
+        , i ^+} b_i = 1, j {j\|j , j ^+} b_j = 0\$​.
+        - Obviously, the constrain of
+          $[round(r_1N)+b_1,round(r_2N)+b_2,\ldots,round(r_nN)+b_n]\in \mathbb{N}^n$
+          is satisfied.
+      - If $m=0$, so, $b=[b_1,b_2,\ldots,b_n]=[0,0,\ldots,0]$.
+        - Obviously, the constrain of
+          $[round(r_1N)+b_1,round(r_2N)+b_2,\ldots,round(r_nN)+b_n]\in \mathbb{N}^n$
+          is satisfied.
+      - If $m<0$, so, $b=[0,0,\ldots,-1,-1,\ldots,-1]$, where
+        $\forall i \in \{i|i \in [1,n-|m|], i \in \mathbb{Z}^+\} b_i = 0, \forall j \in \{j|j \in [n-|m|+1,n], j \in \mathbb{Z}^+\} b_j = -1$​.
+        - Since $b\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m$, so
+          $m\in \mathbb{Z}^-$.
+        - So, $\sum_{i=1}^n x_i=-m \ge 1$
+        - Also because $-0.5 \le x_1\le x_2\le \ldots \le x_n \le 0.5$,
+          there will be
+          $\forall i \in \{n-2|m|+1,n-2|m|+2,\ldots,n\}~x_{i}=round(r_iN)-r_iN > 0$​.
+        - So,
+          $\forall i \in \{n-2|m|+1,n-2|m|+2,\ldots,n\}~round(r_iN) \ge 1$​.
+        - And, there is $n-2|m|\le n-|m|$, so
+          - $\forall i \in \{i|i \in [1,n-2|m|], i \in \mathbb{Z}^+\} round(r_iN)+b_i=round(r_iN)+0=round(r_iN) \ge 0$
+          - $\forall i \in \{i|i \in [n-2|m|+1,n-|m|], i \in \mathbb{Z}^+\} round(r_iN)+b_i=round(r_iN)+0=round(r_iN) \ge 1$
+          - $\forall i \in \{i|i \in [n-|m|+1,n], i \in \mathbb{Z}^+\} round(r_iN)+b_i=round(r_iN)+1 \ge -1+1 =0$
+        - Therefore, the constrain of
+          $[round(r_1N)+b_1,round(r_2N)+b_2,\ldots,round(r_nN)+b_n]\in \mathbb{N}^n$​
+          is satisfied.
+
+      So, regardless of the value of $m$, the $b$ will always satisfy
+      the constrain of
+      $[round(r_1N)+b_1,round(r_2N)+b_2,\ldots,round(r_nN)+b_n]\in \mathbb{N}^n$,
+      i.e., the $b$ defined in `5` satisfies
+      $b\in B_f \subseteq B^{'}_f$​.
+
+    So, `7` is proofed.
+
+8.  Final conclusion:
+
+    - To proof the $b$ in [solution
+      1](#Solution 1, based on round() function) is one of the solutions
+      of problem $\eqref{NIP_problem_round}$. Some known conditions,
+      definitions and basic analyses are put on `1`, especially, the
+      $b$’s feasibility domain and the domain’s super set, i.e.,
+      $B_f \subseteq B^{'}_f$ , with the corresponding solution set
+      $B^{*}_f$ and $B^{*'}_f$.
+
+    - The parts, “`2`, `3`, `4`”, jointly give a restricted feasible
+      domain
+      $B_t=\complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1$.
+      And it is proofed that the $B_t\cap B^{*'}_f \ne \empty$.
+
+      - A $b \in B_t$ (the same to [solution
+        1](#Solution 1, based on round() function)) is given in `5`, and
+        it is proofed that $b\in B^{*'}_{f}$​ in `6`.
+
+    - The $b\in B_f \subseteq B^{'}_f$ is proofed in `7`.
+
+      - Therefore, according to [lemma 2](#Lemma 2), there is
+        $b\in B^{*}_f \subseteq B^{*'}_f$.
 
 Along the above 8 points, the
 [Solution-1](#Solution 1, based on round() function) is proofed totally.
@@ -2161,231 +2005,709 @@ So, `1` is proofed.
 4.  Combine `2` and `3`:
     $\forall n \in \mathbb{Z}^+, R(f,n)=\{f(r,n,N)|(r,N)\in F_{r,N}\}=\{x|x\in (-n,0],x\in \mathbb{Z}\}$.
 
+## A.x
+
+Define a helper function and elaboration some features (conclusions) of
+it.
+
+- Let: $D_{[-1,0]}=\{x|-1\le x \le 0, x \in R\}$
+
+- $\forall p> 1$, define $I(x,k):\{D,\mathbb{Z}\}\rightarrow \mathbb{R}$
+  as
+
+- $I(k,x) =\begin{cases}|k+x|^{p}-|k+x-1|^{p},~k\ge 1, k \in \mathbb{Z},~x \in D_{[-1,0]}\\ -1,~k=0,~x \in D_{[-1,0]}\\ |k+x|^{p}-|k+x+1|^{p},k\le -1, k \in \mathbb{Z},~x \in D_{[-1,0]}\end{cases}$
+
+- Analysis:
+
+  $\forall p> 1$
+
+  - If $k\ge2,k \in \mathbb{Z},~x \in D_{[-1,0]}$,
+
+    - then, $k+x \ge 1 >0, k+x-1 \ge 0$.
+    - $I(k,x)=|k+x|^{p}-|k+x-1|^{p}=(k+x)^p-(k+x-1)^p$
+    - $\frac{\partial I(k,x)}{\partial x}=p(k+x)^{p-1}-p(k+x-1)^{p-1}> 0$
+
+  - If $k=1,~x \in D_{[-1,0]}$,
+
+    - then, $k+x=1+x \ge 0, k+x-1=x\le 0$.
+
+    - $I(k,x)=|1+x|^{p}-|x|^{p}=(1+x)^p-(-x)^p$
+
+    - $\frac{\partial I(k,x)}{\partial x}=p(1+x)^{p-1}+p(-x)^{p-1}> 0$.
+
+  - If $k\le -2,k \in \mathbb{Z},~x \in D_{[-1,0]}$,
+
+    - then, $k+x \le -2 < 0, k+x+1 \le -1 <0$.
+    - $I(k,x)=|k+x|^{p}-|k+x+1|^{p}=(-k-x)^p-(-k-x-1)^p$
+    - $\frac{\partial I(k,x)}{\partial x}=-p(-k-x)^{p-1}+p(-k-x-1)^{p-1} = -p[(-k-x)^{p-1}-(-k-x-1)^{p-1}]< 0$.
+
+  - If $k=-1,~x \in D_{[-1,0]}$,
+
+    - then, $k+x = -1+x \le -1 < 0, k+x+1 = x \le 0$
+    - $I(k,x)=|-1+x|^{p}-|x|^{p}=(1-x)^p-(-x)^p$
+    - $\frac{\partial I(k,x)}{\partial x}=-p(1-x)^{p-1}+p(-x)^{p-1}=-p[(1-x)^{p-1}-(-x)^{p-1}]< 0$.
+
+  - $(I)\rightarrow$ So, when
+    $k\ge1,k \in \mathbb{Z},~x \in D_{[-1,0]},p> 1$, the function
+    $I(k,x)=(|k+x|^{p}-|k+x-1|^{p})$ is strictly monotonically
+    increasing W.R.T. $x$.
+
+  - $(II)\rightarrow$ So, when
+    $k\le -1,k \in \mathbb{Z},~x \in D_{[-1,0]},p> 1$, the function
+    $I(k,x)=(|k+x|^{p}-|k+x+1|^{p})$ is strictly monotonically
+    decreasing W.R.T. $x$.
+
+  Then, consider the region $D_{(-1,0]}=\{x|-1< x \le 0, x \in R\}$
+  instead of $D_{[-1,0]}$.
+
+  $\forall x_1,x_2\in D_{(-1,0]}$:
+
+  - When $k\ge 2$, according to $(I)$, there is: $$
+    \begin{split}
+    \inf_{x_1,x_2\in D_{(-1,0]}}[I(k,x_1)-I(k-1,x_2)]&=\inf_{x_1\in D_{(-1,0]}}I(k,x_1)-\sup_{x_2\in D_{(-1,0]}}I(k-1,x_2)\\
+    &= \inf_{x_1\in D_{(-1,0]}}I(k,x_1)-\max_{x_2\in D_{(-1,0]}}I(k-1,x_2)\\
+    &= I(k,-1)-I(k-1,0)\\
+    &= (|k-1|^{p}-|k-2|^{p})-(|k-1|^{p}-|k-2|^{p})=0,
+    \end{split}
+    $$
+
+    - And obviously, $\nexists x1,x2 \in (0,1]$, that make
+      $I(k,x_1)-I(k-1,x_2)=0$.
+    - Therefore, $I(k,x_1)>I(k-1,x_2)$.
+
+  - When $k=1$, according to $(I)$, there is: $$
+    \begin{split}
+    \inf_{x_1,x_2\in D_{(-1,0]}}[I(k,x_1)-I(k-1,x_2)]&=\inf_{x_1,x_2\in D_{(-1,0]}}[I(1,x_1)-I(0,x_2)]\\
+    &=\inf_{x_1\in D_{(-1,0]}}[I(1,x_1)+1]\\
+    &=\inf_{x_1\in D_{(-1,0]}}I(1,x_1)+1\\
+    &= I(1,-1)+1\\
+    &= (|1-1|^{p}-|-1|^{p})+1=0,
+    \end{split}
+    $$
+
+    - And obviously, $\nexists x1,x2 \in D_{(-1,0]}$, that make
+      $I(k,x_1)-I(k-1,x_2)=0$.
+    - Therefore, $I(k,x_1)>I(k-1,x_2)$.
+
+  - $(III)\rightarrow$ So, when $k\ge1,k \in \mathbb{Z},p> 1$,
+    $\forall x_1,x_2\in D_{(-1,0]}$, there is $I(k,x_1)>I(k-1,x_2)$
+
+  - When $k\le -2$, according to $(II)$, there is: $$
+    \begin{split}
+    \inf_{x_1,x_2\in D_{(-1,0]}}[I(k,x_1)-I(k+1,x_2)]&=\inf_{x_1\in D_{(-1,0]}}I(k,x_1)-\sup_{x_2\in D_{(-1,0]}}I(k+1,x_2)\\
+    &= \min_{x_1\in D_{(-1,0]}}I(k,x_1)-\sup_{x_2\in D_{(-1,0]}}I(k+1,x_2)\\
+    &= I(k,0)-I(k+1,-1)\\
+    &= (|k|^{p}-|k+1|^{p})-(|k|^{p}-|k+1|^{p})=0,
+    \end{split}
+    $$
+
+    - And obviously, $\nexists x1,x2 \in D_{(-1,0]}$, that make
+      $I(k,x_1)-I(k+1,x_2)=0$.
+    - Therefore, $I(k,x_1)>I(k+1,x_2)$.
+
+  - When $k= -1$, according to $(II)$, there is: $$
+    \begin{split}
+    \inf_{x_1,x_2\in D_{(-1,0]}}[I(k,x_1)-I(k+1,x_2)]&=\inf_{x_1,x_2\in D_{(-1,0]}}[I(-1,x_1)-I(0,x_2)]\\
+    &=\inf_{x_1\in D_{(-1,0]}}[I(-1,x_1)+1]\\
+    &=\min_{x_1\in D_{(-1,0]}}I(-1,x_1)+1\\
+    &= I(0,-1)+1\\
+    &= (|-1|^{p}-|0|^{p})+1=2>0,
+    \end{split}
+    $$
+
+    - Therefore, $I(k,x_1)>I(k+1,x_2)$.
+
+  - $(IV)\rightarrow$ So, when $k\le -1,k \in \mathbb{Z},p> 1$,
+    $\forall x_1,x_2\in D_{(-1,0]}$, there is $I(k,x_1)>I(k+1,x_2)$
+
+  According to $(III)$ and $(IV)$, there is:
+
+  - When $k \in \mathbb{Z},p> 1$,
+    $\forall x_1,x_2,\ldots,x_{\infty}\in D_{(-1,0]}$,
+  - $-1=I(0,x_1)< I(-1,x_1)< I(-2,x_2)<\ldots < I(-\infty,x_{\infty})$,
+  - and $-1=I(0,x_1)< I(1,x_1)< I(2,x_2)<\ldots < I(\infty,x_{\infty})$.
+
 ## A.8
 
-The proof procedure of solution 2 that based on `floor()` function. For
-better readability, we divide the proof process into several parts. The
-first one is a pre-explanation, followed by assumptions and
-extrapolations step by step, until the conclusion is reached.
+To proof the $b$ in [solution 2](#Solution 2, based on floor() function)
+is one of the solutions of problem $\eqref{NIP_problem_round}$​.
+
+{% note info %}
+
+For better readability, we divide the proof process into several parts
+and analysis step by step, until the conclusion is reached.
+
+{% endnote %}
 
 1.  Preliminary illustrations:
 
-    $$
+    - Known conditions:
+
+      - $n,N \in \mathbb{Z}^+, n \le N$
+      - $p\in \mathbb{R},~p> 1$
+      - $r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1$​
+      - $floor(\cdot)$ is as $\eqref{floor}$
+      - $m=N-\sum_{i=1}^n floor(r_iN)$,​​​
+        - From the conclusion $\eqref{floor_conclusion}$​, there are
+          $m \in \mathbb{Z},0 \le m < n$​.
+      - $x=[x_1,x_2,\ldots,x_n], \forall i \in \{1,2,\ldots,n\},x_i = floor(r_iN)-r_iN$​.
+
+    - Group $\{x_1,x_2,\ldots,x_n\}$ according their values as:
+
+      - $\exists h\in \mathbb{Z}^+, h\le n, g_1,g_2,\ldots, g_h \in \mathbb{Z}^+,\sum_{i=1}^{h}g_i=n$,
+        that make
+        - $G_1 = \{i_1,i_2,\ldots,i_{g_1}\} \subseteq \{1,2,\ldots,n\}, \forall i_s,i_t \in G_1, x_{i_s}=x_{i_t}$.
+        - $G_2 = \{i_{g_1+1},i_{g_1+1},\ldots,i_{g_1+g_2}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_2, x_{i_s}=x_{i_t}$.
+        - …
+        - $G_h = \{i_{1+\sum_{i=1}^{h-1}g_i},i_{2+\sum_{i=1}^{h-1}g_i},\ldots,i_{\sum_{i=1}^{h}g_i}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_h, x_{i_s}=x_{i_t}$.
+        - $G_1 \cup G_2 \cup \ldots \cup G_h = \{1,2,\ldots,n\}$
+        - $\forall s,t \in \{1,2,\ldots,h\}$ and $s\ne t$, there is
+          $G_s \cap G_t \ne \empty$
+        - $\forall s,t \in \{1,2,\ldots,h\}, s<t$, there is
+          $\forall i_s \in G_s, i_t \in G_t$, that $x_{i_s}<x_{i_t}$.
+        - Specially, if $h=1$, there will be
+          $\forall i_s,i_t \in \{1,2,\ldots,n\}, x_{i_s}=x_{i_t}$
+
+    - Define $$
+      \begin{split}
+      B_f=\{b|&b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m,\\&[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in \mathbb{N}^n\}
+      \end{split}
+      $$
+
+    - Define
+      $B^{'}_f=\{b|b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m\}$​.
+
+    - Define solutions set
+      $B^{*}_f=\{b|b=\mathop{\arg\min}\limits_{b\in B_f}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}$.
+
+    - Define solutions set
+      $B^{*'}_f=\{b|b=\mathop{\arg\min}\limits_{b\in B^{'}_f}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}$.
+
+    - There is $\empty \ne B_f$​.
+
+      Proof:
+
+      - Since $m\ge 0$, so,
+        $\exists b=[m,0,\ldots,0]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m$,
+        that make
+        $[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in \mathbb{N}^n$.
+
+      So, $\empty \ne B_f$ is proofed.
+
+    So, there are
+    $B_f\subseteq B^{'}_f, \empty \ne B^{*}_f\subseteq B_f,~\empty\ne B^{*'}_f \subseteq B^{'}_f$
+
+2.  Let
+    $B_1= \{b|b\in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m, \exists i_s,i_t \in \{1,2,\ldots,n\}~b_{i_s}\ge 1,b_{i_t}\le -1\}\subseteq B^{'}_f$,
+    then there will be $B^{*'}_f \subseteq \complement_{B^{'}_{f}}B_1$.
+
+    Proof:
+
+    - Obviously, $B_1 \ne \empty$.
+
+    - Assume that there
+      $\exists b=[b_1,b_2,\ldots,b_n]\in B^{*'}_f\cap B_1$.
+
+    - Without loss of generality, let $s<t$​.
+
+    - Define $b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}]$, where
+      $b^{'}_{i_s}=b_{i_s}-1,b^{'}_{i_t}=b_{i_t}+1, \forall i \in \{i|i \in [1,n], i\in \mathbb{Z}, i \notin \{i_s,i_t\}\}, b^{'}_i=b_i$.
+
+    - Obviously,there are:
+
+      - $b^{'}\in B^{'}_f$,
+
+      - $(I)\rightarrow$ and
+        $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ge (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
+
+    - Also, according to helper functions and conclusions in [appendix
+      A.x](#A.x), then: $$
+      \begin{split}
+      &\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}\\
+      &=|b^{'}_{i_s}+x_{i_s} |^{p}+|b^{'}_{i_t}+x_{i_t}|^{p}-|b_{i_s}+x_{i_s}|^{p}-|b_{i_t}+x_{i_t}|^{p}\\
+      &=|b_{i_s}-1+x_{i_s}|^{p}+|b_{i_t}+1+x_{i_t}|^{p}-|b_{i_s}+x_{i_s}|^{p}-|b_{i_t}+x_{i_t}|^{p}\\
+      &=-(|b_{i_s}+x_{i_s}|^{p}-|b_{i_s}-1+x_{i_s}|^{p})-(|b_{i_t}+x_{i_t}|^{p}-|b_{i_t}+1+x_{i_t}|^{p})\\
+      &=-I(b_{i_s},x_{i_s})-I(b_{i_t},x_{i_t})\\
+      &<-\inf_{x\in(-1,0]}I(b_{i_s},x)-\inf_{x\in(-1,0]}I(b_{i_t},x)\\
+      &=-I(b_{i_s},-1)-I(b_{i_t},0)\\
+      &=-(|b_{i_s}-1|^{p}-|b_{i_s}-2|^{p})-(|b_{i_t}|^{p}-|b_{i_t}+1|^{p})\\
+      &< 0\\
+      \end{split}
+      $$
+
+    - so,
+      $\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}< \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}$.
+
+    - Therefore,
+      $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} < (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$,
+      which is contradictory to $(I)$​, so the above assumption is not
+      valid.
+
+    - So, $B^{*'}_f\cap B_1 = \empty$, i.e.,
+      $B^{*'}_f \subseteq \complement_{B^{'}_{f}}B_1$​.
+
+    So, `2` is proofed.
+
+3.  Let
+    $B_2= \{b|b \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m,\exists i_s \in \{1,2,\ldots,n\}~b_{i_s}\ge 2\}\subseteq B^{'}_f$,
+    then there will
+    be,$B^{*'}_f \subseteq \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2$.
+
+    Proof:
+
+    - Obviously, $B_2 \ne \empty$.
+
+    - Assume that there
+      $\exists b=[b_1,b_2,\ldots,b_n]\in B^{*'}_f \cap B_2$​​​.
+
+    - So, $\exists i_s \in \{1,2,\ldots,n\}$, that $b_{i_s}\ge 2$.
+
+    - The $B^{*'}_f \subseteq \complement_{B^{'}_{f}}B_1$ has been
+      proofed in `2`, and $\empty\ne B^{*'}_f \subseteq B^{'}_f$​ has
+      been illustrated in `1`.
+
+    - So,
+      $b \in (B^{*'}_f \cap B_2)\subseteq \complement_{B^{'}_{f}}B_1$.
+
+    - Since according to $\eqref{floor_conclusion}$, there is
+      $0\le m=\sum_{i=1}^n b_i < n$. So,
+      $\forall i \in \{1,2,\ldots,n\}~b_{i}\ge 0$, and there
+      $\exists i_t\ne i_s$, that $b_{i_t}=0$.
+
+    - Without loss of generality, let $i_s<i_t$.
+
+    - Define $b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}]$, where
+      $b^{'}_{i_s}=b_{i_s}-1,b^{'}_{i_t}=b_{i_t}+1, \forall i \in \{i|i \in [1,n], i\in \mathbb{Z}, i \notin \{i_s,i_t\}\}, b^{'}_i=b_i$.
+
+    - Obviously,there are:
+
+      - $b^{'}\in \complement_{B^{'}_{f}}B_1\subseteq B^{'}_f$,
+
+      - $(I)\rightarrow$ and
+        $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ge (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
+
+    - Also, according to helper functions and conclusions in [appendix
+      A.x](#A.x), then: $$
+      \begin{split}
+      &\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}\\
+      &=|b^{'}_{i_s}+x_{i_s}|^{p}+|b^{'}_{i_t}+x_{i_t}|^{p}-|b_{i_s}+x_{i_s}|^{p}-|b_{i_t}+x_{i_t}|^{p}\\
+      &=|b_{i_s}-1+x_{i_s}|^{p}+|b_{i_t}+1+x_{i_t}|^{p}-|b_{i_s}+x_{i_s}|^{p}-|b_{i_t}+x_{i_t}|^{p}\\
+      &=-(|b_{i_s}+x_{i_s}|^{p}-|b_{i_s}-1+x_{i_s}|^{p})+(|b_{i_t}+1+x_{i_t}|^{p}-|b_{i_t}+x_{i_t}|^{p})\\
+      &=-I(b_{i_s},x_{i_s})+I(b_{i_t}+1,x_{i_t})\\
+      &=-[I(b_{i_s},x_{i_s})-I(1,x_{i_t})]\\
+      &<0.
+      \end{split}
+      $$
+
+    - So,
+      $\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}< \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}$​.
+
+    - Therefore,
+      $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} < (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$,
+      which is contradictory to $(I)$, so the above assumption is not
+      valid.
+
+    - So, $B^{*'}_f\cap B_2 = \empty$, i.e.,
+      $B^{*'}_f \subseteq \complement_{B^{'}_{f}}B_2$.
+
+    - Therefore,
+      $B^{*'}_f \subseteq \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2$.
+
+    So, `3` is proofed.
+
+4.  Let $$
     \begin{split}
-     &\text{Basing on \eqref{NIP_problem_floor} and \eqref{solution_floor}, try to proof the correctness of \eqref{solution_floor}}.\\
-     &\text{Known conditions:}\\
-     &~~~~n,N \in \mathbb{Z}^+, n \le N\\
-     &~~~~p\in \mathbb{R},~p\ge 1\\
-     &~~~~r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\\
-     &~~~~m=N-\sum_{i=1}^n floor(r_iN)\\
-     &~~~~m \in \mathbb{Z},\text{and }0\le m<n (\text{according to \eqref{floor_range}})\\
-     &\text{Define }x=[x_1,x_2,\ldots,x_n], \forall i \in \{1,2,\ldots,n\},x_i = floor(r_iN)-r_iN.\\
-     &\text{also from \eqref{floor_range}, there is }-n< floor(r_iN)-r_iN \le 0.\\
-     &\text{Without loss of generality, let }-n< x_1\le x_2\le \ldots \le x_n \le 0.\\
-     &\text{Define }B_f=\{b|b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m,[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in \mathbb{N}^n\}.\\
-     &\text{Define }B^{'}_f=\{b|b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m\}.\\
-     &\text{Define solutions set }B^{*}_f=\{b|b=\mathop{\arg\min}\limits_{b\in B_f}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}.\\
-     &\text{Define solutions set }B^{*'}_f=\{b|b=\mathop{\arg\min}\limits_{b\in B^{'}_f}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}.\\
-     &\text{If }m\ge 0, \text{then }\exists b=[m,0,\ldots,0]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m,\\
-     &~~~~\text{and make }[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in \mathbb{N}^n,\\
-     &\text{therefore } \exists b\in B_f,\\
-     &\text{i.e., }\empty \ne B_f,\\
-     &\text{therefore, there are }B_f\subseteq B^{'}_f, \empty \ne B^{*}_f\subseteq B_f,~\empty\ne B^{*'}_f \subseteq B^{'}_f.\\
-     \end{split}
-    $$
+    B_3=\{b|&b \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m,\\
+    &h\in \mathbb{Z}^+,h\ge2, \\
+    &\exists s,t \in \{1,2,\ldots,h\}, s < t,i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t},b_{i_s}< b_{i_t}\}\subseteq B^{'}_{f},
+    \end{split}
+    $$ then there will be
+    $B^{*'}_f \subseteq \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3$.
 
-2.  Assumption 1
+    Proof:
 
-    $$
+    - Since $B_3$​ is not a simple definition, we explain it first:
+
+      - $h\in \mathbb{Z}^+$
+      - If \$h, \$
+        - $\exists s,t \in \{1,2,\ldots,h\}, s < t, i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t}$,
+        - $\forall b \in B_3$, \$ b ^n,~\_{i=1}^n b_i = m\$, and
+          $b_{i_s}< b_{i_t}$.
+      - If $h=1$, $B_3 = \empty$​.
+
+    - If \$h, \$
+
+      - Obviously, $B_3 \ne \empty$.
+
+        - Assume that there
+          $\exists b=[b_1,b_2,\ldots,b_n]\in B^{*'}_f \cap B_3$​​​.
+
+        - So, $\exists i_s \in G_s, i_t\in G_t$, that
+          $b_{i_s}< b_{i_t}$.
+
+        - And, there is $x_{i_s} < x_{i_t}$.
+
+        - The
+          $B^{*'}_f \subseteq \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2$
+          has been proofed in `2`, and
+          $\empty\ne B^{*'}_f \subseteq B^{'}_f$ has been illustrated in
+          `1`.
+
+        - So,
+          $b \in (B^{*'}_f \cap B_3)\subseteq \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2$​.
+
+        - Since according to $\eqref{floor_conclusion}$, there is
+          $0\le m=\sum_{i=1}^n b_i < n$, and according to
+          $\complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2}$’s
+          field, there is
+          $\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,1\}$.
+
+        - So, $b_{i_s}=0, b_{i_t} = 1$.
+
+        - Define $b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}]$, where
+          $b^{'}_{i_s}=b_{i_s}+1,b^{'}_{i_t}=b_{i_t}-1, \forall i \in \{i|i \in [1,n], i\in \mathbb{Z}, i \notin \{i_s,i_t\}\}, b^{'}_i=b_i$.
+
+        - Obviously,there are:
+
+          - $b^{'}\in (\complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2) \subseteq B^{'}_f$,
+
+          - $(I)\rightarrow$ and
+            $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ge (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$​.
+
+        - Also, according to helper functions and conclusions in
+          [appendix A.x](#A.x), then: $$
+          \begin{split}
+          &\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
+          &=|b^{'}_{i_s}+x_{i_s}|^{p}+|b^{'}_{i_t}+x_{i_t}|^{p}-|b_{i_s}+x_{i_s}|^{p}-|b_{i_t}+x_{i_t}|^{p}\\
+          &=|b_{i_s}+1+x_{i_s}|^{p}+|b_{i_t}-1+x_{i_t}|^{p}-|b_{i_s}+x_{i_s}|^{p}-|b_{i_t}+x_{i_t}|^{p}\\
+          &=(|b_{i_s}+1+x_{i_s}|^{p}-|b_{i_s}+x_{i_s}|^{p})-(|b_{i_t}+x_{i_t}|^{p}-|b_{i_t}-1+x_{i_t}|^{p})\\
+          &=I(b_{i_s}+1,x_{i_s})-I(b_{i_t},x_{i_t})\\
+          &=I(1,x_{i_s})-I(1,x_{i_t})\\
+          &< 0.
+          \end{split}
+          $$
+
+        - So,
+          $\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}< \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}$​.
+
+        - Therefore,
+          $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} < (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$,
+          which is contradictory to $(I)$, so the above assumption is
+          not valid.
+
+        - So, $B^{*'}_f\cap B_3 = \empty$, i.e.,
+          $B^{*'}_f \subseteq \complement_{B^{'}_{f}}B_3$​.
+
+    - If $h=1$, ,then $B_3 = \empty$, and there is till
+      $B^{*'}_f \subseteq \complement_{B^{'}_{f}}B_3$.
+
+    Therefore,
+    $B^{*'}_f \subseteq \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3$
+
+    So, `4` is proofed.
+
+5.  Since
+    $\empty \ne B^{*'}_f \subseteq \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3$,
+    there is
+    $B^{*'}_f = \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3$.
+
+    Proof:
+
+    Since: $$
     \begin{split}
-     &\text{Assume that,}\exists b=[b_1,b_2,\ldots,b_n]\in B^{*'}_f \subseteq B^{'}_f,\\
-     &~~~~\text{and simultaneously } b\in B_1= \{b|b=[b_1,b_2,\ldots,b_n] \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m, \exists s,t, b_s\ge 1,b_t\le -1\}\subseteq B^{'}_f.\\
-     &\text{Without loss of generality, let }s<t.\\
-     &\text{So, there is } b=[\ldots,b_s,\ldots,b_t,\ldots] \in B^{*'}_f \cap B_1.\\
-     &\text{Define }b^{'}=[\ldots,b^{'}_s,\ldots,b^{'}_t,\ldots]=[\ldots,b_s-1,\ldots,b_t+1,\ldots]\in B^{'}_f,\text{i.e.},~b^{'}_s=b_s-1,b^{'}_t=b_t+1,\\
-     &\text{therefore }\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}\\
-     &~~~~=|floor(r_sN)+b^{'}_s-r_{s}N |^{p}+|floor(r_tN)+b^{'}_t-r_{t}N |^{p}-|floor(r_sN)+b_s-r_{s}N |^{p}-|floor(r_tN)+b_t-r_{t}N |^{p}\\
-     &~~~~=|floor(r_sN)+b_s-1-r_{s}N |^{p}+|floor(r_tN)+b_t+1-r_{t}N |^{p}-|floor(r_sN)+b_s-r_{s}N |^{p}-|floor(r_tN)+b_t-r_{t}N |^{p}.\\
-     &\text{According to helper functions and conclutions in \eqref{function_i} of appendix A.5},\\
-     &\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}\\
-     &=-I(b_s,floor(r_sN)-r_{s}N)-I(b_t,floor(r_tN)-r_{t}N)\\
-     &\le -I(0,floor(r_sN)-r_{s}N)-I(0,floor(r_tN)-r_{t}N)\\
-     &=0+0=0,\\
-     &\text{therefore }\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}\le \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p},\\
-     &\text{i.e. }(\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}}\le (\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}},\\
-     &\text{so, }b^{'}\in B^{*'}_f.\\
-     &\text{N.B.:There is }b^{'}\in B_1~\text{or }b^{'}\in\complement_{B^{'}_{f}}{B_1}.\text{If }b^{'}\in B_1,\text{we use $b^{'}$ to replace $b$ and repeat the above procedure, and then get $b^{''}$.}\\
-     &~~~~~~~~~~~\text{Obviously, with a finite number of iterations, we must be able to find a }b^{'...'},\\
-     &~~~~~~~~~~~\text{that }b^{'...'}\in \complement_{B^{'}_{f}}{B_1},\text{i.e.},~\complement_{B^{'}_{f}}{B_1}\cap B^{*'}_f \ne \empty.\\
-     &\text{Then, according to lemma $1$ \eqref{lemma_1}, whether the above assumption hold or not, there must be}\\
-     &~~~~\complement_{B^{'}_f}B_1 \cap B^{*'}_f \ne \empty.\\
-     \end{split}
-    $$
+    B_1= \{b|&b\in \mathbb{Z}^n,\sum_{i=1}^n b_i = m, \exists i_s,i_t \in \{1,2,\ldots,n\},b_{i_s}\ge 1,b_{i_t}\le -1\}\subseteq B^{'}_f\\
+    B_2= \{b|&b \in \mathbb{Z}^n,\sum_{i=1}^n b_i = m, \exists i_s \in \{1,2,\ldots,n\}, b_{i_s}\ge 2\}\subseteq B^{'}_f\\
+    B_3=\{b|&b \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m,\\
+    &h\in \mathbb{Z}^+,h\ge2, \\
+    &\exists s,t \in \{1,2,\ldots,h\}, s < t,i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t},b_{i_s}< b_{i_t}\}\subseteq B^{'}_{f}\\
+    \end{split}
+    $$ And according to $\eqref{floor_conclusion}$, there is
+    $0\le m < n$​, so,
+    $\forall b=[b_1,b_2,\ldots,b_n] \in \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3$,
+    there are:
 
-3.  Assumption 2
+    - $\sum_{i=1}^n b_i = m$
 
-    $$
-    \begin{split}
-     &\text{Assume that:}\exists b=[b_1,b_2,\ldots,b_n]\in \complement_{B^{'}_f}B_1 \cap B^{*'}_f \subseteq B^{'}_f,\\
-     &~~~~\text{and simultaneously } b\in B_2= \{b|b=[b_1,b_2,\ldots,b_n],~ b_i \in \mathbb{Z},~\sum_{i=1}^n b_i = m, \exists s,~b_s\ge 2\}\subseteq B^{'}_f.\\
-     &\text{Since }b \in \complement_{B^{'}_f}B_1 \cap B^{*'}_f \cap B_2,\\
-     &\text{so }\exists~s,b_s\ge 2,\\
-     &\text{therefore, for all }i \in \{1,2,\ldots,n\},\text{there is }b_{i}\ge 0,\\
-     &\text{and according to \eqref{floor_range}, there is }0\le \sum_{i=1}^n b_i <n,\\
-     &\text{therefore }\exists t\ne s,\text{that }b_t=0.\\
-     &\text{Without loss of generality, let }s<t.\\
-     &\text{So, there is } b=[\ldots,b_s,\ldots,b_t,\ldots] \in \complement_{B^{'}_f}B_1 \cap B^{*'}_f \cap B_2.\\
-     &\text{Define }b^{'}=[\ldots,b^{'}_s,\ldots,b^{'}_t,\ldots]=[\ldots,b_s-1,\ldots,b_t+1,\ldots]\in \complement_{B^{'}_f}B_1,\text{i.e., }b^{'}_s=b_s-1,b^{'}_t=b_t+1=1,\\
-     &\text{so, } \sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}\\
-     &~~~~=|floor(r_sN)+b^{'}_s-r_{s}N |^{p}+|floor(r_tN)+b^{'}_t-r_{t}N |^{p}-|floor(r_sN)+b_s-r_{s}N |^{p}-|floor(r_tN)+b_t-r_{t}N |^{p}\\
-     &~~~~=|floor(r_sN)+b_s-1-r_{s}N |^{p}+|floor(r_tN)+1-r_{t}N |^{p}-|floor(r_sN)+b_s-r_{s}N |^{p}-|floor(r_tN)-r_{t}N |^{p}.\\
-     &\text{According to helper functions and conclutions in \eqref{function_i} of appendix A.5},\\
-     &\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}\\
-     &=-I(b_s,floor(r_sN)-r_{s}N)+I(1,floor(r_tN)-r_{t}N)\\
-     &=-[I(b_s,floor(r_sN)-r_{s}N)-I(1,floor(r_tN)-r_{t}N)]\\
-     &\le0,\\
-     &\text{therefore, there is } \sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}\le \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p},\\
-     &\text{i.e., }(\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}}\le (\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}},\\
-     &\text{so, } b^{'}\in B^{*'}_f.\\
-     &\text{N.B.:There is }b^{'}\in \complement_{B^{'}_f}B_1\cap B_2~\text{or }b^{'}\in\complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2}. \text{If }b^{'}\in \complement_{B^{'}_f}B_1\cap B_2,\text{we use $b^{'}$ to replace $b$ and repeat the above procedure}\\
-     &~~~~~~~~~~~\text{and then get $b^{''}$.Obviously, with a finite number of iterations, we must be able to find a }b^{'...'},\\
-     &~~~~~~~~~~~\text{that }b^{'...'}\in \complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2},\text{i.e.},~\complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2}\cap B^{*'}_f \ne \empty.\\
-     &\text{Then, according to lemma $1$ \eqref{lemma_1}, whether the above assumption hold or not, there must be}\\
-     &~~~~\complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_2}\cap B^{*'}_f \ne \empty.\\
-     \end{split}
-    $$
+    - $\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,1\}$​
 
-4.  Assumption 3
+    - $h\in \mathbb{Z}^+$
 
-    $$
-    \begin{split}
-     &\text{Assume that:}\exists b=[b_1,b_2,\ldots,b_n]\in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1 \cap B^{*'}_f\subseteq B^{'}_{f},~\text{and simultaneously}\\
-     &~~~~b\in B_3= \{b|b=[b_1,b_2,\ldots,b_n],~ b_i \in \mathbb{Z},~\sum_{i=1}^n b_i = m, \exists s,t,~0\le b_s<b_t,x_s<x_t\}\subseteq B^{'}_{f}.\\
-     &\text{Because }-0.5\le x_1\le x_2\le \ldots \le x_n \le 0.5,\\
-     &\text{therefore, there must be }s<t.\\
-     &\text{Since }b \in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1 \cap B^{*'}_f \cap B_3,\\
-     &\text{so }\exists~0\le b_s<b_t,x_s<x_t,\\
-     &\text{therefore, for all }i \in \{1,2,\ldots,n\},\text{there is }b_{i}\in \{0,1\},\\
-     &\text{hence, }b_s=0, b_t = 1.\\
-     &\text{So,there is }b=[\ldots,b_s,\ldots,b_t,\ldots] \in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1 \cap B^{*'}_f \cap B_3.\\
-     &\text{Define }b^{'}=[\ldots,b^{'}_s,\ldots,b^{'}_t,\ldots]=[\ldots,b_s+1,\ldots,b_t-1,\ldots]\in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1,\text{i.e.},~b^{'}_s=b_s+1=1,b^{'}_t=b_t-1=0,\\
-     &\text{therefore }\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}\\
-     &~~~~=|floor(r_sN)+b^{'}_s-r_{s}N |^{p}+|floor(r_tN)+b^{'}_t-r_{t}N |^{p}-|floor(r_sN)+b_s-r_{s}N |^{p}-|floor(r_tN)+b_t-r_{t}N |^{p}\\
-     &~~~~=|floor(r_sN)+1-r_{s}N |^{p}+|floor(r_tN)-r_{t}N |^{p}-|floor(r_sN)-r_{s}N |^{p}-|floor(r_tN)+1-r_{t}N |^{p}.\\
-     &\text{According to helper functions and conclutions in \eqref{function_i} of appendix A.5},\\
-     &\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}\\
-     &=I(1,floor(r_sN)-r_{s}N)-I(1,floor(r_tN)-r_{t}N)\\
-     &=I(1,x_s)-I(1,x_t)\\
-     &\le 0, \text{since }x_s<x_t,\\
-     &\text{therefore, there is }\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}\le \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p},\\
-     &\text{i.e., }(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}}\le (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}},\\
-     &\text{so, } b^{'}\in B^{*'}_f.\\
-     &\text{N.B.:There is }b^{'}\in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1\cap B_3~\text{or }b^{'}\in\complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_3}.\\
-     &~~~~~~~~~~~\text{If }b^{'}\in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1\cap B_3,\text{we use $b^{'}$ to replace $b$ and repeat the above procedure}\\
-     &~~~~~~~~~~~\text{and then get $b^{''}$. Obviously, with a finite number of iterations, we must be able to find a }b^{'...'},\\
-     &~~~~~~~~~~~\text{that }b^{'...'}\in \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_3},\text{i.e.},~\complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1\cap\complement_{B^{'}_{f}}{B_3}\cap B^{*'}_f \ne \empty.\\
-     &\text{Then, according to lemma $1$ \eqref{lemma_1}, whether the above assumption hold or not, there must be}\\
-     &~~~~\complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_f}B_2\cap\complement_{B^{'}_{f}}{B_1}\cap B^{*'}_f \ne \empty.\\
-     \end{split}
-    $$
+    - If \$h, \$
 
-5.  Consider a special $b$
+      - $\forall s,t \in \{1,2,\ldots,h\}, s < t, i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t}$,
+        there is $b_{i_s} \ge b_{i_t}$
 
-    $$
-    \begin{split}
-     &\text{Define: }B_t= \complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1.\\
-     &\text{Konwn: }x = [x_1,x_2,\ldots,x_n], x_i = floor(r_iN)-r_iN,-1< x_1\le x_2\le \ldots \le x_n \le 0.\\ 
-     &\text{Konwn: }m=N-\sum_{i=1}^n floor(r_iN), \text{and from conclusion \eqref{floor_range}, there are }m \in \mathbb{Z},\text{and }0\le m<n.\\ 
-     &~~~~(1)~\text{If }m>0, \text{then let }b=[b_1,b_2,\ldots,b_n]=[1,1,\ldots,1,0,0,\ldots,0],\\
-     &~~~~~~~~\text{whose the first $|m|$ elements are $1$, the rest are }0.\\
-     &~~~~(2)~\text{If }m=0, \text{then let }b=[b_1,b_2,\ldots,b_n]=[0,0,\ldots,0].\\
-     &\text{Obviously},~b\in B_t= \complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1.\\
-     \end{split}
-    $$
+      - If $m = 0$,
 
-6.  Assumption 4 that proof the above $b\in B^{*'}_{f}$:
+        - then $\forall i \in \{1,2,\ldots,n\}~b_{i}=0$​, i.e.,
+          $b=\theta$.
+        - And the set \$ *{B^{‘}*{f}}B_1 *{B<sup>{’}*{f}}B_2
+          *{B</sup>{’}*{f}}B_3 = {b=}\$​, which is a single element set.
+        - so,
+          $B^{*'}_f = \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3$
 
-    $$
-    \begin{split}
-     &\text{Assume that:}\exists b^{'}=[b^{'}_1,b^{'}_2,\ldots,b^{'}_n]\in B_t=\complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1, b^{'}\ne b,\\
-     &\text{that make} (\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}}<(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}.\\
-     &\text{Define }f:\{\mathbb{Z}^+,\mathbb{Z}^-\cup\mathbb{Z}^+\}\rightarrow \mathbb{Z}^n\\
-     &~~~~\forall i,v~~i\in\mathbb{Z}^+,i\le n, v\in \mathbb{Z}^-\cup\mathbb{Z}^+,\\
-     &~~~~f(i,v)=[0,0,\ldots,0,v,0,\ldots,0]\in \mathbb{N},\\
-     &~~~~\text{represents a vector whose the i-th element is $v$ and other elements are all }0.\\
-     \text{So, if }&m>0:\\
-     &\text{because }p\ge 1,p\in \mathbb{R},\\
-     &\text{therefore }(\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p})<(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}),\\
-     &\text{and because }m>0,\\
-     &\text{hence }b = [1,1,\ldots,1,0,0,\ldots,0],\\
-     &~~~~\text{whose the first $|m|$ elements are $1$, the rest are }0.\\
-     &\text{Without loss of generality, let}\\
-     &~~~~b^{'} = b+f(s_1,-1)+f(s_2,-1)+\ldots+f(s_k,-1)+f(t_1,1)+f(t_2,1)+\ldots+f(t_k,1),\\
-     &~~~~\text{where }k \in \mathbb{Z}^+~1\le s_1<s_2<\ldots<s_k\le m<t_1<t_2<\ldots<t_k\le n,\\
-     &~~~~\text{and }\forall i\in \{1,2,\ldots,k\}~s_i,t_i \in \mathbb{Z},\\
-     &\text{therefore for all }i\in \{1,2,\ldots,k\},\text{there are }b_{s_i}=1,b_{t_i}=0,b^{'}_{s_i}=b_{s_i}-1=0,b^{'}_{t_i}=b_{t_i}+1=1,\\
-     &\text{so }(\sum_{i=1}^k |floor(r_{s_i}N)+b^{'}_{s_i}-r_{s_i}N |^{p}+|floor(r_{t_i}N)+b^{'}_{t_i}-r_{t_i}N |^{p})\\
-     &~~~~<(\sum_{i=1}^k |floor(r_{s_i}N)+b_{s_i}-r_{s_i}N |^{p}+|floor(r_{t_i}N)+b_{t_i}-r_{t_i}N |^{p}),\\
-     (I)\rightarrow &\text{ therefore }(\sum_{i=1}^k |floor(r_{s_i}N)-r_{s_i}N |^{p}+|floor(r_{t_i}N)+1-r_{t_i}N |^{p})\\
-     &~~~~<(\sum_{i=1}^k |floor(r_{s_i}N)+1-r_{s_i}N |^{p}+|floor(r_{t_i}N)-r_{t_i}N |^{p}),\\
-     &\text{and  because for all }i\in \{1,2,\ldots,k\},\text{ there is}\\
-     & |floor(r_{s_i}N)-r_{s_i}N |^{p}+|floor(r_{t_i}N)+1-r_{t_i}N |^{p}-|floor(r_{s_i}N)+1-r_{s_i}N |^{p}-|floor(r_{t_i}N)-r_{t_i}N |^{p}\\
-     &=-I(1,floor(r_{s_i}N)-r_{s_i}N)+I(1,floor(r_{t_i}N)-r_{t_i}N)\\
-     &=-I(1,x_{s_i})+I(1,x_{t_i})\\
-     &\ge 0,since~b\in \complement_{B^{'}_{f}}{B_3},b_{s_i}>b_{t_i}, x_{s_i}\le x_{t_i},\\
-     &\text{therefore, }(\sum_{i=1}^k |floor(r_{s_i}N)-r_{s_i}N |^{p}+|floor(r_{t_i}N)+1-r_{t_i}N |^{p})\\
-     &~~~~\ge (\sum_{i=1}^k |floor(r_{s_i}N)+1-r_{s_i}N |^{p}+|floor(r_{t_i}N)-r_{t_i}N |^{p}),\\
-     &\text{which is contradictory to (I), so the above assumption is not valid.}\\
-     \text{If }&m=0:\\
-     &\text{Obviously}, B_t= \complement_{B^{'}_{f}}{B_3}\cap \complement_{B^{'}_{f}}{B_2}\cap \complement_{B^{'}_f}B_1~\text{is a single-element set, there is }\nexists b^{'}\ne b,\text{that }b^{'}\in B_t,\\
-     &\text{so the above assumption is not valid.}\\
-     \text{So},&~\text{regardless of the value of $m$, the above assumption is always not valid, i.e.,}\\
-     &\text{there must be}\\
-     &b\in \{b|b=\mathop{\arg\min}\limits_{b\in B_t}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\},\\
-     &\text{and, because }B_t \cap B^{*'}_f \ne \empty, \text{and }B_t \subseteq B^{'}_f,\\
-     &\text{and according to \eqref{lemma_2}, there must be}\\
-     &\empty \ne \{b|b=\mathop{\arg\min}\limits_{b\in B_t}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\} \subseteq B^{*'}_f,\\
-     &\text{therefore }b\in B^{*'}_f.\\
-     \end{split}
-    $$
+      - If $m > 0$, there will be
+        $\exist h^{'} \in \{1,2,\ldots,h\} \sum_{i=1}^{h^{'}-1}g_i \le m < \sum_{i=1}^{h^{'}}g_i$.
 
-7.  Consider if the specific $b$ satisfies that
-    $b\in B_f \subseteq B^{'}_f$:
+        - If \$\_{i=1}<sup>{h</sup>{’}-1}g_i = m \$,
 
-    $$
-    \begin{split}
-     &\text{Konwn: }x = [x_1,x_2,\ldots,x_n], x_i = floor(r_iN)-r_iN,-1< x_1\le x_2\le \ldots \le x_n \le 0.\\ 
-     &\text{Konwn: }m=N-\sum_{i=1}^n floor(r_iN), \text{and from }\eqref{floor_range}, \text{there are }m \in \mathbb{Z},\text{and }0\le m<0.\\ 
-     &\text{Try to proof the above $b$ satisfies that $b\in B_f \subseteq B^{'}_f$, i.e.,}\\
-     &~~~~\text{try to proof the above $b$ satisfies }[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in \mathbb{N}^n.\\
-     &(1)\text{If }m>0, \text{then }b=[b_1,b_2,\ldots,b_n]=[1,1,\ldots,1,0,0,\ldots,0],\\
-     &~~~~\text{whose the first $|m|$ elements are $1$ and the rest are }0,\\
-     &~~~~\text{then the constraint }[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in \mathbb{N}^n \text{is valid.}\\
-     &(2)\text{If }m=0, \text{then }b=[b_1,b_2,\ldots,b_n]=[0,0,\ldots,0],\\
-     &~~~~\text{then the constraint }[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in \mathbb{N}^n \text{is still valid.}\\
-     \text{So},&~\text{regardless of the value of }m,\\
-     &\text{the above $b$ always satisfies }[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in \mathbb{N}^n,~\text{i.e.},\\
-     &\text{the above $b$ satisfies that }b\in B_f \subseteq B^{'}_f.\\
-     \end{split}
-    $$
+          - then
+            $\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1$.
+          - and,
+            $\forall i \in G_{h^{'}} \cup G_{h^{'}+1} \cup \ldots \cup G_{h}, b_{i}=0$.
+          - And the set \$ *{B^{‘}*{f}}B_1 *{B<sup>{’}*{f}}B_2
+            *{B</sup>{’}*{f}}B_3 = {b}\$​​, which is a single element set.
+          - So,
+            $B^{*'}_f = \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3$
 
-8.  Finally
+        - If $\sum_{i=1}^{h^{'}-1}g_i < m < \sum_{i=1}^{h^{'}}g_i$​​,
 
-    $$
-    \begin{split}
-     &\text{Konwn: }x = [x_1,x_2,\ldots,x_n], x_i = floor(r_iN)-r_iN,-1< x_1\le x_2\le \ldots \le x_n \le 0.\\ 
-     &\text{Konwn: }m=N-\sum_{i=1}^n floor(r_iN), \text{and from }\eqref{floor_range}, \text{there are }m \in \mathbb{Z},\text{and }0\le m<0.\\ 
-     &\text{Since the above vector $b$, i.e.,}\\
-     &~~~~(1)~\text{if }m>0, \text{then }b=[b_1,b_2,\ldots,b_n]=[1,1,\ldots,1,0,0,\ldots,0],\\
-     &~~~~~~~~\text{whose the first $|m|$ elements are $1$, the rest are }0,\\
-     &~~~~(2)~\text{if }m=0, \text{then }b=[b_1,b_2,\ldots,b_n]=[0,0,\ldots,0],\\
-     &~~~~\text{that satisfies }b\in B^{*'}_f~\text{and }b\in B_f \subseteq B^{'}_f.\\
-     &\text{Then, according to \ref{lemma_3}, the final conclusion can be drawn as}\\
-     &~~~~b\in B^{*}_f \subseteq B^{*'}_f.\\
-     \end{split}
-    $$
+          - then
+            $\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1$​​.
 
-Along the above 8 points, the
+          - let $q = m-\sum_{i=1}^{h^{'}-1}g_i$:
+
+            - Obviously, $1\le q < g_{h^{'}}$​.
+            - Let
+              $Q=\{\lambda^{q}|\lambda^{q}=(i_1,i_2,\ldots,i_q)\in G_{h^{'}}^q, \forall u,v \in \{1,2,\ldots,q\}, i_u\ne i_v\}$,
+            - there is
+              $\forall \lambda^q=(i_1,i_2,\ldots,i_q) \in Q, \Lambda=\{i_1,i_2,\ldots,i_q\} \subsetneq G_{h^{'}}$
+            - $\forall i\in \{i_1,i_2,\ldots,i_q\}, b_i = 1$,
+            - and
+              $\forall i \in \complement_{G_{h^{'}}}^{\Lambda}, b_i = 0$
+
+          - and,
+            $\forall i \in G_{h^{'}+1} \cup G_{h^{'}+2} \cup \ldots \cup G_{h}, b_{i}=0$​​.
+
+          - So, the set \$ *{B^{‘}*{f}}B_1 *{B<sup>{’}*{f}}B_2
+            *{B</sup>{’}*{f}}B_3\$, is not a single element set. It has
+            $C_{g_{h^{'}}}^{q}>1$ elements.
+
+          - Assume
+            $\exists b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}] \in \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3, b^{'}\ne b$​,
+            that
+            make$(I)\rightarrow (\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ne (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$​.
+
+            - So,
+              $\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=b^{'}_{i}=1$​.
+            - $\exists \empty \ne U=\{u_1,u_2,\ldots,u_{\sigma}\} \subseteq G_{h^{'}}$,
+              $\empty \ne V=\{v_1,v_2,\ldots,v_{\sigma}\} \subseteq G_{h^{'}}$,$U\cap V = \empty, U\cup V \subseteq G_{h^{'}}$,
+              - where $\forall i_u \in U, b_{i_u}=1,b^{'}_{i_u}=0$,
+              - and $\forall i_v \in V, b_{i_v}=0,b^{'}_{i_v}=1$​.
+              - Let $W = \complement_{G_{h^{'}}}^{U\cup V}$, then,
+                $\forall i_w \in W, b_{i_w}=b^{'}_{i_w}$
+              - Since $\forall i_u,i_v \in G_{h^{'}}, x_{i_u}=x_{i_v}$,
+                let
+                $\forall i_u,i_v \in G_{h^{'}}, x_{i_u}=x_{i_v}=\Omega$
+            - $\forall i \in G_{h^{'}+1} \cup G_{h^{'}+2} \cup \ldots \cup G_{h}, b_{i}=b^{'}_{i}=0$.
+
+          - Therefore: $$
+            \begin{split}
+            &\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}\\
+            &\sum_{i=1}^n |x_i+b^{'}_i|^{p}- \sum_{i=1}^n |x_i+b_i|^{p}\\
+            &=\sum_{i\in G_{h^{'}}} |x_i+b^{'}_i|^{p} - \sum_{i\in G_{h^{'}}} |x_i+b_i|^{p}\\
+            &=\sum_{i\in U\cup V} |x_i+b^{'}_i|^{p} - \sum_{i\in U\cup V} |x_i+b_i|^{p}\\
+            &=\sum_{i\in U} |x_i|^{p}+\sum_{i\in V} |x_i+1|^{p} - (\sum_{i\in U} |x_i+1|^{p}+\sum_{i\in V} |x_i|^{p})\\
+            &=\sigma |\Omega|^{p}+\sigma|\Omega+1|^{p} - (\sigma|\Omega+1|^{p}+\sigma|\Omega|^{p})\\
+            &=0
+            \end{split}
+            $$
+
+          - so,
+            $\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}= \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}$.
+
+          - Therefore,
+            $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} = (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$,
+            which is contradictory to $(I)$​, so the above assumption is
+            not valid.
+
+          - So,
+            $\forall b^{'} \in \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3, b^{'}\ne b$,
+            there is
+            $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} = (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
+
+          - so,
+            $B^{*'}_f = \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3$
+
+    - If $h = 1$, then $B_3 = \empty$​, $G_1 = \{1,2,\ldots,n\}$
+
+      - If $m = 0$,
+
+        - then $\forall i \in \{1,2,\ldots,n\}~b_{i}=0$​, i.e.,
+          $b=\theta$.
+        - And the set \$ *{B^{‘}*{f}}B_1 *{B<sup>{’}*{f}}B_2
+          *{B</sup>{’}*{f}}B_3 = {b=}\$​, which is a single element set.
+        - so,
+          $B^{*'}_f = \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3$
+
+      - If $m > 0$, there will be $0< m < n$​.
+
+        - let $q = m$:
+
+          - Obviously, $1\le q < n$​.
+          - Let
+            $Q=\{\lambda^{q}|\lambda^{q}=(i_1,i_2,\ldots,i_q)\in G_{1}^q, \forall u,v \in \{1,2,\ldots,q\}, i_u\ne i_v\}$,
+            there is $\Lambda=\{i_1,i_2,\ldots,i_q\} \subsetneq G_{1}$
+          - $\forall i\in \{i_1,i_2,\ldots,i_q\}, b_i = 1$,
+          - and $\forall i \in \complement_{G_{1}}^{\Lambda}, b_i = 0$​.
+
+        - So, the set \$ *{B^{‘}*{f}}B_1 *{B<sup>{’}*{f}}B_2
+          *{B</sup>{’}*{f}}B_3\$, is not a single element set. It has
+          $C_{g_{1}}^{q}=C^{m}_n>1$​ elements.
+
+        - Assume
+          $\exists b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}] \in \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3, b^{'}\ne b$​,
+          that
+          make$(II)\rightarrow (\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ne (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$​.
+
+        - So,$\exists \empty \ne U=\{u_1,u_2,\ldots,u_{\sigma}\} \subseteq G_{1}$,
+          $\empty \ne V=\{v_1,v_2,\ldots,v_{\sigma}\} \subseteq G_{1}$,$U\cap V = \empty, U\cup V \subseteq G_{1}$,
+
+          - where $\forall i_u \in U, b_{i_u}=1,b^{'}_{i_u}=0$,
+          - and $\forall i_v \in V, b_{i_v}=0,b^{'}_{i_v}=1$​.
+          - Let $W = \complement_{G_{1}}^{U\cup V}$, then,
+            $\forall i_w \in W, b_{i_w}=b^{'}_{i_w}$
+          - Since $\forall i_u,i_v \in G_{1}, x_{i_u}=x_{i_v}$, let
+            $\forall i_u,i_v \in G_{1}, x_{i_u}=x_{i_v}=\Omega$
+
+        - Therefore: $$
+          \begin{split}
+          &\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}\\
+          &\sum_{i=1}^n |x_i+b^{'}_i|^{p}- \sum_{i=1}^n |x_i+b_i|^{p}\\
+          &=\sum_{i\in G_{1}} |x_i+b^{'}_i|^{p} - \sum_{i\in G_{1}} |x_i+b_i|^{p}\\
+          &=\sum_{i\in U\cup V} |x_i+b^{'}_i|^{p} - \sum_{i\in U\cup V} |x_i+b_i|^{p}\\
+          &=\sum_{i\in U} |x_i|^{p}+\sum_{i\in V} |x_i+1|^{p} - (\sum_{i\in U} |x_i+1|^{p}+\sum_{i\in V} |x_i|^{p})\\
+          &=\sigma |\Omega|^{p}+\sigma|\Omega+1|^{p} - (\sigma|\Omega+1|^{p}+\sigma|\Omega|^{p})\\
+          &=0
+          \end{split}
+          $$
+
+        - so,
+          $\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}= \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}$.
+
+        - Therefore,
+          $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} = (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$,
+          which is contradictory to $(II)$​, so the above assumption is
+          not valid.
+
+        - So,
+          $\forall b^{'} \in \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3, b^{'}\ne b$,
+          there is
+          $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} = (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
+
+        - so,
+          $B^{*'}_f = \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3$​
+
+    So, `5` is proofed.
+
+6.  Since
+    $B^{*'}_f = \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3$,
+    there is
+    $B^{*}_f = \complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3$​.
+
+    Proof:
+
+    - Since $$
+      \begin{split}
+       B_f=\{b|&b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m,\\&[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in \mathbb{N}^n\}\\
+      B^{'}_f=\{b|&b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m\}.\\
+      B^{*}_f=\{b|&b=\mathop{\arg\min}\limits_{b\in B_f}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}\\
+      B^{*'}_f=\{b|&b=\mathop{\arg\min}\limits_{b\in B^{'}_f}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}
+      \end{split}
+      $$
+
+    - And
+      $B_f\subseteq B^{'}_f, \empty \ne B^{*}_f\subseteq B_f,~\empty\ne B^{*'}_f \subseteq B^{'}_f$​​
+      has been illustrated in `1`.
+
+    - According to $\eqref{floor_conclusion}$, there is $0\le m < n$,
+      so,
+      $\forall b=[b_1,b_2,\ldots,b_n] \in B^{*'}_f=\complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3$,
+      there are:
+
+      - $\sum_{i=1}^n b_i = m$
+      - $\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,1\}$
+      - so, there will always be
+        $[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in \mathbb{N}^n$​
+      - so, $b\in B_f$
+      - according according to [lemma 2](#Lemma 2), there is
+        $b\in B^{*}_f \subseteq B^{*'}_f$​.
+
+    - So, there is also $B^{*'}_f \subseteq B^{*}_f$
+
+    - So,
+      $B^{*}_f = B^{*'}_f =\complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3$
+
+    So, `6` is proofed.
+
+7.  Give out a
+    $b \in B^{*}_f = B^{*'}_f =\complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3$.
+
+    - Since,
+      $x=[x_1,x_2,\ldots,x_n], \forall i \in \{1,2,\ldots,n\},x_i = floor(r_iN)-r_iN$​​.
+
+    - Let $\hat N = \{1,2,\ldots,n\}$,
+
+    - and
+      $Q=\{\lambda^{n}|\lambda^{n}=(i_1,i_2,\ldots,i_n)\in {\hat N}^n, \forall u,v \in \hat N, u\ne v, i_u\ne i_v,  \forall s,t \in \hat N,s<t, x_{i_s}\le x_{i_t}\}$,
+
+    - So, there is
+      $\forall \lambda^n=(i_1,i_2,\ldots,i_n) \in Q, \Lambda=\{i_1,i_2,\ldots,i_n\} = \hat N$,
+      $x_{i_1}\le x_{i_2} \le \ldots \le x_{i_n}$​.
+
+    - And according `1`, $\forall \lambda^n=(i_1,i_2,\ldots,i_n) \in Q$
+
+    - $\exists h\in \mathbb{Z}^+, h\le n, g_1,g_2,\ldots, g_h \in \mathbb{Z}^+,\sum_{i=1}^{h}g_i=n$,
+      that make
+
+      - $G_1 = \{i_1,i_2,\ldots,i_{g_1}\} \subseteq \{1,2,\ldots,n\}, \forall i_s,i_t \in G_1, x_{i_s}=x_{i_t}$.
+      - $G_2 = \{i_{g_1+1},i_{g_1+1},\ldots,i_{g_1+g_2}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_2, x_{i_s}=x_{i_t}$.
+      - …
+      - $G_h = \{i_{1+\sum_{i=1}^{h-1}g_i},i_{2+\sum_{i=1}^{h-1}g_i},\ldots,i_{\sum_{i=1}^{h}g_i}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_h, x_{i_s}=x_{i_t}$.
+      - $G_1 \cup G_2 \cup \ldots \cup G_h = \{1,2,\ldots,n\}$
+      - $\forall s,t \in \{1,2,\ldots,h\}$ and $s\ne t$, there is
+        $G_s \cap G_t \ne \empty$
+      - $\forall s,t \in \{1,2,\ldots,h\}, s<t$, there is
+        $\forall i_s \in G_s, i_t \in G_t$, that $x_{i_s}<x_{i_t}$.
+      - $\lambda^n=(i_1,i_2,\ldots,i_n)=(i_1,i_2,\ldots,i_{g_1},i_{g_1+1},i_{g_1+1},\ldots,i_{g_1+g_2},i_{1+\sum_{i=1}^{h-1}g_i},i_{2+\sum_{i=1}^{h-1}g_i},\ldots,i_{\sum_{i=1}^{h}g_i})$
+
+    - $(I)\rightarrow$Consider a
+      $b=[b_1,b_2,\ldots,b_n] \in \mathbb{Z}^n$ as:
+
+      - Let $m=N-\sum_{i=1}^n floor(r_iN)$,
+        - From the conclusion $\eqref{floor_conclusion}$, there are
+          $m \in \mathbb{Z},0 \le m < n$.
+      - where
+        $\forall s \in \{s|s \in [1,m], s \in \mathbb{Z}^+\} b_{i_s} = 1, \forall t \in \{t|t \in [m+1,n], t \in \mathbb{Z}^+\} b_{i_t} = 0.$​
+
+    - Obviously,
+
+      - $b \in B^{'}_{f}$.
+      - $b \in \complement_{B^{'}_{f}}B_1$, since
+        $\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,1\}$.
+      - $b \in \complement_{B^{'}_{f}}B_2$, since
+        $\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,1\}$.​
+
+    - If $h\ge2, h\in \mathbb{Z}^+$,
+
+      - then
+        $\forall s,t \in \{1,2,\ldots,h\}, s < t, i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t}$.
+      - So, there is
+        $x_{i_1}=x_{i_2},\ldots,x_{i_{g_1}}<x_{i_{g_1+1}}=x_{i_{g_1+1}}=\ldots=x_{i_{g_1+g_2}}<x_{i_{1+\sum_{i=1}^{h-1}g_i}}=x_{i_{2+\sum_{i=1}^{h-1}g_i}}=\ldots=x_{i_{\sum_{i=1}^{h}g_i}}$
+      - and because
+        $\forall s \in \{s|s \in [1,m], s \in \mathbb{Z}^+\} b_{i_s} = 1, \forall t \in \{t|t \in [m+1,n], t \in \mathbb{Z}^+\} b_{i_t} = 0$,
+      - therefore,
+        $\forall s,t \in \{1,2,\ldots,h\}, s < t, i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t}$
+        there is $b_{i_s} \ge b_{i_t}$,
+      - so, $b \in \complement_{B^{'}_{f}}B_3$.
+
+    - If $h=1$, then $B_3 = \empty$, there is
+      $b \in \complement_{B^{'}_{f}}B_3$
+
+    - So, the $b$ of $(I)$ satisfices
+      $b \in B^{*}_f = B^{*'}_f =\complement_{B^{'}_{f}}B_1 \cap \complement_{B^{'}_{f}}B_2 \cap \complement_{B^{'}_{f}}B_3$
+
+Along the above 7 points, the
 [Solution-2](#Solution 2, based on floor() function) is proofed totally.
 
 ## A.9
@@ -2401,319 +2723,6 @@ Here are some standards or explanations of a stable sorting algorithm:
   values).[^7]See
   [here](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) for
   more information.
-
-## A.10
-
-- Try to compare the results of solution 1 and solution 2. The basic
-  conditions are as follows:
-
-  $$
-  \begin{split}
-    \text{Known:}~~~~&n,N \in \mathbb{Z}^+, n \le N,\\
-    &p\in \mathbb{R},~p\ge 1,\\
-    &r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1.\\
-    \text{Define:}&~I_s =\{1,2,\ldots,s\},\\
-    &I_{st}=\{s+1,s+2,\ldots,t-2,t-1\},\\
-    &I_{tn} =\{t,t+1,\ldots,n-1,n\},\\
-    &~~~~\text{where }s,t\in \mathbb{Z}^+,1\le s\le t\le n.\\
-    &m^{'}=N-\sum_{i=1}^n floor(r_iN),\text{and from conclusion \eqref{floor_range}, there are }m^{'} \in \mathbb{Z},\text{and }0\le m^{'}<n.\\
-    &y^{'} \text{is the result $y$ from solution $1$.}\\
-    &m^{''}=N-\sum_{i=1}^n round(r_iN),\text{and from conclusion \eqref{round_conclusion}, there are }m^{''} \in \mathbb{Z},\text{and }-\frac{n}{2}\le m^{''}\le \frac{n}{2}.\\
-    &y^{''} \text{is the result $y$ from solution $2$.}\\
-    \text{Try to analyze:}&~\text{If $y^{'}$ is the same to $y^{''}$?}
-    \end{split}
-  $$
-
-- Analyze the result of solution 2 first:
-
-  $$
-  \begin{split}
-    &\text{From solution 2}:\\
-    &~~~~\text{There is }x^{'}=[x^{'}_1,x^{'}_2,\ldots,x^{'}_n],\forall i \in \{1,2,\ldots,n\},x^{'}_i = floor(r_iN)-r_iN.\\
-    &\text{Without loss of generality, let }\\
-    &~~~~-1<x^{'}_1\le x^{'}_2\le \ldots \le x^{'}_s< -0.5,\\
-    &~~~~\forall i \in I_{st }x^{'}_i = -0.5,\\
-    &~~~~-0.5<x^{'}_t\le x^{'}_{t+1}\ldots \le x^{'}_n \le 0.\\
-    &\text{so }-1<x^{'}_1\le x^{'}_2\le \ldots \le x^{'}_s< -0.5=x^{'}_{s+1}=x^{'}_{s+2}=\ldots=x^{'}_{t-2}=x^{'}_{t-1}=-0.5<x^{'}_t\le x^{'}_{t+1}\ldots \le x^{'}_n \le 0.\\
-    &\text{therefore }y^{'}=[floor(r_1N)+b^{'}_1,floor(r_2N)+b^{'}_2,\ldots,floor(r_nN)+b^{'}_n],\\
-    &~~~~\text{where}\\ 
-    &~~~~~~~~(1)~\text{If }m^{'}>0, \text{then set }b^{'}=[b^{'}_1,b^{'}_2,\ldots,b^{'}_n]=[1,1,\ldots,1,0,0,\ldots,0],\\
-    &~~~~~~~~~~~~\text{whose the first $|m^{'}|$ elements are $ 1$ and the rest are $0$},\\
-    &~~~~~~~~(2)~\text{If }m^{'}=0, \text{then set }b^{'}=[b^{'}_1,b^{'}_2,\ldots,b^{'}_n]=[0,0,\ldots,0].\\
-    &\text{From solution 1}:\\
-    &~~~~\text{There is }x^{''}=[x^{''}_1,x^{''}_2,\ldots,x^{''}_n],\forall i \in \{1,2,\ldots,n\},~x^{''}_i = round(r_iN)-r_iN.\\
-    &\text{therefore }y^{''}=[round(r_1N)+b^{''}_1,round(r_2N)+b^{''}_2,\ldots,round(r_nN)+b^{''}_n],\\
-    &~~~~\text{where},\\ 
-    &~~~~~~~~(1)~\text{If }m^{''}>0, \text{then set }b^{''}=[b^{''}_1,b^{''}_2,\ldots,b^{''}_n]=[1,1,\ldots,1,0,0,\ldots,0],\\
-    &~~~~~~~~~~~~\text{whose the first $|m^{''}|$ elements are $ 1$ and the rest are $0$},\\
-    &~~~~~~~~(2)~\text{If }m^{''}=0, \text{then set }b^{''}=[b^{''}_1,b^{''}_2,\ldots,b^{''}_n]=[0,0,\ldots,0],\\
-    &~~~~~~~~(3)~\text{If }m^{''}<0, \text{then set }b^{''}=[b^{''}_1,b^{''}_2,\ldots,b^{''}_n]=[0,0,\ldots,-1,-1,\ldots,-1],\\
-    &~~~~~~~~~~~~\text{whose the first $|m^{''}|$ elements are $-1$ and the rest are $0$}.
-    \end{split}
-  $$
-
-- Then, analyze the result of solution 1 when $round(\cdot)$ is as
-  $\eqref{round_1}$
-
-  $$
-  \begin{split}
-    \text{(I)If}&~round(\cdot)~\text{is }\forall x \in \mathbb{R}^+\cup\{0\} round_1(x)=\begin{cases}
-    \lfloor x\rfloor, \text{if }x-\lfloor x\rfloor<0.5 \\
-    \lceil x\rceil, \text{if }x-\lfloor x\rfloor \ge 0.5
-    \end{cases},\text{ as \eqref{round_1}},\\
-    &\text{then }\forall i \in \{1,2,\ldots,n\} x^{''}_i=round(r_iN)-r_iN =\begin{cases}
-    floor(r_iN)-r_iN, \text{if }r_iN-\lfloor r_iN\rfloor<0.5 \\
-    floor(r_iN)+1-r_iN, \text{if }r_iN-\lfloor r_iN\rfloor \ge 0.5
-    \end{cases}\\
-    &=\begin{cases}
-            x^{'}_i, \text{if }x^{'}_i>-0.5 \\
-            x^{'}_i+1, \text{if }x^{'}_i \le -0.5
-            \end{cases}.\\             
-    &\text{So, according to $x^{'}$, there is}\\
-    &\forall i \in I_s,-1<x^{'}_i<-0.5,x^{''}_i=x^{'}_i+1,\\
-    &~~~~0<x^{''}_1=x^{'}_1+1\le x^{''}_2=x^{'}_2+1\le \ldots \le x^{''}_s=x^{'}_s+1<0.5,\\
-    &\forall i \in I_{tn},-0.5<x^{'}_i\le 0,x^{''}_i=x^{'}_i,\\
-    &~~~~-0.5< x^{''}_t=x^{'}_t\le x^{''}_{t+1}=x^{'}_{t+1}\ldots \le x^{''}_n=x_n\le 0,\\
-    &\forall i \in I_{st},x^{'}_i=-0.5,x^{''}_i=x^{'}_i+1,\\
-    &~~~~0.5=x^{''}_{s+1}=x^{'}_{s+1}+1=x^{''}_{s+2}=x^{'}_{s+2}+1=..=x^{''}_{t-2}=x^{'}_{t-2}+1=x^{''}_{t-1}=x^{'}_{t-1}+1.\\
-    &\text{And, if a stable sorting algorithm (see appendix A.9) is applied, we can get}\\
-    &~~~~-0.5< x^{''}_t\le x^{''}_{t+1}\ldots \le x^{''}_n\le 0<x^{''}_1\le x^{''}_2\le \ldots \le x^{''}_s<x^{''}_{s+1}=x^{''}_{s+2}=\ldots=x^{''}_{t-2}=x^{''}_{t-1}=0.5,\\
-    &\text{therefore }m^{''}=N-\sum_{i=1}^n round(r_iN)=\sum_{i=1}^n[r_iN-round(r_iN)]=-\sum_{i=1}^n[x^{''}]=-[\sum_{i=1}^nx^{'}]-(t-1)=m^{'}-(t-1).\\
-    &\text{If }m^{''}=m^{'}-(t-1)= 0,\\
-    &\text{then }m^{'}= (t-1),\\
-    &\text{so, } \forall i \in \{1,2,\ldots,t-1\},b^{'}_i=1,\forall i \in \{t,t+1,\ldots,n\},b^{'}_i=0,\\
-    &\text{hence, }\forall i \in \{1,2,\ldots,t-1\},y^{'}_i=floor(r_iN)+1,\forall i \in \{t,t+1,\ldots,n\},y^{'}_i=floor(r_iN),\\
-    &y^{'}=[floor(r_1N)+1,floor(r_2N)+1,\ldots,floor(r_{t-1}N)+1,floor(r_tN),floor(r_{t+1}N),\ldots,floor(r_{n}N)].\\
-    &\text{Because }m^{''}= 0,\\
-    &\text{so, }\forall i \in \{1,2,\ldots,n\},b^{''}_i=0,\\
-    &\text{therefore, }\forall i \in \{1,2,\ldots,n\},y^{'}_i=round(r_iN),\\
-    &y^{''}=[round(r_1N),round(r_2N),\ldots,round(r_nN)],\\
-    &\text{hence, }\forall i \in I_s~y^{''}_i-y^{'}_i=round(r_iN)-(floor(r_iN)+1)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN+1)=x^{''}_i-(x^{'}_i+1)=0,\\
-    &~~~~~~\forall i \in I_{st }y^{''}_i-y^{'}_i=round(r_iN)-(floor(r_iN)+1)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN+1)=x^{''}_i-(x^{'}_i+1)=0,\\
-    &~~~~~~\forall i \in  I_{tn }y^{''}_i-y^{'}_i=round(r_iN)-floor(r_iN)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN)=x^{''}_i-(x^{'}_i)=0.\\
-    &\text{If }m^{''}=m^{'}-(t-1)> 0,\\
-    &\text{then }m^{'}> (t-1),\\
-    &\text{so, }\forall i \in \{1,2,\ldots,t-1,t,t+1,\ldots,m^{'}\},b^{'}_i=1,\forall i \in \{m^{'}+1,m^{'}+2,\ldots,n\},b^{'}_i=0,\\
-    &\text{therefore, }\forall i \in \{1,2,\ldots,t-1,t,t+1,\ldots,m^{'}\},y^{'}_i=floor(r_iN)+1,\forall i \in \{m^{'}+1,m^{'}+2,\ldots,n\},y^{'}_i=floor(r_iN),\\
-    &y^{'}=[floor(r_1N)+1,floor(r_2N)+1,\ldots,floor(r_{t-1}N)+1,\\
-    &~~~~floor(r_{t}N)+1,floor(r_{t+1}N)+1,\ldots,floor(r_{m^{'}}N)+1,\\
-    &~~~~floor(r_{m^{'}+1}N),floor(r_{m^{'}+2}N),\ldots,floor(r_{n}N)].\\
-    &\text{Because }m^{''}> 0,\\
-    &\text{so }\forall i \in \{t,t+1,\ldots,t-1+m^{'}-(t-1)\},b^{''}_i=1,\forall i \in \{1,2,\ldots,t-1,m^{'}+1,m^{'}+2,\ldots,n\},b^{''}_i=0,\\
-    &\text{therefore }\forall i \in \{t,t+1,\ldots,m^{'}\},y^{'}_i=round(r_iN)+1,\forall i \in \{1,2,\ldots,t-1,m^{'}+1,m^{'}+2,\ldots,n\},y^{'}_i=round(r_iN),\\
-    &y^{''}=[round(r_1N),round(r_2N),\ldots,round(r_{t-1}N),\\
-    &round(r_tN)+1,round(r_{t+1}N)+1,\ldots,round(r_{m'}N)+1,\\
-    &round(r_{m^{'}+1}N),floor(r_{m^{'}+2}N),\ldots,floor(r_{n}N)],\\
-    &\text{hence }\forall i \in I_s~y^{''}_i-y^{'}_i=round(r_iN)-(floor(r_iN)+1)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN+1)=x^{''}_i-(x^{'}_i+1)=0,\\
-    &~~~~~~\forall i \in I_{st }y^{''}_i-y^{'}_i=round(r_iN)-(floor(r_iN)+1)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN+1)=x^{''}_i-(x^{'}_i+1)=0,\\
-    &~~~~~~\forall i \in  \{t,t+1,\ldots,m^{'}\}~y^{''}_i-y^{'}_i=round(r_iN)+1-(floor(r_iN)+1)\\
-    &~~~~~~~~=round(r_iN)-r_iN+1-(floor(r_iN)-r_iN+1)=x^{''}_i+1-(x^{'}_i+1)=0,\\
-    &~~~~~~\forall i \in  \{m^{'}+1,m^{'}+2,\ldots,n-1,n\}~y^{''}_i-y^{'}_i=round(r_iN)-floor(r_iN)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN)=x^{''}_i-(x^{'}_i)=0.\\
-    &\text{If }m^{''}=m^{'}-(t-1)< 0,\\
-    &\text{then }m^{'}< (t-1),\\
-    &\text{so, }\forall i \in \{1,2,\ldots,m^{'}\},b^{'}_i=1,\forall i \in \{m^{'}+1,m^{'}+2,\ldots,t-1,t,\ldots,n-1,n\},b^{'}_i=0,\\
-    &\text{therefore, }\forall i \in \{1,2,\ldots,m^{'}\},y^{'}_i=floor(r_iN)+1,\forall i \in \{m^{'}+1,m^{'}+2,\ldots,t-1,t,\ldots,n-1,n\},y^{'}_i=floor(r_iN)，\\
-    &y^{'}=[floor(r_1N)+1,floor(r_2N)+1,\ldots,floor(r_{m^{'}}N)+1,\\
-    &floor(r_{m^{'}+1}N),floor(r_{m^{'}+2}N),\ldots,floor(r_{t-1}N),floor(r_tN),\ldots,floor(r_{n-1}N),floor(r_{n}N)].\\
-    &\text{Because }m^{''}< 0,\\
-    &\text{so, }\forall i \in \{t-1-[(t-1)-m^{'}]+1,t-1-[(t-1)-m^{'}]+2,\ldots,t-1\},\\
-    &~~~~b^{''}_i=-1,\forall i \in \{1,2,\ldots,t-1-[(t-1)-m^{'}],t,t+1,\ldots,n\},b^{''}_i=0,\\
-    &\text{therefore, }\forall i \in \{m^{'}+1,m^{'}+2,\ldots,t-1\},y^{'}_i=round(r_iN)-1,\forall i \in \{1,2,\ldots,m^{'},t,t+1,\ldots,n\},y^{'}_i=round(r_iN),\\
-    &y^{''}=[round(r_1N),round(r_2N),\ldots,round(r_{m^{'}}N),\\
-    &~~~~round(r_{m^{'}+1}N)-1,round(r_{m^{'}+2}N)-1,\ldots,round(r_{t-1}N)-1,\\
-    &~~~~round(r_{t}N),floor(r_{t+1}N),\ldots,round(r_nN)],\\
-    &\text{hence, }\forall i \in I_s \cup \{s+1,s+2,\ldots,m^{'}\} ~y^{''}_i-y^{'}_i=round(r_iN)-(floor(r_iN)+1)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN+1)=x^{''}_i-(x^{'}_i+1)=0,\\
-    &~~~~~~\forall i \in  \{m^{'}+1,m^{'}+2,\ldots,t-1\}~y^{''}_i-y^{'}_i=round(r_iN)-1-floor(r_iN)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN+1)=x^{''}_i-(x^{'}_i+1)=0,\\
-    &~~~~~~\forall i \in  \{t,t+1,\ldots,n-1,n\}~y^{''}_i-y^{'}_i=round(r_iN)-floor(r_iN)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN)=x^{''}_i-(x^{'}_i)=0.\\
-    &\text{So,regardless of any }m^{''}, \text{there always be }\forall i \in \{1,2,\ldots,n\}, y^{''}_i-y^{'}_i=0,\\
-    &\text{i.e. }y^{''}=y^{'}.
-    \end{split}
-  $$
-
-- Then, analyze the result of solution 1 when $round(\cdot)$ is as
-  $\eqref{round_2}$
-
-  $$
-  \begin{split}
-    \text{(II)If}&~round(\cdot)~\text{is }\forall x \in \mathbb{R}^+\cup\{0\},~round_2(x)=  \begin{cases}
-        \lfloor x\rfloor,\text{if }x-\lfloor x\rfloor \le 0.5 \\
-        \lceil x\rceil,\text{if }x-\lfloor x\rfloor > 0.5
-        \end{cases},\text{ as \eqref{round_2}},\\
-    &\text{then }\forall i \in \{1,2,\ldots,n\} x^{''}_i=round(r_iN)-r_iN =\begin{cases}
-        floor(r_iN)-r_iN, \text{if }r_iN-\lfloor r_iN\rfloor \le 0.5 \\
-        floor(r_iN)+1-r_iN, \text{if }r_iN-\lfloor r_iN\rfloor > 0.5
-        \end{cases}\\
-    &=\begin{cases}
-            x^{'}_i, \text{if }x^{'}_i \ge -0.5 \\
-            x^{'}_i+1, \text{if }x^{'}_i < -0.5
-            \end{cases}.\\
-    &\text{So, according to $x^{'}$, there is}\\
-    &\forall i \in I_s,-1<x^{'}_i<-0.5,x^{''}_i=x^{'}_i+1,\\
-    &~~~~0<x^{''}_1=x^{'}_1+1\le x^{''}_2=x^{'}_2+1\le \ldots \le x^{''}_s=x^{'}_s+1<0.5,\\
-    &\forall i \in I_{tn},-0.5<x^{'}_i\le 0,x^{''}_i=x^{'}_i,\\
-    &~~~~-0.5< x^{''}_t=x^{'}_t\le x^{''}_{t+1}=x^{'}_{t+1}\ldots \le x^{''}_n=x_n\le 0,\\
-    &\forall i \in I_{st},x^{'}_i=-0.5,x^{''}_i=x^{'}_i,\\
-    &~~~~-0.5=x^{''}_{s+1}=x^{'}_{s+1}=x^{''}_{s+2}=x^{'}_{s+2}=..=x^{''}_{t-2}=x^{'}_{t-2}=x^{''}_{t-1}=x^{'}_{t-1}.\\
-    &\text{And,if a stable sorting algorithm (see appendix A.9) is applied, we can get}\\
-    &-0.5=x^{''}_{s+1}=x^{''}_{s+2}=\ldots=x^{''}_{t-2}=x^{''}_{t-1}< x^{''}_t\le x^{''}_{t+1}\ldots \le x^{''}_n\le 0<x^{''}_1\le x^{''}_2\le \ldots \le x^{''}_s<0.5,\\
-    &\text{therefore }m^{''}=N-\sum_{i=1}^n round(r_iN)=\sum_{i=1}^n[r_iN-round(r_iN)]=-\sum_{i=1}^n[x^{''}]=-[\sum_{i=1}^nx^{'}]-s=m^{'}-s.\\
-    &\text{If }m^{''}=m^{'}-s= 0,\\
-    &\text{then }m^{'}= s,\\
-    &\text{so, }\forall i \in \{1,2,\ldots,s\},b^{'}_i=1,\forall i \in \{s+1,s+2,\ldots,n\},b^{'}_i=0,\\
-    &\text{therefore, }\forall i \in \{1,2,\ldots,s\},y^{'}_i=floor(r_iN)+1,\forall i \in \{s+1,s+2,\ldots,n\},y^{'}_i=floor(r_iN),\\
-    &y^{'}=[floor(r_1N)+1,floor(r_2N)+1,\ldots,floor(r_{s}N)+1,floor(r_{s+1}N),floor(r_{s+2}N),\ldots,floor(r_{n}N)].\\
-    &\text{Because }m^{''}= 0,\\
-    &\text{so, }\forall i \in \{1,2,\ldots,n\},b^{''}_i=0,\\
-    &\text{therefore, }\forall i \in \{1,2,\ldots,n\},y^{'}_i=round(r_iN),\\
-    &y^{''}=[round(r_1N),round(r_2N),\ldots,round(r_nN)],\\
-    &\text{hence, }\forall i \in I_s~y^{''}_i-y^{'}_i=round(r_iN)-(floor(r_iN)+1)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN+1)=x^{''}_i-(x^{'}_i+1)=0,\\
-    &~~~~~~\forall i \in I_{st }y^{''}_i-y^{'}_i=round(r_iN)-floor(r_iN)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN)=x^{''}_i-(x^{'}_i)=0,\\
-    &~~~~~~\forall i \in  I_{tn }y^{''}_i-y^{'}_i=round(r_iN)-floor(r_iN)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN)=x^{''}_i-(x^{'}_i)=0.\\
-    &\text{If }m^{''}=m^{'}-s> 0,\\
-    &\text{then }m^{'}> s,\\
-    &\text{so, }\forall i \in \{1,2,\ldots,s-1,s,s+1,\ldots,m^{'}\},b^{'}_i=1,\forall i \in \{m^{'}+1,m^{'}+2,\ldots,n\},b^{'}_i=0,\\
-    &\text{therefore, }\forall i \in \{1,2,\ldots,s-1,s,s+1,\ldots,m^{'}\},y^{'}_i=floor(r_iN)+1,\forall i \in \{m^{'}+1,m^{'}+2,\ldots,n\},y^{'}_i=floor(r_iN),\\
-    &y^{'}=[floor(r_1N)+1,floor(r_2N)+1,\ldots,floor(r_{s-1}N)+1,\\
-    &~~~~floor(r_{s}N)+1,floor(r_{s+1}N)+1,\ldots,floor(r_{m^{'}}N)+1,\\
-    &~~~~floor(r_{m^{'}+1}N),floor(r_{m^{'}+2}N),\ldots,floor(r_{n}N)].\\
-    &\text{Because }m^{''}> 0,\\
-    &\text{so, }\forall i \in \{s+1,s+2,\ldots,s+m^{'}-s\},b^{''}_i=1,\forall i \in \{1,2,\ldots,s,m^{'}+1,m^{'}+2,\ldots,n\},b^{''}_i=0,\\
-    &\text{therefore, }forall i \in \{s+1,s+2,\ldots,m^{'}\},y^{'}_i=round(r_iN)+1,\forall i \in \{1,2,\ldots,s,m^{'}+1,m^{'}+2,\ldots,n\},y^{'}_i=round(r_iN),\\
-    &y^{''}=[round(r_1N),round(r_2N),\ldots,round(r_{s}N),\\
-    &~~~~round(r_{s+1}N)+1,round(r_{s+2}N)+1,\ldots,round(r_{m'}N)+1,\\
-    &~~~~round(r_{m^{'}+1}N),floor(r_{m^{'}+2}N),\ldots,floor(r_{n}N)].\\
-    &\text{hence, }\forall i \in I_s~y^{''}_i-y^{'}_i=round(r_iN)-(floor(r_iN)+1)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN+1)=x^{''}_i-(x^{'}_i+1)=0,\\
-    &~~~~~~\forall i \in  \{s+1,s+2,\ldots,m^{'}\}~y^{''}_i-y^{'}_i=round(r_iN)+1-(floor(r_iN)+1)\\
-    &~~~~~~~~=round(r_iN)-r_iN+1-(floor(r_iN)-r_iN+1)=x^{''}_i+1-(x^{'}_i+1)=0,\\
-    &~~~~~~\forall i \in  \{m^{'}+1,m^{'}+2,\ldots,n-1,n\}~y^{''}_i-y^{'}_i=round(r_iN)-floor(r_iN)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN)=x^{''}_i-(x^{'}_i)=0.\\
-    &\text{If }m^{''}=m^{'}-s< 0,\\
-    &\text{then }Wm^{'}< s,\\
-    &\text{so, }\forall i \in \{1,2,\ldots,m^{'}\},b^{'}_i=1,\forall i \in \{m^{'}+1,m^{'}+2,\ldots,s,s+1,\ldots,n-1,n\},b^{'}_i=0,\\
-    &\text{therefore }\forall i \in \{1,2,\ldots,m^{'}\},y^{'}_i=floor(r_iN)+1,\forall i \in \{m^{'}+1,m^{'}+2,\ldots,s,s+1,\ldots,n-1,n\},y^{'}_i=floor(r_iN),\\
-    &y^{'}=[floor(r_1N)+1,floor(r_2N)+1,\ldots,floor(r_{m^{'}}N)+1,\\
-    &~~~~floor(r_{m^{'}+1}N),floor(r_{m^{'}+2}N),\ldots,floor(r_sN),\\
-    &~~~~floor(r_{s+1}N),\ldots,floor(r_{n-1}N),floor(r_{n}N)].\\
-    &\text{Because }m^{''}< 0,\\
-    &\text{so, }\forall i \in \{s-[s-m^{'}]+1,s-[s-m^{'}]+2,\ldots,s\},b^{''}_i=-1,\forall i \in \{1,2,\ldots,s-[s-m^{'}],s+1,s+2,\ldots,n\},b^{''}_i=0,\\
-    &\text{therefore }\forall i \in \{m^{'}+1,m^{'}+2,\ldots,s\},y^{'}_i=round(r_iN)-1,\forall i \in \{1,2,\ldots,m^{'},s+1,s+2,\ldots,n\},y^{'}_i=round(r_iN),\\
-    &y^{''}=[round(r_1N),round(r_2N),\ldots,round(r_{m^{'}}N),\\
-    &~~~~round(r_{m^{'}+1}N)-1,round(r_{m^{'}+2}N)-1,\ldots,round(r_{s}N)-1,\\
-    &~~~~round(r_{s+1}N),floor(r_{s+2}N),\ldots,round(r_nN)],\\
-    &\text{hence }\forall i \in  \{1,2,\ldots,m^{'}\}~y^{''}_i-y^{'}_i=round(r_iN)-(floor(r_iN)+1)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN+1)=x^{''}_i-(x^{'}_i+1)=0,\\
-    &~~~~~~\forall i \in  \{m^{'}+1,m^{'}+2,\ldots,s\}~y^{''}_i-y^{'}_i=round(r_iN)-1-floor(r_iN)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN+1)=x^{''}_i-(x^{'}_i+1)=0,\\
-    &~~~~~~\forall i \in  \{s+1,s+2,\ldots,n-1,n\}~y^{''}_i-y^{'}_i=round(r_iN)-floor(r_iN)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN)=x^{''}_i-x^{'}_i=0.\\
-    &\text{So,regardless of any }m^{''}, \text{there always be }\forall i \in \{1,2,\ldots,n\}, y^{''}_i-y^{'}_i=0,\\
-    &\text{i.e., }y^{''}=y^{'}.
-    \end{split}
-  $$
-
-- Then, analyze the result of solution 1 when $round(\cdot)$ is as
-  $\eqref{round_3}$
-
-  $$
-  \begin{split}
-    \text{(III)If}&~round(\cdot)~\text{is }\forall x \in \mathbb{R}^+\cup\{0\},~round_3(x)=\begin{cases}
-        \lfloor x\rfloor,\text{if }x-\lfloor x\rfloor<0.5 \\
-        \lfloor x\rfloor,\text{if }x-\lfloor x\rfloor=0.5,\lfloor x\rfloor \mod 2=0\\
-        \lceil x\rceil,\text{if }x-\lfloor x\rfloor=0.5,\lceil x\rceil\mod 2= 0\\
-        \lceil x\rceil,\text{if }x-\lfloor x\rfloor>0.5
-        \end{cases},\text{ as \eqref{round_3}},\\
-    &\text{then }\forall i \in \{1,2,\ldots,n\}~x^{''}_i\\
-    &=round(r_iN)-r_iN =\begin{cases}
-        floor(r_iN)-r_iN, \text{if }r_iN-\lfloor r_iN\rfloor < 0.5 \\
-        floor(r_iN)-r_iN, \text{if }r_iN-\lfloor r_iN\rfloor=0.5,\lfloor r_iN\rfloor \mod 2=0\\
-        floor(r_iN)+1-r_iN, \text{if }r_iN-\lfloor r_iN\rfloor=0.5,\lceil r_iN\rceil\mod 2= 0\\
-        floor(r_iN)+1-r_iN, \text{if }r_iN-\lfloor r_iN\rfloor > 0.5
-        \end{cases}\\
-    &~~~~=\begin{cases}
-            x^{'}_i, \text{if }x^{'}_i > -0.5 \\
-            x^{'}_i, \text{if }x^{'}_i = -0.5,\lfloor r_iN\rfloor~\mod 2=0 \\
-            x^{'}_i+1, \text{if }x^{'}_i = -0.5,\lceil r_iN\rceil~\mod 2= 0\\
-            x^{'}_i+1, \text{if }x^{'}_i < -0.5
-            \end{cases}.\\
-    &\text{So, according to $x^{'}$, there is}\\
-    &\forall i \in I_s,-1<x^{'}_i<-0.5,x^{''}_i=x^{'}_i+1,\\
-    &~~~~0<x^{''}_1=x^{'}_1+1\le x^{''}_2=x^{'}_2+1\le \ldots \le x^{''}_s=x^{'}_s+1<0.5,\\
-    &\forall i \in I_{tn},-0.5<x^{'}_i\le 0,x^{''}_i=x^{'}_i,\\
-    &~~~~-0.5< x^{''}_t=x^{'}_t\le x^{''}_{t+1}=x^{'}_{t+1}\ldots \le x^{''}_n=x_n\le 0,\\
-    &\text{assume that the element numbers of $I_{st}$ is }W \in \mathbb{N},\\
-    &\text{define }I_{u}=\{u_1,u_2,\ldots,u_k\} \subseteq I_{st}, \forall i \in I_{st},x^{'}_i=-0.5,\lfloor r_iN\rfloor~\mod 2=0,\\
-    &\text{and define }I_{v}=\complement_{I_{st}}I_{u_1}=\{v_1,v_2,\ldots,v_l\} \subseteq I_{st}, \forall i \in I_{st},x^{'}_i=-0.5,\lceil r_iN\rceil \mod 2=0,\\
-    &~~~~\text{where }k,l\in \mathbb{N},\text{and}, \\
-    &~~~~~~~~k+l=W,s<u_1<u_2<\ldots<u_k<t,s<v_1<v_2<\ldots<v_l<t,\\
-    &\forall i \in I_{u},x^{'}_i=-0.5,x^{''}_i=x^{'}_i,\\
-    &~~~~-0.5=x^{''}_{u_1}=x^{'}_{u_2}=\ldots=x^{'}_{u_k},\\
-    &\forall i \in I_{v},x^{'}_i=-0.5,x^{''}_i=x^{'}_i+1,\\
-    &~~~~-0.5+1=0.5=x^{''}_{v_1}=x^{'}_{v_2}=\ldots=x^{'}_{v_l}.\\
-    &\text{And, if a stable sorting algorithm (see appendix A.9) is applied, we can get}\\
-    &-0.5=x^{''}_{u_1}=x^{''}_{u_2}=\ldots=x^{''}_{u_k}< x^{''}_t\le x^{''}_{t+1}\ldots \le x^{''}_n\le 0<x^{''}_1\le x^{''}_2\le \ldots \le x^{''}_s<x^{''}_{v_1}=x^{'}_{v_2}=\ldots=x^{'}_{v_l}=0.5,\\
-    &\text{therefore }m^{''}=N-\sum_{i=1}^n round(r_iN)=\sum_{i=1}^n[r_iN-round(r_iN)]=-\sum_{i=1}^n[x^{''}]=-[\sum_{i=1}^nx^{'}]-(s+l)=m^{'}-(s+l).\\
-    &\text{If }m^{''}=m^{'}-(s+l)= 0,\\
-    &\text{then }m^{'}= s+l,\\
-    &\text{so, }\forall i \in \{1,2,\ldots,s,s+1,s+2,\ldots,s+l\},b^{'}_i=1,\forall i \in \{s+l+1,s+l+2,\ldots,n\},b^{'}_i=0,\\
-    &\text{therefore }\forall i \in \{1,2,\ldots,s,s+1,s+2,\ldots,s+l\},y^{'}_i=floor(r_iN)+1,\forall i \in \{s+l+1,s+l+2,\ldots,n\},y^{'}_i=floor(r_iN),\\
-    &y^{'}=[floor(r_1N)+1,floor(r_2N)+1,\ldots,floor(r_{s}N)+1,\\
-    &~~~~floor(r_{s+1}N)+1,floor(r_{s+2}N)+1,\ldots,floor(r_{s+l}N)+1,\\
-    &~~~~floor(r_{s+l+1}N),floor(r_{s+l+2}N),\ldots,floor(r_{n}N)].\\
-    &\text{Because }m^{''}= 0,\\
-    &\text{so, }\forall i \in \{1,2,\ldots,n\},b^{''}_i=0,\\
-    &\text{therefore, }\forall i \in \{1,2,\ldots,n\},y^{'}_i=round(r_iN),\\
-    &y^{''}=[round(r_1N),round(r_2N),\ldots,round(r_nN)],\\
-    &\text{hence }\forall i \in I_s~y^{''}_i-y^{'}_i=round(r_iN)-(floor(r_iN)+1)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN+1)=x^{''}_i-(x^{'}_i+1)=0,\\
-    &~~~~~~\forall i \in \{s+1,s+2,\ldots,s+l\}~y^{''}_i-y^{'}_i=round(r_iN)-(floor(r_iN)+1)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN+1)=x^{''}_i-(x^{'}_i+1),\\
-    &~~~~~~~~\text{there is no guarantee that }x^{''}_i=(x^{'}_i+1),\\
-    &~~~~~~\forall i \in \{s+l+1,s+l+2,\ldots,s+W\}~y^{''}_i-y^{'}_i=round(r_iN)-floor(r_iN)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN)=x^{''}_i-x^{'}_i,\\
-    &~~~~~~~~\text{there is no guarantee that }x^{''}_i=x^{'}_i,\\
-    &~~~~~~\forall i \in  I_{tn}~y^{''}_i-y^{'}_i=round(r_iN)-floor(r_iN)\\
-    &~~~~~~~~=round(r_iN)-r_iN-(floor(r_iN)-r_iN)=x^{''}_i-x^{'}_i=0.\\
-    &\text{As the consequence, we cannot guarantee }y^{''}=y^{'},\\
-    &\text{therefore, there is no need to discuss the conditions that } m^{''}=m^{'}-(s+l)> 0 \text{ and } m^{''}=m^{'}-(s+l)<0.\\
-    &~~~~\text{A supporting example is as follows:}\\
-    &~~~~~~~~x^{'}=[x^{'}_1,x^{'}_2,x^{'}_3,x^{'}_4,x^{'}_5,x^{'}_6,x^{'}_7,x^{'}_8,x^{'}_9,x^{'}_{10},x^{'}_{11},x^{'}_{12}]\\
-    &~~~~~~~~~~~~=[-0.9,-0.8,-0.7,-0.6,-0.5,-0.5,-0.5,-0.5,-0.4,-0.3,-0.2,-0.1]\\
-    &~~~~~~~~x^{''}=[x^{''}_1,x^{''}_2,x^{''}_3,x^{''}_4,x^{''}_5,x^{''}_6,x^{''}_7,x^{''}_8,x^{''}_9,x^{''}_{10},x^{''}_{11},x^{''}_{12}]\\
-    &~~~~~~~~~~~~=[0.1,0.2,0.3,0.4,-0.5,0.5,-0.5,0.5,-0.4,-0.3,-0.2,-0.1]\\
-    &~~~~~~~~m^{'}=-\sum_{i=1}^{12}x^{'}_i=6\\
-    &~~~~~~~~m^{''}=-\sum_{i=1}^{12}x^{''}_i=0\\
-    &~~~~~~~~[y^{''}_5-y^{'}_5,y^{''}_6-y^{'}_6,y^{''}_7-y^{'}_7,y^{''}_8-y^{'}_8]\\
-    &~~~~~~~~~~~~=[x^{''}_5-x^{'}_5+1,x^{''}_6-x^{'}_6+1,x^{''}_7-x^{'}_7,x^{''}_8-x^{'}_8]\\
-    &~~~~~~~~[y^{''}_5-y^{'}_5,y^{''}_6-y^{'}_6,y^{''}_7-y^{'}_7,y^{''}_8-y^{'}_8]\\
-    &~~~~~~~~~~~~=[1,0,0,1]\ne [0,0,0,0]\\
-    \end{split}
-  $$
-
-- To conclude:
-
-  $$
-  \begin{split}
-    &\text{Summarize the above and combine (I)(II)(III) as:}\\
-    &~~~~\text{when the used sorting algorithm is stable as appendix A.9,}\\
-    &~~~~\text{if }round(\cdot)~\text{function is as }\eqref{round_1},\text{or }\eqref{round_2},\\
-    &~~~~~~~~\text{the result }y\text{ from solution }1,y^{'},\text{ is the same to the result }y\text{ from solution }2,y^{''},\\
-    &~~~~\text{if }round(\cdot)~\text{function is as }\eqref{round_3},\\
-    &~~~~~~~~\text{there is no guarantee that }y^{'}\text{ is the same to }y^{''}.
-    \end{split}
-  $$
 
 [^1]: 《IEEE 754》, . 2024年4月20日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=IEEE_754&oldid=1219817053#Rounding_rule
 
