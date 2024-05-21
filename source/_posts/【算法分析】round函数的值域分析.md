@@ -1,5 +1,5 @@
 ---
-abbrlink: 256e025
+abbrlink: 34195fcb
 categories: Topics
 date: "2024-04-26 18:04:05"
 math: true
@@ -7,8 +7,8 @@ mathjax: true
 tags:
 - Mathematics
 - Algorithm
-title: Analyses of round function.
-updated: "2024-05-16 09:24:33"
+title: Analyses of round function
+updated: "2024-05-22 02:50:56"
 ---
 
 This article does a mathematical abstraction of the
@@ -172,7 +172,7 @@ which is base on $round(\cdot) \mathbb{R}\rightarrow \mathbb{Z}$.
   - $\forall (r,n,N) \in D_{r,n,N}$, there is \$ f(r,n,N)=\[*{i=1}^n
     round(r*{i}N)\]-N\$
 - $\forall n \in \mathbb{Z}^+$, define
-  $D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$​.
+  $D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
 - $\forall n \in \mathbb{Z}^+$, define the function $f(r,n,N)$’s value
   range set $F_n=\{f(r,n,N)|(r,N)\in D_{r,N}\}$.
 
@@ -197,20 +197,20 @@ the $0$ is also necessary.
   See [appendix A.1](#A.1) for analysis process.
 - If choose $round_2(\cdot)$ as $\eqref{round_2}$, there is
   $f_2(r,n,N)$’s value range set
-  $F_{2,n}=\{f_2(r,n,N)|(r,N)\in D_{r,N}\}=\{x|x \in (-\frac{n}{2},\frac{n}{2}],x\in \mathbb{Z}\}$​.
+  $F_{2,n}=\{f_2(r,n,N)|(r,N)\in D_{r,N}\}=\{x|x \in (-\frac{n}{2},\frac{n}{2}],x\in \mathbb{Z}\}$.
   See [appendix A.2](#A.2) for analysis process.
 - If choose $round_3(\cdot)$ as $\eqref{round_3}$, there is
   $f_3(r,n,N)$’s value range set
   $F_{3,n}=\{f_3(r,n,N)|(r,N)\in D_{r,N}\}=\{x|x \in (-n,0],x\in \mathbb{Z}\}$.
   See [appendix A.3](#A.3) for analysis process.
 - If choose $round_4(\cdot)$ as $\eqref{round_4}$, there is
-  $f_3(r,n,N)$’s value range set
-  $F_{4,n}=\{f_4(r,n,N)|(r,N)\in D_{r,N}\}=\{x|x \in [0,n),x\in \mathbb{Z}\}$​.
+  $f_4(r,n,N)$’s value range set
+  $F_{4,n}=\{f_4(r,n,N)|(r,N)\in D_{r,N}\}=\{x|x \in [0,n),x\in \mathbb{Z}\}$.
   See [appendix A.4](#A.4) for analysis process.
 - If choose $round_5(\cdot)$ as $\eqref{round_5}$, it is equivalent to
-  $\eqref{round_3}$ in the restricted domain $\mathbb{R}^+ \cup \{0\}$.
+  $\eqref{round_3}$ in the restricted domain $\mathbb{R}^+ \cup \{0\}$.
   So, there is $f_5(r,n,N)$’s value range set
-  $F_{5,n}=\{f_5(r,n,N)|(r,N)\in D_{r,N}\}=\{x|x \in (-n,0],x\in \mathbb{Z}\}$​.
+  $F_{5,n}=\{f_5(r,n,N)|(r,N)\in D_{r,N}\}=\{x|x \in (-n,0],x\in \mathbb{Z}\}$.
   See [appendix A.3](#A.3) for analysis process.
 
 # Appendix
@@ -227,13 +227,13 @@ the $0$ is also necessary.
   $\mathbb{R}^+\cup\{0\}$ instead of $\mathbb{R}$, and in this domain,
   it is equivalent to $\eqref{round_1}$.
 - Define:
-  - $D_{r,n,N}=\{(r,n,N)|n \in\mathbb{Z}^+,N \in\mathbb{Z}^+, n \le N,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$​
+  - $D_{r,n,N}=\{(r,n,N)|n \in\mathbb{Z}^+,N \in\mathbb{Z}^+, n \le N,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$
   - $f(r,n,N):\{\mathbb{R}^n,\mathbb{Z}^+,\mathbb{Z}^+\}\rightarrow\{\mathbb{Z}\}$
     as:
     - $\forall (r,n,N) \in D_{r,n,N}$, there is \$ f(r,n,N)=\[*{i=1}^n
       round(r*{i}N)\]-N\$.
   - $\forall n \in \mathbb{Z}^+$,
-    $D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$​​.
+    $D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
 - Question:
   - $\forall n \in \mathbb{Z}^+$, try to find the function $f(r,n,N)$’s
     value range set $F_n=\{f(r,n,N)|(r,N)\in D_{r,N}\}$.
@@ -369,13 +369,13 @@ Take the following steps:
   instead of $\mathbb{R}$, and in this domain, it is equivalent to
   $\eqref{round_2}$.
 - Define:
-  - $D_{r,n,N}=\{(r,n,N)|n \in\mathbb{Z}^+,N \in\mathbb{Z}^+, n \le N,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$​
+  - $D_{r,n,N}=\{(r,n,N)|n \in\mathbb{Z}^+,N \in\mathbb{Z}^+, n \le N,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$
   - $f(r,n,N):\{\mathbb{R}^n,\mathbb{Z}^+,\mathbb{Z}^+\}\rightarrow\{\mathbb{Z}\}$
     as:
     - $\forall (r,n,N) \in D_{r,n,N}$, there is \$ f(r,n,N)=\[*{i=1}^n
       round(r*{i}N)\]-N\$.
   - $\forall n \in \mathbb{Z}^+$,
-    $D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$​​.
+    $D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
 - Question:
   - $\forall n \in \mathbb{Z}^+$, try to find the function $f(r,n,N)$’s
     value range set $F_n=\{f(r,n,N)|(r,N)\in D_{r,N}\}$.
@@ -572,14 +572,14 @@ Take the following steps:
   instead of $\mathbb{R}$, and in this domain, it is equivalent to
   $\eqref{round_3}$ and $\eqref{round_5}$
 - Define:
-  - $D_{r,n,N}=\{(r,n,N)|n \in\mathbb{Z}^+,N \in\mathbb{Z}^+, n \le N,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$​
+  - $D_{r,n,N}=\{(r,n,N)|n \in\mathbb{Z}^+,N \in\mathbb{Z}^+, n \le N,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$
   - $f(r,n,N):\{\mathbb{R}^n,\mathbb{Z}^+,\mathbb{Z}^+\}\rightarrow\{\mathbb{Z}\}$
     as:
     - $\forall (r,n,N) \in D_{r,n,N}$, there is \$ f(r,n,N)=\[*{i=1}^n
       round(r*{i}N)\]-N=\[*{i=1}^n truncate(r*{i}N)\]-N=\[*{i=1}^n
       floor(r*{i}N)\]-N\$.
   - $\forall n \in \mathbb{Z}^+$,
-    $D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$​​.
+    $D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
 - Question:
   - $\forall n \in \mathbb{Z}^+$, try to find the function $f(r,n,N)$’s
     value range set $F_n=\{f(r,n,N)|(r,N)\in D_{r,N}\}$
@@ -672,14 +672,14 @@ Take the following steps:
   $\mathbb{R}$, and in this domain, it is equivalent to
   $\eqref{round_4}$.
 - Define:
-  - $D_{r,n,N}=\{(r,n,N)|n \in\mathbb{Z}^+,N \in\mathbb{Z}^+, n \le N,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$​
+  - $D_{r,n,N}=\{(r,n,N)|n \in\mathbb{Z}^+,N \in\mathbb{Z}^+, n \le N,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$
   - $f(r,n,N):\{\mathbb{R}^n,\mathbb{Z}^+,\mathbb{Z}^+\}\rightarrow\{\mathbb{Z}\}$
     as:
     - $\forall (r,n,N) \in D_{r,n,N}$, there is \$ f(r,n,N)=\[*{i=1}^n
       round(r*{i}N)\]-N=\[*{i=1}^n truncate(r*{i}N)\]-N=\[*{i=1}^n
       floor(r*{i}N)\]-N\$.
   - $\forall n \in \mathbb{Z}^+$,
-    $D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$​​.
+    $D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
 - Question:
   - $\forall n \in \mathbb{Z}^+$, try to find the function $f(r,n,N)$’s
     value range set $F_n=\{f(r,n,N)|(r,N)\in D_{r,N}\}$

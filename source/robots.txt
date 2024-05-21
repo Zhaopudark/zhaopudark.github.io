@@ -52,6 +52,7 @@ Disallow: /page/2/index.html
 Disallow: /posts/1757b5a2
 Disallow: /posts/1757b5a2.html
 Disallow: /posts/17b34613.html
+Disallow: /posts/2.56e27.html
 Disallow: /posts/2855d9ad.html
 Disallow: /posts/28760591.html
 Disallow: /posts/28e1d1cc.html
@@ -59,6 +60,7 @@ Disallow: /posts/346f3a8e
 Disallow: /posts/346f3a8e.html
 Disallow: /posts/66b1be3d
 Disallow: /posts/66b1be3d.html
+Disallow: /posts/7d227c9.html
 Disallow: /posts/7f7f1263
 Disallow: /posts/7f7f1263.html
 Disallow: /posts/7fdde8eb
@@ -156,13 +158,13 @@ Allow: /ddaa8128e40b45f9a08905b37f52607a.txt
 Allow: /index.html
 Allow: /posts/1759cd56.html
 Allow: /posts/1c60e1d2.html
-Allow: /posts/2.56e27.html
 Allow: /posts/2862656e.html
+Allow: /posts/34195fcb.html
 Allow: /posts/394edaa0.html
 Allow: /posts/48cdc71b.html
 Allow: /posts/4df1fb5a.html
 Allow: /posts/4f6afcf2.html
-Allow: /posts/7d227c9.html
+Allow: /posts/70807cc5.html
 Allow: /posts/98626aad.html
 Allow: /posts/9f6c2fd1.html
 Allow: /posts/e11578be.html
