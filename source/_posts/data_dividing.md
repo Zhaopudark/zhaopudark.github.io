@@ -11,7 +11,7 @@ tags:
 - Python
 title: Discuss the mathematics of apportionment when splitting the
   machine learning dataset into several parts by proportions
-updated: "2024-05-22 04:02:51"
+updated: "2024-05-22 16:45:13"
 ---
 
 This article discusses an operation that originated in machine learning,
@@ -49,11 +49,10 @@ fractions to integers[^2], which may lead to some problems:
 - **How to rounding, i.e., how to handle decimals?**
 
   Let’s look at an example, i.e., how to divide a dataset consisting of
-  $248$ elements into `train set`, `validate set` and `test set`,
+  $248$ elements into `train set`, `validate set`, and `test set`,
   according to proportions $[0.7,0.1,0.2]$?
 
-  Simply multiplying the total number of elements by the ratio will
-  result in a fractional part: $$
+  Simply multiplying the total number of elements by the ratio: $$
   \begin{split}
   &train~set: &248\times0.7=173.6\\
   &validate~set: &248\times0.1=24.8\\
@@ -61,18 +60,18 @@ fractions to integers[^2], which may lead to some problems:
   \end{split}
   $$ There are at least the following options and their dilemmas:
 
-  - `Solution 1`: `train set` get $173$, `validate set` get $24$,
-    `test set` get $49$
-  - But $173+24+49=246<248$, 2 elements will be dropped. Which 2
-    elements will be chosen to be dropped? Why choose them but not other
-    else?
-  - `Solution 2`: `train set` get $174$, `validate set` get $25$,
-    `test set` get $50$
+  - `Solution 1`: `train set` gets $173$, `validate set` gets $24$,
+    `test set` gets $49$
+    - But $173+24+49=246<248$, 2 elements will be dropped. Which 2
+      elements will be chosen to be dropped? Why choose them but not
+      other else?
+  - `Solution 2`: `train set` gets $174$, `validate set` gets $25$,
+    `test set` gets $50$
     - But $174+25+50=249>248$ , lacking 1 element. Where to find an
       extra element? We should not make any overlap on these 3 sets.
   - `Solution 3`, basing on the first option and manually divide more
-    elements to `train set` and `test set`: `train set` get $174$,
-    `validate set` get $24$, `test set` get $45$
+    elements to `train set` and `test set`: `train set` gets $174$,
+    `validate set` gets $24$, `test set` gets $45$
     - It seems good because of $174+24+50=248\equiv 248$. But, why not
       divide more elements to `validate set`? And, can this result still
       be considered as the one according to ratios $0.7,0.1,0.2$ without
@@ -81,11 +80,10 @@ fractions to integers[^2], which may lead to some problems:
 - **How to maintain the fairness?**
 
   As the above example, how to divide a dataset consisting of $247$
-  elements into `train set`, `validate set` and `test set`, according to
+  elements into `train set`, `validate set`,and `test set`, according to
   proportions $[0.8,0.1,0.1]$?
 
-  Simply multiplying the total number of elements by the ratio will
-  result in a fractional part: $$
+  Simply multiplying the total number of elements by the ratio: $$
   \begin{split}
   &train~set: &247\times0.8=197.6\\
   &validate~set: &248\times0.1=24.8\\
@@ -118,11 +116,11 @@ Overflow](https://stackoverflow.com/):
   Python? - Stack
   Overflow](https://stackoverflow.com/questions/64004193/how-to-split-dataset-to-train-test-and-valid-in-python)
 
-In these solutions, people concern more about the program itself,
-instead of whether the result is reasonable when encounter decimals. In
-addition,
+In these solutions, the program is concerned more about its’
+implementation, instead of the rationality of the result, when
+encountering decimals. In addition, the
 “[sklearn.model_selection.train_test_split](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)”
-is widely use in these solutions to realize dataset partition. Is it
+is widely used in these solutions to realize dataset partition. Is it
 reasonable? Let’s do some further tests:
 
 ``` python
@@ -145,8 +143,9 @@ print("train set size:",len(X_train),"| test set size:",len(X_test))
 Apparently, `sklearn.model_selection.train_test_split` cannot deal with
 the partition well:
 
-- **No certainty/determinism** about the division ratio: A simple order
-  adjustment can affect the division result.
+- **No certainty/determinism** about the division ratio: The division
+  result after swapping 2 different splitting proportions is different
+  from that of swapping the corresponding original division result.
 - **Lack of consideration** on the significance of the generated
   decimal: It uses simple rounding and completes the missing elements at
   the end of the division interval.
@@ -166,16 +165,16 @@ As the above introduction, we can get the following points:
 Therefore, in this article, we will do the following steps:
 
 1.  Give out a feasible standard to indicate a rounding method/target to
-    deal with the decimal problem.
+    **deal with the decimal problem**.
 2.  According to the defined standard, give out objectives and
     requirements from the perspective of [mathematics
     apportionment](https://en.wikipedia.org/wiki/Mathematics_of_apportionment).
-3.  Give out a set of solutions to circumvent the fairness problem. That
-    is, if we give out all of the solutions, we need not choose one over
-    the other mathematically by some measuring function. When practice,
-    some external priority rules can be used to finally choose a
-    solution. But that would be beyond the scope of this article.
-4.  Design algorithms to get the set of solutions.
+3.  Give out the solution set to **circumvent the fairness problem**.
+    That is, if we give out all of the solutions, we need not choose one
+    over the other mathematically by some measuring function. When
+    practice, some external priority rules can be used to finally choose
+    a solution. But that would be beyond the scope of this article.
+4.  Design the corresponding algorithms.
 
 ### Partition Standard
 
@@ -193,29 +192,61 @@ partition standard:
   will incur further problems in the theory section, particularly in the
   circumstance of small-size datasets. So, the best way is not to miss
   any element.
+
 - **Non-overlapping**: Do not make any 2 divided partitions overlap.
   Overlapping, i.e., the same element appearing in 2 partitions
   simultaneously, can directly lead to a bad division that is unable to
   be used. For example, in machine learning, the overlapping between
   `train set` and `test set` is a serious and principled error that
   should not be allowed to occur.
-- **Determinacy(Reproducibility)**: For a determined rate, the partition
-  result should be deterministic. So, anyone can reproduce the result if
-  the element’s total number and proportions are known.
+
+- **Determinacy(Reproducibility)**: For a determined ratio, the
+  partition result should be deterministic. So, anyone can reproduce the
+  result if the element’s total number and proportions are known. And,
+  the swapping on division ratios will be reflected on corresponding
+  divided parts simultaneously, unless there are 2 identical division
+  ratios.
+
+  {% note info %}
+
+  The 2 identical dividing proportions may bring about **fairness
+  problem**. This will be circumvented by giving out the solution set,
+  as the aforesaid parts.
+
+  {% endnote %}
+
 - **Precision**: Make the division result closest to the one that the
   given ratios expect. Multiply the total number with proportions as the
   desired division result, which can be considered as a vector, although
   its value may not be integers. Consider the actual result also a
-  vector, which must be integers as a result. We want to make the p-norm
-  distance between the desired vector and the actual vector obtain a
-  minimum value.
+  vector, which must be integers as a result. We want to make the
+  `p-norm` ($p>1$​) distance (considered as a division metric/error)
+  between the desired vector and the actual vector obtain a minimum
+  value.
+
+  {% note info %}
+
+  Generally, the `p-norm` ($p=2$) distance is the most common metric for
+  measuring the distance between vectors. In the original research for
+  this article, we have found that all `p-norms` ($p\ge 1$) can lead to
+  a certain solution with deterministic. And, we have found:
+
+  - The `p-norm` ($p=1$​) is only able to derive weak conclusions.
+    - It will lead to the expansion of the solution set, and the
+      complete solution set cannot be easily obtained, but only its
+      subset can be determined.
+  - The `p-norm` ($p>1$) can derive strong conclusions.
+    - The complete solution set can be easily obtained.
+  - So, we prefer to use `p-norm` ($p>1$).
+
+  {% endnote %}
 
 ### Objectives and Requirements
 
 According to the defined standard, give out objectives and requirements
 described in mathematical terms:
 
-- Given a ser $S$ of $N$ identical elements, i.e.,
+- Given a set $S$ of $N$ identical elements, i.e.,
   $S=\{s_1,s_2,\ldots,s_N\}$, where $N\in \mathbb{Z}^+$.
 - Given a list of proportions $r$, where
   $r=[r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1,n\in \mathbb{Z}^+, n \le N$.
@@ -248,9 +279,6 @@ described in mathematical terms:
   **non-overlapping**.
 - The objective function $f(y)$ can guarantee
   **determinacy(reproducibility)** and **precision**.
-  - The constraint $p> 1$ in $f(y)$ is needed. Because if $p=1$, the
-    $f(y)$ will have the same value for many feasible $y$, and lose its
-    ability to filter results.
 
 {% endnote %}
 
@@ -382,11 +410,11 @@ following ideas:
       - There is
         $F_n=\{f(r,n,N)|(r,N)\in D_{r,N}\}=\{x|x \in (-n,0],x\in \mathbb{Z}\}$.
         See [the appendix A.4 of
-        `analyses of round function`](https://little-train.com/posts/34195fcb.html#A.4)
+        `analyses of round function`](https://little-train.com/posts/34195fcb.html#1533739c896a1d55a2625caced54a83fb05b374dbb66122f475751be01f44fb5-1)
         for analysis process.
 
       - Also from [the appendix A.4 of
-        `analyses of round function`](https://little-train.com/posts/34195fcb.html#A.4),
+        `analyses of round function`](https://little-train.com/posts/34195fcb.html#1533739c896a1d55a2625caced54a83fb05b374dbb66122f475751be01f44fb5-1),
         we can find a conclusion about the function $\eqref{floor_f}$
         that: $$
         \begin{equation}\label{floor_conclusion}\tag{4}
@@ -559,7 +587,7 @@ $$
   function may be one of $round_1(x)$ and $round_2(x)$. But the slightly
   different behavior between $round_1(x)$ and $round_2(x)$ may lead our
   algorithm to behave inconsistently in different programming languages.
-  So, we pretend to not use both $round_1(x)$ and $round_2(x)$.
+  So, we prefer not to use $round_1(x)$ and $round_2(x)$.
 - Second, consider the range $F_n=\{f(r,n,N)|(r,N)\in D_{r,N}\}$, if we
   use $round_1(x)$ to replace the $round_5(x)$ that we have used, the
   range will become
@@ -575,10 +603,10 @@ $$
     only an algorithm to find 1 of the solutions.
 - Third, the $round_4(x)=ceil(x)$ is symmetric to $round_5(x)=floor(x)$,
   and $floor(x)$ reflects an idea of allocating first and then making up
-  the difference, in line with general intuition. So, we pretend to use
-  $round_5(x)$
+  the difference, in line with general intuition. So, we prefer to use
+  $round_5(x)$.
 - So, we only use to $round_5(\cdot)$ estimate
-  $y=[y_1,y_2,\ldots,y_n], \forall i \in \{1,2,\ldots,n\} y_i=round(r_iN)$,
+  $y=[y_1,y_2,\ldots,y_n], \forall i \in \{1,2,\ldots,n\} y_i=round(r_iN)$.
 
 ## The Algorithm to Find the Whole Solution Set
 
@@ -713,14 +741,13 @@ one solution of problem $\eqref{NIP_problem}$:
     But if to get 1 solution of the solution set $D^{*}_b$, the choosing
     method will incur new **non-determinacy**. To maintain the
     **determinacy(reproducibility)**, it should be deterministic that
-    getting a $\lambda^n=(i_1,i_2,\ldots,i_n) \in Q$. That is, when
-    implementation, a stable sorting (see [appendix
-    A.9](typora://app/typemark/window.html#A.9)) is needed.
+    getting a $\lambda^n=(i_1,i_2,\ldots,i_n) \in Q$. That is when
+    implementing, a stable sorting (see [appendix A.4](#A.4)) is needed.
 
     And, this will also bring about **fairness problem** as the
     aforesaid terms. That is, getting a
     $\lambda^n=(i_1,i_2,\ldots,i_n) \in Q$ is only determined by the
-    sorting method when implementation, instead of choosing one over the
+    sorting method when implementing, instead of choosing one over the
     other mathematically by some measuring function.
 
     When practice, some external priority rules can be used to finally
@@ -735,9 +762,9 @@ one solution of problem $\eqref{NIP_problem}$:
 3.  Generally, this algorithm’s worst-case time complexity is $O(n^2)$​,
     where the sorting accounts for the most computing time.
 
-# Coding Implementation and Testing
+# Experiments
 
-Here we implement the [algorithm to get 1 solution of the solution
+Here we implement the [algorithm to get 1 solution of the solution
 set](#The Algorithm to Get 1 Solution of the Solution Set), along with
 the testing.
 
@@ -746,60 +773,57 @@ the testing.
 
   ``` python
   #this file is ./datas_dividing.py
-  import copy
-  import operator
-  import random
   import math
-  from typing import Any
-
   from typeguard import typechecked
+
   @typechecked
-  def _get_dividing_nums(N:int,r:list[int|float])->list[int]:
+  def get_dividing_nums(N:int,r:list[int|float])->list[int]:
       """
-      Divide `N` elements into len(`r`) parts, according to rate in `r`, 
-      without repetition or omission(leaking),
-      making the divided result closest to the scale determind by `r*N`.
+      According to https://little-train.com/posts/70807cc5.html.
+      Calculate the number of elements in each divided part, 
+      when splitting `N` elements into `len(r)` parts by a series
+      of division proportions (`r`).
 
       Args: 
-          N: the total numbers of elements
-          r: rates=[r_1,r_2,...,r_n] where r_i represent `i-th` divided part should have about r_i*N elements
-
+          N: the total numbers of elements.
+          r: the series of division proportions.
+              It is a float list as [r_1,r_2,...,r_n], where r_i
+              represent `i-th` divided part should have about r_i*N elements.
+            There should be sum(r)==1.0, 0<r_i<=1, N>=len(r)>=1
       Return:
-          y = [y_1,y_2,...,y_n], list of integer datas, where y_i represts the `i-th` divided part's 
-              element number, i.e., `dividing nums`
+          y: the number of elements in each divided part.
+              It is a integer list as [y_1,y_2,...,y_n],  where y_i represts
+              the `i-th` divided part's element number.
+            There should be sum(y)==N.
 
-      Define a dividing error = (|y_1-r_1*N|^p+|y_2-r_2*N|^p+...+|y_n-r_n*N|^p)^(1/p), p>1
-          there should be 
-          sum(y)==N and y = argmin(error)
-      According to https://little-train.com/posts/7d227c9.html,
-      At first, there should be:
-          N>=len(r)>=1
-          all(0<rate<=1 for rate in r)
-          sum(r)==1.0 
-      The algorithm is as follows:
+      To determine/calculate the y, a division error is defined as:
+        error(y,r,N) = (|y_1-r_1*N|^p+|y_2-r_2*N|^p+...+|y_n-r_n*N|^p)^(1/p),
+          (p>1),where sum(y)==N.
+      So, y = argmin(error)
+      According to https://little-train.com/posts/70807cc5.html,
+      we can get the `y` by following steps:
           1. calculate `x` = [x_1,x_2,...,x_n] where x_i = floor(r_i*N)-r_i*N
-              calculate `y` = [y_1,y_2,...,y_n] where y_i = floor(r_i*N)
+              calculate a estimated `y` = [y_1,y_2,...,y_n] where y_i = floor(r_i*N)
           2. get the sorted `ranks`(indices) of x by order from `small to large`,
               `ranks` = [rank_1,rank_2,...,rank_n]
               rank_i means if sort x, x[rank_i] is the i-th elements
-          3. get `m` = N -(floor(r_1*N)+floor(r_2*N)+...+floor(r_n*N))
+          3. get `m` = N -(floor(r_1*N)+floor(r_2*N)+...+floor(r_n*N) )
           4. calculate a `bias_list` to modify x and get y
-              if m>0 then `bias_list` = [1,1,...1,0,0,...,0], the first |m| elements are 1, the rest are 0 
+              if m>0 then `bias_list` = [1,1,...1,0,0,...,0],
+                the first |m| elements are 1, the rest are 0 
               if m=0 then `bias_list` = [0,0,...,0]
-          5. modify `y` = [y_1,y_2,...,y_n], where y[ranks[i]] = y[ranks[i]]+bias_list[i]
-          6. `4` and `5` will be optimized.
-      Here the `y` is the target list to be returned.
+          5. modify `y` = [y_1,y_2,...,y_n],
+            where y[ranks[i]] = y[ranks[i]]+bias_list[i].
+      The `1`~`5` will be optimized appropriately when implementing.
 
       NOTE For determinacy, the sorting function used should be stable.
           Luckily, python's built-in sorted() function is a stable one,
-          see https://docs.python.org/3/library/functions.html?highlight=sorted#sorted.
-
+          see https://docs.python.org/3/library/functions.html#sorted
       """
       n = len(r)
       assert all(0<rate<=1 for rate in r)
       assert math.isclose(sum(r),1.0)
       assert 1<=n<=N
-
       x = [] # buf for index and `estimated-N*rate`
       y = [] # estimated list, y:list[estimated]
 
@@ -815,44 +839,6 @@ the testing.
           if i+1 <= m:
               y[sorted_index] += 1
       return y
-
-
-  def datas_dividing(datas:list[Any],rates:list[int|float],seed:int|None=None,)->tuple[list[Any],...]:
-      """
-      Dividing a list of elements into several parts without repetition or omission(leaking), 
-          according to rates, to achieve the smallest dividing error as far as possible.
-      Args:
-          datas: input list of elements that need divide
-          rates: list of rate numbers, represtent the dividing rate, rates[i] means the i+1 part will get about 
-                 len(datas)*rates[i] elements more details see function `_get_dividing_nums`'s arg `r`
-          seed: if not `None`, an independent random shuffle with `seed` will be applied to realize random dividing
-                NOTE: random is only for "which data in which parts", where the datas in a same parts should matain 
-                      the original relative order, we matain this order by operating on indexes-level
-      Return:
-          tuple of divided datas
-
-      For safety, we only operate the copy of datas.
-      For envinient, we operate on indexes-level insead of element-level.
-
-      >>> datas_dividing(list(range(3)),[0.51,0.24,0.25])
-      >>> ([0], [1], [2])
-      """
-      _datas = copy.deepcopy(datas)
-      _datas_indexes = list(range(len(_datas)))
-      if seed is not None:
-          random_func = random.Random(seed)
-          random_func.shuffle(_datas_indexes)
-      dividing_nums = _get_dividing_nums(N=len(_datas_indexes),r=rates)
-      indices_buf = [] # slices buf / indices buf
-      begin = 0 
-      for num in dividing_nums: # get indices
-          indices_buf.append(slice(begin,begin+num,1))
-          begin = begin+num
-      out_buf = []
-      for indices in indices_buf:
-          sorted_indices = sorted(operator.getitem(_datas_indexes,indices)) # get selected indexes, sort it
-          out_buf.append([_datas[i] for i in sorted_indices]) # get sorted elements by sorted indexes
-      return tuple(out_buf)
   ```
 
 - Define the testing part. We use [Python](https://www.python.org/) with
@@ -864,7 +850,7 @@ the testing.
   import math
   import pytest
   import random
-  from utils.data_dividing_helper import datas_dividing
+  from utils.data_dividing_helper import get_dividing_nums
 
   def _gen_rate(rate_len,seed):
       random_func = random.Random(seed)
@@ -898,23 +884,23 @@ the testing.
       numbers_list[j] += 1
       return numbers_list
 
-  @pytest.mark.parametrize('data_len',[2,3,5,10,20,33,79,100,999,114514,142857])
-  @pytest.mark.parametrize('rate_len',[1,2,3,5,6,7,8,9])
+  @pytest.mark.parametrize('N',[2,3,5,10,20,33,79,100,999,114514,142857])
+  @pytest.mark.parametrize('n',[1,2,3,5,6,7,8,9])
   @pytest.mark.parametrize('rate_seed',[0,1,2])
   @pytest.mark.parametrize('tweak_seed',[0,1,2,3,4,5])
   @pytest.mark.parametrize('p',[1,1.1,2,2.3,3])
-  def test_datas_dividing(data_len,rate_len,rate_seed,tweak_seed,p):
-      if data_len<rate_len:
+  def test_datas_dividing(N,n,rate_seed,tweak_seed,p):
+      if N<n:
           pass
       else:
-          datas = list(range(data_len))
-          rates = _gen_rate(rate_len,rate_seed)
-          divided_datas = datas_dividing(datas,rates,seed=None)
-          divided_datas_len = list(map(lambda x:len(x),divided_datas))
-
-          targets = list(map(lambda r:r*len(datas),rates))
-          diff_p_norm1 = _diff_p_norm(divided_datas_len,targets,ord=p)
-          diff_p_norm2 = _diff_p_norm(_tweak_i_j(divided_datas_len,tweak_seed),targets,ord=p)
+          ratios = _gen_rate(n,rate_seed)
+          targets = list(map(lambda r:r*N,ratios))
+          dividing_nums = get_dividing_nums(N,ratios)
+          assert len(dividing_nums)==n
+          assert sum(dividing_nums)==N
+          diff_p_norm1 = _diff_p_norm(dividing_nums,targets,ord=p)
+          diff_p_norm2 = \
+            _diff_p_norm(_tweak_i_j(dividing_nums,tweak_seed),targets,ord=p)
           assert diff_p_norm1<=diff_p_norm2
   ```
 
@@ -930,47 +916,60 @@ the testing.
 
     <figure>
     <img
-    src="https://raw.little-train.com/ed045e4dff371d09a090a0bf7bd60a91c0ec5e14119794e241da6598bef1a174.png"
+    src="https://raw.little-train.com/eb35932a6d9cf57ccf080fba6a9160dce43157a8ca6d65c41be25a2065dd5f9c.png"
     alt="test-result" />
     <figcaption aria-hidden="true">test-result</figcaption>
     </figure>
 
-# Summary
+# Conclusion and Discussion
 
 In this article, we have done the following things:
 
 1.  From the [mathematics of
     apportionment](https://en.wikipedia.org/wiki/Mathematics_of_apportionment)
-    in machine learning, we show the **rounding(decimal)** and
+    problem in machine learning, we show the **rounding(decimal)** and
     **fairness** problems when dividing/partitioning/splitting a dataset
-    of the same genre of elements by a series of proportions
+    of the same genre of elements by a series of proportions.
 2.  We investigated current practices and found it does not pay much
     attention to the aforesaid problems.
-3.  We give out a feasible standard to indicate a rounding method/target
-    to deal with the decimal problem.
-4.  According to the defined standard, we gave out objectives and
-    requirements from the perspective of [mathematics
-    apportionment](https://en.wikipedia.org/wiki/Mathematics_of_apportionment).
-5.  We designed algorithms to get the set of solutions, and proved its
-    correctness theoretically.
-    - We designed an algorithm to get the whole solution set.
-    - We designed an algorithm to get one solution of the solution set.
-    - We implemented the algorithm to get one solution of the solution
-      set, and did testing for it.
+3.  So, we tried to solve these problems.
+    - We gave out a feasible standard with **non-omission**,
+      **non-overlapping**, **determinacy(reproducibility)** and
+      **precision** to indicate a rounding method/target to deal with
+      the decimal problem.
+    - According to the defined standard, we gave out objectives and
+      requirements from the perspective of [mathematics
+      apportionment](https://en.wikipedia.org/wiki/Mathematics_of_apportionment).
+    - We designed the corresponding algorithms.
+      - We designed an algorithm to get the whole solution set and
+        proved its correctness theoretically
+      - We designed an algorithm to get one solution of the solution set
+        and proved its correctness theoretically.
+      - We implemented the algorithm to get one solution of the solution
+        set and did testing for it.
 
 Other points:
 
 - The **standard** and **method** posted in this article can help to
-  partition a dataset by a series of proportions in machine learning,
-  with **non-omission**, **non-overlapping**,
+  split a dataset by a series of proportions in machine learning, with
+  **non-omission**, **non-overlapping**,
   **determinacy(reproducibility)**, and **precision**.
-  - This method will be useful and exceptionally efficient when one
-    concerns much about the above dataset partitioning points.
+  - The proposed division metric/error based on `p-norm` ($p>1$) is a
+    reasonable indicator and with universality.
 
-  - And the division metric based on `p-norm` is a reasonable indicator
-    and with universality.
-- If we want to realize random division, we should shuffle the original
-  list first, which is not the key problem of this article.
+  - This method will be useful and exceptionally efficient when one
+    wants to minimize the division metric/error.
+
+  - When dividing, each data in the dataset is treated as identical,
+    even though all of them are different from each other actually. That
+    is, we hold the view that, the distribution in each divided subset
+    conforms to the original distribution.
+
+  - If one wants to realize random division on a dataset, we should:
+
+    - consider the original dataset as an ordered list,
+    - shuffle the original list first,
+    - then apply the division method as aforesaid.
 - The proof process in this article is complicated, where some lemmas
   are used to simplify the proof, but its logic is not confusing. The
   proofing procedure is very simple and smooth. It is a step-by-step
@@ -1292,7 +1291,7 @@ and analysis step by step, until the conclusion is reached.
         $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ge (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
 
     - Also, according to helper functions and conclusions in [appendix
-      A.x](#A.x), then: $$
+      A.2](#A.2), then: $$
       \begin{split}
       &\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}\\
       &=|b^{'}_{i_s}+x_{i_s} |^{p}+|b^{'}_{i_t}+x_{i_t}|^{p}-|b_{i_s}+x_{i_s}|^{p}-|b_{i_t}+x_{i_t}|^{p}\\
@@ -1357,7 +1356,7 @@ and analysis step by step, until the conclusion is reached.
         $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ge (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
 
     - Also, according to helper functions and conclusions in [appendix
-      A.x](#A.x), then: $$
+      A.2](#A.2), then: $$
       \begin{split}
       &\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}\\
       &=|b^{'}_{i_s}+x_{i_s}|^{p}+|b^{'}_{i_t}+x_{i_t}|^{p}-|b_{i_s}+x_{i_s}|^{p}-|b_{i_t}+x_{i_t}|^{p}\\
@@ -1445,7 +1444,7 @@ and analysis step by step, until the conclusion is reached.
             $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ge (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
 
         - Also, according to helper functions and conclusions in
-          [appendix A.x](#A.x), then: $$
+          [appendix A.2](#A.2), then: $$
           \begin{split}
           &\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
           &=|b^{'}_{i_s}+x_{i_s}|^{p}+|b^{'}_{i_t}+x_{i_t}|^{p}-|b_{i_s}+x_{i_s}|^{p}-|b_{i_t}+x_{i_t}|^{p}\\
