@@ -8,7 +8,7 @@ tags:
 - Mathematics
 - Algorithm
 title: Analyses of round function
-updated: "2024-05-22 02:50:56"
+updated: "2024-05-23 01:02:52"
 ---
 
 This article does a mathematical abstraction of the
