@@ -5,7 +5,7 @@ hide: true
 math: true
 mathjax: true
 title: Formatting Test
-updated: "2024-05-16 10:15:01"
+updated: "2024-05-22 17:04:49"
 ---
 
 用于测试关键的若干Markdown语法或Markdown标记是否被正确渲染为预期的html。
@@ -354,6 +354,16 @@ x+y\\y+z
 \\
 这是中文\\
 $$
+
+## 公式块中表示空集
+
+- `\empty` $$
+  \empty
+  $$
+
+- `\emptyset` $$
+  \emptyset
+  $$
 
 # 代码高亮
 
