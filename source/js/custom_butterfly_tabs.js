@@ -42,9 +42,6 @@
     // console.log(button.innerText);
     button.addEventListener('click', buttonFnTemp);
     });
-        
-    
-    
 })();
 
   

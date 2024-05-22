@@ -1,3 +1,6 @@
+// Anchors
+hexo.extend.injector.register('body_end', '<script src="/js/custom_butterfly_anchors.js"></script>', 'default');
+
 // Tabs
 hexo.extend.injector.register('body_end', '<script src="/js/custom_butterfly_tabs.js"></script>', 'default');
 
@@ -48,10 +51,6 @@ hexo.extend.injector.register('body_end', '<script src="/js/custom_butterfly_bei
 
 // 本站安全运行周期  butterfly 主题已经支持
 // hexo.extend.injector.register('body_end', '<script src="/js/custom_butterfly_duration.js"></script>', 'default');
-
-
-
-
 
 
 // CSS 隐藏 liveRe 广告
