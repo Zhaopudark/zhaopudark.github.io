@@ -46,11 +46,11 @@ def convert_md2md(markdown_content:str,file_path:str,target_dir:str):
             output_path,
             'markdown',
             'gfm',
-            [pandoc_filter.md2md_convert_github_style_alert_to_hexo_style_alert_filter,
-            pandoc_filter.md2md_enhance_equation_filter,
-            pandoc_filter.md2md_upload_figure_to_aliyun_filter,
-            pandoc_filter.md2md_norm_footnote_filter,
-            pandoc_filter.md2md_norm_internal_link_filter],
+            [pandoc_filter.filters.md2md.convert_github_style_alert_to_hexo_style_alert.run_filter,
+            pandoc_filter.filters.md2md.enhance_equation.run_filter,
+            pandoc_filter.filters.md2md.upload_figure_to_aliyun.run_filter,
+            pandoc_filter.filters.md2md.norm_footnote.run_filter,
+            pandoc_filter.filters.md2md.norm_internal_link.run_filter],
             doc_path=file_path,
             finalize=finalize)
     

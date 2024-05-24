@@ -11,7 +11,7 @@ tags:
 - Python
 title: Discuss the mathematics of apportionment when splitting the
   machine learning dataset into several parts by proportions
-updated: "2024-05-23 01:06:11"
+updated: "2024-05-23 01:06:53"
 ---
 
 This article discusses an operation that originated in machine learning,
@@ -1738,12 +1738,12 @@ Here are some standards or explanations of a stable sorting algorithm:
   [here](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) for
   more information.
 
-[^1]: 《Mathematics of apportionment》, . 2024年3月23日. 见于: 2024年5月18日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=Mathematics_of_apportionment&oldid=1215159951
+[^1]: 《Mathematics of apportionment》, Wikipedia. 2024年3月23日. 见于: 2024年5月18日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=Mathematics_of_apportionment&oldid=1215159951
 
-[^2]: 《Mathematics of apportionment》, . 2024年3月23日. 见于: 2024年5月18日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=Mathematics_of_apportionment&oldid=1215159951
+[^2]: 《Mathematics of apportionment》, Wikipedia. 2024年3月23日. 见于: 2024年5月18日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=Mathematics_of_apportionment&oldid=1215159951
 
-[^3]: 《Mathematics of apportionment》, . 2024年3月23日. 见于: 2024年5月18日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=Mathematics_of_apportionment&oldid=1215159951
+[^3]: 《Mathematics of apportionment》, Wikipedia. 2024年3月23日. 见于: 2024年5月18日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=Mathematics_of_apportionment&oldid=1215159951
 
 [^4]: 《Built-in Functions》, Python documentation. 见于: 2024年5月22日. \[在线\]. 载于: https://docs.python.org/3/library/functions.html#sorted
 
-[^5]: 《Sorting algorithm》, . 2024年3月19日. 见于: 2024年5月22日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=Sorting_algorithm&oldid=1214598553#Stability
+[^5]: 《Sorting algorithm》, Wikipedia. 2024年3月19日. 见于: 2024年5月22日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=Sorting_algorithm&oldid=1214598553#Stability

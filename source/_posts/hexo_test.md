@@ -5,7 +5,7 @@ hide: true
 math: true
 mathjax: true
 title: Formatting Test
-updated: "2024-05-22 17:04:49"
+updated: "2024-05-24 13:07:49"
 ---
 
 用于测试关键的若干Markdown语法或Markdown标记是否被正确渲染为预期的html。
@@ -546,14 +546,22 @@ which2.[^2]
 
 which3.[^3]
 
-## 脚注中带有链接
+## 脚注中带有特殊格式
 
 footnot.[^4]
 
-[^1]: Deep Learning with Intel® AVX-512 and Intel® DL Boost https://www.intel.cn/content/www/cn/zh/developer/articles/guide/deep-learning-with-avx512-and-dl-boost.html www.intel.cn
+emphasis(italic).[^5]
 
-[^2]: Deep Learning with Intel® AVX-512 and Intel® DL Boost https://www.intel.cn/content/www/cn/zh/developer/articles/guide/deep-learning-with-avx512-and-dl-boost.html www.intel.cn
+strong(bold).[^6]
 
-[^3]: Deep Learning with Intel® AVX-512 and Intel® DL Boost https://www.intel.cn/content/www/cn/zh/developer/articles/guide/deep-learning-with-avx512-and-dl-boost.html www.intel.cn
+[^1]: Deep Learning with Intel® AVX-512 and Intel® DL Boost https://www.intel.cn/content/www/cn/zh/developer/articles/guide/deep-learning-with-avx512-and-dl-boost.html www.intel.com
 
-[^4]: 技术文档 \[技术文档 \| Microsoft Learn\](https://learn.microsoft.com/zh-cn/docs/)
+[^2]: Deep Learning with Intel® AVX-512 and Intel® DL Boost https://www.intel.cn/content/www/cn/zh/developer/articles/guide/deep-learning-with-avx512-and-dl-boost.html www.intel.com
+
+[^3]: Deep Learning with Intel® AVX-512 and Intel® DL Boost https://www.intel.cn/content/www/cn/zh/developer/articles/guide/deep-learning-with-avx512-and-dl-boost.html www.intel.com
+
+[^4]: 技术文档 技术文档 \| Microsoft Learn
+
+[^5]: 《Sorting algorithm》, Wikipedia. 2024年3月19日. 见于: 2024年5月22日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=Sorting_algorithm&oldid=1214598553#Stability
+
+[^6]: 《Sorting algorithm》, Wikipedia. 2024年3月19日. 见于: 2024年5月22日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=Sorting_algorithm&oldid=1214598553#Stability

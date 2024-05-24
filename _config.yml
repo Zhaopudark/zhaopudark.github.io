@@ -130,6 +130,8 @@ pandoc: # https://github.com/hexojs/hexo-renderer-pandoc
     - "md2html-hash-anchor-and-internal-link-filter"
     - '--filter'
     - "md2html-increase-header-level-filter"
+    - '--filter'
+    - "md2html-enhance-footnote-filter"
     
 feed: # https://github.com/hexojs/hexo-generator-sitemap
   enable: true

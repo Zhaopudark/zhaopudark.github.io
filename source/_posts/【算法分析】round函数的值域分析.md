@@ -765,18 +765,18 @@ Take the following steps:
 4.  Combine `2` and `3`:
     $\forall n \in \mathbb{Z}^+, F_n=\{f(r,n,N)|(r,N)\in D_{r,N}\}=\{x|x\in [0,n),x\in \mathbb{Z}\}$.
 
-[^1]: 《Rounding》, . 2024年4月17日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=Rounding&oldid=1219417301
+[^1]: 《Rounding》, Wikipedia. 2024年4月17日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=Rounding&oldid=1219417301
 
-[^2]: 《Rounding》, . 2024年4月17日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=Rounding&oldid=1219417301
+[^2]: 《Rounding》, Wikipedia. 2024年4月17日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=Rounding&oldid=1219417301
 
-[^3]: 《Rounding》, . 2024年4月17日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=Rounding&oldid=1219417301
+[^3]: 《Rounding》, Wikipedia. 2024年4月17日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=Rounding&oldid=1219417301
 
-[^4]: 《IEEE 754》, . 2024年4月20日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=IEEE_754&oldid=1219817053#Rounding_rules
+[^4]: 《IEEE 754》, Wikipedia. 2024年4月20日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=IEEE_754&oldid=1219817053#Rounding_rules
 
-[^5]: 《IEEE 754》, . 2024年4月20日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=IEEE_754&oldid=1219817053#Rounding_rules
+[^5]: 《IEEE 754》, Wikipedia. 2024年4月20日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=IEEE_754&oldid=1219817053#Rounding_rules
 
-[^6]: 《IEEE 754》, . 2024年4月20日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=IEEE_754&oldid=1219817053#Rounding_rules
+[^6]: 《IEEE 754》, Wikipedia. 2024年4月20日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=IEEE_754&oldid=1219817053#Rounding_rules
 
-[^7]: 《IEEE 754》, . 2024年4月20日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=IEEE_754&oldid=1219817053#Rounding_rules
+[^7]: 《IEEE 754》, Wikipedia. 2024年4月20日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=IEEE_754&oldid=1219817053#Rounding_rules
 
-[^8]: 《IEEE 754》, . 2024年4月20日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=IEEE_754&oldid=1219817053#Rounding_rules
+[^8]: 《IEEE 754》, Wikipedia. 2024年4月20日. 见于: 2024年4月26日. \[在线\]. 载于: https://en.wikipedia.org/w/index.php?title=IEEE_754&oldid=1219817053#Rounding_rules

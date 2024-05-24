@@ -1,6 +1,3 @@
-// Anchors
-hexo.extend.injector.register('body_end', '<script src="/js/custom_butterfly_anchors.js"></script>', 'default');
-
 // Tabs
 hexo.extend.injector.register('body_end', '<script src="/js/custom_butterfly_tabs.js"></script>', 'default');
 
