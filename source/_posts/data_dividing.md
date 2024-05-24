@@ -11,7 +11,7 @@ tags:
 - Python
 title: Discuss the mathematics of apportionment when splitting the
   machine learning dataset into several parts by proportions
-updated: "2024-05-23 01:06:53"
+updated: "2024-05-24 14:20:08"
 ---
 
 This article discusses an operation that originated in machine learning,
@@ -1402,19 +1402,21 @@ and analysis step by step, until the conclusion is reached.
       - If $m = 0$,
         - then $\forall i \in \{1,2,\ldots,n\}~b_{i}=0$, i.e.,
           $b=\theta$.
-        - And the set \$ \_{D^{‘}*b}B_1 *{D<sup>{’}*b}B_2
-          *{D</sup>{’}\_b}B_3 = {b=}\$, which is a single element set.
+        - And the set
+          $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b=\theta\}$,
+          which is a single element set.
         - so,
           $D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$
       - If $m > 0$, there will be
-        $\exist h^{'} \in \{1,2,\ldots,h\} \sum_{i=1}^{h^{'}-1}g_i \le m < \sum_{i=1}^{h^{'}}g_i$.
+        $\exists h^{'} \in \{1,2,\ldots,h\} \sum_{i=1}^{h^{'}-1}g_i \le m < \sum_{i=1}^{h^{'}}g_i$.
         - If \$\_{i=1}<sup>{h</sup>{’}-1}g_i = m \$,
           - then
             $\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1$.
           - and,
             $\forall i \in G_{h^{'}} \cup G_{h^{'}+1} \cup \ldots \cup G_{h}, b_{i}=0$.
-          - And the set \$ \_{D^{‘}*b}B_1 *{D<sup>{’}*b}B_2
-            *{D</sup>{’}\_b}B_3 = {b}\$, which is a single element set.
+          - And the set
+            $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b\}$,
+            which is a single element set.
           - So,
             $D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$
         - If $\sum_{i=1}^{h^{'}-1}g_i < m < \sum_{i=1}^{h^{'}}g_i$,
@@ -1431,8 +1433,9 @@ and analysis step by step, until the conclusion is reached.
               $\forall i \in \complement_{G_{h^{'}}}^{\Lambda}, b_i = 0$
           - and,
             $\forall i \in G_{h^{'}+1} \cup G_{h^{'}+2} \cup \ldots \cup G_{h}, b_{i}=0$.
-          - So, the set \$ \_{D^{‘}*b}B_1 *{D<sup>{’}*b}B_2
-            *{D</sup>{’}\_b}B_3\$, is not a single element set. It has
+          - So, the set
+            $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$,
+            is not a single element set. It has
             $\binom{g_{h^{'}}}{q} >1$ elements.
           - Assume
             $\exists b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}] \in \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3, b^{'}\ne b$,
@@ -1477,8 +1480,9 @@ and analysis step by step, until the conclusion is reached.
       - If $m = 0$,
         - then $\forall i \in \{1,2,\ldots,n\}~b_{i}=0$, i.e.,
           $b=\theta$.
-        - And the set \$ \_{D^{‘}*b}B_1 *{D<sup>{’}*b}B_2
-          *{D</sup>{’}\_b}B_3 = {b=}\$, which is a single element set.
+        - And the set
+          $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b=\theta\}$,
+          which is a single element set.
         - so,
           $D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$
       - If $m > 0$, there will be $0< m < n$.
@@ -1489,8 +1493,9 @@ and analysis step by step, until the conclusion is reached.
             there is $\Lambda=\{i_1,i_2,\ldots,i_q\} \subsetneq G_{1}$
           - $\forall i\in \{i_1,i_2,\ldots,i_q\}, b_i = 1$,
           - and $\forall i \in \complement_{G_{1}}^{\Lambda}, b_i = 0$.
-        - So, the set \$ \_{D^{‘}*b}B_1 *{D<sup>{’}*b}B_2
-          *{D</sup>{’}\_b}B_3\$, is not a single element set. It has
+        - So, the set
+          $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$,
+          is not a single element set. It has
           $\binom{g_{1}}{q}=\binom{n}{m}>1$ elements.
         - Assume
           $\exists b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}] \in \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3, b^{'}\ne b$,
@@ -1574,18 +1579,20 @@ and analysis step by step, until the conclusion is reached.
       - If $m = 0$,
         - then $\forall i \in \{1,2,\ldots,n\}~b_{i}=0$, i.e.,
           $b=\theta$.
-        - And the set \$ \_{D^{‘}*b}B_1 *{D<sup>{’}*b}B_2
-          *{D</sup>{’}\_b}B_3 = {b=}\$, which is a single element set.
+        - And the set
+          $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b=\theta\}$,
+          which is a single element set.
         - So, $D^{*}_b=\{\theta\}$, which is a single element set.
       - If $m > 0$, there will be
-        $\exist h^{'} \in \{1,2,\ldots,h\} \sum_{i=1}^{h^{'}-1}g_i \le m < \sum_{i=1}^{h^{'}}g_i$.
+        $\exists h^{'} \in \{1,2,\ldots,h\} \sum_{i=1}^{h^{'}-1}g_i \le m < \sum_{i=1}^{h^{'}}g_i$.
         - If \$\_{i=1}<sup>{h</sup>{’}-1}g_i = m \$,
           - then
             $\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1$.
           - and,
             $\forall i \in G_{h^{'}} \cup G_{h^{'}+1} \cup \ldots \cup G_{h}, b_{i}=0$.
-          - And the set \$ \_{D^{‘}*b}B_1 *{D<sup>{’}*b}B_2
-            *{D</sup>{’}\_b}B_3 = {b}\$, which is a single element set.
+          - And the set
+            $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b\}$,
+            which is a single element set.
           - So $$
             \begin{split}
             D^{*}_b = \{b|&b = [b_1,b_2,\ldots,b_n]\\
@@ -1608,9 +1615,10 @@ and analysis step by step, until the conclusion is reached.
               $\forall i \in \complement_{G_{h^{'}}}^{\Lambda}, b_i = 0$
           - and,
             $\forall i \in G_{h^{'}+1} \cup G_{h^{'}+2} \cup \ldots \cup G_{h}, b_{i}=0$.
-          - So, the set \$ \_{D^{‘}*b}B_1 *{D<sup>{’}*b}B_2
-            *{D</sup>{’}\_b}B_3\$, is not a single element set. It has
-            $\binom{g_{h^{'}}}{q}>1$ elements.
+          - So, the set
+            $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$,
+            is not a single element set. It has $\binom{g_{h^{'}}}{q}>1$
+            elements.
           - So $$
             \begin{split}
             D^{*}_b = \{b|&b = [b_1,b_2,\ldots,b_n],\\
@@ -1628,8 +1636,9 @@ and analysis step by step, until the conclusion is reached.
       - If $m = 0$,
         - then $\forall i \in \{1,2,\ldots,n\}~b_{i}=0$, i.e.,
           $b=\theta$.
-        - And the set \$ \_{D^{‘}*b}B_1 *{D<sup>{’}*b}B_2
-          *{D</sup>{’}\_b}B_3 = {b=}\$, which is a single element set.
+        - And the set
+          $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b=\theta\}$,
+          which is a single element set.
         - So, $D^{*}_b=\{\theta\}$, which is a single element set.
       - If $m > 0$, there will be $0< m < n$.
         - let $q = m$:
@@ -1639,8 +1648,9 @@ and analysis step by step, until the conclusion is reached.
             there is $\Lambda=\{i_1,i_2,\ldots,i_q\} \subsetneq G_{1}$
           - $\forall i\in \{i_1,i_2,\ldots,i_q\}, b_i = 1$,
           - and $\forall i \in \complement_{G_{1}}^{\Lambda}, b_i = 0$.
-        - So, the set \$ \_{D^{‘}*b}B_1 *{D<sup>{’}*b}B_2
-          *{D</sup>{’}\_b}B_3\$, is not a single element set. It has
+        - So, the set
+          $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$,
+          is not a single element set. It has
           $\binom{g_{1}}{q}=\binom{n}{m}>1$ elements.
         - So $$
           \begin{split}
