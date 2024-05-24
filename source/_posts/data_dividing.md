@@ -11,7 +11,7 @@ tags:
 - Python
 title: Discuss the mathematics of apportionment when splitting the
   machine learning dataset into several parts by proportions
-updated: "2024-05-24 14:20:08"
+updated: "2024-05-24 14:32:20"
 ---
 
 This article discusses an operation that originated in machine learning,
@@ -628,10 +628,10 @@ $\eqref{NIP_problem}$:
       - $\forall s,t \in \{1,2,\ldots,h\}, s<t$, there is
         $\forall i_s \in G_s, i_t \in G_t$, that $x_{i_s}<x_{i_t}$.
     - According to the `7` of [appendix A.3](#A.3),
-      - If \$h, \$ $m = 0$, $D^{*}_b=\{\theta\}$, which is a single
+      - If $h\ge2$, $m = 0$, $D^{*}_b=\{\theta\}$, which is a single
         element set.
-      - If \$h, \$ $m > 0$,
-        - If \$\_{i=1}<sup>{h</sup>{’}-1}g_i = m \$,
+      - If $h\ge2$, $m > 0$,
+        - If $\sum_{i=1}^{h^{'}-1}g_i = m$,
           - So $$
             \begin{split}
             D^{*}_b = \{b|&b = [b_1,b_2,\ldots,b_n]\\
@@ -644,15 +644,15 @@ $\eqref{NIP_problem}$:
           - So  
             $$
             \begin{split}
-             D^{*}_b = \{b|&b = [b_1,b_2,\ldots,b_n],\\
-             &\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1,\\
-             &q = m-\sum_{i=1}^{h^{'}-1}g_i,\\
-             &Q=\{\lambda^{q}|\lambda^{q}=(i_1,i_2,\ldots,i_q)\in G_{h^{'}}^q, \forall u,v \in \{1,2,\ldots,q\}, i_u\ne i_v\}\\
-             &\forall \lambda^q=(i_1,i_2,\ldots,i_q) \in Q, \Lambda=\{i_1,i_2,\ldots,i_q\} \subsetneq G_{h^{'}},\\
-             &~~~~\forall i\in \{i_1,i_2,\ldots,i_q\}, b_i = 1,\\
-             &~~~~\forall i \in \complement_{G_{h^{'}}}^{\Lambda}, b_i = 0\\
-             &\forall i \in G_{h^{'}+1} \cup G_{h^{'}+2} \cup \ldots \cup G_{h}, b_{i}=0\}
-             \end{split}
+            D^{*}_b = \{b|&b = [b_1,b_2,\ldots,b_n],\\
+            &\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1,\\
+            &q = m-\sum_{i=1}^{h^{'}-1}g_i,\\
+            &Q=\{\lambda^{q}|\lambda^{q}=(i_1,i_2,\ldots,i_q)\in G_{h^{'}}^q, \forall u,v \in \{1,2,\ldots,q\}, i_u\ne i_v\}\\
+            &\forall \lambda^q=(i_1,i_2,\ldots,i_q) \in Q, \Lambda=\{i_1,i_2,\ldots,i_q\} \subsetneq G_{h^{'}},\\
+            &~~~~\forall i\in \{i_1,i_2,\ldots,i_q\}, b_i = 1,\\
+            &~~~~\forall i \in \complement_{G_{h^{'}}}^{\Lambda}, b_i = 0\\
+            &\forall i \in G_{h^{'}+1} \cup G_{h^{'}+2} \cup \ldots \cup G_{h}, b_{i}=0\}
+            \end{split}
             $$
           - The $D^{*}_b$ has $\binom{g_{h^{'}}}{q}>1$ elements.
       - If $h = 1$, $m = 0$, $D^{*}_b=\{\theta\}$, which is a single
@@ -978,7 +978,7 @@ Details of some proofs for several issues are documented here.
 
 ## A.1
 
-\$n,N ^+, n N \$, conside
+$\forall n,N \in \mathbb{Z}^+, n \le N$, conside
 $D_y = \{y|y=[y_1,y_2,\ldots,y_n]\in \mathbb{N}^n,\sum_{i=1}^{n}y_i=\|y\|_1=N\}$.
 Except $\emptyset$, how many elements in $D_y$?
 
@@ -1319,7 +1319,7 @@ and analysis step by step, until the conclusion is reached.
         - $\forall b \in B_3$, \$ b ^n,~\_{i=1}^n b_i = m\$, and
           $b_{i_s}< b_{i_t}$.
       - If $h=1$, $B_3 = \emptyset$.
-    - If \$h, \$
+    - If $h\ge2$.
       - Obviously, $B_3 \ne \emptyset$.
         - Assume that there
           $\exists b=[b_1,b_2,\ldots,b_n]\in D^{*'}_b \cap B_3$.
@@ -1365,7 +1365,7 @@ and analysis step by step, until the conclusion is reached.
           not valid.
         - So, $D^{*'}_b\cap B_3 = \emptyset$, i.e.,
           $D^{*'}_b \subseteq \complement_{D^{'}_b}B_3$.
-    - If $h=1$, ,then $B_3 = \emptyset$, and there is till
+    - If $h=1$,then $B_3 = \emptyset$, and there is till
       $D^{*'}_b \subseteq \complement_{D^{'}_b}B_3$.
 
     Therefore,
