@@ -11,7 +11,7 @@ tags:
 - Python
 title: Discuss the mathematics of apportionment when splitting the
   machine learning dataset into several parts by proportions
-updated: "2024-05-24 14:48:46"
+updated: "2024-05-25 14:31:18"
 ---
 
 This article discusses an operation that originated in machine learning,
@@ -248,7 +248,7 @@ described in mathematical terms:
 
 - Given a set $S$ of $N$ identical elements, i.e.,
   $S=\{s_1,s_2,\ldots,s_N\}$, where $N\in \mathbb{Z}^+$.
-- Given a list of proportions $r$, where
+- Given a vector of proportions $r$, where
   $r=[r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1,n\in \mathbb{Z}^+, n \le N$.
 - Try to divide $S$ into $n$ parts by $r$.
 - Define result vector $y=[y_1,y_2,\ldots,y_n]\in \mathbb{N}^n$, where
@@ -261,7 +261,8 @@ described in mathematical terms:
   - $\forall y \in D_y, f(y)=(\sum_{i=1}^n |y_i-r_{i}N |^{p})^{\frac{1}{p}}$.
 - Try to find a the
   $D^*_y=\{y|y=\mathop{\arg\min}\limits_{y\in D_y}f(y)\}$.
-- $\forall y^*=[y^*_1,y^*_2,\ldots,y^*_n]$, divide $S$ into `n` parts:
+- $\forall y^*=[y^*_1,y^*_2,\ldots,y^*_n] \in D^*_y$, divide $S$ into
+  `n` parts:
   - part `1`: $\{s_1,s_2,\ldots,s_{y^{*}_1}\}$
   - part `2`:
     $\{s_{y^{*}_1+1},s_{y^{*}_1+2},\ldots,s_{y^{*}_1+y^{*}_2}\}$
@@ -749,8 +750,8 @@ one solution of problem $\eqref{NIP_problem}$:
 
     {% endnote %}
 
-2.  According the $b\in D^{*}_b$ in `1`, calculate all the
-    $y\in D^*_y=\{y|y=[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n],\\ \forall b=[b_1,b_2,\ldots,b_n]\in D^{*}_b\}$.
+2.  According the $b\in D^{*}_b$ in `1`, calculate the $y\in D^*_y$ as
+    $y=[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]$.
 
 3.  Generally, this algorithm’s worst-case time complexity is $O(n^2)$,
     where the sorting accounts for the most computing time.
