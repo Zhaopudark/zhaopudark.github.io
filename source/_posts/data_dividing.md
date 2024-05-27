@@ -11,7 +11,7 @@ tags:
 - Python
 title: Discuss the mathematics of apportionment when splitting the
   machine learning dataset into several parts by proportions
-updated: "2024-05-25 14:31:18"
+updated: "2024-05-27 14:16:41"
 ---
 
 This article discusses an operation that originated in machine learning,
@@ -270,18 +270,18 @@ described in mathematical terms:
   - part `n`:
     $\{s_{\sum_{i=1}^{n-1}y^*_i+1},s_{\sum_{i=1}^{n-1}y^*_i+2},\ldots,s_{\sum_{i=1}^{n}y^*_i}\}$
 
-{% note info %}
+  {% note info %}
 
-- The constraint $n \le N$ is needed to exclude many unrealistic
-  scenarios. Because if $n > N$, there must be at least one divided part
-  that possesses no element, instead of being determined by the
-  corresponding ratio $r_i$.
-- The constraint of the set $D_y$ can guarantee **non-omission** and
-  **non-overlapping**.
-- The objective function $f(y)$ can guarantee
-  **determinacy(reproducibility)** and **precision**.
+  - The constraint $n \le N$ is needed to exclude many unrealistic
+    scenarios. Because if $n > N$, there must be at least one divided
+    part that possesses no element, instead of being determined by the
+    corresponding ratio $r_i$.
+  - The constraint of the set $D_y$ can guarantee **non-omission** and
+    **non-overlapping**.
+  - The objective function $f(y)$ can guarantee
+    **determinacy(reproducibility)** and **precision**.
 
-{% endnote %}
+  {% endnote %}
 
 So, the key objective is equivalent to solve a Nonlinear Integer
 Programming (NIP) problem: $$
