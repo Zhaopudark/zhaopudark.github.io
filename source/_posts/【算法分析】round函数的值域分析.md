@@ -8,7 +8,7 @@ tags:
 - Mathematics
 - Algorithm
 title: Analyses of round function
-updated: "2024-05-23 01:02:52"
+updated: "2024-05-28 23:44:04"
 ---
 
 This article does a mathematical abstraction of the
@@ -169,8 +169,8 @@ which is base on $round(\cdot) \mathbb{R}\rightarrow \mathbb{Z}$.
 - Define
   $f(r,n,N):\{\mathbb{R}^n,\mathbb{Z}^+,\mathbb{Z}^+\}\rightarrow\{\mathbb{Z}\}$
   as:
-  - $\forall (r,n,N) \in D_{r,n,N}$, there is \$ f(r,n,N)=\[*{i=1}^n
-    round(r*{i}N)\]-N\$
+  - $\forall (r,n,N) \in D_{r,n,N}$, there is
+    $f(r,n,N)=[\sum_{i=1}^n round(r_{i}N)]-N$
 - $\forall n \in \mathbb{Z}^+$, define
   $D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
 - $\forall n \in \mathbb{Z}^+$, define the function $f(r,n,N)$’s value
@@ -230,8 +230,8 @@ the $0$ is also necessary.
   - $D_{r,n,N}=\{(r,n,N)|n \in\mathbb{Z}^+,N \in\mathbb{Z}^+, n \le N,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$
   - $f(r,n,N):\{\mathbb{R}^n,\mathbb{Z}^+,\mathbb{Z}^+\}\rightarrow\{\mathbb{Z}\}$
     as:
-    - $\forall (r,n,N) \in D_{r,n,N}$, there is \$ f(r,n,N)=\[*{i=1}^n
-      round(r*{i}N)\]-N\$.
+    - $\forall (r,n,N) \in D_{r,n,N}$, there is
+      $f(r,n,N)=[\sum_{i=1}^n round(r_{i}N)]-N$.
   - $\forall n \in \mathbb{Z}^+$,
     $D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
 - Question:
@@ -372,8 +372,8 @@ Take the following steps:
   - $D_{r,n,N}=\{(r,n,N)|n \in\mathbb{Z}^+,N \in\mathbb{Z}^+, n \le N,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$
   - $f(r,n,N):\{\mathbb{R}^n,\mathbb{Z}^+,\mathbb{Z}^+\}\rightarrow\{\mathbb{Z}\}$
     as:
-    - $\forall (r,n,N) \in D_{r,n,N}$, there is \$ f(r,n,N)=\[*{i=1}^n
-      round(r*{i}N)\]-N\$.
+    - $\forall (r,n,N) \in D_{r,n,N}$, there is
+      $f(r,n,N)=[\sum_{i=1}^n round(r_{i}N)]-N$.
   - $\forall n \in \mathbb{Z}^+$,
     $D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
 - Question:
@@ -575,9 +575,8 @@ Take the following steps:
   - $D_{r,n,N}=\{(r,n,N)|n \in\mathbb{Z}^+,N \in\mathbb{Z}^+, n \le N,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$
   - $f(r,n,N):\{\mathbb{R}^n,\mathbb{Z}^+,\mathbb{Z}^+\}\rightarrow\{\mathbb{Z}\}$
     as:
-    - $\forall (r,n,N) \in D_{r,n,N}$, there is \$ f(r,n,N)=\[*{i=1}^n
-      round(r*{i}N)\]-N=\[*{i=1}^n truncate(r*{i}N)\]-N=\[*{i=1}^n
-      floor(r*{i}N)\]-N\$.
+    - $\forall (r,n,N) \in D_{r,n,N}$, there is
+      $f(r,n,N)=[\sum_{i=1}^n round(r_{i}N)]-N=[\sum_{i=1}^n truncate(r_{i}N)]-N=[\sum_{i=1}^n floor(r_{i}N)]-N$.
   - $\forall n \in \mathbb{Z}^+$,
     $D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
 - Question:
@@ -667,17 +666,17 @@ Take the following steps:
 
 ## A.4
 
-- Given $round(x)$, where \$x ^+{0},~round(x)=ceil(x)=x\$. Its domain of
-  definition is restricted to $\mathbb{R}^+\cup\{0\}$ instead of
-  $\mathbb{R}$, and in this domain, it is equivalent to
+- Given $round(x)$, where
+  $\forall x \in \mathbb{R}^+\cup\{0\},~round(x)=ceil(x)=\lceil x\rceil$.
+  Its domain of definition is restricted to $\mathbb{R}^+\cup\{0\}$
+  instead of $\mathbb{R}$, and in this domain, it is equivalent to
   $\eqref{round_4}$.
 - Define:
   - $D_{r,n,N}=\{(r,n,N)|n \in\mathbb{Z}^+,N \in\mathbb{Z}^+, n \le N,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$
   - $f(r,n,N):\{\mathbb{R}^n,\mathbb{Z}^+,\mathbb{Z}^+\}\rightarrow\{\mathbb{Z}\}$
     as:
-    - $\forall (r,n,N) \in D_{r,n,N}$, there is \$ f(r,n,N)=\[*{i=1}^n
-      round(r*{i}N)\]-N=\[*{i=1}^n truncate(r*{i}N)\]-N=\[*{i=1}^n
-      floor(r*{i}N)\]-N\$.
+    - $\forall (r,n,N) \in D_{r,n,N}$, there is
+      $f(r,n,N)=[\sum_{i=1}^n round(r_{i}N)]-N=[\sum_{i=1}^n truncate(r_{i}N)]-N=[\sum_{i=1}^n floor(r_{i}N)]-N$.
   - $\forall n \in \mathbb{Z}^+$,
     $D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N\ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
 - Question:

@@ -11,7 +11,7 @@ tags:
 - Python
 title: Discuss the mathematics of apportionment when splitting the
   machine learning dataset into several parts by proportions
-updated: "2024-05-27 14:16:41"
+updated: "2024-05-28 23:45:58"
 ---
 
 This article discusses an operation that originated in machine learning,
@@ -1319,7 +1319,8 @@ and analysis step by step, until the conclusion is reached.
       - $h\in \mathbb{Z}^+$
       - If $h \ge 2$,
         - $\exists s,t \in \{1,2,\ldots,h\}, s < t, i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t}$,
-        - $\forall b \in B_3$, \$ b ^n,~\_{i=1}^n b_i = m\$, and
+        - $\forall b \in B_3$,
+          $b \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m$, and
           $b_{i_s} < b_{i_t}$.
       - If $h=1$, $B_3 = \emptyset$.
     - If $h \ge 2$.
@@ -1412,7 +1413,7 @@ and analysis step by step, until the conclusion is reached.
           $D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$
       - If $m > 0$, there will be
         $\exists h^{'} \in \{1,2,\ldots,h\} \sum_{i=1}^{h^{'}-1}g_i \le m < \sum_{i=1}^{h^{'}}g_i$.
-        - If \$\_{i=1}<sup>{h</sup>{’}-1}g_i = m \$,
+        - If $\sum_{i=1}^{h^{'}-1}g_i = m$,
           - then
             $\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1$.
           - and,
@@ -1588,7 +1589,7 @@ and analysis step by step, until the conclusion is reached.
         - So, $D^{*}_b=\{\theta\}$, which is a single element set.
       - If $m > 0$, there will be
         $\exists h^{'} \in \{1,2,\ldots,h\} \sum_{i=1}^{h^{'}-1}g_i \le m < \sum_{i=1}^{h^{'}}g_i$.
-        - If \$\_{i=1}<sup>{h</sup>{’}-1}g_i = m \$,
+        - If $\sum_{i=1}^{h^{'}-1}g_i = m$,
           - then
             $\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1$.
           - and,
