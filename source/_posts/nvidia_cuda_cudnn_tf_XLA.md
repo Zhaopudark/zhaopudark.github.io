@@ -6,7 +6,7 @@ tags:
 - Machine Learning
 - Computer Vision
 title: How to Compile TensorFlow-GPU both on Linux (WSL2) and Window
-updated: "2024-01-25 15:39:47"
+updated: "2024-05-30 16:11:31"
 ---
 
 This article record some key procedures for me to compile
@@ -79,7 +79,7 @@ tools and their versions. We try to ensure these stuffs’ versions are as
 new as possible, but not necessarily the latest versions, because the
 latest versions may incur compatibility issues. For example, see
 [here](https://developer.nvidia.com/rdp/cudnn-download), before
-2022/12/18, the latest `cudnn8.7.0.84` does not support `cuda12.0`, so
+`2022/12/18`, the latest `cudnn8.7.0.84` does not support `cuda12.0`, so
 we can only use `cuda11.8` to make it compatible with `cudnn8.7.0.84`.
 Additionally, see
 [here](https://github.com/tensorflow/tensorflow/releases/tag/v2.11.0#:~:text=TF%20pip%3A,TensorFlow%20in%20WSL2.)
@@ -401,7 +401,7 @@ conda.
   Then, go to [NVIDIA cuDNN home
   page](https://developer.nvidia.com/cudnn) to download the `tar` file
   as the name `cudnn-linux-x86_64-8.x.x.x_cudaX.Y-archive.tar.xz` , then
-  move it to \$HOME directory in anyway. (To download this cudnn `tar`
+  move it to `$HOME`  directory in anyway. (To download this cudnn `tar`
   file, a NVIDIA account registration on browser is needed, so we cannot
   download it to local simply via tools such as `wget`.)
 

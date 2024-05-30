@@ -37,10 +37,10 @@ def finalize(doc:pf.Doc=None,**kwargs):
 #     return pf.run_filters(actions= [math_filter,figure_filter,footnote_filter,internal_link_filter],finalize=_finalize,doc=doc,**kwargs)
 
 
-def convert_md2md(markdown_content:str,file_path:str,target_dir:str):
+def convert_md2md(markdown_content:str,file_path:pathlib.Path,target_dir:str):
     doc = pf.convert_text(markdown_content,input_format='markdown',output_format='panflute',standalone=True)
     if doc.get_metadata():
-        output_path = pathlib.Path(f"{target_dir}/{file_path.name}")
+        output_path = pathlib.Path(f"{target_dir}/{file_path.stem}.md")
         pandoc_filter.run_filters_pyio(
             file_path,
             output_path,
