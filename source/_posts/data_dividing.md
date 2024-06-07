@@ -11,7 +11,7 @@ tags:
 - Python
 title: Discuss the mathematics of apportionment when splitting the
   machine learning dataset into several parts by proportions
-updated: "2024-05-28 23:45:58"
+updated: "2024-06-07 11:35:05"
 ---
 
 This article discusses an operation that originated in machine learning,
@@ -1214,6 +1214,7 @@ and analysis step by step, until the conclusion is reached.
 2.  Let
     $B_1= \{b|b\in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m, \exists i_s,i_t \in \{1,2,\ldots,n\}~b_{i_s} \ge 1,b_{i_t} \le -1\}\subseteq D^{'}_b$,
     then there will be $D^{*'}_b \subseteq \complement_{D^{'}_b}B_1$.
+
     Proof:
 
     - Obviously, $B_1 \ne \emptyset$.

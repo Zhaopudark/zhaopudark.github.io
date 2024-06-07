@@ -5,7 +5,7 @@ hide: true
 math: true
 mathjax: true
 title: Formatting Test
-updated: "2024-05-24 13:07:49"
+updated: "2024-06-05 22:40:55"
 ---
 
 用于测试关键的若干Markdown语法或Markdown标记是否被正确渲染为预期的html。
