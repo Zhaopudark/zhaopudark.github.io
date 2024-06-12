@@ -14,7 +14,7 @@
             }else if(level == current_heading_level){
                 headingCounters[level-1] += 1;
             }else{
-                headingCounters[level-1] = 1;
+                headingCounters[level-1] += 1;
                 for (let i = level + 1; i < headingCounters.length; i++) {
                     headingCounters[i] = 0;
                 }  
