@@ -4,6 +4,8 @@ hexo.extend.injector.register('body_end', '<script src="/js/custom_butterfly_tab
 // 脚注优化
 hexo.extend.injector.register('body_end', '<script src="/js/custom_any_theme_footnotes.js"></script>', 'default');
 
+hexo.extend.injector.register('body_end', '<script src="/js/custom_any_theme_headings_number.js"></script>', 'default');
+
 // Mermaid 支持 
 // fluid 主题已经支持 
 // 使用Butterfly主题时，需要 highlight.js 中排除 mermaid 语言
