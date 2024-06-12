@@ -15,7 +15,8 @@
                 headingCounters[level-1] += 1;
             }else{
                 headingCounters[level-1] += 1;
-                for (let i = level + 1; i < headingCounters.length; i++) {
+                // clear from level-1+1 to end
+                for (let i = level; i < headingCounters.length; i++) {
                     headingCounters[i] = 0;
                 }  
             }
