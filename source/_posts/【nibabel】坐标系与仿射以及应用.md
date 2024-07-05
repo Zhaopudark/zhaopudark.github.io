@@ -9,7 +9,7 @@ tags:
 - Machine Learning
 - Computer Vision
 title: About `coordinate systems and affines` in Nibabel
-updated: "2024-04-25 15:50:06"
+updated: "2024-06-20 20:00:54"
 ---
 
 There are many continuously updated Python libraries that can be used or
@@ -136,17 +136,17 @@ readers, but it is a respect for copyright.
   example, the subject may be lying with their face pointing to the
   right (in terms of the scanner-left/right axis). In that case “scanner
   XYZ” will not tell us about the subject’s left and right, but only the
-  scanner left and right. We might prefer to know where we are in terms
-  of the subject’s left and right.[^8]
+  scanner‘s left and right. We might prefer to know where we are in
+  terms of the subject’s left and right.[^8]
 
-  To deal with this problem, most reference spaces use subject- or
-  patient- centered scanner coordinate systems. In these systems, the
+  To deal with this problem, most reference spaces use `subject-` or
+  `patient-` centered scanner coordinate systems. In these systems, the
   axes are still the scanner axes above, but the ordering and direction
-  of the axes comes from the position of the subject. The most common
+  of the axes come from the position of the subject. The most common
   subject-centered scanner coordinate system in neuroimaging is called
   **“scanner RAS” (right, anterior, superior)**. Here the scanner axes
   are reordered and flipped so that the first axis is the scanner axis
-  that is closest to the left to right axis of the subject, the second
+  that is closest to the left-to-right axis of the subject, the second
   is the closest scanner axis to the posterior-anterior axis of the
   subject, and the third is the closest scanner axis to the
   inferior-superior axis of the subject. For example, if the subject was

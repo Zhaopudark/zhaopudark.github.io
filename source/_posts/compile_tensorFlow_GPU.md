@@ -1,12 +1,12 @@
 ---
-abbrlink: 9f6c2fd1
+abbrlink: abd91911
 categories: Personal Experiences
 date: "2023-10-25 16:22:37"
 tags:
 - Machine Learning
 - Computer Vision
-title: How to Compile TensorFlow-GPU both on Linux (WSL2) and Window
-updated: "2024-05-30 16:11:31"
+title: How to compile TensorFlow-GPU both on Linux (WSL2) and Window
+updated: "2024-07-06 01:53:57"
 ---
 
 This article record some key procedures for me to compile
@@ -401,7 +401,7 @@ conda.
   Then, go to [NVIDIA cuDNN home
   page](https://developer.nvidia.com/cudnn) to download the `tar` file
   as the name `cudnn-linux-x86_64-8.x.x.x_cudaX.Y-archive.tar.xz` , then
-  move it to `$HOME`  directory in anyway. (To download this cudnn `tar`
+  move it to `$HOME` directory in anyway. (To download this cudnn `tar`
   file, a NVIDIA account registration on browser is needed, so we cannot
   download it to local simply via tools such as `wget`.)
 

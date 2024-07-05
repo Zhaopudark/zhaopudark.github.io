@@ -7,7 +7,7 @@ tags:
 - File System
 title: Reset ACL/SDDL to deal with authorization problems in ReFS or
   NTFS
-updated: "2024-02-27 14:58:35"
+updated: "2024-07-05 08:49:46"
 ---
 
 This article records my procedures for dealing with authorization
@@ -21,6 +21,8 @@ this article, we do not talk about the relationship between
 almost can follow the actions in this article, since if a `File System`
 does not support authorization operations, it may not bring us
 authorization problems.
+
+<!-- more -->
 
 Some crucial codes can be found in
 [Authorization.ps1](https://github.com/Zhaopudark/PSComputerManagementZp/blob/2d44507837ecca35726aeae5c6439dc6e2bb97f4/Module/Private/Tools/Authorization.ps1)

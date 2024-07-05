@@ -2,6 +2,76 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
  <url>
   <loc>
+   https://little-train.com/posts/abd91911.html
+  </loc>
+  <lastmod>
+   2024-07-06
+  </lastmod>
+  <changefreq>
+   monthly
+  </changefreq>
+  <priority>
+   0.8
+  </priority>
+ </url>
+ <url>
+  <loc>
+   https://little-train.com/posts/e08b94fa.html
+  </loc>
+  <lastmod>
+   2024-07-06
+  </lastmod>
+  <changefreq>
+   monthly
+  </changefreq>
+  <priority>
+   0.8
+  </priority>
+ </url>
+ <url>
+  <loc>
+   https://little-train.com/posts/34195fcb.html
+  </loc>
+  <lastmod>
+   2024-07-06
+  </lastmod>
+  <changefreq>
+   monthly
+  </changefreq>
+  <priority>
+   0.8
+  </priority>
+ </url>
+ <url>
+  <loc>
+   https://little-train.com/posts/ebaccba2.html
+  </loc>
+  <lastmod>
+   2024-07-05
+  </lastmod>
+  <changefreq>
+   monthly
+  </changefreq>
+  <priority>
+   0.8
+  </priority>
+ </url>
+ <url>
+  <loc>
+   https://little-train.com/posts/1759cd56.html
+  </loc>
+  <lastmod>
+   2024-06-20
+  </lastmod>
+  <changefreq>
+   monthly
+  </changefreq>
+  <priority>
+   0.8
+  </priority>
+ </url>
+ <url>
+  <loc>
    https://little-train.com/posts/70807cc5.html
   </loc>
   <lastmod>
@@ -16,52 +86,10 @@
  </url>
  <url>
   <loc>
-   https://little-train.com/posts/9f6c2fd1.html
-  </loc>
-  <lastmod>
-   2024-05-30
-  </lastmod>
-  <changefreq>
-   monthly
-  </changefreq>
-  <priority>
-   0.8
-  </priority>
- </url>
- <url>
-  <loc>
-   https://little-train.com/posts/34195fcb.html
-  </loc>
-  <lastmod>
-   2024-05-28
-  </lastmod>
-  <changefreq>
-   monthly
-  </changefreq>
-  <priority>
-   0.8
-  </priority>
- </url>
- <url>
-  <loc>
    https://little-train.com/posts/1c60e1d2.html
   </loc>
   <lastmod>
    2024-04-28
-  </lastmod>
-  <changefreq>
-   monthly
-  </changefreq>
-  <priority>
-   0.8
-  </priority>
- </url>
- <url>
-  <loc>
-   https://little-train.com/posts/1759cd56.html
-  </loc>
-  <lastmod>
-   2024-04-25
   </lastmod>
   <changefreq>
    monthly
@@ -118,20 +146,6 @@
   </loc>
   <lastmod>
    2024-02-28
-  </lastmod>
-  <changefreq>
-   monthly
-  </changefreq>
-  <priority>
-   0.8
-  </priority>
- </url>
- <url>
-  <loc>
-   https://little-train.com/posts/ebaccba2.html
-  </loc>
-  <lastmod>
-   2024-02-27
   </lastmod>
   <changefreq>
    monthly

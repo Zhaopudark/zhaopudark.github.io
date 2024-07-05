@@ -50,6 +50,7 @@ https://little-train.com/page/2/index.html
 https://little-train.com/posts/1757b5a2
 https://little-train.com/posts/1757b5a2.html
 https://little-train.com/posts/17b34613.html
+https://little-train.com/posts/18c8ba4b.html
 https://little-train.com/posts/2.56e27.html
 https://little-train.com/posts/2855d9ad.html
 https://little-train.com/posts/28760591.html
@@ -70,6 +71,7 @@ https://little-train.com/posts/9a1192fa
 https://little-train.com/posts/9a1192fa.html
 https://little-train.com/posts/9b627e5.html
 https://little-train.com/posts/9f6c2fd1
+https://little-train.com/posts/9f6c2fd1.html
 https://little-train.com/posts/<a href=
 https://little-train.com/posts/[Install WSL | Microsoft Docs](https://docs.microsoft.com/en-us/windows/wsl/install)
 https://little-train.com/posts/a303f9aa
@@ -81,6 +83,7 @@ https://little-train.com/posts/ac22604c
 https://little-train.com/posts/ac22604c.html
 https://little-train.com/posts/b3746bf1
 https://little-train.com/posts/b3746bf1.html
+https://little-train.com/posts/b4545.html
 https://little-train.com/posts/c05ef92b
 https://little-train.com/posts/c05ef92b.html
 https://little-train.com/posts/c19e73aa
@@ -92,6 +95,7 @@ https://little-train.com/posts/d0d884a0.html
 https://little-train.com/posts/d13c6a40
 https://little-train.com/posts/d13c6a40.html
 https://little-train.com/posts/d36d5fbd.html
+https://little-train.com/posts/e81e7147.html
 https://little-train.com/posts/e99215c7.html
 https://little-train.com/posts/ea07a866.html
 https://little-train.com/posts/f06fd56f.html
