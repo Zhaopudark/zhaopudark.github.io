@@ -5,7 +5,7 @@ hide: true
 math: true
 mathjax: true
 title: Formatting Test
-updated: "2024-06-05 22:40:55"
+updated: "2024-07-23 23:48:59"
 ---
 
 用于测试关键的若干Markdown语法或Markdown标记是否被正确渲染为预期的html。
@@ -343,7 +343,7 @@ $$
 $$
 \begin{split}
 &x+y \\
-&y+z
+&y+z \\
 \end{split}
 $$
 
@@ -364,6 +364,12 @@ $$
 - `\emptyset` $$
   \emptyset
   $$
+
+## mathbb 和 mathbf
+
+\$\$
+
+\$\$
 
 # 代码高亮
 
