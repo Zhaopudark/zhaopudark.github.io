@@ -5,7 +5,7 @@ hide: true
 math: true
 mathjax: true
 title: Formatting Test
-updated: "2024-07-23 23:48:59"
+updated: "2024-07-24 00:11:50"
 ---
 
 用于测试关键的若干Markdown语法或Markdown标记是否被正确渲染为预期的html。
@@ -367,9 +367,18 @@ $$
 
 ## mathbb 和 mathbf
 
-\$\$
-
-\$\$
+$$
+\begin{split}
+&\mathbb{Z^-}\\
+&\mathbb{Z^+}\\
+&\mathbb{R^+}\\
+&\mathbb{N}\\
+&\mathbf{Z^-}\\
+&\mathbf{Z^+}\\
+&\mathbf{R^+}\\
+&\mathbf{N}\\
+\end{split}
+$$
 
 # 代码高亮
 
