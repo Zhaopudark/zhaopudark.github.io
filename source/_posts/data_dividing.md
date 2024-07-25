@@ -11,7 +11,7 @@ tags:
 - Python
 title: Discuss the mathematics of apportionment when splitting the
   machine learning dataset into several parts by proportions
-updated: "2024-06-07 11:35:05"
+updated: "2024-07-25 22:01:10"
 ---
 
 This article discusses an operation that originated in machine learning,
