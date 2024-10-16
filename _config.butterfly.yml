@@ -426,7 +426,7 @@ rightside_item_order:
 
 anchor:
   # When you scroll, the URL will update according to header id.
-  auto_update: false
+  auto_update: true
   # Click the headline to scroll and update the anchor
   click_to_scroll: false
 
@@ -820,7 +820,7 @@ display_mode: light
 
 # Configuration for beautifying the content of the article
 beautify:
-  enable: false
+  enable: true
   # Specify the field to beautify (site or post)
   field: post
   # Specify the icon to be used as a prefix for the title, such as '\f0c1'
@@ -999,7 +999,7 @@ instantpage: false
 # Pangu - Insert a space between Chinese character and English character
 # https://github.com/vinta/pangu.js
 pangu:
-  enable: false
+  enable: true
   # Specify the field to use pangu (site or post)
   field: site
 
