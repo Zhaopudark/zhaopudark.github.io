@@ -49,57 +49,52 @@ fractions to integers[^2], which may lead to some problems:
 - **How to rounding, i.e., how to handle decimals?**
 
   Let’s look at an example, i.e., how to divide a dataset consisting of
-  $`248`$ elements into `train set`, `validate set`, and `test set`,
-  according to proportions $`[0.7,0.1,0.2]`$?
+  $248$ elements into `train set`, `validate set`, and `test set`,
+  according to proportions $[0.7,0.1,0.2]$?
 
-  Simply multiplying the total number of elements by the ratio:
-  ``` math
-
+  Simply multiplying the total number of elements by the ratio: $$
   \begin{split}
   &\text{train set}: &248\times0.7=173.6\\
   &\text{validate set}: &248\times0.1=24.8\\
   &\text{test set}: &248\times0.2=49.6
   \end{split}
-  ```
-  There are at least the following options and their dilemmas:
+  $$ There are at least the following options and their dilemmas:
 
-  - `Solution 1`: `train set` gets $`173`$, `validate set` gets $`24`$,
-    `test set` gets $`49`$
-    - But $`173+24+49=246 < 248`$, 2 elements will be dropped. Which 2
+  - `Solution 1`: `train set` gets $173$, `validate set` gets $24$,
+    `test set` gets $49$
+    - But $173+24+49=246 < 248$, 2 elements will be dropped. Which 2
       elements will be chosen to be dropped? Why choose them but not
       other else?
-  - `Solution 2`: `train set` gets $`174`$, `validate set` gets $`25`$,
-    `test set` gets $`50`$
-    - But $`174+25+50=249 > 248`$ , lacking 1 element. Where to find an
+  - `Solution 2`: `train set` gets $174$, `validate set` gets $25$,
+    `test set` gets $50$
+    - But $174+25+50=249 > 248$ , lacking 1 element. Where to find an
       extra element? We should not make any overlap on these 3 sets.
   - `Solution 3`, basing on the first option and manually divide more
-    elements to `train set` and `test set`: `train set` gets $`174`$,
-    `validate set` gets $`24`$, `test set` gets $`45`$
-    - It seems good because of $`174+24+50=248\equiv 248`$. But, why not
+    elements to `train set` and `test set`: `train set` gets $174$,
+    `validate set` gets $24$, `test set` gets $45$
+    - It seems good because of $174+24+50=248\equiv 248$. But, why not
       divide more elements to `validate set`? And, can this result still
-      be considered as the one according to ratios $`0.7,0.1,0.2`$
-      without any disputation?
+      be considered as the one according to ratios $0.7,0.1,0.2$ without
+      any disputation?
 
 - **How to maintain the fairness?**
 
-  As the above example, how to divide a dataset consisting of $`247`$
+  As the above example, how to divide a dataset consisting of $247$
   elements into `train set`, `validate set`,and `test set`, according to
-  proportions $`[0.8,0.1,0.1]`$?
+  proportions $[0.8,0.1,0.1]$?
 
-  Simply multiplying the total number of elements by the ratio:
-  ``` math
-
+  Simply multiplying the total number of elements by the ratio: $$
   \begin{split}
   &\text{train set}: &247\times0.8=197.6\\
   &\text{validate set}: &248\times0.1=24.8\\
   &\text{test set}: &248\times0.1=24.8
   \end{split}
-  ```
+  $$
 
-  - `Solution 1`: `train set` get $`198`$, `validate set` get $`25`$,
-    `test set` get $`24`$.
-  - `Solution 2`: `train set` get $`198`$, `validate set` get $`24`$,
-    `test set` get $`25`$.
+  - `Solution 1`: `train set` get $198$, `validate set` get $25$,
+    `test set` get $24$.
+  - `Solution 2`: `train set` get $198$, `validate set` get $24$,
+    `test set` get $25$.
 
   Both `Solution 1` and `Solution 2` are equally reasonable solutions,
   and there is no mathematical way to choose one over the other.[^3]
@@ -225,24 +220,24 @@ partition standard:
   desired division result, which can be considered as a vector, although
   its value may not be integers. Consider the actual result also a
   vector, which must be integers as a result. We want to make the
-  `p-norm` ($`p > 1`$) distance (considered as a division metric/error)
+  `p-norm` ($p > 1$) distance (considered as a division metric/error)
   between the desired vector and the actual vector obtain a minimum
   value.
 
   {% note info %}
 
-  Generally, the `p-norm` ($`p = 2`$) distance is the most common metric
+  Generally, the `p-norm` ($p = 2$) distance is the most common metric
   for measuring the distance between vectors. In the original research
-  for this article, we have found that all `p-norms` ($`p \ge 1`$) can
+  for this article, we have found that all `p-norms` ($p \ge 1$) can
   lead to a certain solution with deterministic. And, we have found:
 
-  - The `p-norm` ($`p = 1`$) is only able to derive weak conclusions.
+  - The `p-norm` ($p = 1$) is only able to derive weak conclusions.
     - It will lead to the expansion of the solution set, and the
       complete solution set cannot be easily obtained, but only its
       subset can be determined.
-  - The `p-norm` ($`p > 1`$) can derive strong conclusions.
+  - The `p-norm` ($p > 1$) can derive strong conclusions.
     - The complete solution set can be easily obtained.
-  - So, we prefer to use `p-norm` ($`p > 1`$).
+  - So, we prefer to use `p-norm` ($p > 1$).
 
   {% endnote %}
 
@@ -251,47 +246,45 @@ partition standard:
 According to the defined standard, give out objectives and requirements
 described in mathematical terms:
 
-- Given a set $`S`$ of $`N`$ identical elements, i.e.,
-  $`S=\{s_1,s_2,\ldots,s_N\}`$, where $`N\in \mathbb{Z}^+`$.
-- Given a vector of proportions $`r`$, where
-  $`r=[r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1,n\in \mathbb{Z}^+, n \le N`$.
-- Try to divide $`S`$ into $`n`$ parts by $`r`$.
-- Define result vector $`y=[y_1,y_2,\ldots,y_n]\in \mathbb{N}^n`$, where
-  $`y_i`$ represents the element numbers in the $`i`$-th divided parts.
+- Given a set $S$ of $N$ identical elements, i.e.,
+  $S=\{s_1,s_2,\ldots,s_N\}$, where $N\in \mathbb{Z}^+$.
+- Given a vector of proportions $r$, where
+  $r=[r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1,n\in \mathbb{Z}^+, n \le N$.
+- Try to divide $S$ into $n$ parts by $r$.
+- Define result vector $y=[y_1,y_2,\ldots,y_n]\in \mathbb{N}^n$, where
+  $y_i$ represents the element numbers in the $i$-th divided parts.
 - Let
-  $`D_y = \{y|y=[y_1,y_2,\ldots,y_n]\in \mathbb{N}^n,\sum_{i=1}^{n}y_i=\|y\|_1=N\}`$
+  $D_y = \{y|y=[y_1,y_2,\ldots,y_n]\in \mathbb{N}^n,\sum_{i=1}^{n}y_i=\|y\|_1=N\}$
 - Define an objective function
-  $`f(y):D_y\rightarrow \mathbb{R}^+\cup\{0\}`$ as:
-  - Given a $`p, p\in \mathbb{R},p > 1`$.
-  - $`\forall y \in D_y, f(y)=(\sum_{i=1}^n |y_i-r_{i}N |^{p})^{\frac{1}{p}}`$.
+  $f(y):D_y\rightarrow \mathbb{R}^+\cup\{0\}$ as:
+  - Given a $p, p\in \mathbb{R},p > 1$.
+  - $\forall y \in D_y, f(y)=(\sum_{i=1}^n |y_i-r_{i}N |^{p})^{\frac{1}{p}}$.
 - Try to find a the
-  $`D^*_y=\{y|y=\mathop{\arg\min}\limits_{y\in D_y}f(y)\}`$.
-- $`\forall y^*=[y^*_1,y^*_2,\ldots,y^*_n] \in D^*_y`$, divide $`S`$
-  into `n` parts:
-  - part `1`: $`\{s_1,s_2,\ldots,s_{y^{*}_1}\}`$
+  $D^*_y=\{y|y=\mathop{\arg\min}\limits_{y\in D_y}f(y)\}$.
+- $\forall y^*=[y^*_1,y^*_2,\ldots,y^*_n] \in D^*_y$, divide $S$ into
+  `n` parts:
+  - part `1`: $\{s_1,s_2,\ldots,s_{y^{*}_1}\}$
   - part `2`:
-    $`\{s_{y^{*}_1+1},s_{y^{*}_1+2},\ldots,s_{y^{*}_1+y^{*}_2}\}`$
+    $\{s_{y^{*}_1+1},s_{y^{*}_1+2},\ldots,s_{y^{*}_1+y^{*}_2}\}$
   - …
   - part `n`:
-    $`\{s_{\sum_{i=1}^{n-1}y^*_i+1},s_{\sum_{i=1}^{n-1}y^*_i+2},\ldots,s_{\sum_{i=1}^{n}y^*_i}\}`$
+    $\{s_{\sum_{i=1}^{n-1}y^*_i+1},s_{\sum_{i=1}^{n-1}y^*_i+2},\ldots,s_{\sum_{i=1}^{n}y^*_i}\}$
 
   {% note info %}
 
-  - The constraint $`n \le N`$ is needed to exclude many unrealistic
-    scenarios. Because if $`n > N`$, there must be at least one divided
+  - The constraint $n \le N$ is needed to exclude many unrealistic
+    scenarios. Because if $n > N$, there must be at least one divided
     part that possesses no element, instead of being determined by the
-    corresponding ratio $`r_i`$.
-  - The constraint of the set $`D_y`$ can guarantee **non-omission** and
+    corresponding ratio $r_i$.
+  - The constraint of the set $D_y$ can guarantee **non-omission** and
     **non-overlapping**.
-  - The objective function $`f(y)`$ can guarantee
+  - The objective function $f(y)$ can guarantee
     **determinacy(reproducibility)** and **precision**.
 
   {% endnote %}
 
 So, the key objective is equivalent to solve a Nonlinear Integer
-Programming (NIP) problem:
-``` math
-
+Programming (NIP) problem: $$
 \begin{equation}\label{NIP_problem}\tag{1}
 \begin{split}
 \text{known:}~~~~&n,N \in \mathbb{Z}^+, n \le N\\
@@ -302,9 +295,8 @@ Programming (NIP) problem:
 &\sum_{i=1}^{n}y_i=N\\
 \end{split}
 \end{equation}
-```
-In this article, we will analyze the NIP problem
-$`\eqref{NIP_problem}`$, give out the set of solutions, and post an
+$$ In this article, we will analyze the NIP problem
+$\eqref{NIP_problem}$, give out the set of solutions, and post an
 algorithm to get the set of solutions. The necessary proofs and
 explanations will also be illustrated.
 
@@ -351,87 +343,81 @@ There are some related concepts:
 
 # Basic analyses
 
-Generally, the enumeration method of problem $`\eqref{NIP_problem}`$ is
-to traverse a number of $`\binom{N+n-1}{n-1}`$ vector
-$`y\in D_y = \{y|y=[y_1,y_2,\ldots,y_n]\in \mathbb{N}^n,\sum_{i=1}^{n}y_i=\|y\|_1=N\}`$
-to find the solution, see [appendix A.1](#A.1). If for each $`y`$, it
-takes $`O(n)`$ to calculate the objective function, the time complexity
-of this enumeration method will be about
-$`O(\binom{N+n-1}{n-1}\times n)=O(\frac{(N+n-1)!}{(n-1)!N!}\times n)`$.
+Generally, the enumeration method of problem $\eqref{NIP_problem}$ is to
+traverse a number of $\binom{N+n-1}{n-1}$ vector
+$y\in D_y = \{y|y=[y_1,y_2,\ldots,y_n]\in \mathbb{N}^n,\sum_{i=1}^{n}y_i=\|y\|_1=N\}$
+to find the solution, see [appendix A.1](#A.1). If for each $y$, it
+takes $O(n)$ to calculate the objective function, the time complexity of
+this enumeration method will be about
+$O(\binom{N+n-1}{n-1}\times n)=O(\frac{(N+n-1)!}{(n-1)!N!}\times n)$.
 
-So, without any optimization, the problem $`\eqref{NIP_problem}`$ is
+So, without any optimization, the problem $\eqref{NIP_problem}$ is
 almost difficult to calculate and solve.
 
-Therefore, to sove the problem $`\eqref{NIP_problem}`$, we can take the
+Therefore, to sove the problem $\eqref{NIP_problem}$, we can take the
 following ideas:
 
 1.  Define
-    $`D_{r,n,N}=\{(r,n,N)| n\in \mathbb{Z}^+,N \in \mathbb{Z}^+, n \le N, r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}`$.
+    $D_{r,n,N}=\{(r,n,N)| n\in \mathbb{Z}^+,N \in \mathbb{Z}^+, n \le N, r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
 
-2.  $`\forall n \in \mathbb{Z}^+`$, define
-    $`D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N \ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}`$.
+2.  $\forall n \in \mathbb{Z}^+$, define
+    $D_{r,N}=\{(r,N)|N \in \mathbb{Z}^+, N \ge n,r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1\}$.
 
-3.  Choose a rounding function $`round(\cdot)`$ and try
-    $`y=[y_1,y_2,\ldots,y_n], \forall i \in \{1,2,\ldots,n\} y_i=round(r_iN)`$,
-    to estimate a solution $`y`$.
+3.  Choose a rounding function $round(\cdot)$ and try
+    $y=[y_1,y_2,\ldots,y_n], \forall i \in \{1,2,\ldots,n\} y_i=round(r_iN)$,
+    to estimate a solution $y$.
 
     - According to
       [rounding](https://en.wikipedia.org/w/index.php?title=Rounding)
       and [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754), there are
       many different **rounding rules**, deriving different
-      $`round(\cdot)`$ functions, among which the rounding behaviors are
+      $round(\cdot)$ functions, among which the rounding behaviors are
       slightly different. Here we choose
-      $`round(\cdot)=floor(\cdot)=\lfloor \cdot \rfloor`$ as the
-      $`\forall x \in \mathbb{R},round_5(x)=floor(x)=\lfloor x\rfloor`$
-      in [analyses of round
+      $round(\cdot)=floor(\cdot)=\lfloor \cdot \rfloor$ as the
+      $\forall x \in \mathbb{R},round_5(x)=floor(x)=\lfloor x\rfloor$ in
+      [analyses of round
       function](https://little-train.com/posts/34195fcb.html).
-    - So, the estimate
-      $`y=[floor(r_1N),floor(r_2N),\ldots,floor(r_nN)]`$
+    - So, the estimate $y=[floor(r_1N),floor(r_2N),\ldots,floor(r_nN)]$
     - The later sections will explain why other forms of rounding
       functions are not used.
 
-4.  $`\forall n \in \mathbb{Z}^+`$, $`\forall (r,N) \in D_{r,N}`$, it is
+4.  $\forall n \in \mathbb{Z}^+$, $\forall (r,N) \in D_{r,N}$, it is
     obviously that
-    $`y=[floor(r_1N),floor(r_2N),\ldots,floor(r_nN)] \in \mathbb{N}^n`$.
+    $y=[floor(r_1N),floor(r_2N),\ldots,floor(r_nN)] \in \mathbb{N}^n$.
 
-5.  $`\forall n \in \mathbb{Z}^+`$, there $`\exists (r,N) \in D_{r,N}`$,
-    that make $`\sum_{i=1}^{n}floor(r_iN)=N`$. As the following domain
-    and range analyses:
+5.  $\forall n \in \mathbb{Z}^+$, there $\exists (r,N) \in D_{r,N}$,
+    that make $\sum_{i=1}^{n}floor(r_iN)=N$. As the following domain and
+    range analyses:
 
-    - Firstly, since the $`r_iN`$ is non-negative, we can give out a
-      mathematical abstraction about $`round(\cdot)`$ function on
-      $`\mathbb{R}^+\cup \{0\}`$ as:
-      ``` math
-
+    - Firstly, since the $r_iN$ is non-negative, we can give out a
+      mathematical abstraction about $round(\cdot)$ function on
+      $\mathbb{R}^+\cup \{0\}$ as: $$
       \begin{equation}\label{floor}\tag{2}
       \forall x \in \mathbb{R}^+\cup \{0\},round(x)=floor(x)=\lfloor x\rfloor
       \end{equation}
-      ```
+      $$
 
     - Then, we can define and focus on a mapping function
-      $`f(r,n,N):\{\mathbb{R}^n,\mathbb{Z}^+,\mathbb{Z}^+\}\rightarrow\{\mathbb{Z}\}`$,
-      ``` math
-
+      $f(r,n,N):\{\mathbb{R}^n,\mathbb{Z}^+,\mathbb{Z}^+\}\rightarrow\{\mathbb{Z}\}$,
+      $$
       \begin{equation}\label{floor_f}\tag{3}
       \forall (r,n,N) \in D_{r,n,N},f(r,n,N)=[\sum_{i=1}^n floor(r_{i}N)]-N
       \end{equation}
-      ```
+      $$
 
-    - $`\forall n \in \mathbb{Z}^+`$, define the function $`f(r,n,N)`$’s
-      value range set $`F_n=\{f(r,n,N)|(r,N)\in D_{r,N}\}`$.
+    - $\forall n \in \mathbb{Z}^+$, define the function $f(r,n,N)$’s
+      value range set $F_n=\{f(r,n,N)|(r,N)\in D_{r,N}\}$.
 
     - There is
-      $`F_n=\{f(r,n,N)|(r,N)\in D_{r,N}\}=\{x|x \in (-n,0],x\in \mathbb{Z}\}`$.
+      $F_n=\{f(r,n,N)|(r,N)\in D_{r,N}\}=\{x|x \in (-n,0],x\in \mathbb{Z}\}$.
       See [the appendix A.4 of
       `analyses of round function`](https://little-train.com/posts/34195fcb.html#1533739c896a1d55a2625caced54a83fb05b374dbb66122f475751be01f44fb5-1)
       for analysis process.
 
     - Also from [the appendix A.4 of
       `analyses of round function`](https://little-train.com/posts/34195fcb.html#1533739c896a1d55a2625caced54a83fb05b374dbb66122f475751be01f44fb5-1),
-      we can find a conclusion about the function $`\eqref{floor_f}`$
-      that:
-      ``` math
-
+      we can find a conclusion about the function $\eqref{floor_f}$
+      that: $$
       \begin{equation}\label{floor_conclusion}\tag{4}
       \begin{split}
        \forall & n \in \mathbb{Z}^+,\\
@@ -444,29 +430,26 @@ following ideas:
        &~~(V)\exists (r,N)\in D_{r,N},\sum_{i=1}^{n}floor(r_{i}N)=N
        \end{split}
       \end{equation}
-      ```
+      $$
 
-6.  According to `4` and `5`, $`\forall n \in \mathbb{Z}^+`$, there
-    $`\exists (r,N) \in D_{r,N}`$, that make
-    $`y=[floor(r_1N),floor(r_2N),\ldots,floor(r_nN)] \in D_y`$.
+6.  According to `4` and `5`, $\forall n \in \mathbb{Z}^+$, there
+    $\exists (r,N) \in D_{r,N}$, that make
+    $y=[floor(r_1N),floor(r_2N),\ldots,floor(r_nN)] \in D_y$.
 
-7.  Furthermore, $`\forall n \in \mathbb{Z}^+`$,
-    $`\forall (r,N) \in D_{r,N}`$:
+7.  Furthermore, $\forall n \in \mathbb{Z}^+$,
+    $\forall (r,N) \in D_{r,N}$:
 
-    - If $`y=[floor(r_1N),floor(r_2N),\ldots,floor(r_nN)] \notin D_y`$,
-      we can find a vector $`b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n`$
-      for $`y`$ to constitute
-      $`[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n] \in D_y`$.
-    - If $`y=[floor(r_1N),floor(r_2N),\ldots,floor(r_nN)] \in D_y`$, we
-      can find a vector
-      $`b=[b_1,b_2,\ldots,b_n]=\theta\in \mathbb{Z}^n`$ for $`y`$ to
-      constitute
-      $`[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n] \in D_y`$.
+    - If $y=[floor(r_1N),floor(r_2N),\ldots,floor(r_nN)] \notin D_y$, we
+      can find a vector $b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n$ for $y$
+      to constitute
+      $[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n] \in D_y$.
+    - If $y=[floor(r_1N),floor(r_2N),\ldots,floor(r_nN)] \in D_y$, we
+      can find a vector $b=[b_1,b_2,\ldots,b_n]=\theta\in \mathbb{Z}^n$
+      for $y$ to constitute
+      $[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n] \in D_y$.
 
-8.  So, the original NIP problem $`\eqref{NIP_problem}`$ can be
-    equivalent to the following problem:
-    ``` math
-
+8.  So, the original NIP problem $\eqref{NIP_problem}$ can be equivalent
+    to the following problem: $$
     \begin{equation}\label{NIP_problem_floor}\tag{5}
     \begin{split}
      \text{known:}~~~~&n,N \in \mathbb{Z}^+, n \le N\\
@@ -479,202 +462,188 @@ following ideas:
      &\sum_{i=1}^n b_i=m\\
      \end{split}
     \end{equation}
-    ```
+    $$
 
-9.  Basing on the problem $`\eqref{NIP_problem_floor}`$, what we need is
-    to traverse all of the vector $`b\in D_b`$ to find the solution,
-    where
-    ``` math
-
+9.  Basing on the problem $\eqref{NIP_problem_floor}$, what we need is
+    to traverse all of the vector $b\in D_b$ to find the solution, where
+    $$
     \begin{split}
      D_b = \{b|&b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\\
      &[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in\mathbb{N}^n,\\
      &m=N-\sum_{i=1}^n floor(r_iN)\\
      &\sum_{i=1}^n b_i=m\}
      \end{split}
-    ```
+    $$
 
 10. The later sections will post the method to solve the problem
-    $`\eqref{NIP_problem_floor}`$ instead of the direct NIP problem
-    $`\eqref{NIP_problem}`$.
+    $\eqref{NIP_problem_floor}$ instead of the direct NIP problem
+    $\eqref{NIP_problem}$.
 
     {% note info %}
 
     Of course, the significance of the equivalent conversion from
-    $`\eqref{NIP_problem}`$ to $`\eqref{NIP_problem_floor}`$ may be not
+    $\eqref{NIP_problem}$ to $\eqref{NIP_problem_floor}$ may be not
     reflected mathematically. The underlying logic is based on our
     intuition, i.e., we believe that fine-tuning based on an estimated
-    solution ($`y=[floor(r_1N),floor(r_2N),\ldots,floor(r_nN)]`$) may
-    lead to finding the true solution faster.
+    solution ($y=[floor(r_1N),floor(r_2N),\ldots,floor(r_nN)]$) may lead
+    to finding the true solution faster.
 
     {% endnote %}
 
 # Method
 
 See the `1~6` of [appendix A.3](#A.3), we can found the solution set of
-problem $`\eqref{NIP_problem_floor}`$ as:
+problem $\eqref{NIP_problem_floor}$ as:
 
 - Define
-  $`x=[x_1,x_2,\ldots,x_n], \forall i \in \{1,2,\ldots,n\},x_i = floor(r_iN)-r_iN`$.
+  $x=[x_1,x_2,\ldots,x_n], \forall i \in \{1,2,\ldots,n\},x_i = floor(r_iN)-r_iN$.
 
-- Let $`m=N-\sum_{i=1}^n floor(r_iN)`$.
+- Let $m=N-\sum_{i=1}^n floor(r_iN)$.
 
-- Group $`\{x_1,x_2,\ldots,x_n\}`$ according their values as:
+- Group $\{x_1,x_2,\ldots,x_n\}$ according their values as:
 
-  - $`\exists h\in \mathbb{Z}^+, h \le n, g_1,g_2,\ldots, g_h \in \mathbb{Z}^+,\sum_{i=1}^{h}g_i=n`$,
+  - $\exists h\in \mathbb{Z}^+, h \le n, g_1,g_2,\ldots, g_h \in \mathbb{Z}^+,\sum_{i=1}^{h}g_i=n$,
     that make
-    - $`G_1 = \{i_1,i_2,\ldots,i_{g_1}\} \subseteq \{1,2,\ldots,n\}, \forall i_s,i_t \in G_1, x_{i_s}=x_{i_t}`$.
-    - $`G_2 = \{i_{g_1+1},i_{g_1+1},\ldots,i_{g_1+g_2}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_2, x_{i_s}=x_{i_t}`$.
+    - $G_1 = \{i_1,i_2,\ldots,i_{g_1}\} \subseteq \{1,2,\ldots,n\}, \forall i_s,i_t \in G_1, x_{i_s}=x_{i_t}$.
+    - $G_2 = \{i_{g_1+1},i_{g_1+1},\ldots,i_{g_1+g_2}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_2, x_{i_s}=x_{i_t}$.
     - …
-    - $`G_h = \{i_{1+\sum_{i=1}^{h-1}g_i},i_{2+\sum_{i=1}^{h-1}g_i},\ldots,i_{\sum_{i=1}^{h}g_i}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_h, x_{i_s}=x_{i_t}`$.
-    - $`G_1 \cup G_2 \cup \ldots \cup G_h = \{1,2,\ldots,n\}`$
-    - $`\forall s,t \in \{1,2,\ldots,h\}`$ and $`s\ne t`$, there is
-      $`G_s \cap G_t \ne \emptyset`$
-    - $`\forall s,t \in \{1,2,\ldots,h\},s < t`$, there is
-      $`\forall i_s \in G_s, i_t \in G_t`$, that $`x_{i_s} < x_{i_t}`$.
-    - Specially, if $`h=1`$, there will be
-      $`\forall i_s,i_t \in \{1,2,\ldots,n\}, x_{i_s}=x_{i_t}`$
+    - $G_h = \{i_{1+\sum_{i=1}^{h-1}g_i},i_{2+\sum_{i=1}^{h-1}g_i},\ldots,i_{\sum_{i=1}^{h}g_i}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_h, x_{i_s}=x_{i_t}$.
+    - $G_1 \cup G_2 \cup \ldots \cup G_h = \{1,2,\ldots,n\}$
+    - $\forall s,t \in \{1,2,\ldots,h\}$ and $s\ne t$, there is
+      $G_s \cap G_t \ne \emptyset$
+    - $\forall s,t \in \{1,2,\ldots,h\},s < t$, there is
+      $\forall i_s \in G_s, i_t \in G_t$, that $x_{i_s} < x_{i_t}$.
+    - Specially, if $h=1$, there will be
+      $\forall i_s,i_t \in \{1,2,\ldots,n\}, x_{i_s}=x_{i_t}$
 
-- Define
-  ``` math
-
+- Define $$
   \begin{split}
   D_b = \{b|&b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\\
   &[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in\mathbb{N}^n,\\
   &\sum_{i=1}^n b_i=m\}
   \end{split}
-  ```
+  $$
 
 - Define
-  $`D^{'}_b=\{b|b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,m=N-\sum_{i=1}^n floor(r_iN),\sum_{i=1}^n b_i=m\}`$.
+  $D^{'}_b=\{b|b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,m=N-\sum_{i=1}^n floor(r_iN),\sum_{i=1}^n b_i=m\}$.
 
-- Define solutions set of problem $`\eqref{NIP_problem_floor}`$ as
-  $`D^{*}_b=\{b|b=\mathop{\arg\min}\limits_{b\in D_b}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}`$.
+- Define solutions set of problem $\eqref{NIP_problem_floor}$ as
+  $D^{*}_b=\{b|b=\mathop{\arg\min}\limits_{b\in D_b}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}$.
 
 - Define solutions set
-  $`D^{*'}_b=\{b|b=\mathop{\arg\min}\limits_{b\in D^{'}_b}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}`$.
+  $D^{*'}_b=\{b|b=\mathop{\arg\min}\limits_{b\in D^{'}_b}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}$.
 
 - Define
-  $`B_1= \{b|b\in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m, \exists i_s,i_t \in \{1,2,\ldots,n\}~b_{i_s} \ge 1,b_{i_t} \le -1\}\subseteq D^{'}_b`$.
+  $B_1= \{b|b\in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m, \exists i_s,i_t \in \{1,2,\ldots,n\}~b_{i_s} \ge 1,b_{i_t} \le -1\}\subseteq D^{'}_b$.
 
 - Define
-  $`B_2= \{b|b \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m,\exists i_s \in \{1,2,\ldots,n\}~b_{i_s} \ge 2\}\subseteq D^{'}_b`$.
+  $B_2= \{b|b \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m,\exists i_s \in \{1,2,\ldots,n\}~b_{i_s} \ge 2\}\subseteq D^{'}_b$.
 
-- Define
-  ``` math
-
+- Define $$
   \begin{split}
   B_3=\{b|&b \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m,\\
   &h\in \mathbb{Z}^+,h \ge 2, \\
   &\exists s,t \in \{1,2,\ldots,h\}, s < t,i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t},b_{i_s} < b_{i_t}\}\subseteq D^{'}_b,
   \end{split}
-  ```
+  $$
 
-- So, the solutions set of problem $`\eqref{NIP_problem_floor}`$ is
-  $`D^{*}_b =\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$
+- So, the solutions set of problem $\eqref{NIP_problem_floor}$ is
+  $D^{*}_b =\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$
 
-Back to the original problem $`\eqref{NIP_problem}`$, the solution set
-of problem $`\eqref{NIP_problem}`$ is
-``` math
-
+Back to the original problem $\eqref{NIP_problem}$, the solution set of
+problem $\eqref{NIP_problem}$ is $$
 \begin{split}
 D^*_y=\{y|&y=[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n],\\
 &\forall b=[b_1,b_2,\ldots,b_n]\in D^{*}_b\}
 \end{split}
-```
+$$
 
 ## Why other forms of rounding functions are not used
 
 - Actually, to estimate
-  $`y=[y_1,y_2,\ldots,y_n], \forall i \in \{1,2,\ldots,n\} y_i=round(r_iN)`$,
-  we can choose the $`round(\cdot)`$ function as:
-  - $`\forall x \in \mathbb{R},round_1(x)=\begin{cases}\lfloor x\rfloor,\text{if }x-\lfloor x\rfloor < 0.5 \\\lfloor x\rfloor,\text{if }x-\lfloor x\rfloor=0.5,\lfloor x\rfloor \mod 2=0\\\lceil x\rceil,\text{if }x-\lfloor x\rfloor=0.5,\lceil x\rceil\mod 2= 0\\\lceil x\rceil,\text{if }x-\lfloor x\rfloor > 0.5\end{cases}`$
+  $y=[y_1,y_2,\ldots,y_n], \forall i \in \{1,2,\ldots,n\} y_i=round(r_iN)$,
+  we can choose the $round(\cdot)$ function as:
+  - $\forall x \in \mathbb{R},round_1(x)=\begin{cases}\lfloor x\rfloor,\text{if }x-\lfloor x\rfloor < 0.5 \\\lfloor x\rfloor,\text{if }x-\lfloor x\rfloor=0.5,\lfloor x\rfloor \mod 2=0\\\lceil x\rceil,\text{if }x-\lfloor x\rfloor=0.5,\lceil x\rceil\mod 2= 0\\\lceil x\rceil,\text{if }x-\lfloor x\rfloor > 0.5\end{cases}$
     in [analyses of round
     function](https://little-train.com/posts/34195fcb.html),
   - or,
-    $`\forall x \in \mathbb{R},~round_2(x)=\begin{cases}\lfloor x\rfloor,\text{if }x-\lfloor x\rfloor < 0.5 \\\lceil x\rceil,\text{if }x-\lfloor x\rfloor=0.5,x > 0\\\lfloor x\rfloor,\text{if }x-\lfloor x\rfloor=0.5,x < 0\\\lceil x\rceil,\text{if }x-\lfloor x\rfloor > 0.5\end{cases}`$
+    $\forall x \in \mathbb{R},~round_2(x)=\begin{cases}\lfloor x\rfloor,\text{if }x-\lfloor x\rfloor < 0.5 \\\lceil x\rceil,\text{if }x-\lfloor x\rfloor=0.5,x > 0\\\lfloor x\rfloor,\text{if }x-\lfloor x\rfloor=0.5,x < 0\\\lceil x\rceil,\text{if }x-\lfloor x\rfloor > 0.5\end{cases}$
     in [analyses of round
     function](https://little-train.com/posts/34195fcb.html),
-  - or $`\forall x \in \mathbb{R},round_4(x)=ceil(x)=\lceil x\rceil`$ in
+  - or $\forall x \in \mathbb{R},round_4(x)=ceil(x)=\lceil x\rceil$ in
     [analyses of round
     function](https://little-train.com/posts/34195fcb.html),
-  - or $`\forall x \in \mathbb{R},round_5(x)=floor(x)=\lfloor x\rfloor`$
+  - or $\forall x \in \mathbb{R},round_5(x)=floor(x)=\lfloor x\rfloor$
     in [analyses of round
     function](https://little-train.com/posts/34195fcb.html).
 - First, in different programming languages, the default rounding
-  function may be one of $`round_1(x)`$ and $`round_2(x)`$. But the
-  slightly different behavior between $`round_1(x)`$ and $`round_2(x)`$
-  may lead our algorithm to behave inconsistently in different
-  programming languages. So, we prefer not to use $`round_1(x)`$ and
-  $`round_2(x)`$.
-- Second, consider the range $`F_n=\{f(r,n,N)|(r,N)\in D_{r,N}\}`$, if
-  we use $`round_1(x)`$ to replace the $`round_5(x)`$ that we have used,
-  the range will become
-  $`\{x|x \in [-\frac{n}{2},\frac{n}{2}],x\in \mathbb{Z}\}`$, whose left
+  function may be one of $round_1(x)$ and $round_2(x)$. But the slightly
+  different behavior between $round_1(x)$ and $round_2(x)$ may lead our
+  algorithm to behave inconsistently in different programming languages.
+  So, we prefer not to use $round_1(x)$ and $round_2(x)$.
+- Second, consider the range $F_n=\{f(r,n,N)|(r,N)\in D_{r,N}\}$, if we
+  use $round_1(x)$ to replace the $round_5(x)$ that we have used, the
+  range will become
+  $\{x|x \in [-\frac{n}{2},\frac{n}{2}],x\in \mathbb{Z}\}$, whose left
   and right are both closed. This will bring the following consequences:
-  - The helper function
-    $`H(k,x):\{\mathbb{Z},D\}\rightarrow \mathbb{R}`$, that defined in
-    [appendix A.2](#A.2), will lose its **special monotonicity
-    property** of $`k`$.
+  - The helper function $H(k,x):\{\mathbb{Z},D\}\rightarrow \mathbb{R}$,
+    that defined in [appendix A.2](#A.2), will lose its **special
+    monotonicity property** of $k$.
   - As the steps in the `1~6` of [appendix A.3](#A.3), our conclusion
     will be weakened to
-    $`D^{*}_b \subseteq \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$.
+    $D^{*}_b \subseteq \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$.
   - We cannot give out an algorithm to find the whole solution set, but
     only an algorithm to find 1 of the solutions.
-- Third, the $`round_4(x)=ceil(x)`$ is symmetric to
-  $`round_5(x)=floor(x)`$, and $`floor(x)`$ reflects an idea of
-  allocating first and then making up the difference, in line with
-  general intuition. So, we prefer to use $`round_5(x)`$.
-- So, we only use to $`round_5(\cdot)`$ estimate
-  $`y=[y_1,y_2,\ldots,y_n], \forall i \in \{1,2,\ldots,n\} y_i=round(r_iN)`$.
+- Third, the $round_4(x)=ceil(x)$ is symmetric to $round_5(x)=floor(x)$,
+  and $floor(x)$ reflects an idea of allocating first and then making up
+  the difference, in line with general intuition. So, we prefer to use
+  $round_5(x)$.
+- So, we only use to $round_5(\cdot)$ estimate
+  $y=[y_1,y_2,\ldots,y_n], \forall i \in \{1,2,\ldots,n\} y_i=round(r_iN)$.
 
 ## The Algorithm to Find the Whole Solution Set
 
-According to the above solution set $`D^{*}_b`$ of problem
-$`\eqref{NIP_problem_floor}`$ and the solution set $`D^*_y`$ of problem
-$`\eqref{NIP_problem}`$, we can have the following algorithm for problem
-$`\eqref{NIP_problem}`$:
+According to the above solution set $D^{*}_b$ of problem
+$\eqref{NIP_problem_floor}$ and the solution set $D^*_y$ of problem
+$\eqref{NIP_problem}$, we can have the following algorithm for problem
+$\eqref{NIP_problem}$:
 
 1.  To find all
-    $`b \in D^{*}_b =\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$.
+    $b \in D^{*}_b =\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$.
 
     - Calculate
-      $`x=[x_1,x_2,\ldots,x_n],\forall i \in \{1,2,\ldots,n\},x_i = floor(r_iN)-r_iN`$.
-    - Calculate $`m=N-\sum_{i=1}^n floor(r_iN)`$,  
-    - From the conclusion $`\eqref{floor_conclusion}`$, there are
-      $`m \in \mathbb{Z},0 \le m < n`$.
-    - Group $`\{x_1,x_2,\ldots,x_n\}`$ according their values as:
-      - $`\exists h\in \mathbb{Z}^+, h \le n, g_1,g_2,\ldots, g_h \in \mathbb{Z}^+,\sum_{i=1}^{h}g_i=n`$,
+      $x=[x_1,x_2,\ldots,x_n],\forall i \in \{1,2,\ldots,n\},x_i = floor(r_iN)-r_iN$.
+    - Calculate $m=N-\sum_{i=1}^n floor(r_iN)$,  
+    - From the conclusion $\eqref{floor_conclusion}$, there are
+      $m \in \mathbb{Z},0 \le m < n$.
+    - Group $\{x_1,x_2,\ldots,x_n\}$ according their values as:
+      - $\exists h\in \mathbb{Z}^+, h \le n, g_1,g_2,\ldots, g_h \in \mathbb{Z}^+,\sum_{i=1}^{h}g_i=n$,
         that make
-      - $`G_1 = \{i_1,i_2,\ldots,i_{g_1}\} \subseteq \{1,2,\ldots,n\}, \forall i_s,i_t \in G_1, x_{i_s}=x_{i_t}`$.
-      - $`G_2 = \{i_{g_1+1},i_{g_1+1},\ldots,i_{g_1+g_2}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_2, x_{i_s}=x_{i_t}`$.
+      - $G_1 = \{i_1,i_2,\ldots,i_{g_1}\} \subseteq \{1,2,\ldots,n\}, \forall i_s,i_t \in G_1, x_{i_s}=x_{i_t}$.
+      - $G_2 = \{i_{g_1+1},i_{g_1+1},\ldots,i_{g_1+g_2}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_2, x_{i_s}=x_{i_t}$.
       - …
-      - $`G_h = \{i_{1+\sum_{i=1}^{h-1}g_i},i_{2+\sum_{i=1}^{h-1}g_i},\ldots,i_{\sum_{i=1}^{h}g_i}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_h, x_{i_s}=x_{i_t}`$.
-      - $`G_1 \cup G_2 \cup \ldots \cup G_h = \{1,2,\ldots,n\}`$
-      - $`\forall s,t \in \{1,2,\ldots,h\}`$ and $`s\ne t`$, there is
-        $`G_s \cap G_t \ne \emptyset`$
-      - $`\forall s,t \in \{1,2,\ldots,h\}, s < t`$, there is
-        $`\forall i_s \in G_s, i_t \in G_t`$, that
-        $`x_{i_s} < x_{i_t}`$.
+      - $G_h = \{i_{1+\sum_{i=1}^{h-1}g_i},i_{2+\sum_{i=1}^{h-1}g_i},\ldots,i_{\sum_{i=1}^{h}g_i}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_h, x_{i_s}=x_{i_t}$.
+      - $G_1 \cup G_2 \cup \ldots \cup G_h = \{1,2,\ldots,n\}$
+      - $\forall s,t \in \{1,2,\ldots,h\}$ and $s\ne t$, there is
+        $G_s \cap G_t \ne \emptyset$
+      - $\forall s,t \in \{1,2,\ldots,h\}, s < t$, there is
+        $\forall i_s \in G_s, i_t \in G_t$, that $x_{i_s} < x_{i_t}$.
     - According to the `7` of [appendix A.3](#A.3),
-      - If $`h \ge 2`$, $`m = 0`$, $`D^{*}_b=\{\theta\}`$, which is a
-        single element set.
-      - If $`h \ge 2`$, $`m > 0`$,
-        - If $`\sum_{i=1}^{h^{'}-1}g_i = m`$,
-          - So
-            ``` math
-
+      - If $h \ge 2$, $m = 0$, $D^{*}_b=\{\theta\}$, which is a single
+        element set.
+      - If $h \ge 2$, $m > 0$,
+        - If $\sum_{i=1}^{h^{'}-1}g_i = m$,
+          - So $$
             \begin{split}
             D^{*}_b = \{b|&b = [b_1,b_2,\ldots,b_n]\\
             &\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1,\\
             &\forall i \in G_{h^{'}} \cup G_{h^{'}+1} \cup \ldots \cup G_{h}, b_{i}=0\}
             \end{split}
-            ```
-          - The $`D^{*}_b`$ is a single element set.
-        - If $`\sum_{i=1}^{h^{'}-1}g_i < m < \sum_{i=1}^{h^{'}}g_i`$,
+            $$
+          - The $D^{*}_b$ is a single element set.
+        - If $\sum_{i=1}^{h^{'}-1}g_i < m < \sum_{i=1}^{h^{'}}g_i$,
           - So  
-            ``` math
-
+            $$
             \begin{split}
             D^{*}_b = \{b|&b = [b_1,b_2,\ldots,b_n],\\
             &\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1,\\
@@ -685,14 +654,12 @@ $`\eqref{NIP_problem}`$:
             &~~~~\forall i \in \complement_{G_{h^{'}}}^{\Lambda}, b_i = 0\\
             &\forall i \in G_{h^{'}+1} \cup G_{h^{'}+2} \cup \ldots \cup G_{h}, b_{i}=0\}
             \end{split}
-            ```
-          - The $`D^{*}_b`$ has $`\binom{g_{h^{'}}}{q} > 1`$ elements.
-      - If $`h = 1`$, $`m = 0`$, $`D^{*}_b=\{\theta\}`$, which is a
-        single element set.
-      - If $`h = 1`$, $`m > 0`$,
-        - So
-          ``` math
-
+            $$
+          - The $D^{*}_b$ has $\binom{g_{h^{'}}}{q} > 1$ elements.
+      - If $h = 1$, $m = 0$, $D^{*}_b=\{\theta\}$, which is a single
+        element set.
+      - If $h = 1$, $m > 0$,
+        - So $$
           \begin{split}
           D^{*}_b = \{b|&b = [b_1,b_2,\ldots,b_n],\\
           &q = m,\\
@@ -701,93 +668,93 @@ $`\eqref{NIP_problem}`$:
           &~~~~\forall i\in \{i_1,i_2,\ldots,i_q\}, b_i = 1,\\
           &~~~~\forall i \in \complement_{G_{1}}^{\Lambda}, b_i = 0\}
           \end{split}
-          ```
-        - The $`D^{*}_b`$ has $`\binom{g_{1}}{q}=\binom{n}{m} > 1`$
+          $$
+        - The $D^{*}_b$ has $\binom{g_{1}}{q}=\binom{n}{m} > 1$
           elements.
 
-2.  According all the found $`b\in D^{*}_b`$ in `1`, calculate all the
-    $`y\in D^*_y=\{y|y=[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n],\\ \forall b=[b_1,b_2,\ldots,b_n]\in D^{*}_b\}`$.
+2.  According all the found $b\in D^{*}_b$ in `1`, calculate all the
+    $y\in D^*_y=\{y|y=[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n],\\ \forall b=[b_1,b_2,\ldots,b_n]\in D^{*}_b\}$.
 
 3.  Generally, this algorithm’s worst-case time complexity is 1 order of
-    magnitude greater than $`O(n^2)`$, because:
+    magnitude greater than $O(n^2)$, because:
 
-    - Grouping $`\{x_1,x_2,\ldots,x_n\}`$ according their values may
-      take $`O(n^2)`$ generally.
-    - For each $`\{x_1,x_2,\ldots,x_n\}`$, traverse $`D^{*}_b`$ will
-      also take time.
+    - Grouping $\{x_1,x_2,\ldots,x_n\}$ according their values may take
+      $O(n^2)$ generally.
+    - For each $\{x_1,x_2,\ldots,x_n\}$, traverse $D^{*}_b$ will also
+      take time.
 
 ## The Algorithm to Get 1 Solution of the Solution Set
 
 Even though the above has given out an algorithm to find all of the
-solutions, it takes a complexity more than $`O(n^2)`$. When practice, if
+solutions, it takes a complexity more than $O(n^2)$. When practice, if
 we do not care about the whole solution set, but only want to know a
 valid one, we can take the following algorithm to get 1 solution of the
 solution set, where the time complexity will be controlled within
-$`O(n^2)`$.
+$O(n^2)$.
 
-According to the above solution set $`D^{*}_b`$ of problem
-$`\eqref{NIP_problem_floor}`$ and the solution set $`D^*_y`$ of problem
-$`\eqref{NIP_problem}`$, we can have the following algorithm for getting
-one solution of problem $`\eqref{NIP_problem}`$:
+According to the above solution set $D^{*}_b$ of problem
+$\eqref{NIP_problem_floor}$ and the solution set $D^*_y$ of problem
+$\eqref{NIP_problem}$, we can have the following algorithm for getting
+one solution of problem $\eqref{NIP_problem}$:
 
 1.  To find a
-    $`b \in D^{*}_b =\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$.
+    $b \in D^{*}_b =\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$.
 
     - Calculate
-      $`x=[x_1,x_2,\ldots,x_n],\forall i \in \{1,2,\ldots,n\},x_i = floor(r_iN)-r_iN`$.
+      $x=[x_1,x_2,\ldots,x_n],\forall i \in \{1,2,\ldots,n\},x_i = floor(r_iN)-r_iN$.
 
-    - Calculate $`m=N-\sum_{i=1}^n floor(r_iN)`$,
+    - Calculate $m=N-\sum_{i=1}^n floor(r_iN)$,
 
-      - From the conclusion $`\eqref{floor_conclusion}`$, there are
-        $`m \in \mathbb{Z},0 \le m < n`$.
+      - From the conclusion $\eqref{floor_conclusion}$, there are
+        $m \in \mathbb{Z},0 \le m < n$.
 
-    - Let $`\hat N = \{1,2,\ldots,n\}`$,
+    - Let $\hat N = \{1,2,\ldots,n\}$,
 
     - and let
-      $`Q=\{\lambda^{n}|\lambda^{n}=(i_1,i_2,\ldots,i_n)\in {\hat N}^n, \forall u,v \in \hat N, u\ne v, i_u\ne i_v,  \forall s,t \in \hat N,s < t, x_{i_s} \le x_{i_t}\}`$.
+      $Q=\{\lambda^{n}|\lambda^{n}=(i_1,i_2,\ldots,i_n)\in {\hat N}^n, \forall u,v \in \hat N, u\ne v, i_u\ne i_v,  \forall s,t \in \hat N,s < t, x_{i_s} \le x_{i_t}\}$.
 
-    - Get a $`\lambda^n=(i_1,i_2,\ldots,i_n) \in Q`$, there will be
-      $`\Lambda=\{i_1,i_2,\ldots,i_n\} = \hat N,x_{i_1} \le x_{i_2} \le \ldots \le x_{i_n}`$.
+    - Get a $\lambda^n=(i_1,i_2,\ldots,i_n) \in Q$, there will be
+      $\Lambda=\{i_1,i_2,\ldots,i_n\} = \hat N,x_{i_1} \le x_{i_2} \le \ldots \le x_{i_n}$.
 
     - According to the `8` of [appendix A.3](#A.3), consider a
-      $`b=[b_1,b_2,\ldots,b_n] \in \mathbb{Z}^n`$ as:
+      $b=[b_1,b_2,\ldots,b_n] \in \mathbb{Z}^n$ as:
 
       where
-      $`\forall s \in \{s|s \in [1,m], s \in \mathbb{Z}^+\} b_{i_s} = 1, \forall t \in \{t|t \in [m+1,n], t \in \mathbb{Z}^+\} b_{i_t} = 0`$.
+      $\forall s \in \{s|s \in [1,m], s \in \mathbb{Z}^+\} b_{i_s} = 1, \forall t \in \{t|t \in [m+1,n], t \in \mathbb{Z}^+\} b_{i_t} = 0$.
 
     {% note info %}
 
-    In problem $`\eqref{NIP_problem}`$, the objective function $`f(y)`$
-    can guarantee **determinacy(reproducibility)** and **precision**.
-
-    When it comes to the problem $`\eqref{NIP_problem_floor}`$, the
-    objective function
-    $`(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}`$ can
+    In problem $\eqref{NIP_problem}$, the objective function $f(y)$ can
     guarantee **determinacy(reproducibility)** and **precision**.
 
-    But if to get 1 solution of the solution set $`D^{*}_b`$, the
-    choosing method will incur new **non-determinacy**. To maintain the
+    When it comes to the problem $\eqref{NIP_problem_floor}$, the
+    objective function
+    $(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$ can
+    guarantee **determinacy(reproducibility)** and **precision**.
+
+    But if to get 1 solution of the solution set $D^{*}_b$, the choosing
+    method will incur new **non-determinacy**. To maintain the
     **determinacy(reproducibility)**, it should be deterministic that
-    getting a $`\lambda^n=(i_1,i_2,\ldots,i_n) \in Q`$. That is when
+    getting a $\lambda^n=(i_1,i_2,\ldots,i_n) \in Q$. That is when
     implementing, a stable sorting (see [appendix A.4](#A.4)) is needed.
 
     And, this will also bring about **fairness problem** as the
     aforesaid terms. That is, getting a
-    $`\lambda^n=(i_1,i_2,\ldots,i_n) \in Q`$ is only determined by the
+    $\lambda^n=(i_1,i_2,\ldots,i_n) \in Q$ is only determined by the
     sorting method when implementing, instead of choosing one over the
     other mathematically by some measuring function.
 
     When practice, some external priority rules can be used to finally
-    choose a $`\lambda^n=(i_1,i_2,\ldots,i_n) \in Q`$. But that would be
+    choose a $\lambda^n=(i_1,i_2,\ldots,i_n) \in Q$. But that would be
     beyond the scope of this article.
 
     {% endnote %}
 
-2.  According the $`b\in D^{*}_b`$ in `1`, calculate the $`y\in D^*_y`$
-    as $`y=[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]`$.
+2.  According the $b\in D^{*}_b$ in `1`, calculate the $y\in D^*_y$ as
+    $y=[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]$.
 
-3.  Generally, this algorithm’s worst-case time complexity is
-    $`O(n^2)`$, where the sorting accounts for the most computing time.
+3.  Generally, this algorithm’s worst-case time complexity is $O(n^2)$,
+    where the sorting accounts for the most computing time.
 
 # Experiments
 
@@ -981,8 +948,8 @@ Other points:
   split a dataset by a series of proportions in machine learning, with
   **non-omission**, **non-overlapping**,
   **determinacy(reproducibility)**, and **precision**.
-  - The proposed division metric/error based on `p-norm` ($`p > 1`$) is
-    a reasonable indicator and with universality.
+  - The proposed division metric/error based on `p-norm` ($p > 1$) is a
+    reasonable indicator and with universality.
   - This method will be useful and exceptionally efficient when one
     wants to minimize the division metric/error.
   - When dividing, each data in the dataset is treated as identical,
@@ -1005,8 +972,7 @@ Thanks to [@汪坤](https://www.zhihu.com/people/wang-kun-51-88)
 [@林凌](https://www.zhihu.com/people/lin-ling-43-27-55) for the initial
 ideas and comments on the [知乎](https://www.zhihu.com/) problem
 [如何不遗漏不重复地将列表元素按照指定比率划分？](https://www.zhihu.com/question/543548568),
-which comes out with the solution that based on $`floor(\cdot)`$
-function.
+which comes out with the solution that based on $floor(\cdot)$ function.
 
 # Appendix
 
@@ -1014,89 +980,86 @@ Details of some proofs for several issues are documented here.
 
 ## A.1
 
-$`\forall n,N \in \mathbb{Z}^+, n \le N`$, conside
-$`D_y = \{y|y=[y_1,y_2,\ldots,y_n]\in \mathbb{N}^n,\sum_{i=1}^{n}y_i=\|y\|_1=N\}`$.
-Except $`\emptyset`$, how many elements in $`D_y`$?
+$\forall n,N \in \mathbb{Z}^+, n \le N$, conside
+$D_y = \{y|y=[y_1,y_2,\ldots,y_n]\in \mathbb{N}^n,\sum_{i=1}^{n}y_i=\|y\|_1=N\}$.
+Except $\emptyset$, how many elements in $D_y$?
 
 It equals to:
 
-- How many ways to partition $`N`$ identical elements to $`n`$ groups,
-  allowing $`0`$ element group?
+- How many ways to partition $N$ identical elements to $n$ groups,
+  allowing $0$ element group?
 
 It also equals to:
 
-- How many ways to partition $`N+n`$ identical elements to $`n`$ groups,
-  each group should has atleast $`1`$ element?
+- How many ways to partition $N+n$ identical elements to $n$ groups,
+  each group should has atleast $1$ element?
 
 So, it equals to:
 
-- How many ways to selection $`n-1`$ intervals for $`N+n-1`$ potential
+- How many ways to selection $n-1$ intervals for $N+n-1$ potential
   intervals?
-- i.e., $`\binom{N+n-1}{n-1}`$
+- i.e., $\binom{N+n-1}{n-1}$
 
 ## Lemma 1
 
 - Assertion:
-  - Given set $`V_1,V_2`$, where
-    $`\emptyset \subsetneq V_1 \subseteq V_2`$,
-  - and given set $`U\subset V_2`$,
-  - so, let $`\complement_{V_2}U`$ represents the complement of $`U`$ in
-    $`V_2`$.
-  - If $`U\cap V_1=\emptyset`$,
-  - then, $`\complement_{V_2}U \cap V_1 \ne \emptyset`$.
+  - Given set $V_1,V_2$, where $\emptyset \subsetneq V_1 \subseteq V_2$,
+  - and given set $U\subset V_2$,
+  - so, let $\complement_{V_2}U$ represents the complement of $U$ in
+    $V_2$.
+  - If $U\cap V_1=\emptyset$,
+  - then, $\complement_{V_2}U \cap V_1 \ne \emptyset$.
 - Proof:
-  - Since $`U\cap V_1=\emptyset`$.
-  - If $`U=\emptyset`$,
-    - then $`\complement_{V_2}U=V_2`$.
+  - Since $U\cap V_1=\emptyset$.
+  - If $U=\emptyset$,
+    - then $\complement_{V_2}U=V_2$.
     - According to the assertion, there is
-      $`\complement_{V_2}U \cap V_1 = V_2\cap V_1 = V_1\ne \emptyset`$.
-  - If $`U \ne \emptyset`$,
-    - then, $`\exists x\in V_1, x\notin U, x \in V_2`$.
-    - So, $`x \in \complement_{V_2}U \cap V_1`$,
-    - i.e., $`\complement_{V_2}U \cap V_1 \ne \emptyset`$.
+      $\complement_{V_2}U \cap V_1 = V_2\cap V_1 = V_1\ne \emptyset$.
+  - If $U \ne \emptyset$,
+    - then, $\exists x\in V_1, x\notin U, x \in V_2$.
+    - So, $x \in \complement_{V_2}U \cap V_1$,
+    - i.e., $\complement_{V_2}U \cap V_1 \ne \emptyset$.
 
   Therefore, the [Lemma 1](#lemma 1) is proofed.
 
 ## Lemma 2
 
 - Assertion:
-  - Given set $`V_1,V_2`$, where
-    $`\emptyset \subsetneq V_1 \subseteq V_2`$,
+  - Given set $V_1,V_2$, where $\emptyset \subsetneq V_1 \subseteq V_2$,
   - and given set
-    $`V^{*}_{1}=\{x|\mathop{\arg\min}\limits_{x\in V_1}f(x)\}`$,
-    $`V^{*}_{2}=\{x|\mathop{\arg\min}\limits_{x\in V_2}f(x)\}`$.
-  - If $`\exists x \in V^{*}_{2}`$, and $`x \in V_1`$,
-    - then, $`x \in V^{*}_{1} \subseteq V^{*}_{2}`$.
+    $V^{*}_{1}=\{x|\mathop{\arg\min}\limits_{x\in V_1}f(x)\}$,
+    $V^{*}_{2}=\{x|\mathop{\arg\min}\limits_{x\in V_2}f(x)\}$.
+  - If $\exists x \in V^{*}_{2}$, and $x \in V_1$,
+    - then, $x \in V^{*}_{1} \subseteq V^{*}_{2}$.
 - Proof:
-  - Obviously, there are $`V_1^*\subseteq V_1 \subseteq V_2`$, and
-    $`V_2^*\subseteq V_2`$.
-  - Since $`\exists x \in V^{*}_{2}`$, and $`x \in V_1`$,
-  - so, $`V_1\cap V_2^* \ne \emptyset`$.
-  - Assume $`\exists \hat x \in V_1\cap V_2^*`$ that
-    $`\hat x \notin V_1^*`$,
-    - so, $`\hat x \in V_2^*, x\in V_1`$, but $`\hat x \notin V_1^*`$.
-    - So, $`\forall \hat y \in V_1^* \subseteq V_2`$, there is
-      $`f(\hat y) < f(\hat x)`$.
-    - So, $`\hat x \notin V_2^*`$, which is contrary to the logic of the
+  - Obviously, there are $V_1^*\subseteq V_1 \subseteq V_2$, and
+    $V_2^*\subseteq V_2$.
+  - Since $\exists x \in V^{*}_{2}$, and $x \in V_1$,
+  - so, $V_1\cap V_2^* \ne \emptyset$.
+  - Assume $\exists \hat x \in V_1\cap V_2^*$ that
+    $\hat x \notin V_1^*$,
+    - so, $\hat x \in V_2^*, x\in V_1$, but $\hat x \notin V_1^*$.
+    - So, $\forall \hat y \in V_1^* \subseteq V_2$, there is
+      $f(\hat y) < f(\hat x)$.
+    - So, $\hat x \notin V_2^*$, which is contrary to the logic of the
       above.
     - So, the assumption is not valid.
-  - So, $`\forall \hat x \in V_1\cap V_2^*`$, there is
-    $`\hat x \in V_1^*`$, i.e., $`V_1\cap V_2^*\subseteq V_1^*`$.
-  - Assume $`\exists \hat x \in V_1^*`$ that
-    $`\hat x \notin V_1\cap V_2^*`$,
-    - so, $`\hat x \in V_1^*, x\in V_1`$, but $`\hat x \notin V_2^*`$.
-    - So, $`\forall \hat y \in V_2^* \subseteq V_2`$, there is
-      $`f(\hat y) < f(\hat x)`$.
-    - So, $`\forall \hat z \in V_1 \cap V_2^* \subseteq V_1`$, there is
-      $`f(\hat z) < f(\hat x)`$.
-    - So, $`\hat x \notin V_1^*`$, which is contrary to the logic of the
+  - So, $\forall \hat x \in V_1\cap V_2^*$, there is $\hat x \in V_1^*$,
+    i.e., $V_1\cap V_2^*\subseteq V_1^*$.
+  - Assume $\exists \hat x \in V_1^*$ that
+    $\hat x \notin V_1\cap V_2^*$,
+    - so, $\hat x \in V_1^*, x\in V_1$, but $\hat x \notin V_2^*$.
+    - So, $\forall \hat y \in V_2^* \subseteq V_2$, there is
+      $f(\hat y) < f(\hat x)$.
+    - So, $\forall \hat z \in V_1 \cap V_2^* \subseteq V_1$, there is
+      $f(\hat z) < f(\hat x)$.
+    - So, $\hat x \notin V_1^*$, which is contrary to the logic of the
       above.
     - So, the assumption is not valid.
-  - So, $`\forall \hat x \in V_1^*`$, there is
-    $`\hat x \in V_1\cap V_2^*`$, i.e.,
-    $`V_1^* \subseteq V_1\cap V_2^*`$.
-  - Therefore, $`V_1^*=V_1\cap V_2^*`$.
-  - So, $`x \in V^{*}_{1} \subseteq V^{*}_{2}`$ Therefore, the [Lemma
+  - So, $\forall \hat x \in V_1^*$, there is $\hat x \in V_1\cap V_2^*$,
+    i.e., $V_1^* \subseteq V_1\cap V_2^*$.
+  - Therefore, $V_1^*=V_1\cap V_2^*$.
+  - So, $x \in V^{*}_{1} \subseteq V^{*}_{2}$ Therefore, the [Lemma
     2](#lemma 2) is proofed.
 
 ## A.2
@@ -1104,55 +1067,51 @@ So, it equals to:
 Define a helper function and elaboration some features (conclusions) of
 it.
 
-- Let: $`D_{[-1,0]}=\{x|-1 \le x \le 0, x \in R\}`$
-- $`\forall p > 1`$, define
-  $`H(k,x):\{\mathbb{Z},D\}\rightarrow \mathbb{R}`$ as
-- $`H(k,x) =\begin{cases}|k+x|^{p}-|k+x-1|^{p},~k \ge 1, k \in \mathbb{Z},~x \in D_{[-1,0]}\\ -1,~k=0,~x \in D_{[-1,0]}\\ |k+x|^{p}-|k+x+1|^{p},k \le -1, k \in \mathbb{Z},~x \in D_{[-1,0]}\end{cases}`$
+- Let: $D_{[-1,0]}=\{x|-1 \le x \le 0, x \in R\}$
+- $\forall p > 1$, define
+  $H(k,x):\{\mathbb{Z},D\}\rightarrow \mathbb{R}$ as
+- $H(k,x) =\begin{cases}|k+x|^{p}-|k+x-1|^{p},~k \ge 1, k \in \mathbb{Z},~x \in D_{[-1,0]}\\ -1,~k=0,~x \in D_{[-1,0]}\\ |k+x|^{p}-|k+x+1|^{p},k \le -1, k \in \mathbb{Z},~x \in D_{[-1,0]}\end{cases}$
 
-Analysis: $`\forall p > 1`$
+Analysis: $\forall p > 1$
 
-- If $`k \ge 2,k \in \mathbb{Z},~x \in D_{[-1,0]}`$,
-  - then, $`k+x \ge 1 > 0, k+x-1 \ge 0`$.
-  - $`H(k,x)=|k+x|^{p}-|k+x-1|^{p}=(k+x)^p-(k+x-1)^p`$
-  - $`\frac{\partial H(k,x)}{\partial x}=p(k+x)^{p-1}-p(k+x-1)^{p-1} > 0`$
-- If $`k=1,~x \in D_{[-1,0]}`$,
-  - then, $`k+x=1+x \ge 0, k+x-1=x \le 0`$.
-  - $`H(k,x)=|1+x|^{p}-|x|^{p}=(1+x)^p-(-x)^p`$
-  - $`\frac{\partial H(k,x)}{\partial x}=p(1+x)^{p-1}+p(-x)^{p-1} > 0`$.
-- If $`k \le -2,k \in \mathbb{Z},~x \in D_{[-1,0]}`$,
-  - then, $`k+x \le -2 < 0, k+x+1 \le -1 < 0`$.
-  - $`H(k,x)=|k+x|^{p}-|k+x+1|^{p}=(-k-x)^p-(-k-x-1)^p`$
-  - $`\frac{\partial H(k,x)}{\partial x}=-p(-k-x)^{p-1}+p(-k-x-1)^{p-1} = -p[(-k-x)^{p-1}-(-k-x-1)^{p-1}] < 0`$.
-- If $`k=-1,~x \in D_{[-1,0]}`$,
-  - then, $`k+x = -1+x \le -1 < 0, k+x+1 = x \le 0`$
-  - $`H(k,x)=|-1+x|^{p}-|x|^{p}=(1-x)^p-(-x)^p`$
-  - $`\frac{\partial H(k,x)}{\partial x}=-p(1-x)^{p-1}+p(-x)^{p-1}=-p[(1-x)^{p-1}-(-x)^{p-1}] < 0`$.
-- $`(I)\rightarrow`$ So, when
-  $`k \ge 1,k \in \mathbb{Z},~x \in D_{[-1,0]},p > 1`$, the function
-  $`H(k,x)=(|k+x|^{p}-|k+x-1|^{p})`$ is strictly monotonically
-  increasing W.R.T. $`x`$.
-- $`(II)\rightarrow`$ So, when
-  $`k \le -1,k \in \mathbb{Z},~x \in D_{[-1,0]},p > 1`$, the function
-  $`H(k,x)=(|k+x|^{p}-|k+x+1|^{p})`$ is strictly monotonically
-  decreasing W.R.T. $`x`$. Then, consider the region
-  $`D_{(-1,0]}=\{x|-1 < x \le 0, x \in R\}`$ instead of $`D_{[-1,0]}`$.
-  $`\forall x_1,x_2\in D_{(-1,0]}`$:
-- When $`k \ge 2`$, according to $`(I)`$, there is:
-  ``` math
-
+- If $k \ge 2,k \in \mathbb{Z},~x \in D_{[-1,0]}$,
+  - then, $k+x \ge 1 > 0, k+x-1 \ge 0$.
+  - $H(k,x)=|k+x|^{p}-|k+x-1|^{p}=(k+x)^p-(k+x-1)^p$
+  - $\frac{\partial H(k,x)}{\partial x}=p(k+x)^{p-1}-p(k+x-1)^{p-1} > 0$
+- If $k=1,~x \in D_{[-1,0]}$,
+  - then, $k+x=1+x \ge 0, k+x-1=x \le 0$.
+  - $H(k,x)=|1+x|^{p}-|x|^{p}=(1+x)^p-(-x)^p$
+  - $\frac{\partial H(k,x)}{\partial x}=p(1+x)^{p-1}+p(-x)^{p-1} > 0$.
+- If $k \le -2,k \in \mathbb{Z},~x \in D_{[-1,0]}$,
+  - then, $k+x \le -2 < 0, k+x+1 \le -1 < 0$.
+  - $H(k,x)=|k+x|^{p}-|k+x+1|^{p}=(-k-x)^p-(-k-x-1)^p$
+  - $\frac{\partial H(k,x)}{\partial x}=-p(-k-x)^{p-1}+p(-k-x-1)^{p-1} = -p[(-k-x)^{p-1}-(-k-x-1)^{p-1}] < 0$.
+- If $k=-1,~x \in D_{[-1,0]}$,
+  - then, $k+x = -1+x \le -1 < 0, k+x+1 = x \le 0$
+  - $H(k,x)=|-1+x|^{p}-|x|^{p}=(1-x)^p-(-x)^p$
+  - $\frac{\partial H(k,x)}{\partial x}=-p(1-x)^{p-1}+p(-x)^{p-1}=-p[(1-x)^{p-1}-(-x)^{p-1}] < 0$.
+- $(I)\rightarrow$ So, when
+  $k \ge 1,k \in \mathbb{Z},~x \in D_{[-1,0]},p > 1$, the function
+  $H(k,x)=(|k+x|^{p}-|k+x-1|^{p})$ is strictly monotonically increasing
+  W.R.T. $x$.
+- $(II)\rightarrow$ So, when
+  $k \le -1,k \in \mathbb{Z},~x \in D_{[-1,0]},p > 1$, the function
+  $H(k,x)=(|k+x|^{p}-|k+x+1|^{p})$ is strictly monotonically decreasing
+  W.R.T. $x$. Then, consider the region
+  $D_{(-1,0]}=\{x|-1 < x \le 0, x \in R\}$ instead of $D_{[-1,0]}$.
+  $\forall x_1,x_2\in D_{(-1,0]}$:
+- When $k \ge 2$, according to $(I)$, there is: $$
   \begin{split}
   \inf_{x_1,x_2\in D_{(-1,0]}}[H(k,x_1)-H(k-1,x_2)]&=\inf_{x_1\in D_{(-1,0]}}H(k,x_1)-\sup_{x_2\in D_{(-1,0]}}H(k-1,x_2)\\
   &= \inf_{x_1\in D_{(-1,0]}}H(k,x_1)-\max_{x_2\in D_{(-1,0]}}H(k-1,x_2)\\
   &= H(k,-1)-H(k-1,0)\\
   &= (|k-1|^{p}-|k-2|^{p})-(|k-1|^{p}-|k-2|^{p})=0,
   \end{split}
-  ```
-  - And obviously, $`\nexists x1,x2 \in (0,1]`$, that make
-    $`H(k,x_1)-H(k-1,x_2)=0`$.
-  - Therefore, $`H(k,x_1) > H(k-1,x_2)`$.
-- When $`k=1`$, according to $`(I)`$, there is:
-  ``` math
-
+  $$
+  - And obviously, $\nexists x1,x2 \in (0,1]$, that make
+    $H(k,x_1)-H(k-1,x_2)=0$.
+  - Therefore, $H(k,x_1) > H(k-1,x_2)$.
+- When $k=1$, according to $(I)$, there is: $$
   \begin{split}
   \inf_{x_1,x_2\in D_{(-1,0]}}[H(k,x_1)-H(k-1,x_2)]&=\inf_{x_1,x_2\in D_{(-1,0]}}[H(1,x_1)-H(0,x_2)]\\
   &=\inf_{x_1\in D_{(-1,0]}}[H(1,x_1)+1]\\
@@ -1160,28 +1119,24 @@ Analysis: $`\forall p > 1`$
   &= H(1,-1)+1\\
   &= (|1-1|^{p}-|-1|^{p})+1=0,
   \end{split}
-  ```
-  - And obviously, $`\nexists x1,x2 \in D_{(-1,0]}`$, that make
-    $`H(k,x_1)-H(k-1,x_2)=0`$.
-  - Therefore, $`H(k,x_1) > H(k-1,x_2)`$.
-- $`(III)\rightarrow`$ So, when $`k \ge 1,k \in \mathbb{Z},p > 1`$,
-  $`\forall x_1,x_2\in D_{(-1,0]}`$, there is $`H(k,x_1) > H(k-1,x_2)`$
-- When $`k \le -2`$, according to $`(II)`$, there is:
-  ``` math
-
+  $$
+  - And obviously, $\nexists x1,x2 \in D_{(-1,0]}$, that make
+    $H(k,x_1)-H(k-1,x_2)=0$.
+  - Therefore, $H(k,x_1) > H(k-1,x_2)$.
+- $(III)\rightarrow$ So, when $k \ge 1,k \in \mathbb{Z},p > 1$,
+  $\forall x_1,x_2\in D_{(-1,0]}$, there is $H(k,x_1) > H(k-1,x_2)$
+- When $k \le -2$, according to $(II)$, there is: $$
   \begin{split}
   \inf_{x_1,x_2\in D_{(-1,0]}}[H(k,x_1)-H(k+1,x_2)]&=\inf_{x_1\in D_{(-1,0]}}H(k,x_1)-\sup_{x_2\in D_{(-1,0]}}H(k+1,x_2)\\
   &= \min_{x_1\in D_{(-1,0]}}H(k,x_1)-\sup_{x_2\in D_{(-1,0]}}H(k+1,x_2)\\
   &= H(k,0)-H(k+1,-1)\\
   &= (|k|^{p}-|k+1|^{p})-(|k|^{p}-|k+1|^{p})=0,
   \end{split}
-  ```
-  - And obviously, $`\nexists x1,x2 \in D_{(-1,0]}`$, that make
-    $`H(k,x_1)-H(k+1,x_2)=0`$.
-  - Therefore, $`H(k,x_1) > H(k+1,x_2)`$.
-- When $`k= -1`$, according to $`(II)`$, there is:
-  ``` math
-
+  $$
+  - And obviously, $\nexists x1,x2 \in D_{(-1,0]}$, that make
+    $H(k,x_1)-H(k+1,x_2)=0$.
+  - Therefore, $H(k,x_1) > H(k+1,x_2)$.
+- When $k= -1$, according to $(II)$, there is: $$
   \begin{split}
   \inf_{x_1,x_2\in D_{(-1,0]}}[H(k,x_1)-H(k+1,x_2)]&=\inf_{x_1,x_2\in D_{(-1,0]}}[H(-1,x_1)-H(0,x_2)]\\
   &=\inf_{x_1\in D_{(-1,0]}}[H(-1,x_1)+1]\\
@@ -1189,17 +1144,17 @@ Analysis: $`\forall p > 1`$
   &= H(0,-1)+1\\
   &= (|-1|^{p}-|0|^{p})+1=2 > 0,
   \end{split}
-  ```
-  - Therefore, $`H(k,x_1) > H(k+1,x_2)`$.
-- $`(IV)\rightarrow`$ So, when $`k \le -1,k \in \mathbb{Z},p > 1`$,
-  $`\forall x_1,x_2\in D_{(-1,0]}`$, there is $`H(k,x_1) > H(k+1,x_2)`$
-  According to $`(III)`$ and $`(IV)`$, there is:
-- When $`k \in \mathbb{Z},p > 1`$,
-  $`\forall x_1,x_2,\ldots,x_{\infty}\in D_{(-1,0]}`$,
-- $`-1=H(0,x_1) < H(-1,x_1) < H(-2,x_2) < \ldots < H(-\infty,x_{\infty})`$,
+  $$
+  - Therefore, $H(k,x_1) > H(k+1,x_2)$.
+- $(IV)\rightarrow$ So, when $k \le -1,k \in \mathbb{Z},p > 1$,
+  $\forall x_1,x_2\in D_{(-1,0]}$, there is $H(k,x_1) > H(k+1,x_2)$
+  According to $(III)$ and $(IV)$, there is:
+- When $k \in \mathbb{Z},p > 1$,
+  $\forall x_1,x_2,\ldots,x_{\infty}\in D_{(-1,0]}$,
+- $-1=H(0,x_1) < H(-1,x_1) < H(-2,x_2) < \ldots < H(-\infty,x_{\infty})$,
 - and
-  $`-1=H(0,x_1) < H(1,x_1) < H(2,x_2) < \ldots < H(\infty,x_{\infty})`$.
-- Let’s call this a **special monotonicity property** of $`k`$.
+  $-1=H(0,x_1) < H(1,x_1) < H(2,x_2) < \ldots < H(\infty,x_{\infty})$.
+- Let’s call this a **special monotonicity property** of $k$.
 
 ## A.3
 
@@ -1213,72 +1168,67 @@ and analysis step by step, until the conclusion is reached.
 1.  Preliminary illustrations:
 
     - Known conditions:
-      - $`n,N \in \mathbb{Z}^+, n \le N`$
-      - $`p\in \mathbb{R},p > 1`$
-      - $`r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1`$
-      - $`floor(\cdot)`$ is as $`\eqref{floor}`$
-      - $`m=N-\sum_{i=1}^n floor(r_iN)`$,
-        - From the conclusion $`\eqref{floor_conclusion}`$, there are
-          $`m \in \mathbb{Z},0 \le m < n`$.
-      - $`x=[x_1,x_2,\ldots,x_n], \forall i \in \{1,2,\ldots,n\},x_i = floor(r_iN)-r_iN`$.
-    - Group $`\{x_1,x_2,\ldots,x_n\}`$ according their values as:
-      - $`\exists h\in \mathbb{Z}^+, h \le n, g_1,g_2,\ldots, g_h \in \mathbb{Z}^+,\sum_{i=1}^{h}g_i=n`$,
+      - $n,N \in \mathbb{Z}^+, n \le N$
+      - $p\in \mathbb{R},p > 1$
+      - $r = [r_1,r_2,\ldots,r_n]\in \mathbb{R}_+^n,\|r\|_{1}=1$
+      - $floor(\cdot)$ is as $\eqref{floor}$
+      - $m=N-\sum_{i=1}^n floor(r_iN)$,
+        - From the conclusion $\eqref{floor_conclusion}$, there are
+          $m \in \mathbb{Z},0 \le m < n$.
+      - $x=[x_1,x_2,\ldots,x_n], \forall i \in \{1,2,\ldots,n\},x_i = floor(r_iN)-r_iN$.
+    - Group $\{x_1,x_2,\ldots,x_n\}$ according their values as:
+      - $\exists h\in \mathbb{Z}^+, h \le n, g_1,g_2,\ldots, g_h \in \mathbb{Z}^+,\sum_{i=1}^{h}g_i=n$,
         that make
-        - $`G_1 = \{i_1,i_2,\ldots,i_{g_1}\} \subseteq \{1,2,\ldots,n\}, \forall i_s,i_t \in G_1, x_{i_s}=x_{i_t}`$.
-        - $`G_2 = \{i_{g_1+1},i_{g_1+1},\ldots,i_{g_1+g_2}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_2, x_{i_s}=x_{i_t}`$.
+        - $G_1 = \{i_1,i_2,\ldots,i_{g_1}\} \subseteq \{1,2,\ldots,n\}, \forall i_s,i_t \in G_1, x_{i_s}=x_{i_t}$.
+        - $G_2 = \{i_{g_1+1},i_{g_1+1},\ldots,i_{g_1+g_2}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_2, x_{i_s}=x_{i_t}$.
         - …
-        - $`G_h = \{i_{1+\sum_{i=1}^{h-1}g_i},i_{2+\sum_{i=1}^{h-1}g_i},\ldots,i_{\sum_{i=1}^{h}g_i}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_h, x_{i_s}=x_{i_t}`$.
-        - $`G_1 \cup G_2 \cup \ldots \cup G_h = \{1,2,\ldots,n\}`$
-        - $`\forall s,t \in \{1,2,\ldots,h\}`$ and $`s\ne t`$, there is
-          $`G_s \cap G_t \ne \emptyset`$
-        - $`\forall s,t \in \{1,2,\ldots,h\}, s < t`$, there is
-          $`\forall i_s \in G_s, i_t \in G_t`$, that
-          $`x_{i_s} < x_{i_t}`$.
-        - Specially, if $`h=1`$, there will be
-          $`\forall i_s,i_t \in \{1,2,\ldots,n\}, x_{i_s}=x_{i_t}`$
-    - Define
-      ``` math
-
+        - $G_h = \{i_{1+\sum_{i=1}^{h-1}g_i},i_{2+\sum_{i=1}^{h-1}g_i},\ldots,i_{\sum_{i=1}^{h}g_i}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_h, x_{i_s}=x_{i_t}$.
+        - $G_1 \cup G_2 \cup \ldots \cup G_h = \{1,2,\ldots,n\}$
+        - $\forall s,t \in \{1,2,\ldots,h\}$ and $s\ne t$, there is
+          $G_s \cap G_t \ne \emptyset$
+        - $\forall s,t \in \{1,2,\ldots,h\}, s < t$, there is
+          $\forall i_s \in G_s, i_t \in G_t$, that $x_{i_s} < x_{i_t}$.
+        - Specially, if $h=1$, there will be
+          $\forall i_s,i_t \in \{1,2,\ldots,n\}, x_{i_s}=x_{i_t}$
+    - Define $$
       \begin{split}
       D_b=\{b|&b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m,\\&[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in \mathbb{N}^n\}
       \end{split}
-      ```
+      $$
     - Define
-      $`D^{'}_b=\{b|b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m\}`$.
+      $D^{'}_b=\{b|b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m\}$.
     - Define solutions set
-      $`D^{*}_b=\{b|b=\mathop{\arg\min}\limits_{b\in D_b}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}`$.
+      $D^{*}_b=\{b|b=\mathop{\arg\min}\limits_{b\in D_b}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}$.
     - Define solutions set
-      $`D^{*'}_b=\{b|b=\mathop{\arg\min}\limits_{b\in D^{'}_b}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}`$.
-    - There is $`\emptyset \ne D_b`$. Proof:
-      - Since $`m \ge 0`$, so,
-        $`\exists b=[m,0,\ldots,0]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m`$,
+      $D^{*'}_b=\{b|b=\mathop{\arg\min}\limits_{b\in D^{'}_b}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}$.
+    - There is $\emptyset \ne D_b$. Proof:
+      - Since $m \ge 0$, so,
+        $\exists b=[m,0,\ldots,0]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m$,
         that make
-        $`[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in \mathbb{N}^n`$.
-      - So, $`\emptyset \ne D_b`$ is proofed.
+        $[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in \mathbb{N}^n$.
+      - So, $\emptyset \ne D_b$ is proofed.
 
     So, there are
-    $`D_b\subseteq D^{'}_b, \emptyset \ne D^{*}_b\subseteq D_b,~\emptyset\ne D^{*'}_b \subseteq D^{'}_b`$
+    $D_b\subseteq D^{'}_b, \emptyset \ne D^{*}_b\subseteq D_b,~\emptyset\ne D^{*'}_b \subseteq D^{'}_b$
 
 2.  Let
-    $`B_1= \{b|b\in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m, \exists i_s,i_t \in \{1,2,\ldots,n\}~b_{i_s} \ge 1,b_{i_t} \le -1\}\subseteq D^{'}_b`$,
-    then there will be $`D^{*'}_b \subseteq \complement_{D^{'}_b}B_1`$.
+    $B_1= \{b|b\in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m, \exists i_s,i_t \in \{1,2,\ldots,n\}~b_{i_s} \ge 1,b_{i_t} \le -1\}\subseteq D^{'}_b$,
+    then there will be $D^{*'}_b \subseteq \complement_{D^{'}_b}B_1$.
 
     Proof:
 
-    - Obviously, $`B_1 \ne \emptyset`$.
+    - Obviously, $B_1 \ne \emptyset$.
     - Assume that there
-      $`\exists b=[b_1,b_2,\ldots,b_n]\in D^{*'}_b\cap B_1`$.
-    - Without loss of generality, let $`s < t`$.
-    - Define $`b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}]`$, where
-      $`b^{'}_{i_s}=b_{i_s}-1,b^{'}_{i_t}=b_{i_t}+1, \forall i \in \{i|i \in [1,n], i\in \mathbb{Z}, i \notin \{i_s,i_t\}\}, b^{'}_i=b_i`$.
+      $\exists b=[b_1,b_2,\ldots,b_n]\in D^{*'}_b\cap B_1$.
+    - Without loss of generality, let $s < t$.
+    - Define $b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}]$, where
+      $b^{'}_{i_s}=b_{i_s}-1,b^{'}_{i_t}=b_{i_t}+1, \forall i \in \{i|i \in [1,n], i\in \mathbb{Z}, i \notin \{i_s,i_t\}\}, b^{'}_i=b_i$.
     - Obviously,there are:
-      - $`b^{'}\in D^{'}_b`$,
-      - $`(I)\rightarrow`$ and
-        $`(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ge (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}`$.
-    - Also, according to the helper function $`H(k,x)`$ and the
-      conclusions in [appendix A.2](#A.2), then:
-      ``` math
-
+      - $b^{'}\in D^{'}_b$,
+      - $(I)\rightarrow$ and
+        $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ge (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
+    - Also, according to the helper function $H(k,x)$ and the
+      conclusions in [appendix A.2](#A.2), then: $$
       \begin{split}
       &\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}\\
       &=|b^{'}_{i_s}+x_{i_s} |^{p}+|b^{'}_{i_t}+x_{i_t}|^{p}-|b_{i_s}+x_{i_s}|^{p}-|b_{i_t}+x_{i_t}|^{p}\\
@@ -1290,49 +1240,46 @@ and analysis step by step, until the conclusion is reached.
       &=-(|b_{i_s}-1|^{p}-|b_{i_s}-2|^{p})-(|b_{i_t}|^{p}-|b_{i_t}+1|^{p})\\
       &< 0\\
       \end{split}
-      ```
+      $$
     - so,
-      $`\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p} < \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}`$.
+      $\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p} < \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}$.
     - Therefore,
-      $`(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} < (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}`$,
-      which is contradictory to $`(I)`$, so the above assumption is not
+      $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} < (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$,
+      which is contradictory to $(I)$, so the above assumption is not
       valid.
-    - So, $`D^{*'}_b\cap B_1 = \emptyset`$, i.e.,
-      $`D^{*'}_b \subseteq \complement_{D^{'}_b}B_1`$.
+    - So, $D^{*'}_b\cap B_1 = \emptyset$, i.e.,
+      $D^{*'}_b \subseteq \complement_{D^{'}_b}B_1$.
 
     So, `2` is proofed.
 
 3.  Let
-    $`B_2= \{b|b \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m,\exists i_s \in \{1,2,\ldots,n\}~b_{i_s} \ge 2\}\subseteq D^{'}_b`$,
+    $B_2= \{b|b \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m,\exists i_s \in \{1,2,\ldots,n\}~b_{i_s} \ge 2\}\subseteq D^{'}_b$,
     then there will
-    be,$`D^{*'}_b \subseteq \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2`$.
+    be,$D^{*'}_b \subseteq \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2$.
 
     Proof:
 
-    - Obviously, $`B_2 \ne \emptyset`$.
+    - Obviously, $B_2 \ne \emptyset$.
     - Assume that there
-      $`\exists b=[b_1,b_2,\ldots,b_n]\in D^{*'}_b \cap B_2`$.
-    - So, $`\exists i_s \in \{1,2,\ldots,n\}`$, that $`b_{i_s} \ge 2`$.
-    - The $`D^{*'}_b \subseteq \complement_{D^{'}_b}B_1`$ has been
-      proofed in `2`, and $`\emptyset\ne D^{*'}_b \subseteq D^{'}_b`$
-      has been illustrated in `1`.
-    - So,
-      $`b \in (D^{*'}_b \cap B_2)\subseteq \complement_{D^{'}_b}B_1`$.
-    - Since according to $`\eqref{floor_conclusion}`$, there is
-      $`0 \le m=\sum_{i=1}^n b_i < n`$. So,
-      $`\forall i \in \{1,2,\ldots,n\}~b_{i} \ge 0`$, and there
-      $`\exists i_t\ne i_s`$, that $`b_{i_t}=0`$.
-    - Without loss of generality, let $`i_s < i_t`$.
-    - Define $`b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}]`$, where
-      $`b^{'}_{i_s}=b_{i_s}-1,b^{'}_{i_t}=b_{i_t}+1, \forall i \in \{i|i \in [1,n], i\in \mathbb{Z}, i \notin \{i_s,i_t\}\}, b^{'}_i=b_i`$.
+      $\exists b=[b_1,b_2,\ldots,b_n]\in D^{*'}_b \cap B_2$.
+    - So, $\exists i_s \in \{1,2,\ldots,n\}$, that $b_{i_s} \ge 2$.
+    - The $D^{*'}_b \subseteq \complement_{D^{'}_b}B_1$ has been proofed
+      in `2`, and $\emptyset\ne D^{*'}_b \subseteq D^{'}_b$ has been
+      illustrated in `1`.
+    - So, $b \in (D^{*'}_b \cap B_2)\subseteq \complement_{D^{'}_b}B_1$.
+    - Since according to $\eqref{floor_conclusion}$, there is
+      $0 \le m=\sum_{i=1}^n b_i < n$. So,
+      $\forall i \in \{1,2,\ldots,n\}~b_{i} \ge 0$, and there
+      $\exists i_t\ne i_s$, that $b_{i_t}=0$.
+    - Without loss of generality, let $i_s < i_t$.
+    - Define $b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}]$, where
+      $b^{'}_{i_s}=b_{i_s}-1,b^{'}_{i_t}=b_{i_t}+1, \forall i \in \{i|i \in [1,n], i\in \mathbb{Z}, i \notin \{i_s,i_t\}\}, b^{'}_i=b_i$.
     - Obviously,there are:
-      - $`b^{'}\in \complement_{D^{'}_b}B_1\subseteq D^{'}_b`$,
-      - $`(I)\rightarrow`$ and
-        $`(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ge (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}`$.
-    - Also, according to the helper function $`H(k,x)`$ and the
-      conclusions in [appendix A.2](#A.2), then:
-      ``` math
-
+      - $b^{'}\in \complement_{D^{'}_b}B_1\subseteq D^{'}_b$,
+      - $(I)\rightarrow$ and
+        $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ge (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
+    - Also, according to the helper function $H(k,x)$ and the
+      conclusions in [appendix A.2](#A.2), then: $$
       \begin{split}
       &\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}\\
       &=|b^{'}_{i_s}+x_{i_s}|^{p}+|b^{'}_{i_t}+x_{i_t}|^{p}-|b_{i_s}+x_{i_s}|^{p}-|b_{i_t}+x_{i_t}|^{p}\\
@@ -1342,73 +1289,69 @@ and analysis step by step, until the conclusion is reached.
       &=-[H(b_{i_s},x_{i_s})-H(1,x_{i_t})]\\
       &< 0.
       \end{split}
-      ```
+      $$
     - So,
-      $`\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p} < \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}`$.
+      $\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p} < \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}$.
     - Therefore,
-      $`(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} < (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}`$,
-      which is contradictory to $`(I)`$, so the above assumption is not
+      $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} < (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$,
+      which is contradictory to $(I)$, so the above assumption is not
       valid.
-    - So, $`D^{*'}_b\cap B_2 = \emptyset`$, i.e.,
-      $`D^{*'}_b \subseteq \complement_{D^{'}_b}B_2`$.
+    - So, $D^{*'}_b\cap B_2 = \emptyset$, i.e.,
+      $D^{*'}_b \subseteq \complement_{D^{'}_b}B_2$.
     - Therefore,
-      $`D^{*'}_b \subseteq \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2`$.
+      $D^{*'}_b \subseteq \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2$.
 
     So, `3` is proofed.
 
 4.  Let
 
-    ``` math
-
+    $$
     \begin{split}
      B_3=\{b|&b \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m,\\
      &h\in \mathbb{Z}^+,h \ge 2, \\
      &\exists s,t \in \{1,2,\ldots,h\}, s < t,i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t},b_{i_s} < b_{i_t}\}\subseteq D^{'}_b,
      \end{split}
-    ```
-    then there will be
-    $`D^{*'}_b \subseteq \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$.
+    $$ then there will be
+    $D^{*'}_b \subseteq \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$.
 
     Proof:
 
-    - Since $`B_3`$ is not a simple definition, we explain it first:
-      - $`h\in \mathbb{Z}^+`$
-      - If $`h \ge 2`$,
-        - $`\exists s,t \in \{1,2,\ldots,h\}, s < t, i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t}`$,
-        - $`\forall b \in B_3`$,
-          $`b \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m`$, and
-          $`b_{i_s} < b_{i_t}`$.
-      - If $`h=1`$, $`B_3 = \emptyset`$.
-    - If $`h \ge 2`$.
-      - Obviously, $`B_3 \ne \emptyset`$.
+    - Since $B_3$ is not a simple definition, we explain it first:
+      - $h\in \mathbb{Z}^+$
+      - If $h \ge 2$,
+        - $\exists s,t \in \{1,2,\ldots,h\}, s < t, i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t}$,
+        - $\forall b \in B_3$,
+          $b \in \mathbb{Z}^n,~\sum_{i=1}^n b_i = m$, and
+          $b_{i_s} < b_{i_t}$.
+      - If $h=1$, $B_3 = \emptyset$.
+    - If $h \ge 2$.
+      - Obviously, $B_3 \ne \emptyset$.
         - Assume that there
-          $`\exists b=[b_1,b_2,\ldots,b_n]\in D^{*'}_b \cap B_3`$.
-        - So, $`\exists i_s \in G_s, i_t\in G_t`$, that
-          $`b_{i_s} < b_{i_t}`$.
-        - And, there is $`x_{i_s} < x_{i_t}`$.
+          $\exists b=[b_1,b_2,\ldots,b_n]\in D^{*'}_b \cap B_3$.
+        - So, $\exists i_s \in G_s, i_t\in G_t$, that
+          $b_{i_s} < b_{i_t}$.
+        - And, there is $x_{i_s} < x_{i_t}$.
         - The
-          $`D^{*'}_b \subseteq \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2`$
+          $D^{*'}_b \subseteq \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2$
           has been proofed in `2`, and
-          $`\emptyset\ne D^{*'}_b \subseteq D^{'}_b`$ has been
-          illustrated in `1`.
+          $\emptyset\ne D^{*'}_b \subseteq D^{'}_b$ has been illustrated
+          in `1`.
         - So,
-          $`b \in (D^{*'}_b \cap B_3)\subseteq \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2`$.
-        - Since according to $`\eqref{floor_conclusion}`$, there is
-          $`0 \le m=\sum_{i=1}^n b_i < n`$, and according to
-          $`\complement_{D^{'}_b}B_1\cap\complement_{D^{'}_b}{B_2}`$’s
+          $b \in (D^{*'}_b \cap B_3)\subseteq \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2$.
+        - Since according to $\eqref{floor_conclusion}$, there is
+          $0 \le m=\sum_{i=1}^n b_i < n$, and according to
+          $\complement_{D^{'}_b}B_1\cap\complement_{D^{'}_b}{B_2}$’s
           field, there is
-          $`\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,1\}`$.
-        - So, $`b_{i_s}=0, b_{i_t} = 1`$.
-        - Define $`b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}]`$, where
-          $`b^{'}_{i_s}=b_{i_s}+1,b^{'}_{i_t}=b_{i_t}-1, \forall i \in \{i|i \in [1,n], i\in \mathbb{Z}, i \notin \{i_s,i_t\}\}, b^{'}_i=b_i`$.
+          $\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,1\}$.
+        - So, $b_{i_s}=0, b_{i_t} = 1$.
+        - Define $b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}]$, where
+          $b^{'}_{i_s}=b_{i_s}+1,b^{'}_{i_t}=b_{i_t}-1, \forall i \in \{i|i \in [1,n], i\in \mathbb{Z}, i \notin \{i_s,i_t\}\}, b^{'}_i=b_i$.
         - Obviously,there are:
-          - $`b^{'}\in (\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2) \subseteq D^{'}_b`$,
-          - $`(I)\rightarrow`$ and
-            $`(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ge (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}`$.
-        - Also, according to the helper function $`H(k,x)`$ and the
-          conclusions in [appendix A.2](#A.2), then:
-          ``` math
-
+          - $b^{'}\in (\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2) \subseteq D^{'}_b$,
+          - $(I)\rightarrow$ and
+            $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ge (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
+        - Also, according to the helper function $H(k,x)$ and the
+          conclusions in [appendix A.2](#A.2), then: $$
           \begin{split}
           &\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}\\
           &=|b^{'}_{i_s}+x_{i_s}|^{p}+|b^{'}_{i_t}+x_{i_t}|^{p}-|b_{i_s}+x_{i_s}|^{p}-|b_{i_t}+x_{i_t}|^{p}\\
@@ -1418,33 +1361,31 @@ and analysis step by step, until the conclusion is reached.
           &=H(1,x_{i_s})-H(1,x_{i_t})\\
           &< 0.
           \end{split}
-          ```
+          $$
         - So,
-          $`\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p} < \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}`$.
+          $\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p} < \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}$.
         - Therefore,
-          $`(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} < (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}`$,
-          which is contradictory to $`(I)`$, so the above assumption is
+          $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} < (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$,
+          which is contradictory to $(I)$, so the above assumption is
           not valid.
-        - So, $`D^{*'}_b\cap B_3 = \emptyset`$, i.e.,
-          $`D^{*'}_b \subseteq \complement_{D^{'}_b}B_3`$.
-    - If $`h=1`$,then $`B_3 = \emptyset`$, and there is till
-      $`D^{*'}_b \subseteq \complement_{D^{'}_b}B_3`$.
+        - So, $D^{*'}_b\cap B_3 = \emptyset$, i.e.,
+          $D^{*'}_b \subseteq \complement_{D^{'}_b}B_3$.
+    - If $h=1$,then $B_3 = \emptyset$, and there is till
+      $D^{*'}_b \subseteq \complement_{D^{'}_b}B_3$.
 
     Therefore,
-    $`D^{*'}_b \subseteq \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$
+    $D^{*'}_b \subseteq \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$
 
     So, `4` is proofed.
 
 5.  Since
-    $`\emptyset \ne D^{*'}_b \subseteq \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$,
+    $\emptyset \ne D^{*'}_b \subseteq \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$,
     there is
-    $`D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$.
+    $D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$.
 
     Proof:
 
-    Since:
-    ``` math
-
+    Since: $$
     \begin{split}
      B_1= \{b|&b\in \mathbb{Z}^n,\sum_{i=1}^n b_i = m, \exists i_s,i_t \in \{1,2,\ldots,n\},b_{i_s} \ge 1,b_{i_t} \le -1\}\subseteq D^{'}_b\\
      B_2= \{b|&b \in \mathbb{Z}^n,\sum_{i=1}^n b_i = m, \exists i_s \in \{1,2,\ldots,n\}, b_{i_s} \ge 2\}\subseteq D^{'}_b\\
@@ -1452,75 +1393,72 @@ and analysis step by step, until the conclusion is reached.
      &h\in \mathbb{Z}^+,h \ge 2, \\
      &\exists s,t \in \{1,2,\ldots,h\}, s < t,i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t},b_{i_s} < b_{i_t}\}\subseteq D^{'}_b\\
      \end{split}
-    ```
-    And according to $`\eqref{floor_conclusion}`$, there is
-    $`0 \le m < n`$, so,
-    $`\forall b=[b_1,b_2,\ldots,b_n] \in \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}  B_2 \cap \complement_{D^{'}_b}B_3`$,
+    $$ And according to $\eqref{floor_conclusion}$, there is
+    $0 \le m < n$, so,
+    $\forall b=[b_1,b_2,\ldots,b_n] \in \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}  B_2 \cap \complement_{D^{'}_b}B_3$,
     there are:
 
-    - $`\sum_{i=1}^n b_i = m`$
-    - $`\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,1\}`$
-    - $`h\in \mathbb{Z}^+`$
-    - If $`h \ge 2`$,
-      - $`\forall s,t \in \{1,2,\ldots,h\}, s < t, i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t}`$,
-        there is $`b_{i_s} \ge b_{i_t}`$
-      - If $`m = 0`$,
-        - then $`\forall i \in \{1,2,\ldots,n\}~b_{i}=0`$, i.e.,
-          $`b=\theta`$.
+    - $\sum_{i=1}^n b_i = m$
+    - $\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,1\}$
+    - $h\in \mathbb{Z}^+$
+    - If $h \ge 2$,
+      - $\forall s,t \in \{1,2,\ldots,h\}, s < t, i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t}$,
+        there is $b_{i_s} \ge b_{i_t}$
+      - If $m = 0$,
+        - then $\forall i \in \{1,2,\ldots,n\}~b_{i}=0$, i.e.,
+          $b=\theta$.
         - And the set
-          $`\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b=\theta\}`$,
+          $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b=\theta\}$,
           which is a single element set.
         - so,
-          $`D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$
-      - If $`m > 0`$, there will be
-        $`\exists h^{'} \in \{1,2,\ldots,h\} \sum_{i=1}^{h^{'}-1}g_i \le m < \sum_{i=1}^{h^{'}}g_i`$.
-        - If $`\sum_{i=1}^{h^{'}-1}g_i = m`$,
+          $D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$
+      - If $m > 0$, there will be
+        $\exists h^{'} \in \{1,2,\ldots,h\} \sum_{i=1}^{h^{'}-1}g_i \le m < \sum_{i=1}^{h^{'}}g_i$.
+        - If $\sum_{i=1}^{h^{'}-1}g_i = m$,
           - then
-            $`\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1`$.
+            $\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1$.
           - and,
-            $`\forall i \in G_{h^{'}} \cup G_{h^{'}+1} \cup \ldots \cup G_{h}, b_{i}=0`$.
+            $\forall i \in G_{h^{'}} \cup G_{h^{'}+1} \cup \ldots \cup G_{h}, b_{i}=0$.
           - And the set
-            $`\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b\}`$,
+            $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b\}$,
             which is a single element set.
           - So,
-            $`D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$
-        - If $`\sum_{i=1}^{h^{'}-1}g_i < m < \sum_{i=1}^{h^{'}}g_i`$,
+            $D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$
+        - If $\sum_{i=1}^{h^{'}-1}g_i < m < \sum_{i=1}^{h^{'}}g_i$,
           - then
-            $`\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1`$.
-          - let $`q = m-\sum_{i=1}^{h^{'}-1}g_i`$:
-            - Obviously, $`1 \le q < g_{h^{'}}`$.
+            $\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1$.
+          - let $q = m-\sum_{i=1}^{h^{'}-1}g_i$:
+            - Obviously, $1 \le q < g_{h^{'}}$.
             - Let
-              $`Q=\{\lambda^{q}|\lambda^{q}=(i_1,i_2,\ldots,i_q)\in G_{h^{'}}^q, \forall u,v \in \{1,2,\ldots,q\}, i_u\ne i_v\}`$,
+              $Q=\{\lambda^{q}|\lambda^{q}=(i_1,i_2,\ldots,i_q)\in G_{h^{'}}^q, \forall u,v \in \{1,2,\ldots,q\}, i_u\ne i_v\}$,
             - there is
-              $`\forall \lambda^q=(i_1,i_2,\ldots,i_q) \in Q, \Lambda=\{i_1,i_2,\ldots,i_q\} \subsetneq G_{h^{'}}`$
-            - $`\forall i\in \{i_1,i_2,\ldots,i_q\}, b_i = 1`$,
+              $\forall \lambda^q=(i_1,i_2,\ldots,i_q) \in Q, \Lambda=\{i_1,i_2,\ldots,i_q\} \subsetneq G_{h^{'}}$
+            - $\forall i\in \{i_1,i_2,\ldots,i_q\}, b_i = 1$,
             - and
-              $`\forall i \in \complement_{G_{h^{'}}}^{\Lambda}, b_i = 0`$
+              $\forall i \in \complement_{G_{h^{'}}}^{\Lambda}, b_i = 0$
           - and,
-            $`\forall i \in G_{h^{'}+1} \cup G_{h^{'}+2} \cup \ldots \cup G_{h}, b_{i}=0`$.
+            $\forall i \in G_{h^{'}+1} \cup G_{h^{'}+2} \cup \ldots \cup G_{h}, b_{i}=0$.
           - So, the set
-            $`\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$,
+            $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$,
             is not a single element set. It has
-            $`\binom{g_{h^{'}}}{q} > 1`$ elements.
+            $\binom{g_{h^{'}}}{q} > 1$ elements.
           - Assume
-            $`\exists b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}] \in \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3, b^{'}\ne b`$,
+            $\exists b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}] \in \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3, b^{'}\ne b$,
             that
-            make$`(I)\rightarrow (\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ne (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}`$.
+            make$(I)\rightarrow (\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ne (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
             - So,
-              $`\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=b^{'}_{i}=1`$.
-            - $`\exists \emptyset \ne U=\{u_1,u_2,\ldots,u_{\sigma}\} \subseteq G_{h^{'}}`$,
-              $`\emptyset \ne V=\{v_1,v_2,\ldots,v_{\sigma}\} \subseteq G_{h^{'}}`$,$`U\cap V = \emptyset, U\cup V \subseteq G_{h^{'}}`$,
-              - where $`\forall i_u \in U, b_{i_u}=1,b^{'}_{i_u}=0`$,
-              - and $`\forall i_v \in V, b_{i_v}=0,b^{'}_{i_v}=1`$.
-              - Let $`W = \complement_{G_{h^{'}}}^{U\cup V}`$, then,
-                $`\forall i_w \in W, b_{i_w}=b^{'}_{i_w}`$
-              - Since
-                $`\forall i_u,i_v \in G_{h^{'}}, x_{i_u}=x_{i_v}`$, let
-                $`\forall i_u,i_v \in G_{h^{'}}, x_{i_u}=x_{i_v}=\Omega`$
-            - $`\forall i \in G_{h^{'}+1} \cup G_{h^{'}+2} \cup \ldots \cup G_{h}, b_{i}=b^{'}_{i}=0`$.
-          - Therefore:
-            ``` math
-
+              $\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=b^{'}_{i}=1$.
+            - $\exists \emptyset \ne U=\{u_1,u_2,\ldots,u_{\sigma}\} \subseteq G_{h^{'}}$,
+              $\emptyset \ne V=\{v_1,v_2,\ldots,v_{\sigma}\} \subseteq G_{h^{'}}$,$U\cap V = \emptyset, U\cup V \subseteq G_{h^{'}}$,
+              - where $\forall i_u \in U, b_{i_u}=1,b^{'}_{i_u}=0$,
+              - and $\forall i_v \in V, b_{i_v}=0,b^{'}_{i_v}=1$.
+              - Let $W = \complement_{G_{h^{'}}}^{U\cup V}$, then,
+                $\forall i_w \in W, b_{i_w}=b^{'}_{i_w}$
+              - Since $\forall i_u,i_v \in G_{h^{'}}, x_{i_u}=x_{i_v}$,
+                let
+                $\forall i_u,i_v \in G_{h^{'}}, x_{i_u}=x_{i_v}=\Omega$
+            - $\forall i \in G_{h^{'}+1} \cup G_{h^{'}+2} \cup \ldots \cup G_{h}, b_{i}=b^{'}_{i}=0$.
+          - Therefore: $$
             \begin{split}
             &\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}\\
             &\sum_{i=1}^n |x_i+b^{'}_i|^{p}- \sum_{i=1}^n |x_i+b_i|^{p}\\
@@ -1530,56 +1468,53 @@ and analysis step by step, until the conclusion is reached.
             &=\sigma |\Omega|^{p}+\sigma|\Omega+1|^{p} - (\sigma|\Omega+1|^{p}+\sigma|\Omega|^{p})\\
             &=0
             \end{split}
-            ```
+            $$
           - so,
-            $`\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}= \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}`$.
+            $\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}= \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}$.
           - Therefore,
-            $`(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} = (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}`$,
-            which is contradictory to $`(I)`$, so the above assumption
-            is not valid.
+            $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} = (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$,
+            which is contradictory to $(I)$, so the above assumption is
+            not valid.
           - So,
-            $`\forall b^{'} \in \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3, b^{'}\ne b`$,
+            $\forall b^{'} \in \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3, b^{'}\ne b$,
             there is
-            $`(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} = (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}`$.
+            $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} = (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
           - so,
-            $`D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$
-    - If $`h = 1`$, then $`B_3 = \emptyset`$, $`G_1 = \{1,2,\ldots,n\}`$
-      - If $`m = 0`$,
-        - then $`\forall i \in \{1,2,\ldots,n\}~b_{i}=0`$, i.e.,
-          $`b=\theta`$.
+            $D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$
+    - If $h = 1$, then $B_3 = \emptyset$, $G_1 = \{1,2,\ldots,n\}$
+      - If $m = 0$,
+        - then $\forall i \in \{1,2,\ldots,n\}~b_{i}=0$, i.e.,
+          $b=\theta$.
         - And the set
-          $`\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b=\theta\}`$,
+          $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b=\theta\}$,
           which is a single element set.
         - so,
-          $`D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$
-      - If $`m > 0`$, there will be $`0 < m < n`$.
-        - let $`q = m`$:
-          - Obviously, $`1 \le q < n`$.
+          $D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$
+      - If $m > 0$, there will be $0 < m < n$.
+        - let $q = m$:
+          - Obviously, $1 \le q < n$.
           - Let
-            $`Q=\{\lambda^{q}|\lambda^{q}=(i_1,i_2,\ldots,i_q)\in G_{1}^q, \forall u,v \in \{1,2,\ldots,q\}, i_u\ne i_v\}`$,
-            there is $`\Lambda=\{i_1,i_2,\ldots,i_q\} \subsetneq G_{1}`$
-          - $`\forall i\in \{i_1,i_2,\ldots,i_q\}, b_i = 1`$,
-          - and
-            $`\forall i \in \complement_{G_{1}}^{\Lambda}, b_i = 0`$.
+            $Q=\{\lambda^{q}|\lambda^{q}=(i_1,i_2,\ldots,i_q)\in G_{1}^q, \forall u,v \in \{1,2,\ldots,q\}, i_u\ne i_v\}$,
+            there is $\Lambda=\{i_1,i_2,\ldots,i_q\} \subsetneq G_{1}$
+          - $\forall i\in \{i_1,i_2,\ldots,i_q\}, b_i = 1$,
+          - and $\forall i \in \complement_{G_{1}}^{\Lambda}, b_i = 0$.
         - So, the set
-          $`\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$,
+          $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$,
           is not a single element set. It has
-          $`\binom{g_{1}}{q}=\binom{n}{m} > 1`$ elements.
+          $\binom{g_{1}}{q}=\binom{n}{m} > 1$ elements.
         - Assume
-          $`\exists b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}] \in \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3, b^{'}\ne b`$,
+          $\exists b^{'}=[b^{'}_{1},b^{'}_{2},\ldots,b^{'}_{n}] \in \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3, b^{'}\ne b$,
           that
-          make$`(II)\rightarrow (\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ne (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}`$.
-        - So,$`\exists \emptyset \ne U=\{u_1,u_2,\ldots,u_{\sigma}\} \subseteq G_{1}`$,
-          $`\emptyset \ne V=\{v_1,v_2,\ldots,v_{\sigma}\} \subseteq G_{1}`$,$`U\cap V = \emptyset, U\cup V \subseteq G_{1}`$,
-          - where $`\forall i_u \in U, b_{i_u}=1,b^{'}_{i_u}=0`$,
-          - and $`\forall i_v \in V, b_{i_v}=0,b^{'}_{i_v}=1`$.
-          - Let $`W = \complement_{G_{1}}^{U\cup V}`$, then,
-            $`\forall i_w \in W, b_{i_w}=b^{'}_{i_w}`$
-          - Since $`\forall i_u,i_v \in G_{1}, x_{i_u}=x_{i_v}`$, let
-            $`\forall i_u,i_v \in G_{1}, x_{i_u}=x_{i_v}=\Omega`$
-        - Therefore:
-          ``` math
-
+          make$(II)\rightarrow (\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} \ne (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
+        - So,$\exists \emptyset \ne U=\{u_1,u_2,\ldots,u_{\sigma}\} \subseteq G_{1}$,
+          $\emptyset \ne V=\{v_1,v_2,\ldots,v_{\sigma}\} \subseteq G_{1}$,$U\cap V = \emptyset, U\cup V \subseteq G_{1}$,
+          - where $\forall i_u \in U, b_{i_u}=1,b^{'}_{i_u}=0$,
+          - and $\forall i_v \in V, b_{i_v}=0,b^{'}_{i_v}=1$.
+          - Let $W = \complement_{G_{1}}^{U\cup V}$, then,
+            $\forall i_w \in W, b_{i_w}=b^{'}_{i_w}$
+          - Since $\forall i_u,i_v \in G_{1}, x_{i_u}=x_{i_v}$, let
+            $\forall i_u,i_v \in G_{1}, x_{i_u}=x_{i_v}=\Omega$
+        - Therefore: $$
           \begin{split}
           &\sum_{i=1}^n |floor(r_iN)+b^{'}_i-r_{i}N |^{p}- \sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p}\\
           &\sum_{i=1}^n |x_i+b^{'}_i|^{p}- \sum_{i=1}^n |x_i+b_i|^{p}\\
@@ -1589,113 +1524,107 @@ and analysis step by step, until the conclusion is reached.
           &=\sigma |\Omega|^{p}+\sigma|\Omega+1|^{p} - (\sigma|\Omega+1|^{p}+\sigma|\Omega|^{p})\\
           &=0
           \end{split}
-          ```
+          $$
         - so,
-          $`\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}= \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}`$.
+          $\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p}= \sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p}$.
         - Therefore,
-          $`(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} = (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}`$,
-          which is contradictory to $`(II)`$, so the above assumption is
+          $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} = (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$,
+          which is contradictory to $(II)$, so the above assumption is
           not valid.
         - So,
-          $`\forall b^{'} \in \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3, b^{'}\ne b`$,
+          $\forall b^{'} \in \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3, b^{'}\ne b$,
           there is
-          $`(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} = (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}`$.
+          $(\sum_{i=1}^n |round(r_iN)+b^{'}_i-r_{i}N |^{p})^{\frac{1}{p}} = (\sum_{i=1}^n |round(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}$.
         - so,
-          $`D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$
+          $D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$
 
     So, `5` is proofed.
 
 6.  Since
-    $`D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$,
+    $D^{*'}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$,
     there is
-    $`D^{*}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$.
+    $D^{*}_b = \complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$.
     Proof:
 
-    - Since
-      ``` math
-
+    - Since $$
       \begin{split}
         D_b=\{b|&b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m,\\&[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in \mathbb{N}^n\}\\
       D^{'}_b=\{b|&b=[b_1,b_2,\ldots,b_n]\in \mathbb{Z}^n,\sum_{i=1}^n b_i=m\}.\\
       D^{*}_b=\{b|&b=\mathop{\arg\min}\limits_{b\in D_b}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}\\
       D^{*'}_b=\{b|&b=\mathop{\arg\min}\limits_{b\in D^{'}_b}(\sum_{i=1}^n |floor(r_iN)+b_i-r_{i}N |^{p})^{\frac{1}{p}}\}
       \end{split}
-      ```
+      $$
     - And
-      $`D_b\subseteq D^{'}_b, \emptyset \ne D^{*}_b\subseteq D_b,~\emptyset\ne D^{*'}_b \subseteq D^{'}_b`$
+      $D_b\subseteq D^{'}_b, \emptyset \ne D^{*}_b\subseteq D_b,~\emptyset\ne D^{*'}_b \subseteq D^{'}_b$
       has been illustrated in `1`.
-    - According to $`\eqref{floor_conclusion}`$, there is
-      $`0 \le m < n`$, so,
-      $`\forall b=[b_1,b_2,\ldots,b_n] \in D^{*'}_b=\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$,
+    - According to $\eqref{floor_conclusion}$, there is $0 \le m < n$,
+      so,
+      $\forall b=[b_1,b_2,\ldots,b_n] \in D^{*'}_b=\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$,
       there are:
-      - $`\sum_{i=1}^n b_i = m`$
-      - $`\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,1\}`$
+      - $\sum_{i=1}^n b_i = m$
+      - $\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,1\}$
       - so, there will always be
-        $`[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in \mathbb{N}^n`$
-      - so, $`b\in D_b`$
+        $[floor(r_1N)+b_1,floor(r_2N)+b_2,\ldots,floor(r_nN)+b_n]\in \mathbb{N}^n$
+      - so, $b\in D_b$
       - according according to [lemma 2](#Lemma 2), there is
-        $`b\in D^{*}_b \subseteq D^{*'}_b`$.
-    - So, there is also $`D^{*'}_b \subseteq D^{*}_b`$
+        $b\in D^{*}_b \subseteq D^{*'}_b$.
+    - So, there is also $D^{*'}_b \subseteq D^{*}_b$
     - So,
-      $`D^{*}_b = D^{*'}_b =\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$
+      $D^{*}_b = D^{*'}_b =\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$
 
     So, `6` is proofed.
 
 7.  To find all
-    $`b \in D^{*}_b =\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$.
-    $`\forall b=[b_1,b_2,\ldots,b_n] \in D^{*}_b =\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$
+    $b \in D^{*}_b =\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$.
+    $\forall b=[b_1,b_2,\ldots,b_n] \in D^{*}_b =\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$
 
-    - If $`h \ge 2`$, so
-      $`\forall s,t \in \{1,2,\ldots,h\}, s < t, i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t}`$,
-      there is $`b_{i_s} \ge b_{i_t}`$
-      - If $`m = 0`$,
-        - then $`\forall i \in \{1,2,\ldots,n\}~b_{i}=0`$, i.e.,
-          $`b=\theta`$.
+    - If $h \ge 2$, so
+      $\forall s,t \in \{1,2,\ldots,h\}, s < t, i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t}$,
+      there is $b_{i_s} \ge b_{i_t}$
+      - If $m = 0$,
+        - then $\forall i \in \{1,2,\ldots,n\}~b_{i}=0$, i.e.,
+          $b=\theta$.
         - And the set
-          $`\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b=\theta\}`$,
+          $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b=\theta\}$,
           which is a single element set.
-        - So, $`D^{*}_b=\{\theta\}`$, which is a single element set.
-      - If $`m > 0`$, there will be
-        $`\exists h^{'} \in \{1,2,\ldots,h\} \sum_{i=1}^{h^{'}-1}g_i \le m < \sum_{i=1}^{h^{'}}g_i`$.
-        - If $`\sum_{i=1}^{h^{'}-1}g_i = m`$,
+        - So, $D^{*}_b=\{\theta\}$, which is a single element set.
+      - If $m > 0$, there will be
+        $\exists h^{'} \in \{1,2,\ldots,h\} \sum_{i=1}^{h^{'}-1}g_i \le m < \sum_{i=1}^{h^{'}}g_i$.
+        - If $\sum_{i=1}^{h^{'}-1}g_i = m$,
           - then
-            $`\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1`$.
+            $\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1$.
           - and,
-            $`\forall i \in G_{h^{'}} \cup G_{h^{'}+1} \cup \ldots \cup G_{h}, b_{i}=0`$.
+            $\forall i \in G_{h^{'}} \cup G_{h^{'}+1} \cup \ldots \cup G_{h}, b_{i}=0$.
           - And the set
-            $`\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b\}`$,
+            $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b\}$,
             which is a single element set.
-          - So
-            ``` math
-
+          - So $$
             \begin{split}
             D^{*}_b = \{b|&b = [b_1,b_2,\ldots,b_n]\\
             &\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1,\\
             &\forall i \in G_{h^{'}} \cup G_{h^{'}+1} \cup \ldots \cup G_{h}, b_{i}=0\}
             \end{split}
-            ```
-          - The $`D^{*}_b`$ is a single element set.
-        - If $`\sum_{i=1}^{h^{'}-1}g_i < m < \sum_{i=1}^{h^{'}}g_i`$,
+            $$
+          - The $D^{*}_b$ is a single element set.
+        - If $\sum_{i=1}^{h^{'}-1}g_i < m < \sum_{i=1}^{h^{'}}g_i$,
           - then
-            $`\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1`$.
-          - let $`q = m-\sum_{i=1}^{h^{'}-1}g_i`$:
-            - Obviously, $`1 \le q < g_{h^{'}}`$.
+            $\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1$.
+          - let $q = m-\sum_{i=1}^{h^{'}-1}g_i$:
+            - Obviously, $1 \le q < g_{h^{'}}$.
             - Let
-              $`Q=\{\lambda^{q}|\lambda^{q}=(i_1,i_2,\ldots,i_q)\in G_{h^{'}}^q, \forall u,v \in \{1,2,\ldots,q\}, i_u\ne i_v\}`$,
+              $Q=\{\lambda^{q}|\lambda^{q}=(i_1,i_2,\ldots,i_q)\in G_{h^{'}}^q, \forall u,v \in \{1,2,\ldots,q\}, i_u\ne i_v\}$,
             - there is
-              $`\forall \lambda^q=(i_1,i_2,\ldots,i_q) \in Q, \Lambda=\{i_1,i_2,\ldots,i_q\} \subsetneq G_{h^{'}}`$
-            - $`\forall i\in \{i_1,i_2,\ldots,i_q\}, b_i = 1`$,
+              $\forall \lambda^q=(i_1,i_2,\ldots,i_q) \in Q, \Lambda=\{i_1,i_2,\ldots,i_q\} \subsetneq G_{h^{'}}$
+            - $\forall i\in \{i_1,i_2,\ldots,i_q\}, b_i = 1$,
             - and
-              $`\forall i \in \complement_{G_{h^{'}}}^{\Lambda}, b_i = 0`$
+              $\forall i \in \complement_{G_{h^{'}}}^{\Lambda}, b_i = 0$
           - and,
-            $`\forall i \in G_{h^{'}+1} \cup G_{h^{'}+2} \cup \ldots \cup G_{h}, b_{i}=0`$.
+            $\forall i \in G_{h^{'}+1} \cup G_{h^{'}+2} \cup \ldots \cup G_{h}, b_{i}=0$.
           - So, the set
-            $`\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$,
+            $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$,
             is not a single element set. It has
-            $`\binom{g_{h^{'}}}{q} > 1`$ elements.
-          - So
-            ``` math
-
+            $\binom{g_{h^{'}}}{q} > 1$ elements.
+          - So $$
             \begin{split}
             D^{*}_b = \{b|&b = [b_1,b_2,\ldots,b_n],\\
             &\forall i \in G_1 \cup G_2 \cup \ldots \cup G_{h^{'}-1}, b_{i}=1,\\
@@ -1706,32 +1635,29 @@ and analysis step by step, until the conclusion is reached.
             &~~~~\forall i \in \complement_{G_{h^{'}}}^{\Lambda}, b_i = 0\\
             &\forall i \in G_{h^{'}+1} \cup G_{h^{'}+2} \cup \ldots \cup G_{h}, b_{i}=0\}
             \end{split}
-            ```
-          - The $`D^{*}_b`$ has $`\binom{g_{h^{'}}}{q} > 1`$ elements.
-    - If $`h = 1`$, then $`B_3 = \emptyset`$, $`G_1 = \{1,2,\ldots,n\}`$
-      - If $`m = 0`$,
-        - then $`\forall i \in \{1,2,\ldots,n\}~b_{i}=0`$, i.e.,
-          $`b=\theta`$.
+            $$
+          - The $D^{*}_b$ has $\binom{g_{h^{'}}}{q} > 1$ elements.
+    - If $h = 1$, then $B_3 = \emptyset$, $G_1 = \{1,2,\ldots,n\}$
+      - If $m = 0$,
+        - then $\forall i \in \{1,2,\ldots,n\}~b_{i}=0$, i.e.,
+          $b=\theta$.
         - And the set
-          $`\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b=\theta\}`$,
+          $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3 = \{b=\theta\}$,
           which is a single element set.
-        - So, $`D^{*}_b=\{\theta\}`$, which is a single element set.
-      - If $`m > 0`$, there will be $`0 < m < n`$.
-        - let $`q = m`$:
-          - Obviously, $`1 \le q < n`$.
+        - So, $D^{*}_b=\{\theta\}$, which is a single element set.
+      - If $m > 0$, there will be $0 < m < n$.
+        - let $q = m$:
+          - Obviously, $1 \le q < n$.
           - Let
-            $`Q=\{\lambda^{q}|\lambda^{q}=(i_1,i_2,\ldots,i_q)\in G_{1}^q, \forall u,v \in \{1,2,\ldots,q\}, i_u\ne i_v\}`$,
-            there is $`\Lambda=\{i_1,i_2,\ldots,i_q\} \subsetneq G_{1}`$
-          - $`\forall i\in \{i_1,i_2,\ldots,i_q\}, b_i = 1`$,
-          - and
-            $`\forall i \in \complement_{G_{1}}^{\Lambda}, b_i = 0`$.
+            $Q=\{\lambda^{q}|\lambda^{q}=(i_1,i_2,\ldots,i_q)\in G_{1}^q, \forall u,v \in \{1,2,\ldots,q\}, i_u\ne i_v\}$,
+            there is $\Lambda=\{i_1,i_2,\ldots,i_q\} \subsetneq G_{1}$
+          - $\forall i\in \{i_1,i_2,\ldots,i_q\}, b_i = 1$,
+          - and $\forall i \in \complement_{G_{1}}^{\Lambda}, b_i = 0$.
         - So, the set
-          $`\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$,
+          $\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$,
           is not a single element set. It has
-          $`\binom{g_{1}}{q}=\binom{n}{m} > 1`$ elements.
-        - So
-          ``` math
-
+          $\binom{g_{1}}{q}=\binom{n}{m} > 1$ elements.
+        - So $$
           \begin{split}
           D^{*}_b = \{b|&b = [b_1,b_2,\ldots,b_n],\\
           &G_1 = \{1,2,\ldots,n\},\\
@@ -1741,78 +1667,76 @@ and analysis step by step, until the conclusion is reached.
           &~~~~\forall i\in \{i_1,i_2,\ldots,i_q\}, b_i = 1,\\
           &~~~~\forall i \in \complement_{G_{1}}^{\Lambda}, b_i = 0\}
           \end{split}
-          ```
-        - The $`D^{*}_b`$ has $`\binom{g_{1}}{q}=\binom{n}{m} > 1`$
+          $$
+        - The $D^{*}_b$ has $\binom{g_{1}}{q}=\binom{n}{m} > 1$
           elements.
 
 8.  Give out a
-    $`b \in D^{*}_b = D^{*'}_b =\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$.
+    $b \in D^{*}_b = D^{*'}_b =\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$.
 
     - Since,
-      $`x=[x_1,x_2,\ldots,x_n], \forall i \in \{1,2,\ldots,n\},x_i = floor(r_iN)-r_iN`$.
+      $x=[x_1,x_2,\ldots,x_n], \forall i \in \{1,2,\ldots,n\},x_i = floor(r_iN)-r_iN$.
 
-    - Let $`\hat N = \{1,2,\ldots,n\}`$,
+    - Let $\hat N = \{1,2,\ldots,n\}$,
 
     - and
-      $`Q=\{\lambda^{n}|\lambda^{n}=(i_1,i_2,\ldots,i_n)\in {\hat N}^n, \forall u,v \in \hat N, u\ne v, i_u\ne i_v,  \forall s,t \in \hat N,s < t, x_{i_s} \le x_{i_t}\}`$,
+      $Q=\{\lambda^{n}|\lambda^{n}=(i_1,i_2,\ldots,i_n)\in {\hat N}^n, \forall u,v \in \hat N, u\ne v, i_u\ne i_v,  \forall s,t \in \hat N,s < t, x_{i_s} \le x_{i_t}\}$,
 
     - So, there is
-      $`\forall \lambda^n=(i_1,i_2,\ldots,i_n) \in Q, \Lambda=\{i_1,i_2,\ldots,i_n\} = \hat N`$,
-      $`x_{i_1} \le x_{i_2} \le \ldots \le x_{i_n}`$.
+      $\forall \lambda^n=(i_1,i_2,\ldots,i_n) \in Q, \Lambda=\{i_1,i_2,\ldots,i_n\} = \hat N$,
+      $x_{i_1} \le x_{i_2} \le \ldots \le x_{i_n}$.
 
-    - And according `1`,
-      $`\forall \lambda^n=(i_1,i_2,\ldots,i_n) \in Q`$
+    - And according `1`, $\forall \lambda^n=(i_1,i_2,\ldots,i_n) \in Q$
 
-    - $`\exists h\in \mathbb{Z}^+, h \le n, g_1,g_2,\ldots, g_h \in \mathbb{Z}^+,\sum_{i=1}^{h}g_i=n`$,
+    - $\exists h\in \mathbb{Z}^+, h \le n, g_1,g_2,\ldots, g_h \in \mathbb{Z}^+,\sum_{i=1}^{h}g_i=n$,
       that make
 
-      - $`G_1 = \{i_1,i_2,\ldots,i_{g_1}\} \subseteq \{1,2,\ldots,n\}, \forall i_s,i_t \in G_1, x_{i_s}=x_{i_t}`$.
-      - $`G_2 = \{i_{g_1+1},i_{g_1+1},\ldots,i_{g_1+g_2}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_2, x_{i_s}=x_{i_t}`$.
+      - $G_1 = \{i_1,i_2,\ldots,i_{g_1}\} \subseteq \{1,2,\ldots,n\}, \forall i_s,i_t \in G_1, x_{i_s}=x_{i_t}$.
+      - $G_2 = \{i_{g_1+1},i_{g_1+1},\ldots,i_{g_1+g_2}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_2, x_{i_s}=x_{i_t}$.
       - …
-      - $`G_h = \{i_{1+\sum_{i=1}^{h-1}g_i},i_{2+\sum_{i=1}^{h-1}g_i},\ldots,i_{\sum_{i=1}^{h}g_i}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_h, x_{i_s}=x_{i_t}`$.
-      - $`G_1 \cup G_2 \cup \ldots \cup G_h = \{1,2,\ldots,n\}`$
-      - $`\forall s,t \in \{1,2,\ldots,h\}`$ and $`s\ne t`$, there is
-        $`G_s \cap G_t \ne \emptyset`$
-      - $`\forall s,t \in \{1,2,\ldots,h\},s < t`$, there is
-        $`\forall i_s \in G_s, i_t \in G_t`$, that
-        $`x_{i_s} < x_{i_t}`$.
-      - $`\lambda^n=(i_1,i_2,\ldots,i_n)=(i_1,i_2,\ldots,i_{g_1},i_{g_1+1},i_{g_1+1},\ldots,i_{g_1+g_2},i_{1+\sum_{i=1}^{h-1}g_i},i_{2+\sum_{i=1}^{h-1}g_i},\ldots,i_{\sum_{i=1}^{h}g_i})`$
+      - $G_h = \{i_{1+\sum_{i=1}^{h-1}g_i},i_{2+\sum_{i=1}^{h-1}g_i},\ldots,i_{\sum_{i=1}^{h}g_i}\} \subseteq \{1,2,\ldots,n\}  \forall i_s,i_t \in G_h, x_{i_s}=x_{i_t}$.
+      - $G_1 \cup G_2 \cup \ldots \cup G_h = \{1,2,\ldots,n\}$
+      - $\forall s,t \in \{1,2,\ldots,h\}$ and $s\ne t$, there is
+        $G_s \cap G_t \ne \emptyset$
+      - $\forall s,t \in \{1,2,\ldots,h\},s < t$, there is
+        $\forall i_s \in G_s, i_t \in G_t$, that $x_{i_s} < x_{i_t}$.
+      - $\lambda^n=(i_1,i_2,\ldots,i_n)=(i_1,i_2,\ldots,i_{g_1},i_{g_1+1},i_{g_1+1},\ldots,i_{g_1+g_2},i_{1+\sum_{i=1}^{h-1}g_i},i_{2+\sum_{i=1}^{h-1}g_i},\ldots,i_{\sum_{i=1}^{h}g_i})$
 
-    - $`(I)\rightarrow`$Consider a
-      $`b=[b_1,b_2,\ldots,b_n] \in \mathbb{Z}^n`$ as:
+    - $(I)\rightarrow$Consider a
+      $b=[b_1,b_2,\ldots,b_n] \in \mathbb{Z}^n$ as:
 
-      - Let $`m=N-\sum_{i=1}^n floor(r_iN)`$,
-        - From the conclusion $`\eqref{floor_conclusion}`$, there are
-          $`m \in \mathbb{Z},0 \le m < n`$.
+      - Let $m=N-\sum_{i=1}^n floor(r_iN)$,
+        - From the conclusion $\eqref{floor_conclusion}$, there are
+          $m \in \mathbb{Z},0 \le m < n$.
       - where
-        $`\forall s \in \{s|s \in [1,m], s \in \mathbb{Z}^+\} b_{i_s} = 1, \forall t \in \{t|t \in [m+1,n], t \in \mathbb{Z}^+\} b_{i_t} = 0.`$
+        $\forall s \in \{s|s \in [1,m], s \in \mathbb{Z}^+\} b_{i_s} = 1, \forall t \in \{t|t \in [m+1,n], t \in \mathbb{Z}^+\} b_{i_t} = 0.$
 
     - Obviously,
 
-      - $`b \in D^{'}_b`$.
-      - $`b \in \complement_{D^{'}_b}B_1`$, since
-        $`\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,1\}`$.
-      - $`b \in \complement_{D^{'}_b}B_2`$, since
-        $`\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,1\}`$.
+      - $b \in D^{'}_b$.
+      - $b \in \complement_{D^{'}_b}B_1$, since
+        $\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,1\}$.
+      - $b \in \complement_{D^{'}_b}B_2$, since
+        $\forall i \in \{1,2,\ldots,n\}~b_{i}\in \{0,1\}$.
 
-    - If $`h \ge 2, h\in \mathbb{Z}^+`$,
+    - If $h \ge 2, h\in \mathbb{Z}^+$,
 
       - then
-        $`\forall s,t \in \{1,2,\ldots,h\}, s < t, i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t}`$.
+        $\forall s,t \in \{1,2,\ldots,h\}, s < t, i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t}$.
       - So, there is
-        $`x_{i_1}=x_{i_2},\ldots,x_{i_{g_1}} < x_{i_{g_1+1}}=x_{i_{g_1+1}}=\ldots=x_{i_{g_1+g_2}} < x_{i_{1+\sum_{i=1}^{h-1}g_i}}=x_{i_{2+\sum_{i=1}^{h-1}g_i}}=\ldots=x_{i_{\sum_{i=1}^{h}g_i}}`$
+        $x_{i_1}=x_{i_2},\ldots,x_{i_{g_1}} < x_{i_{g_1+1}}=x_{i_{g_1+1}}=\ldots=x_{i_{g_1+g_2}} < x_{i_{1+\sum_{i=1}^{h-1}g_i}}=x_{i_{2+\sum_{i=1}^{h-1}g_i}}=\ldots=x_{i_{\sum_{i=1}^{h}g_i}}$
       - and because
-        $`\forall s \in \{s|s \in [1,m], s \in \mathbb{Z}^+\} b_{i_s} = 1, \forall t \in \{t|t \in [m+1,n], t \in \mathbb{Z}^+\} b_{i_t} = 0`$,
+        $\forall s \in \{s|s \in [1,m], s \in \mathbb{Z}^+\} b_{i_s} = 1, \forall t \in \{t|t \in [m+1,n], t \in \mathbb{Z}^+\} b_{i_t} = 0$,
       - therefore,
-        $`\forall s,t \in \{1,2,\ldots,h\}, s < t, i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t}`$
-        there is $`b_{i_s} \ge b_{i_t}`$,
-      - so, $`b \in \complement_{D^{'}_b}B_3`$.
+        $\forall s,t \in \{1,2,\ldots,h\}, s < t, i_s \in G_s, i_t\in G_t, x_{i_s} < x_{i_t}$
+        there is $b_{i_s} \ge b_{i_t}$,
+      - so, $b \in \complement_{D^{'}_b}B_3$.
 
-    - If $`h=1`$, then $`B_3 = \emptyset`$, there is
-      $`b \in \complement_{D^{'}_b}B_3`$
+    - If $h=1$, then $B_3 = \emptyset$, there is
+      $b \in \complement_{D^{'}_b}B_3$
 
-    - So, the $`b`$ of $`(I)`$ satisfices
-      $`b \in D^{*}_b = D^{*'}_b =\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3`$
+    - So, the $b$ of $(I)$ satisfices
+      $b \in D^{*}_b = D^{*'}_b =\complement_{D^{'}_b}B_1 \cap \complement_{D^{'}_b}B_2 \cap \complement_{D^{'}_b}B_3$
 
 Along the above 8 points, the [method](#Method) is proofed totally.
 
