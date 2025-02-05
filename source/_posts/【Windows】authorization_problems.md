@@ -365,12 +365,12 @@ to yourself, without influencing others’ items.
 >       function. The dacl_flags string can be a concatenation of zero
 >       or more of the following strings.
 >
->       | ontrol              | Constant in Sddl.h    | Meaning                                                                                         |
->       |:--------------------|:----------------------|:------------------------------------------------------------------------------------------------|
->       | “P”                 | SDDL_PROTECTED        | The SE_DACL_PROTECTED flag is set.                                                              |
->       | “AR”                | SDDL_AUTO_INHERIT_REQ | The SE_DACL_AUTO_INHERIT_REQ flag is set.                                                       |
->       | “AI”                | SDDL_AUTO_INHERITED   | The SE_DACL_AUTO_INHERITED flag is set.                                                         |
->       | “NO_ACCESS_CONTROL” | SDDL_NULL_ACL         | The ACL is null. **Windows Server 2008, Windows Vista and Windows Server 2003:** Not available. |
+>       | ontrol | Constant in Sddl.h | Meaning |
+>       |:---|:---|:---|
+>       | “P” | SDDL_PROTECTED | The SE_DACL_PROTECTED flag is set. |
+>       | “AR” | SDDL_AUTO_INHERIT_REQ | The SE_DACL_AUTO_INHERIT_REQ flag is set. |
+>       | “AI” | SDDL_AUTO_INHERITED | The SE_DACL_AUTO_INHERITED flag is set. |
+>       | “NO_ACCESS_CONTROL” | SDDL_NULL_ACL | The ACL is null. **Windows Server 2008, Windows Vista and Windows Server 2003:** Not available. |
 >
 >   - S:sacl_flags(string_ace1)(string_ace2)… (string_acen)
 >
@@ -818,36 +818,36 @@ Details about my solution.
 
 - At last, we get the following 28 specific paths.
 
-  | Types Description                               | Specific Path Example               |
-  |-------------------------------------------------|-------------------------------------|
-  | `NonSystemDisk[NTFS]\Root`                      | `D:\`                               |
-  | `NonSystemDisk[ReFS]\Root`                      | `E:\`                               |
-  | `Home\Root`                                     | `${Home}`                           |
-  | `NonSystemDisk[NTFS]\System Volume Information` | `D:\System Volume Information`      |
-  | `NonSystemDisk[NTFS]\$Recycle.Bin`              | `D:\$('$Recycle.Bin')`              |
-  | `NonSystemDisk[ReFS]\System Volume Information` | `E:\System Volume Information`      |
-  | `NonSystemDisk[ReFS]\$Recycle.Bin`              | `E:\$('$Recycle.Bin')`              |
-  | `Home\Directory`                                | `${Home}\${guid}\test_dir`          |
-  | `Home\SymbolicLinkDirectory`                    | `${Home}\${guid}\symbolic_link`     |
-  | `Home\Junction`                                 | `${Home}\${guid}\junction`          |
-  | `NonSystemDisk[NTFS]\Directory`                 | `D:\${guid}\test_dir`               |
-  | `NonSystemDisk[NTFS]\SymbolicLinkDirectory`     | `D:\${guid}\symbolic_link`          |
-  | `NonSystemDisk[NTFS]\Junction`                  | `D:\${guid}\junction`               |
-  | `NonSystemDisk[ReFS]\Directory`                 | `E:\${guid}\test_dir`               |
-  | `NonSystemDisk[ReFS]\SymbolicLinkDirectory`     | `E:\${guid}\symbolic_link`          |
-  | `NonSystemDisk[ReFS]\Junction`                  | `E:\${guid}\junction`               |
-  | `Home\desktop.ini`                              | `${Home}\${guid}\desktop.ini`       |
-  | `Home\SymbolicLinkFile`                         | `${Home}\${guid}\symbolic_link_txt` |
-  | `Home\File`                                     | `${Home}\${guid}\test_file.txt`     |
-  | `Home\HardLink`                                 | `${Home}\${guid}\hardlink`          |
-  | `NonSystemDisk[NTFS]\desktop.ini`               | `D:\${guid}\desktop.ini`            |
-  | `NonSystemDisk[NTFS]\SymbolicLinkFile`          | `D:\${guid}\symbolic_link_txt`      |
-  | `NonSystemDisk[NTFS]\File`                      | `D:\${guid}\test_file.txt`          |
-  | `NonSystemDisk[NTFS]\HardLink`                  | `D:\${guid}\hardlink`               |
-  | `NonSystemDisk[ReFS]\desktop.ini`               | `E:\${guid}\desktop.ini`            |
-  | `NonSystemDisk[ReFS]\SymbolicLinkFile`          | `E:\${guid}\symbolic_link_txt`      |
-  | `NonSystemDisk[ReFS]\File`                      | `E:\${guid}\test_file.txt`          |
-  | `NonSystemDisk[ReFS]\HardLink`                  | `E:\${guid}\hardlink`               |
+  | Types Description | Specific Path Example |
+  |----|----|
+  | `NonSystemDisk[NTFS]\Root` | `D:\` |
+  | `NonSystemDisk[ReFS]\Root` | `E:\` |
+  | `Home\Root` | `${Home}` |
+  | `NonSystemDisk[NTFS]\System Volume Information` | `D:\System Volume Information` |
+  | `NonSystemDisk[NTFS]\$Recycle.Bin` | `D:\$('$Recycle.Bin')` |
+  | `NonSystemDisk[ReFS]\System Volume Information` | `E:\System Volume Information` |
+  | `NonSystemDisk[ReFS]\$Recycle.Bin` | `E:\$('$Recycle.Bin')` |
+  | `Home\Directory` | `${Home}\${guid}\test_dir` |
+  | `Home\SymbolicLinkDirectory` | `${Home}\${guid}\symbolic_link` |
+  | `Home\Junction` | `${Home}\${guid}\junction` |
+  | `NonSystemDisk[NTFS]\Directory` | `D:\${guid}\test_dir` |
+  | `NonSystemDisk[NTFS]\SymbolicLinkDirectory` | `D:\${guid}\symbolic_link` |
+  | `NonSystemDisk[NTFS]\Junction` | `D:\${guid}\junction` |
+  | `NonSystemDisk[ReFS]\Directory` | `E:\${guid}\test_dir` |
+  | `NonSystemDisk[ReFS]\SymbolicLinkDirectory` | `E:\${guid}\symbolic_link` |
+  | `NonSystemDisk[ReFS]\Junction` | `E:\${guid}\junction` |
+  | `Home\desktop.ini` | `${Home}\${guid}\desktop.ini` |
+  | `Home\SymbolicLinkFile` | `${Home}\${guid}\symbolic_link_txt` |
+  | `Home\File` | `${Home}\${guid}\test_file.txt` |
+  | `Home\HardLink` | `${Home}\${guid}\hardlink` |
+  | `NonSystemDisk[NTFS]\desktop.ini` | `D:\${guid}\desktop.ini` |
+  | `NonSystemDisk[NTFS]\SymbolicLinkFile` | `D:\${guid}\symbolic_link_txt` |
+  | `NonSystemDisk[NTFS]\File` | `D:\${guid}\test_file.txt` |
+  | `NonSystemDisk[NTFS]\HardLink` | `D:\${guid}\hardlink` |
+  | `NonSystemDisk[ReFS]\desktop.ini` | `E:\${guid}\desktop.ini` |
+  | `NonSystemDisk[ReFS]\SymbolicLinkFile` | `E:\${guid}\symbolic_link_txt` |
+  | `NonSystemDisk[ReFS]\File` | `E:\${guid}\test_file.txt` |
+  | `NonSystemDisk[ReFS]\HardLink` | `E:\${guid}\hardlink` |
 
 ## A.2 Types of Items
 
@@ -862,13 +862,13 @@ from my experience, these attributes usually appear in combination not
 individually except `Archive`. There are only 5 attribute combinations
 we may encounter often in normal usage:
 
-| Attributes                | Path Example                                                   |
-|---------------------------|----------------------------------------------------------------|
+| Attributes | Path Example |
+|----|----|
 | Hidden, System, Directory | `D:\` or `D:\System Volume Information\` or `D:\$Recycle.Bin\` |
-| Directory, ReparsePoint   | `D:\*some_symbolic_link_dir\` or `D:\*some_junction\`          |
-| Hidden, System, Archive   | `D:\*desktop.ini`                                              |
-| Archive, ReparsePoint     | `D:\*some_symbolic_link_file`                                  |
-| Archive                   | `D:\*some_hardlink`                                            |
+| Directory, ReparsePoint | `D:\*some_symbolic_link_dir\` or `D:\*some_junction\` |
+| Hidden, System, Archive | `D:\*desktop.ini` |
+| Archive, ReparsePoint | `D:\*some_symbolic_link_file` |
+| Archive | `D:\*some_hardlink` |
 
 And, a file system may also influence items’ `SDDLs` in a certain way.
 In this article, we only concern about those items that hold in
@@ -881,36 +881,36 @@ Therefore, here we define 28 common types of files, links or directories
 as following (consider `D:\`’s format is NTFS while `E:\`’s format is
 ReFS while):
 
-| Types Description                               | Path Example                                          |
-|-------------------------------------------------|-------------------------------------------------------|
-| `NonSystemDisk[NTFS]\Root`                      | `D:\`                                                 |
-| `NonSystemDisk[RTFS]\Root`                      | `E:\`                                                 |
-| `Home\Root`                                     | `$Home\`                                              |
-| `NonSystemDisk[NTFS]\System Volume Information` | `D:\System Volume Information`                        |
-| `NonSystemDisk[NTFS]\$Recycle.Bin`              | `D:\$Recycle.Bin`                                     |
-| `NonSystemDisk[ReFS]\System Volume Information` | `E:\System Volume Information`                        |
-| `NonSystemDisk[ReFS]\$Recycle.Bin`              | `E:\$Recycle.Bin`                                     |
-| `Home\Directory`                                | `$Home\*some_nomrmal_dir\`                            |
-| `Home\SymbolicLinkDirectory`                    | `$Home\*some_symbolic_link_dir\`                      |
-| `Home\Junction`                                 | `$Home\*some_junction\`                               |
-| `NonSystemDisk[NTFS]\Directory`                 | `D:\*some_nomrmal_dir\`                               |
-| `NonSystemDisk[NTFS]\SymbolicLinkDirectory`     | `D:\*some_symbolic_link_dir\`                         |
-| `NonSystemDisk[NTFS]\Junction`                  | `D:\*some_junction\`                                  |
-| `NonSystemDisk[ReFS]\Directory`                 | `E:\*some_nomrmal_dir\`                               |
-| `NonSystemDisk[ReFS]\SymbolicLinkDirectory`     | `E:\*some_symbolic_link_dir\`                         |
-| `NonSystemDisk[ReFS]\Junction`                  | `E:\*some_junction\`                                  |
-| `Home\desktop.ini`                              | `$Home\*desktop.ini`                                  |
-| `Home\SymbolicLinkFile`                         | `$Home\*some_symbolic_link_file`                      |
-| `Home\File`                                     | `$Home\*some_normal_file or InHome\*some_sparse_file` |
-| `Home\HardLink`                                 | `$Home\*some_hardlink`                                |
-| `NonSystemDisk[NTFS]\desktop.ini`               | `D:\*desktop.ini`                                     |
-| `NonSystemDisk[NTFS]\SymbolicLinkFile`          | `D:\*some_symbolic_link_file`                         |
-| `NonSystemDisk[NTFS]\File`                      | `D:\*some_normal_file or D:\*some_sparse_file`        |
-| `NonSystemDisk[NTFS]\HardLink`                  | `D:\*some_hardlink`                                   |
-| `NonSystemDisk[ReFS]\desktop.ini`               | `D:\*desktop.ini`                                     |
-| `NonSystemDisk[ReFS]\SymbolicLinkFile`          | `D:\*some_symbolic_link_file`                         |
-| `NonSystemDisk[ReFS]\File`                      | `D:\*some_normal_file or D:\*some_sparse_file`        |
-| `NonSystemDisk[ReFS]\HardLink`                  | `D:\*some_hardlink`                                   |
+| Types Description | Path Example |
+|----|----|
+| `NonSystemDisk[NTFS]\Root` | `D:\` |
+| `NonSystemDisk[RTFS]\Root` | `E:\` |
+| `Home\Root` | `$Home\` |
+| `NonSystemDisk[NTFS]\System Volume Information` | `D:\System Volume Information` |
+| `NonSystemDisk[NTFS]\$Recycle.Bin` | `D:\$Recycle.Bin` |
+| `NonSystemDisk[ReFS]\System Volume Information` | `E:\System Volume Information` |
+| `NonSystemDisk[ReFS]\$Recycle.Bin` | `E:\$Recycle.Bin` |
+| `Home\Directory` | `$Home\*some_nomrmal_dir\` |
+| `Home\SymbolicLinkDirectory` | `$Home\*some_symbolic_link_dir\` |
+| `Home\Junction` | `$Home\*some_junction\` |
+| `NonSystemDisk[NTFS]\Directory` | `D:\*some_nomrmal_dir\` |
+| `NonSystemDisk[NTFS]\SymbolicLinkDirectory` | `D:\*some_symbolic_link_dir\` |
+| `NonSystemDisk[NTFS]\Junction` | `D:\*some_junction\` |
+| `NonSystemDisk[ReFS]\Directory` | `E:\*some_nomrmal_dir\` |
+| `NonSystemDisk[ReFS]\SymbolicLinkDirectory` | `E:\*some_symbolic_link_dir\` |
+| `NonSystemDisk[ReFS]\Junction` | `E:\*some_junction\` |
+| `Home\desktop.ini` | `$Home\*desktop.ini` |
+| `Home\SymbolicLinkFile` | `$Home\*some_symbolic_link_file` |
+| `Home\File` | `$Home\*some_normal_file or InHome\*some_sparse_file` |
+| `Home\HardLink` | `$Home\*some_hardlink` |
+| `NonSystemDisk[NTFS]\desktop.ini` | `D:\*desktop.ini` |
+| `NonSystemDisk[NTFS]\SymbolicLinkFile` | `D:\*some_symbolic_link_file` |
+| `NonSystemDisk[NTFS]\File` | `D:\*some_normal_file or D:\*some_sparse_file` |
+| `NonSystemDisk[NTFS]\HardLink` | `D:\*some_hardlink` |
+| `NonSystemDisk[ReFS]\desktop.ini` | `D:\*desktop.ini` |
+| `NonSystemDisk[ReFS]\SymbolicLinkFile` | `D:\*some_symbolic_link_file` |
+| `NonSystemDisk[ReFS]\File` | `D:\*some_normal_file or D:\*some_sparse_file` |
+| `NonSystemDisk[ReFS]\HardLink` | `D:\*some_hardlink` |
 
 **But, why the above 28 types are the common ones ？** I think the
 reasons are (on Windows):
@@ -1029,36 +1029,36 @@ Finally, we collect the above outputs to reveal the correct `SDDLs` as
 the following table, where
 the`$UserSid = (Get-LocalUser -Name ([Environment]::UserName)).SID.Value`
 
-| Type                                            | Example Path                                                           | SDDL                                                                                                                                                                                       |
-|-------------------------------------------------|------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `NonSystemDisk[NTFS]\Root`                      | `D:\`                                                                  | `O:SYG:SYD:AI(A;OICIIO;SDGXGWGR;;;AU)(A;;0x1301bf;;;AU)(A;;FA;;;SY)(A;OICIIO;GA;;;SY)(A;OICIIO;GA;;;BA)(A;;FA;;;BA)(A;;0x1200a9;;;BU)(A;OICIIO;GXGR;;;BU)`                                 |
-| `NonSystemDisk[ReFS]\Root`                      | `E:\`                                                                  | `O:BAG:SYD:AI(A;OICIIO;SDGXGWGR;;;AU)(A;;0x1301bf;;;AU)(A;OICIIO;GA;;;SY)(A;;FA;;;SY)(A;OICI;FA;;;BA)(A;;0x1200a9;;;BU)(A;OICIIO;GXGR;;;BU)`                                               |
-| `Home\Root`                                     | `C:\Users\User`                                                        | `O:BAG:SYD:PAI(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;OICI;FA;;;${UserSid})`                                                                                                                    |
-| `NonSystemDisk[NTFS]\System Volume Information` | `D:\System Volume Information`                                         | `O:BAG:SYD:PAI(A;OICI;FA;;;SY)`                                                                                                                                                            |
-| `NonSystemDisk[NTFS]\$Recycle.Bin`              | `D:\$Recycle.Bin`                                                      | `O:${UserSid}G:${UserSid}D:PAI(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;;0x1201ad;;;BU)`                                                                                                          |
-| `NonSystemDisk[ReFS]\System Volume Information` | `E:\System Volume Information`                                         | `O:BAG:SYD:PAI(A;OICI;FA;;;SY)`                                                                                                                                                            |
-| `NonSystemDisk[ReFS]\$Recycle.Bin`              | `E:\$Recycle.Bin`                                                      | `O:${UserSid}G:${UserSid}D:PAI(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;;0x1201ad;;;BU)`                                                                                                          |
-| `Home\Directory`                                | `C:\Users\User\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\test_dir`          | `O:${UserSid}G:${UserSid}D:AI(A;OICIID;FA;;;SY)(A;OICIID;FA;;;BA)(A;OICIID;FA;;;${UserSid})`                                                                                               |
-| `Home\SymbolicLinkDirectory`                    | `C:\Users\User\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\symbolic_link`     | `O:BAG:${UserSid}D:AI(A;OICIID;FA;;;SY)(A;OICIID;FA;;;BA)(A;OICIID;FA;;;${UserSid})`                                                                                                       |
-| `Home\Junction`                                 | `C:\Users\User\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\junction`          | `O:${UserSid}G:${UserSid}D:AI(A;OICIID;FA;;;SY)(A;OICIID;FA;;;BA)(A;OICIID;FA;;;${UserSid})`                                                                                               |
-| `NonSystemDisk[NTFS]\Directory`                 | `D:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\test_dir`                     | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;OICIIOID;SDGXGWGR;;;AU)(A;ID;FA;;;SY)(A;OICIIOID;GA;;;SY)(A;ID;FA;;;BA)(A;OICIIOID;GA;;;BA)(A;ID;0x1200a9;;;BU)(A;OICIIOID;GXGR;;;BU)` |
-| `NonSystemDisk[NTFS]\SymbolicLinkDirectory`     | `D:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\symbolic_link`                | `O:BAG:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;OICIIOID;SDGXGWGR;;;AU)(A;ID;FA;;;SY)(A;OICIIOID;GA;;;SY)(A;ID;FA;;;BA)(A;OICIIOID;GA;;;BA)(A;ID;0x1200a9;;;BU)(A;OICIIOID;GXGR;;;BU)`         |
-| `NonSystemDisk[NTFS]\Junction`                  | `D:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\junction`                     | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;OICIIOID;SDGXGWGR;;;AU)(A;ID;FA;;;SY)(A;OICIIOID;GA;;;SY)(A;ID;FA;;;BA)(A;OICIIOID;GA;;;BA)(A;ID;0x1200a9;;;BU)(A;OICIIOID;GXGR;;;BU)` |
-| `NonSystemDisk[ReFS]\Directory`                 | `E:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\test_dir`                     | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;OICIIOID;SDGXGWGR;;;AU)(A;ID;FA;;;SY)(A;OICIIOID;GA;;;SY)(A;OICIID;FA;;;BA)(A;ID;0x1200a9;;;BU)(A;OICIIOID;GXGR;;;BU)`                 |
-| `NonSystemDisk[ReFS]\SymbolicLinkDirectory`     | `E:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\symbolic_link`                | `O:BAG:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;OICIIOID;SDGXGWGR;;;AU)(A;ID;FA;;;SY)(A;OICIIOID;GA;;;SY)(A;OICIID;FA;;;BA)(A;ID;0x1200a9;;;BU)(A;OICIIOID;GXGR;;;BU)`                         |
-| `NonSystemDisk[ReFS]\Junction`                  | `E:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\junction`                     | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;OICIIOID;SDGXGWGR;;;AU)(A;ID;FA;;;SY)(A;OICIIOID;GA;;;SY)(A;OICIID;FA;;;BA)(A;ID;0x1200a9;;;BU)(A;OICIIOID;GXGR;;;BU)`                 |
-| `Home\desktop.ini`                              | `C:\Users\User\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\desktop.ini`       | `O:${UserSid}G:${UserSid}D:AI(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;FA;;;${UserSid})`                                                                                                           |
-| `Home\SymbolicLinkFile`                         | `C:\Users\User\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\symbolic_link_txt` | `O:BAG:${UserSid}D:AI(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;FA;;;${UserSid})`                                                                                                                   |
-| `Home\File`                                     | `C:\Users\User\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\test_file.txt`     | `O:${UserSid}G:${UserSid}D:AI(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;FA;;;${UserSid})`                                                                                                           |
-| `Home\HardLink`                                 | `C:\Users\User\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\hardlink`          | `O:${UserSid}G:${UserSid}D:AI(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;FA;;;${UserSid})`                                                                                                           |
-| `NonSystemDisk[NTFS]\desktop.ini`               | `D:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\desktop.ini`                  | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;0x1200a9;;;BU)`                                                                                         |
-| `NonSystemDisk[NTFS]\SymbolicLinkFile`          | `D:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\symbolic_link_txt`            | `O:BAG:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;0x1200a9;;;BU)`                                                                                                 |
-| `NonSystemDisk[NTFS]\File`                      | `D:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\test_file.txt`                | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;0x1200a9;;;BU)`                                                                                         |
-| `NonSystemDisk[NTFS]\HardLink`                  | `D:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\hardlink`                     | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;0x1200a9;;;BU)`                                                                                         |
-| `NonSystemDisk[ReFS]\desktop.ini`               | `E:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\desktop.ini`                  | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;0x1200a9;;;BU)`                                                                                         |
-| `NonSystemDisk[ReFS]\SymbolicLinkFile`          | `E:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\symbolic_link_txt`            | `O:BAG:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;0x1200a9;;;BU)`                                                                                                 |
-| `NonSystemDisk[ReFS]\File`                      | `E:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\test_file.txt`                | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;0x1200a9;;;BU)`                                                                                         |
-| `NonSystemDisk[ReFS]\HardLink`                  | `E:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\hardlink`                     | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;0x1200a9;;;BU)`                                                                                         |
+| Type | Example Path | SDDL |
+|----|----|----|
+| `NonSystemDisk[NTFS]\Root` | `D:\` | `O:SYG:SYD:AI(A;OICIIO;SDGXGWGR;;;AU)(A;;0x1301bf;;;AU)(A;;FA;;;SY)(A;OICIIO;GA;;;SY)(A;OICIIO;GA;;;BA)(A;;FA;;;BA)(A;;0x1200a9;;;BU)(A;OICIIO;GXGR;;;BU)` |
+| `NonSystemDisk[ReFS]\Root` | `E:\` | `O:BAG:SYD:AI(A;OICIIO;SDGXGWGR;;;AU)(A;;0x1301bf;;;AU)(A;OICIIO;GA;;;SY)(A;;FA;;;SY)(A;OICI;FA;;;BA)(A;;0x1200a9;;;BU)(A;OICIIO;GXGR;;;BU)` |
+| `Home\Root` | `C:\Users\User` | `O:BAG:SYD:PAI(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;OICI;FA;;;${UserSid})` |
+| `NonSystemDisk[NTFS]\System Volume Information` | `D:\System Volume Information` | `O:BAG:SYD:PAI(A;OICI;FA;;;SY)` |
+| `NonSystemDisk[NTFS]\$Recycle.Bin` | `D:\$Recycle.Bin` | `O:${UserSid}G:${UserSid}D:PAI(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;;0x1201ad;;;BU)` |
+| `NonSystemDisk[ReFS]\System Volume Information` | `E:\System Volume Information` | `O:BAG:SYD:PAI(A;OICI;FA;;;SY)` |
+| `NonSystemDisk[ReFS]\$Recycle.Bin` | `E:\$Recycle.Bin` | `O:${UserSid}G:${UserSid}D:PAI(A;OICI;FA;;;SY)(A;OICI;FA;;;BA)(A;;0x1201ad;;;BU)` |
+| `Home\Directory` | `C:\Users\User\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\test_dir` | `O:${UserSid}G:${UserSid}D:AI(A;OICIID;FA;;;SY)(A;OICIID;FA;;;BA)(A;OICIID;FA;;;${UserSid})` |
+| `Home\SymbolicLinkDirectory` | `C:\Users\User\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\symbolic_link` | `O:BAG:${UserSid}D:AI(A;OICIID;FA;;;SY)(A;OICIID;FA;;;BA)(A;OICIID;FA;;;${UserSid})` |
+| `Home\Junction` | `C:\Users\User\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\junction` | `O:${UserSid}G:${UserSid}D:AI(A;OICIID;FA;;;SY)(A;OICIID;FA;;;BA)(A;OICIID;FA;;;${UserSid})` |
+| `NonSystemDisk[NTFS]\Directory` | `D:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\test_dir` | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;OICIIOID;SDGXGWGR;;;AU)(A;ID;FA;;;SY)(A;OICIIOID;GA;;;SY)(A;ID;FA;;;BA)(A;OICIIOID;GA;;;BA)(A;ID;0x1200a9;;;BU)(A;OICIIOID;GXGR;;;BU)` |
+| `NonSystemDisk[NTFS]\SymbolicLinkDirectory` | `D:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\symbolic_link` | `O:BAG:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;OICIIOID;SDGXGWGR;;;AU)(A;ID;FA;;;SY)(A;OICIIOID;GA;;;SY)(A;ID;FA;;;BA)(A;OICIIOID;GA;;;BA)(A;ID;0x1200a9;;;BU)(A;OICIIOID;GXGR;;;BU)` |
+| `NonSystemDisk[NTFS]\Junction` | `D:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\junction` | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;OICIIOID;SDGXGWGR;;;AU)(A;ID;FA;;;SY)(A;OICIIOID;GA;;;SY)(A;ID;FA;;;BA)(A;OICIIOID;GA;;;BA)(A;ID;0x1200a9;;;BU)(A;OICIIOID;GXGR;;;BU)` |
+| `NonSystemDisk[ReFS]\Directory` | `E:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\test_dir` | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;OICIIOID;SDGXGWGR;;;AU)(A;ID;FA;;;SY)(A;OICIIOID;GA;;;SY)(A;OICIID;FA;;;BA)(A;ID;0x1200a9;;;BU)(A;OICIIOID;GXGR;;;BU)` |
+| `NonSystemDisk[ReFS]\SymbolicLinkDirectory` | `E:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\symbolic_link` | `O:BAG:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;OICIIOID;SDGXGWGR;;;AU)(A;ID;FA;;;SY)(A;OICIIOID;GA;;;SY)(A;OICIID;FA;;;BA)(A;ID;0x1200a9;;;BU)(A;OICIIOID;GXGR;;;BU)` |
+| `NonSystemDisk[ReFS]\Junction` | `E:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\junction` | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;OICIIOID;SDGXGWGR;;;AU)(A;ID;FA;;;SY)(A;OICIIOID;GA;;;SY)(A;OICIID;FA;;;BA)(A;ID;0x1200a9;;;BU)(A;OICIIOID;GXGR;;;BU)` |
+| `Home\desktop.ini` | `C:\Users\User\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\desktop.ini` | `O:${UserSid}G:${UserSid}D:AI(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;FA;;;${UserSid})` |
+| `Home\SymbolicLinkFile` | `C:\Users\User\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\symbolic_link_txt` | `O:BAG:${UserSid}D:AI(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;FA;;;${UserSid})` |
+| `Home\File` | `C:\Users\User\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\test_file.txt` | `O:${UserSid}G:${UserSid}D:AI(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;FA;;;${UserSid})` |
+| `Home\HardLink` | `C:\Users\User\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\hardlink` | `O:${UserSid}G:${UserSid}D:AI(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;FA;;;${UserSid})` |
+| `NonSystemDisk[NTFS]\desktop.ini` | `D:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\desktop.ini` | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;0x1200a9;;;BU)` |
+| `NonSystemDisk[NTFS]\SymbolicLinkFile` | `D:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\symbolic_link_txt` | `O:BAG:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;0x1200a9;;;BU)` |
+| `NonSystemDisk[NTFS]\File` | `D:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\test_file.txt` | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;0x1200a9;;;BU)` |
+| `NonSystemDisk[NTFS]\HardLink` | `D:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\hardlink` | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;0x1200a9;;;BU)` |
+| `NonSystemDisk[ReFS]\desktop.ini` | `E:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\desktop.ini` | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;0x1200a9;;;BU)` |
+| `NonSystemDisk[ReFS]\SymbolicLinkFile` | `E:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\symbolic_link_txt` | `O:BAG:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;0x1200a9;;;BU)` |
+| `NonSystemDisk[ReFS]\File` | `E:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\test_file.txt` | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;0x1200a9;;;BU)` |
+| `NonSystemDisk[ReFS]\HardLink` | `E:\ac6120eb-6f9e-4e75-9f4c-a41b576ffe3e\hardlink` | `O:${UserSid}G:${UserSid}D:AI(A;ID;0x1301bf;;;AU)(A;ID;FA;;;SY)(A;ID;FA;;;BA)(A;ID;0x1200a9;;;BU)` |
 
 **See function**
 [`Get-DefaultSddl`](https://github.com/Zhaopudark/PSComputerManagementZp/blob/2d44507837ecca35726aeae5c6439dc6e2bb97f4/Module/Private/Tools/Authorization.ps1#L281)

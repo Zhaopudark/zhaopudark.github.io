@@ -163,22 +163,22 @@ behavior. Let’s elaborate some prerequisites:
 
 Then, we can generate a 14-type of links as:
 
-| Path $\rightarrow$                                                     | Toward                                                                         | Type                                    |
-|------------------------------------------------------------------------|--------------------------------------------------------------------------------|-----------------------------------------|
-| `${Home}\${guid}\hardlink`                                             | `${Home}\${guid}\file_for_hardlink.txt`                                        | `Hard Link`$\rightarrow$`File`          |
-| `D:\${guid}\hardlink`                                                  | `D:\${guid}\file_for_hardlink.txt`                                             | `Hard Link`$\rightarrow$`File`          |
-| `${Home}\${guid}\local_junction`                                       | `${Home}\${guid}\dir_for_local_junction`                                       | `Junction`$\rightarrow$`Directory`      |
-| `D:\${guid}\local_junction`                                            | `D:\${guid}\dir_for_local_junction`                                            | `Junction`$\rightarrow$`Directory`      |
-| <font color=#FF00 >`D:\${guid}\non_local_junction`</font>              | <font color=#0080>`${Home}\${guid}\dir_for_non_local_junction`</font>          | `Junction`$\rightarrow$`Directory`      |
-| <font color=#0080>`${Home}\${guid}\non_local_junction`</font>          | <font color=#FF00 >`D:\${guid}\dir_for_non_local_junction`</font>              | `Junction`$\rightarrow$`Directory`      |
-| `${Home}\${guid}\local_symbiliclink-txt`                               | `${Home}\${guid}\fire_for_local_symbiliclink.txt`                              | `Symbolic Link`$\rightarrow$`File`      |
-| `D:\${guid}\local_symbiliclink-txt`                                    | `D:\${guid}\fire_for_local_symbiliclink.txt`                                   | `Symbolic Link`$\rightarrow$`File`      |
-| <font color=#FF00 >`D:\${guid}\non_local_symbiliclink-txt`</font>      | <font color=#0080>`${Home}\${guid}\fire_for_non_local_symbiliclink.txt`</font> | `Symbolic Link`$\rightarrow$`File`      |
-| <font color=#0080>`${Home}\${guid}\non_local_symbiliclink-txt` </font> | <font color=#FF00>`D:\${guid}\fire_for_non_local_symbiliclink.txt`</font>      | `Symbolic Link`$\rightarrow$`File`      |
-| `${Home}\${guid}\local_symbiliclink`                                   | `${Home}\${guid}\dir_for_local_symbiliclink`                                   | `Symbolic Link`$\rightarrow$`Directory` |
-| `D:\${guid}\local_symbiliclink`                                        | `D:\${guid}\dir_for_local_symbiliclink`                                        | `Symbolic Link`$\rightarrow$`Directory` |
-| <font color=#FF00>`D:\${guid}\non_local_symbiliclink`</font>           | <font color=#0080>`${Home}\${guid}\dir_for_non_local_symbiliclink`</font>      | `Symbolic Link`$\rightarrow$`Directory` |
-| <font color=#0080>`${Home}\${guid}\non_local_symbiliclink`</font>      | <font color=#FF00>`D:\${guid}\dir_for_non_local_symbiliclink`</font>           | `Symbolic Link`$\rightarrow$`Directory` |
+| Path $`\rightarrow`$ | Toward | Type |
+|----|----|----|
+| `${Home}\${guid}\hardlink` | `${Home}\${guid}\file_for_hardlink.txt` | `Hard Link`$`\rightarrow`$`File` |
+| `D:\${guid}\hardlink` | `D:\${guid}\file_for_hardlink.txt` | `Hard Link`$`\rightarrow`$`File` |
+| `${Home}\${guid}\local_junction` | `${Home}\${guid}\dir_for_local_junction` | `Junction`$`\rightarrow`$`Directory` |
+| `D:\${guid}\local_junction` | `D:\${guid}\dir_for_local_junction` | `Junction`$`\rightarrow`$`Directory` |
+| <font color=#FF00 >`D:\${guid}\non_local_junction`</font> | <font color=#0080>`${Home}\${guid}\dir_for_non_local_junction`</font> | `Junction`$`\rightarrow`$`Directory` |
+| <font color=#0080>`${Home}\${guid}\non_local_junction`</font> | <font color=#FF00 >`D:\${guid}\dir_for_non_local_junction`</font> | `Junction`$`\rightarrow`$`Directory` |
+| `${Home}\${guid}\local_symbiliclink-txt` | `${Home}\${guid}\fire_for_local_symbiliclink.txt` | `Symbolic Link`$`\rightarrow`$`File` |
+| `D:\${guid}\local_symbiliclink-txt` | `D:\${guid}\fire_for_local_symbiliclink.txt` | `Symbolic Link`$`\rightarrow`$`File` |
+| <font color=#FF00 >`D:\${guid}\non_local_symbiliclink-txt`</font> | <font color=#0080>`${Home}\${guid}\fire_for_non_local_symbiliclink.txt`</font> | `Symbolic Link`$`\rightarrow`$`File` |
+| <font color=#0080>`${Home}\${guid}\non_local_symbiliclink-txt` </font> | <font color=#FF00>`D:\${guid}\fire_for_non_local_symbiliclink.txt`</font> | `Symbolic Link`$`\rightarrow`$`File` |
+| `${Home}\${guid}\local_symbiliclink` | `${Home}\${guid}\dir_for_local_symbiliclink` | `Symbolic Link`$`\rightarrow`$`Directory` |
+| `D:\${guid}\local_symbiliclink` | `D:\${guid}\dir_for_local_symbiliclink` | `Symbolic Link`$`\rightarrow`$`Directory` |
+| <font color=#FF00>`D:\${guid}\non_local_symbiliclink`</font> | <font color=#0080>`${Home}\${guid}\dir_for_non_local_symbiliclink`</font> | `Symbolic Link`$`\rightarrow`$`Directory` |
+| <font color=#0080>`${Home}\${guid}\non_local_symbiliclink`</font> | <font color=#FF00>`D:\${guid}\dir_for_non_local_symbiliclink`</font> | `Symbolic Link`$`\rightarrow`$`Directory` |
 
 That is to say, we will make the 14-type of links as the table above,
 covering many types that we may encounter when using. Notice, the table
@@ -215,36 +215,36 @@ Codes:
 Th results are collected in the following table, where `-` means null or
 empty (`'' or $null` in PowerShell)
 
-| Path                                                  | Attributes              | LinkType     | LinkTarget                                            |
-|-------------------------------------------------------|-------------------------|--------------|-------------------------------------------------------|
-| `${Home}\${guid}\file_for_hardlink.txt`               | Archive                 | HardLink     | \-                                                    |
-| `${Home}\${guid}\hardlink`                            | Archive                 | HardLink     | \-                                                    |
-| `D:\${guid}\file_for_hardlink.txt`                    | Archive                 | HardLink     | \-                                                    |
-| `D:\${guid}\hardlink`                                 | Archive                 | HardLink     | \-                                                    |
-| `${Home}\${guid}\dir_for_local_junction`              | Directory               | \-           | \-                                                    |
-| `${Home}\${guid}\local_junction`                      | Directory, ReparsePoint | Junction     | `${Home}\${guid}\dir_for_local_junction`              |
-| `D:\${guid}\dir_for_local_junction`                   | Directory               | \-           | \-                                                    |
-| `D:\${guid}\local_junction`                           | Directory, ReparsePoint | Junction     | `D:\${guid}\dir_for_local_junction`                   |
-| `${Home}\${guid}\dir_for_non_local_junction`          | Directory               | \-           | \-                                                    |
-| `D:\${guid}\non_local_junction`                       | Directory, ReparsePoint | Junction     | `${Home}\${guid}\dir_for_non_local_junction`          |
-| `D:\${guid}\dir_for_non_local_junction`               | Directory               | \-           | \-                                                    |
-| `${Home}\${guid}\non_local_junction`                  | Directory, ReparsePoint | Junction     | `D:\${guid}\dir_for_non_local_junction`               |
-| `${Home}\${guid}\fire_for_local_symbiliclink.txt`     | Archive                 | \-           | \-                                                    |
-| `${Home}\${guid}\local_symbiliclink-txt`              | Archive, ReparsePoint   | SymbolicLink | `${Home}\${guid}\fire_for_local_symbiliclink.txt`     |
-| `D:\${guid}\fire_for_local_symbiliclink.txt`          | Archive                 | \-           | \-                                                    |
-| `D:\${guid}\local_symbiliclink-txt`                   | Archive, ReparsePoint   | SymbolicLink | `D:\${guid}\fire_for_local_symbiliclink.txt`          |
-| `${Home}\${guid}\fire_for_non_local_symbiliclink.txt` | Archive                 | \-           | \-                                                    |
-| `D:\${guid}\non_local_symbiliclink-txt`               | Archive, ReparsePoint   | SymbolicLink | `${Home}\${guid}\fire_for_non_local_symbiliclink.txt` |
-| `D:\${guid}\fire_for_non_local_symbiliclink.txt`      | Archive                 | \-           | \-                                                    |
-| `${Home}\${guid}\non_local_symbiliclink-txt`          | Archive, ReparsePoint   | SymbolicLink | `D:\${guid}\fire_for_non_local_symbiliclink.txt`      |
-| `${Home}\${guid}\dir_for_local_symbiliclink`          | Directory               | \-           | \-                                                    |
-| `${Home}\${guid}\local_symbiliclink`                  | Directory, ReparsePoint | SymbolicLink | `${Home}\${guid}\dir_for_local_symbiliclink`          |
-| `D:\${guid}\dir_for_local_symbiliclink`               | Directory               | \-           | \-                                                    |
-| `D:\${guid}\local_symbiliclink`                       | Directory, ReparsePoint | SymbolicLink | `D:\${guid}\dir_for_local_symbiliclink`               |
-| `${Home}\${guid}\dir_for_non_local_symbiliclink`      | Directory               | \-           | \-                                                    |
-| `D:\${guid}\non_local_symbiliclink`                   | Directory, ReparsePoint | SymbolicLink | `${Home}\${guid}\dir_for_non_local_symbiliclink`      |
-| `D:\${guid}\dir_for_non_local_symbiliclink`           | Directory               | \-           | \-                                                    |
-| `${Home}\${guid}\non_local_symbiliclink`              | Directory, ReparsePoint | SymbolicLink | `D:\${guid}\dir_for_non_local_symbiliclink`           |
+| Path | Attributes | LinkType | LinkTarget |
+|----|----|----|----|
+| `${Home}\${guid}\file_for_hardlink.txt` | Archive | HardLink | \- |
+| `${Home}\${guid}\hardlink` | Archive | HardLink | \- |
+| `D:\${guid}\file_for_hardlink.txt` | Archive | HardLink | \- |
+| `D:\${guid}\hardlink` | Archive | HardLink | \- |
+| `${Home}\${guid}\dir_for_local_junction` | Directory | \- | \- |
+| `${Home}\${guid}\local_junction` | Directory, ReparsePoint | Junction | `${Home}\${guid}\dir_for_local_junction` |
+| `D:\${guid}\dir_for_local_junction` | Directory | \- | \- |
+| `D:\${guid}\local_junction` | Directory, ReparsePoint | Junction | `D:\${guid}\dir_for_local_junction` |
+| `${Home}\${guid}\dir_for_non_local_junction` | Directory | \- | \- |
+| `D:\${guid}\non_local_junction` | Directory, ReparsePoint | Junction | `${Home}\${guid}\dir_for_non_local_junction` |
+| `D:\${guid}\dir_for_non_local_junction` | Directory | \- | \- |
+| `${Home}\${guid}\non_local_junction` | Directory, ReparsePoint | Junction | `D:\${guid}\dir_for_non_local_junction` |
+| `${Home}\${guid}\fire_for_local_symbiliclink.txt` | Archive | \- | \- |
+| `${Home}\${guid}\local_symbiliclink-txt` | Archive, ReparsePoint | SymbolicLink | `${Home}\${guid}\fire_for_local_symbiliclink.txt` |
+| `D:\${guid}\fire_for_local_symbiliclink.txt` | Archive | \- | \- |
+| `D:\${guid}\local_symbiliclink-txt` | Archive, ReparsePoint | SymbolicLink | `D:\${guid}\fire_for_local_symbiliclink.txt` |
+| `${Home}\${guid}\fire_for_non_local_symbiliclink.txt` | Archive | \- | \- |
+| `D:\${guid}\non_local_symbiliclink-txt` | Archive, ReparsePoint | SymbolicLink | `${Home}\${guid}\fire_for_non_local_symbiliclink.txt` |
+| `D:\${guid}\fire_for_non_local_symbiliclink.txt` | Archive | \- | \- |
+| `${Home}\${guid}\non_local_symbiliclink-txt` | Archive, ReparsePoint | SymbolicLink | `D:\${guid}\fire_for_non_local_symbiliclink.txt` |
+| `${Home}\${guid}\dir_for_local_symbiliclink` | Directory | \- | \- |
+| `${Home}\${guid}\local_symbiliclink` | Directory, ReparsePoint | SymbolicLink | `${Home}\${guid}\dir_for_local_symbiliclink` |
+| `D:\${guid}\dir_for_local_symbiliclink` | Directory | \- | \- |
+| `D:\${guid}\local_symbiliclink` | Directory, ReparsePoint | SymbolicLink | `D:\${guid}\dir_for_local_symbiliclink` |
+| `${Home}\${guid}\dir_for_non_local_symbiliclink` | Directory | \- | \- |
+| `D:\${guid}\non_local_symbiliclink` | Directory, ReparsePoint | SymbolicLink | `${Home}\${guid}\dir_for_non_local_symbiliclink` |
+| `D:\${guid}\dir_for_non_local_symbiliclink` | Directory | \- | \- |
+| `${Home}\${guid}\non_local_symbiliclink` | Directory, ReparsePoint | SymbolicLink | `D:\${guid}\dir_for_non_local_symbiliclink` |
 
 ### Test Deletion Behavior
 
@@ -282,22 +282,22 @@ Codes:
 
 Results for target 1: See the following table.
 
-| Link $\rightarrow$                                                     | Source                                                                         | Check source after link deletion |
-|------------------------------------------------------------------------|--------------------------------------------------------------------------------|----------------------------------|
-| `${Home}\${guid}\hardlink`                                             | `${Home}\${guid}\file_for_hardlink.txt`                                        | `*1`                             |
-| `D:\${guid}\hardlink`                                                  | `D:\${guid}\file_for_hardlink.txt`                                             | `*1`                             |
-| `${Home}\${guid}\local_junction`                                       | `${Home}\${guid}\dir_for_local_junction`                                       | `*2`                             |
-| `D:\${guid}\local_junction`                                            | `D:\${guid}\dir_for_local_junction`                                            | `*2`                             |
-| <font color=#FF00 >`D:\${guid}\non_local_junction`</font>              | <font color=#0080>`${Home}\${guid}\dir_for_non_local_junction`</font>          | `*2`                             |
-| <font color=#0080>`${Home}\${guid}\non_local_junction`</font>          | <font color=#FF00 >`D:\${guid}\dir_for_non_local_junction`</font>              | `*2`                             |
-| `${Home}\${guid}\local_symbiliclink-txt`                               | `${Home}\${guid}\fire_for_local_symbiliclink.txt`                              | `*3`                             |
-| `D:\${guid}\local_symbiliclink-txt`                                    | `D:\${guid}\fire_for_local_symbiliclink.txt`                                   | `*3`                             |
-| <font color=#FF00 >`D:\${guid}\non_local_symbiliclink-txt`</font>      | <font color=#0080>`${Home}\${guid}\fire_for_non_local_symbiliclink.txt`</font> | `*3`                             |
-| <font color=#0080>`${Home}\${guid}\non_local_symbiliclink-txt` </font> | <font color=#FF00>`D:\${guid}\fire_for_non_local_symbiliclink.txt`</font>      | `*3`                             |
-| `${Home}\${guid}\local_symbiliclink`                                   | `${Home}\${guid}\dir_for_local_symbiliclink`                                   | `*2`                             |
-| `D:\${guid}\local_symbiliclink`                                        | `D:\${guid}\dir_for_local_symbiliclink`                                        | `*2`                             |
-| <font color=#FF00>`D:\${guid}\non_local_symbiliclink`</font>           | <font color=#0080>`${Home}\${guid}\dir_for_non_local_symbiliclink`</font>      | `*2`                             |
-| <font color=#0080>`${Home}\${guid}\non_local_symbiliclink`</font>      | <font color=#FF00>`D:\${guid}\dir_for_non_local_symbiliclink`</font>           | `*2`                             |
+| Link $`\rightarrow`$ | Source | Check source after link deletion |
+|----|----|----|
+| `${Home}\${guid}\hardlink` | `${Home}\${guid}\file_for_hardlink.txt` | `*1` |
+| `D:\${guid}\hardlink` | `D:\${guid}\file_for_hardlink.txt` | `*1` |
+| `${Home}\${guid}\local_junction` | `${Home}\${guid}\dir_for_local_junction` | `*2` |
+| `D:\${guid}\local_junction` | `D:\${guid}\dir_for_local_junction` | `*2` |
+| <font color=#FF00 >`D:\${guid}\non_local_junction`</font> | <font color=#0080>`${Home}\${guid}\dir_for_non_local_junction`</font> | `*2` |
+| <font color=#0080>`${Home}\${guid}\non_local_junction`</font> | <font color=#FF00 >`D:\${guid}\dir_for_non_local_junction`</font> | `*2` |
+| `${Home}\${guid}\local_symbiliclink-txt` | `${Home}\${guid}\fire_for_local_symbiliclink.txt` | `*3` |
+| `D:\${guid}\local_symbiliclink-txt` | `D:\${guid}\fire_for_local_symbiliclink.txt` | `*3` |
+| <font color=#FF00 >`D:\${guid}\non_local_symbiliclink-txt`</font> | <font color=#0080>`${Home}\${guid}\fire_for_non_local_symbiliclink.txt`</font> | `*3` |
+| <font color=#0080>`${Home}\${guid}\non_local_symbiliclink-txt` </font> | <font color=#FF00>`D:\${guid}\fire_for_non_local_symbiliclink.txt`</font> | `*3` |
+| `${Home}\${guid}\local_symbiliclink` | `${Home}\${guid}\dir_for_local_symbiliclink` | `*2` |
+| `D:\${guid}\local_symbiliclink` | `D:\${guid}\dir_for_local_symbiliclink` | `*2` |
+| <font color=#FF00>`D:\${guid}\non_local_symbiliclink`</font> | <font color=#0080>`${Home}\${guid}\dir_for_non_local_symbiliclink`</font> | `*2` |
+| <font color=#0080>`${Home}\${guid}\non_local_symbiliclink`</font> | <font color=#FF00>`D:\${guid}\dir_for_non_local_symbiliclink`</font> | `*2` |
 
 - `*1`: Become a normal file from a hardlink after link deletion.
 - `*2`: Maintain as a normal dir. The deletion of the link with
@@ -306,22 +306,22 @@ Results for target 1: See the following table.
 
 Results for target 2: See the following table.
 
-| Link $\rightarrow$                                                     | Source                                                                         | Check link after source deletion |
-|------------------------------------------------------------------------|--------------------------------------------------------------------------------|----------------------------------|
-| `${Home}\${guid}\hardlink`                                             | `${Home}\${guid}\file_for_hardlink.txt`                                        | `*1`                             |
-| `D:\${guid}\hardlink`                                                  | `D:\${guid}\file_for_hardlink.txt`                                             | `*1`                             |
-| `${Home}\${guid}\local_junction`                                       | `${Home}\${guid}\dir_for_local_junction`                                       | `*4`                             |
-| `D:\${guid}\local_junction`                                            | `D:\${guid}\dir_for_local_junction`                                            | `*4`                             |
-| <font color=#FF00 >`D:\${guid}\non_local_junction`</font>              | <font color=#0080>`${Home}\${guid}\dir_for_non_local_junction`</font>          | `*4`                             |
-| <font color=#0080>`${Home}\${guid}\non_local_junction`</font>          | <font color=#FF00 >`D:\${guid}\dir_for_non_local_junction`</font>              | `*4`                             |
-| `${Home}\${guid}\local_symbiliclink-txt`                               | `${Home}\${guid}\fire_for_local_symbiliclink.txt`                              | `*5`                             |
-| `D:\${guid}\local_symbiliclink-txt`                                    | `D:\${guid}\fire_for_local_symbiliclink.txt`                                   | `*5`                             |
-| <font color=#FF00 >`D:\${guid}\non_local_symbiliclink-txt`</font>      | <font color=#0080>`${Home}\${guid}\fire_for_non_local_symbiliclink.txt`</font> | `*5`                             |
-| <font color=#0080>`${Home}\${guid}\non_local_symbiliclink-txt` </font> | <font color=#FF00>`D:\${guid}\fire_for_non_local_symbiliclink.txt`</font>      | `*5`                             |
-| `${Home}\${guid}\local_symbiliclink`                                   | `${Home}\${guid}\dir_for_local_symbiliclink`                                   | `*6`                             |
-| `D:\${guid}\local_symbiliclink`                                        | `D:\${guid}\dir_for_local_symbiliclink`                                        | `*6`                             |
-| <font color=#FF00>`D:\${guid}\non_local_symbiliclink`</font>           | <font color=#0080>`${Home}\${guid}\dir_for_non_local_symbiliclink`</font>      | `*6`                             |
-| <font color=#0080>`${Home}\${guid}\non_local_symbiliclink`</font>      | <font color=#FF00>`D:\${guid}\dir_for_non_local_symbiliclink`</font>           | `*6`                             |
+| Link $`\rightarrow`$ | Source | Check link after source deletion |
+|----|----|----|
+| `${Home}\${guid}\hardlink` | `${Home}\${guid}\file_for_hardlink.txt` | `*1` |
+| `D:\${guid}\hardlink` | `D:\${guid}\file_for_hardlink.txt` | `*1` |
+| `${Home}\${guid}\local_junction` | `${Home}\${guid}\dir_for_local_junction` | `*4` |
+| `D:\${guid}\local_junction` | `D:\${guid}\dir_for_local_junction` | `*4` |
+| <font color=#FF00 >`D:\${guid}\non_local_junction`</font> | <font color=#0080>`${Home}\${guid}\dir_for_non_local_junction`</font> | `*4` |
+| <font color=#0080>`${Home}\${guid}\non_local_junction`</font> | <font color=#FF00 >`D:\${guid}\dir_for_non_local_junction`</font> | `*4` |
+| `${Home}\${guid}\local_symbiliclink-txt` | `${Home}\${guid}\fire_for_local_symbiliclink.txt` | `*5` |
+| `D:\${guid}\local_symbiliclink-txt` | `D:\${guid}\fire_for_local_symbiliclink.txt` | `*5` |
+| <font color=#FF00 >`D:\${guid}\non_local_symbiliclink-txt`</font> | <font color=#0080>`${Home}\${guid}\fire_for_non_local_symbiliclink.txt`</font> | `*5` |
+| <font color=#0080>`${Home}\${guid}\non_local_symbiliclink-txt` </font> | <font color=#FF00>`D:\${guid}\fire_for_non_local_symbiliclink.txt`</font> | `*5` |
+| `${Home}\${guid}\local_symbiliclink` | `${Home}\${guid}\dir_for_local_symbiliclink` | `*6` |
+| `D:\${guid}\local_symbiliclink` | `D:\${guid}\dir_for_local_symbiliclink` | `*6` |
+| <font color=#FF00>`D:\${guid}\non_local_symbiliclink`</font> | <font color=#0080>`${Home}\${guid}\dir_for_non_local_symbiliclink`</font> | `*6` |
+| <font color=#0080>`${Home}\${guid}\non_local_symbiliclink`</font> | <font color=#FF00>`D:\${guid}\dir_for_non_local_symbiliclink`</font> | `*6` |
 
 - `*4`: Maintain as a junction but point to a deleted path.
 - `*5`: Maintain as a symbolic link file but point to a deleted path.
@@ -370,22 +370,22 @@ Codes:
 
 Results : See the following table.
 
-| Link $\rightarrow$                                                     | Source                                                                         | Is authorization the same? |
-|------------------------------------------------------------------------|--------------------------------------------------------------------------------|----------------------------|
-| `${Home}\${guid}\hardlink`                                             | `${Home}\${guid}\file_for_hardlink.txt`                                        | True                       |
-| `D:\${guid}\hardlink`                                                  | `D:\${guid}\file_for_hardlink.txt`                                             | True                       |
-| `${Home}\${guid}\local_junction`                                       | `${Home}\${guid}\dir_for_local_junction`                                       | False                      |
-| `D:\${guid}\local_junction`                                            | `D:\${guid}\dir_for_local_junction`                                            | False                      |
-| <font color=#FF00 >`D:\${guid}\non_local_junction`</font>              | <font color=#0080>`${Home}\${guid}\dir_for_non_local_junction`</font>          | False                      |
-| <font color=#0080>`${Home}\${guid}\non_local_junction`</font>          | <font color=#FF00 >`D:\${guid}\dir_for_non_local_junction`</font>              | False                      |
-| `${Home}\${guid}\local_symbiliclink-txt`                               | `${Home}\${guid}\fire_for_local_symbiliclink.txt`                              | False                      |
-| `D:\${guid}\local_symbiliclink-txt`                                    | `D:\${guid}\fire_for_local_symbiliclink.txt`                                   | False                      |
-| <font color=#FF00 >`D:\${guid}\non_local_symbiliclink-txt`</font>      | <font color=#0080>`${Home}\${guid}\fire_for_non_local_symbiliclink.txt`</font> | False                      |
-| <font color=#0080>`${Home}\${guid}\non_local_symbiliclink-txt` </font> | <font color=#FF00>`D:\${guid}\fire_for_non_local_symbiliclink.txt`</font>      | False                      |
-| `${Home}\${guid}\local_symbiliclink`                                   | `${Home}\${guid}\dir_for_local_symbiliclink`                                   | False                      |
-| `D:\${guid}\local_symbiliclink`                                        | `D:\${guid}\dir_for_local_symbiliclink`                                        | False                      |
-| <font color=#FF00>`D:\${guid}\non_local_symbiliclink`</font>           | <font color=#0080>`${Home}\${guid}\dir_for_non_local_symbiliclink`</font>      | False                      |
-| <font color=#0080>`${Home}\${guid}\non_local_symbiliclink`</font>      | <font color=#FF00>`D:\${guid}\dir_for_non_local_symbiliclink`</font>           | False                      |
+| Link $`\rightarrow`$ | Source | Is authorization the same? |
+|----|----|----|
+| `${Home}\${guid}\hardlink` | `${Home}\${guid}\file_for_hardlink.txt` | True |
+| `D:\${guid}\hardlink` | `D:\${guid}\file_for_hardlink.txt` | True |
+| `${Home}\${guid}\local_junction` | `${Home}\${guid}\dir_for_local_junction` | False |
+| `D:\${guid}\local_junction` | `D:\${guid}\dir_for_local_junction` | False |
+| <font color=#FF00 >`D:\${guid}\non_local_junction`</font> | <font color=#0080>`${Home}\${guid}\dir_for_non_local_junction`</font> | False |
+| <font color=#0080>`${Home}\${guid}\non_local_junction`</font> | <font color=#FF00 >`D:\${guid}\dir_for_non_local_junction`</font> | False |
+| `${Home}\${guid}\local_symbiliclink-txt` | `${Home}\${guid}\fire_for_local_symbiliclink.txt` | False |
+| `D:\${guid}\local_symbiliclink-txt` | `D:\${guid}\fire_for_local_symbiliclink.txt` | False |
+| <font color=#FF00 >`D:\${guid}\non_local_symbiliclink-txt`</font> | <font color=#0080>`${Home}\${guid}\fire_for_non_local_symbiliclink.txt`</font> | False |
+| <font color=#0080>`${Home}\${guid}\non_local_symbiliclink-txt` </font> | <font color=#FF00>`D:\${guid}\fire_for_non_local_symbiliclink.txt`</font> | False |
+| `${Home}\${guid}\local_symbiliclink` | `${Home}\${guid}\dir_for_local_symbiliclink` | False |
+| `D:\${guid}\local_symbiliclink` | `D:\${guid}\dir_for_local_symbiliclink` | False |
+| <font color=#FF00>`D:\${guid}\non_local_symbiliclink`</font> | <font color=#0080>`${Home}\${guid}\dir_for_non_local_symbiliclink`</font> | False |
+| <font color=#0080>`${Home}\${guid}\non_local_symbiliclink`</font> | <font color=#FF00>`D:\${guid}\dir_for_non_local_symbiliclink`</font> | False |
 
 ## Conclusion
 

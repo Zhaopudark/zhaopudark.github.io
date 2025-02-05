@@ -259,7 +259,7 @@ updated: "2024-07-24 00:11:50"
 
 - 正常情况：
 
-  - `$e=mc^2 \rightarrow$`: $e=mc^2 \rightarrow$
+  - `$e=mc^2 \rightarrow$`: $`e=mc^2 \rightarrow`$
 
 - `$`符号的的最近邻有空格：
 
@@ -271,11 +271,12 @@ updated: "2024-07-24 00:11:50"
 
 NOTICE: 统一采用 AMS规则
 
-$$
+``` math
+
 \begin{equation}\label{lalla}\tag{abcd}
 e=mc^2
 \end{equation}
-$$
+```
 
 `Use AMS Numbering Rule (where only certain environments produce numbered equations, as they would be in LaTeX).`
 
@@ -287,19 +288,21 @@ e=mc^2
 \end{equation}
 ```
 
-$$
+``` math
+
 \begin{equation}\tag{1}
 e=mc^2\\
 \end{equation}
-$$
+```
 
 ## 公式块（行间公式）标注和引用
 
-$$
+``` math
+
 \begin{equation}\label{eq1}\tag{2}
 e=mc^2
 \end{equation}
-$$
+```
 
 对公式2的定义语法为：
 
@@ -309,65 +312,77 @@ e=mc^2
 \end{equation}
 ```
 
-此处使用语法`$公式\label{eq1}$`进行引用，效果为：引用 $公式\ref{eq1}$
-此处使用语法`$公式\label{eq1}$`进行引用，效果为：引用 $公式\ref{lalla}$
+此处使用语法`$公式\label{eq1}$`进行引用，效果为：引用 $`公式\ref{eq1}`$
+此处使用语法`$公式\label{eq1}$`进行引用，效果为：引用
+$`公式\ref{lalla}`$
 
 ## 公式块（行间公式）换行
 
 使用`\displaylines{x+y\\y+z}`语法换行
 
-$$
+``` math
+
 \displaylines{x+y\\y+z}
-$$
+```
 
 使用`\\`换行
 
-$$
+``` math
+
 x+y\\y+z
-$$
+```
 
 使用`\\\\`换行
 
-$$
+``` math
+
 x+y\\\\y+z
-$$
+```
 
 使用`\newline`换行
 
-$$
+``` math
+
 x+y\newline y+z
-$$
+```
 
 使用`split` 块换行
 
-$$
+``` math
+
 \begin{split}
 &x+y \\
 &y+z \\
 \end{split}
-$$
+```
 
 ## 公式块（行间公式）中遇到中文
 
-$$
+``` math
+
 x+y\\y+z
 \\
 这是中文\\
-$$
+```
 
 ## 公式块中表示空集
 
-- `\empty` $$
-  \empty
-  $$
+- `\empty`
+  ``` math
 
-- `\emptyset` $$
+  \empty
+  ```
+
+- `\emptyset`
+  ``` math
+
   \emptyset
-  $$
+  ```
 
 ## mathbb 和 mathbf
 
-$$
+``` math
+
 \begin{split}
 &\mathbb{Z^-}\\
 &\mathbb{Z^+}\\
@@ -378,7 +393,7 @@ $$
 &\mathbf{R^+}\\
 &\mathbf{N}\\
 \end{split}
-$$
+```
 
 # 代码高亮
 
@@ -462,13 +477,14 @@ alt="Level-of-concepts" />
 
 链接 [`typoraio.cn`](https://support.typoraio.cn/Links/)
 
-公式 $E=mc^2$
+公式 $`E=mc^2`$
 
-$$
+``` math
+
 \begin{equation}\tag{3}
 e=mc^2
 \end{equation}
-$$
+```
 
 {% endnote %}
 
@@ -485,6 +501,7 @@ $$
 **This is Tab 2.**
 
 <!-- endtab -->
+
 <!-- tab -->
 
 **This is Tab 3.** <!-- endtab -->
@@ -498,11 +515,13 @@ $$
 **This is Tab 1.**
 
 <!-- endtab -->
+
 <!-- tab 22-->
 
 **This is Tab 2.**
 
 <!-- endtab -->
+
 <!-- tab 333-->
 
 **This is Tab 3.**
@@ -518,11 +537,13 @@ $$
 **This is Tab 1.**
 
 <!-- endtab -->
+
 <!-- tab 22-->
 
 **This is Tab 2.**
 
 <!-- endtab -->
+
 <!-- tab 333-->
 
 **This is Tab 3.**
@@ -538,11 +559,13 @@ $$
 **This is Tab 1.**
 
 <!-- endtab -->
+
 <!-- tab 22-->
 
 **This is Tab 2.**
 
 <!-- endtab -->
+
 <!-- tab 333-->
 
 **This is Tab 3.**
