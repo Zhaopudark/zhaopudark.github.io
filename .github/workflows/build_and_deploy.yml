@@ -26,11 +26,21 @@ jobs:
           mkdir logs
           hexo clean
           hexo generate
+      ## Upload to GitHub Pages
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
           path: "public/"
+      ## Upload to OSS
+      - uses: manyuanrong/setup-ossutil@v2.0
+        with:
+          endpoint: ${{ secrets.OSS_ENDPOINT }}
+          access-key-id: ${{ secrets.OSS_ACCESS_KEY_ID}}
+          access-key-secret: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+          # sts-token:
+        # https://help.aliyun.com/zh/oss/developer-reference/synchronize-local-files-to-oss?spm=a2c4g.11186623.0.i5
+      - run: ossutil sync ./public/ oss://${{ secrets.OSS_BUCKET_NAME}}/ -f --delete
   deploy_to_github_pages:
     # Add a dependency to the build job
     needs: build_and_upload
