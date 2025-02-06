@@ -9,7 +9,7 @@ jobs:
   push_to_seo:
     runs-on: ubuntu-latest
     environment:
-      name: github-pages
+      name: seo
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5 
