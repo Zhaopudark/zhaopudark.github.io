@@ -40,7 +40,7 @@ jobs:
           access-key-secret: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
           # sts-token:
         # https://help.aliyun.com/zh/oss/developer-reference/synchronize-local-files-to-oss?spm=a2c4g.11186623.0.i5
-      - run: ossutil sync ./public/ oss://${{ secrets.OSS_BUCKET_NAME}}/ -f --delete
+      - run: ossutil sync ./public/ oss://${{ secrets.OSS_BUCKET_NAME }}/ -f --delete
   deploy_to_github_pages:
     # Add a dependency to the build job
     needs: build_and_upload
