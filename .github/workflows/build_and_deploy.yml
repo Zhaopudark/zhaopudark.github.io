@@ -38,12 +38,14 @@ jobs:
           # sts-token:
         # https://help.aliyun.com/zh/oss/developer-reference/synchronize-local-files-to-oss?spm=a2c4g.11186623.0.i5
       - run: ossutil sync ./public/ oss://${{ secrets.OSS_BUCKET_NAME }}/ -f --delete
+      
       # ## Upload to GitHub Pages
       # - name: Upload Pages artifact
       #   uses: actions/upload-pages-artifact@v3
       #   with:
       #     name: github-pages
       #     path: "public/"
+
   # deploy_to_github_pages:
   #   # Add a dependency to the build job
   #   needs: build_and_upload
