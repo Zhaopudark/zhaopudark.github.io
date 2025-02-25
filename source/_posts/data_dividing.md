@@ -11,7 +11,7 @@ tags:
 - Python
 title: Discuss the mathematics of apportionment when splitting the
   machine learning dataset into several parts by proportions
-updated: "2024-07-25 22:01:10"
+updated: "2025-02-25 09:21:39"
 ---
 
 This article discusses an operation that originated in machine learning,
@@ -982,7 +982,7 @@ Details of some proofs for several issues are documented here.
 
 $\forall n,N \in \mathbb{Z}^+, n \le N$, conside
 $D_y = \{y|y=[y_1,y_2,\ldots,y_n]\in \mathbb{N}^n,\sum_{i=1}^{n}y_i=\|y\|_1=N\}$.
-Except $\emptyset$, how many elements in $D_y$?
+How to get $\left|D_y\right|$?
 
 It equals to:
 
