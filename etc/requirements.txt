@@ -3,3 +3,5 @@ requests
 panflute
 httplib2
 oauth2client
+bs4
+pandoc-filter
