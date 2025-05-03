@@ -637,7 +637,7 @@ twikoo:
 # Giscus
 # https://giscus.app/
 giscus:
-  repo: "Zhaopudark/Blog-Little-Train"
+  repo: "Zhaopudark/zhaopudark.github.io"
   repo_id: "R_kgDOLKsTeg"
   category_id: "DIC_kwDOLKsTes4CcwC6"
   light_theme: light
