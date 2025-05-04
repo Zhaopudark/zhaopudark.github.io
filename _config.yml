@@ -120,6 +120,8 @@ deploy:
 
 
 pandoc: # https://github.com/hexojs/hexo-renderer-pandoc
+  pandocPath: 'pandoc'
+  timeout: 60000
   args:
     - '-f'
     - markdown
