@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- 由 Microsoft Visio, SVG Export 生成 绘图1.svg 页-1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="7.7932in" height="1.30741in"
+		viewBox="0 0 561.11 94.1334" xml:space="preserve" color-interpolation-filters="sRGB" class="st10">
+	<v:documentProperties v:langID="2052" v:metric="true" v:viewMarkup="false"/>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:#4672c4;stroke:#c7c8c8;stroke-width:0.25}
+		.st2 {fill:#feffff;font-family:Calibri;font-size:1.00001em}
+		.st3 {font-size:1em}
+		.st4 {marker-end:url(#mrkr4-19);stroke:#4672c4;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st5 {fill:#4672c4;fill-opacity:1;stroke:#4672c4;stroke-opacity:1;stroke-width:0.28409090909091}
+		.st6 {fill:#ffffff;stroke:none;stroke-linecap:butt;stroke-width:7.2}
+		.st7 {fill:#3c63ac;font-family:Calibri;font-size:0.833336em}
+		.st8 {fill:none;stroke:none;stroke-width:0.25}
+		.st9 {fill:#4672c4;font-family:Calibri;font-size:1.00001em}
+		.st10 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<defs id="Markers">
+		<g id="lend4">
+			<path d="M 2 1 L 0 0 L 2 -1 L 2 1 " style="stroke:none"/>
+		</g>
+		<marker id="mrkr4-19" class="st5" v:arrowType="4" v:arrowSize="2" v:setback="7.04" refX="-7.04" orient="auto"
+				markerUnits="strokeWidth" overflow="visible">
+			<use xlink:href="#lend4" transform="scale(-3.52,-3.52) "/>
+		</marker>
+	</defs>
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<title>页-1</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<v:layer v:name="连接线" v:index="0"/>
+		<g id="shape1-1" v:mID="1" v:groupContext="shape" transform="translate(0.25,-0.25)">
+			<title>矩形</title>
+			<desc>Windows</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="41.1024" cy="75.7082" width="82.21" height="36.8504"/>
+			<rect x="0" y="57.283" width="82.2047" height="36.8504" class="st1"/>
+			<text x="18.28" y="79.31" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>Windows</text>		</g>
+		<g id="shape2-4" v:mID="2" v:groupContext="shape" transform="translate(159.463,-0.25)">
+			<title>矩形.2</title>
+			<desc>Windows Terminal</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="41.1024" cy="75.7082" width="82.21" height="36.8504"/>
+			<rect x="0" y="57.283" width="82.2047" height="36.8504" class="st1"/>
+			<text x="18.28" y="72.11" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>Windows<v:newlineChar/><tspan
+						x="19.53" dy="1.2em" class="st3">Terminal</tspan></text>		</g>
+		<g id="shape3-8" v:mID="3" v:groupContext="shape" transform="translate(318.675,-0.25)">
+			<title>矩形.3</title>
+			<desc>ConsoleHost</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="41.1024" cy="75.7082" width="82.21" height="36.8504"/>
+			<rect x="0" y="57.283" width="82.2047" height="36.8504" class="st1"/>
+			<text x="10.45" y="79.31" class="st2" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>ConsoleHost</text>		</g>
+		<g id="shape4-11" v:mID="4" v:groupContext="shape" transform="translate(477.888,-0.25)">
+			<title>矩形.4</title>
+			<desc>PowerShell</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="41.1024" cy="75.7082" width="82.21" height="36.8504"/>
+			<rect x="0" y="57.283" width="82.2047" height="36.8504" class="st1"/>
+			<text x="13.82" y="79.31" class="st2" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>PowerShell</text>		</g>
+		<g id="shape5-14" v:mID="5" v:groupContext="shape" v:layerMember="0" transform="translate(82.4547,-11.5886)">
+			<title>动态连接线</title>
+			<desc>Run a</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="38.5039" cy="87.0468" width="50" height="20.0036"/>
+			<path d="M0 87.05 L69.97 87.05" class="st4"/>
+			<rect v:rectContext="textBkgnd" x="27.0097" y="81.047" width="22.9883" height="12.0001" class="st6"/>
+			<text x="27.01" y="90.05" class="st7" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>Run a</text>		</g>
+		<g id="shape6-22" v:mID="6" v:groupContext="shape" v:layerMember="0" transform="translate(241.667,-11.5886)">
+			<title>动态连接线.6</title>
+			<desc>Start a</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="38.5039" cy="87.0468" width="50" height="20.0036"/>
+			<path d="M0 87.05 L69.97 87.05" class="st4"/>
+			<rect v:rectContext="textBkgnd" x="25.1934" y="81.047" width="26.6212" height="12.0001" class="st6"/>
+			<text x="25.19" y="90.05" class="st7" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>Start a</text>		</g>
+		<g id="shape7-29" v:mID="7" v:groupContext="shape" v:layerMember="0" transform="translate(400.88,-11.5886)">
+			<title>动态连接线.7</title>
+			<desc>Host a</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="38.5039" cy="87.0468" width="50" height="20.0036"/>
+			<path d="M0 87.05 L69.97 87.05" class="st4"/>
+			<rect v:rectContext="textBkgnd" x="25.596" y="81.047" width="25.8157" height="12.0001" class="st6"/>
+			<text x="25.6" y="90.05" class="st7" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>Host a</text>		</g>
+		<g id="shape8-36" v:mID="8" v:groupContext="shape" transform="translate(0.25,-54.1083)">
+			<title>工作表.8</title>
+			<desc>System Level</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="41.1024" cy="75.7082" width="82.21" height="36.8504"/>
+			<rect x="0" y="57.283" width="82.2047" height="36.8504" class="st8"/>
+			<text x="23.49" y="72.11" class="st9" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>System<v:newlineChar/><tspan
+						x="28.52" dy="1.2em" class="st3">Level</tspan></text>		</g>
+		<g id="shape10-40" v:mID="10" v:groupContext="shape" transform="translate(159.463,-54.1083)">
+			<title>工作表.10</title>
+			<desc>Terminal (Emulator) Level</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="41.1024" cy="75.7082" width="82.21" height="36.8504"/>
+			<rect x="0" y="57.283" width="82.2047" height="36.8504" class="st8"/>
+			<text x="19.53" y="64.91" class="st9" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>Terminal<v:newlineChar/><tspan
+						x="15.07" dy="1.2em" class="st3">(Emulator)<v:newlineChar/></tspan><tspan x="28.52" dy="1.2em" class="st3">Level</tspan></text>		</g>
+		<g id="shape11-45" v:mID="11" v:groupContext="shape" transform="translate(319.148,-54.1083)">
+			<title>工作表.11</title>
+			<desc>Host Level</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="41.1024" cy="75.7082" width="82.21" height="36.8504"/>
+			<rect x="0" y="57.283" width="82.2047" height="36.8504" class="st8"/>
+			<text x="29.84" y="72.11" class="st9" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>Host<v:newlineChar/><tspan
+						x="28.52" dy="1.2em" class="st3">Level</tspan></text>		</g>
+		<g id="shape12-49" v:mID="12" v:groupContext="shape" transform="translate(478.655,-54.1083)">
+			<title>工作表.12</title>
+			<desc>Shell Level</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="41.1024" cy="75.7082" width="82.21" height="36.8504"/>
+			<rect x="0" y="57.283" width="82.2047" height="36.8504" class="st8"/>
+			<text x="29.45" y="72.11" class="st9" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>Shell<v:newlineChar/><tspan
+						x="28.52" dy="1.2em" class="st3">Level</tspan></text>		</g>
+	</g>
+</svg>

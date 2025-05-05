@@ -943,7 +943,7 @@ the testing.
 
     <figure>
     <img
-    src="https://raw.little-train.com/eb35932a6d9cf57ccf080fba6a9160dce43157a8ca6d65c41be25a2065dd5f9c.png"
+    src="/assets/eb35932a6d9cf57ccf080fba6a9160dce43157a8ca6d65c41be25a2065dd5f9c.png"
     alt="test-result" />
     <figcaption aria-hidden="true">test-result</figcaption>
     </figure>

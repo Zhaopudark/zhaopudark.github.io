@@ -229,7 +229,7 @@ Restart WSL2, then, we will automatically in `pwsh` with
 
 <figure>
 <img
-src="https://raw.little-train.com/9077a349e6c02d97df86a3daefaf1ea81435229f959d98d4093922d6613c5524.png"
+src="/assets/9077a349e6c02d97df86a3daefaf1ea81435229f959d98d4093922d6613c5524.png"
 alt="pwsh with conda base env" />
 <figcaption aria-hidden="true">pwsh with conda base env</figcaption>
 </figure>
@@ -397,7 +397,7 @@ conda create -n ml python=3.12
 
   <figure>
   <img
-  src="https://raw.little-train.com/ca90060e695c696cf85e34ce1dbf0822ef3f8cd5909fd35814c08e25bfebdb86.png"
+  src="/assets/ca90060e695c696cf85e34ce1dbf0822ef3f8cd5909fd35814c08e25bfebdb86.png"
   alt="nvcc check" />
   <figcaption aria-hidden="true">nvcc check</figcaption>
   </figure>
@@ -478,7 +478,7 @@ pip show tensorflow keras
 
 <figure>
 <img
-src="https://raw.little-train.com/b5f66901d7f0ad29db86d4073c9e5a0024236588447cc9858b033df432d816ef.png"
+src="/assets/b5f66901d7f0ad29db86d4073c9e5a0024236588447cc9858b033df432d816ef.png"
 alt="check the version of tensorflow and keras" />
 <figcaption aria-hidden="true">check the version of tensorflow and
 keras</figcaption>
@@ -523,7 +523,7 @@ as:
 
 <figure>
 <img
-src="https://raw.little-train.com/833fd3a923eefda8a115c95111152da9af679fece31795b1355174428aae34e7.png"
+src="/assets/833fd3a923eefda8a115c95111152da9af679fece31795b1355174428aae34e7.png"
 alt="tensorflow GPU test" />
 <figcaption aria-hidden="true">tensorflow GPU test</figcaption>
 </figure>

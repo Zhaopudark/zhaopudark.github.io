@@ -184,7 +184,7 @@ The testing result is shown as the following:
 
 <figure>
 <img
-src="https://raw.little-train.com/b5f4de28db1ff15f5d383edfa78ed018e23b3d9701e886615ef50c7f59ff23ca.png"
+src="/assets/b5f4de28db1ff15f5d383edfa78ed018e23b3d9701e886615ef50c7f59ff23ca.png"
 alt="patch-a-function-with-bar" />
 <figcaption aria-hidden="true">patch-a-function-with-bar</figcaption>
 </figure>
@@ -276,7 +276,7 @@ The testing result is shown as the following:
 
 <figure>
 <img
-src="https://raw.little-train.com/984a1d142eab42c5896ce8badc82b48a4861c28038750f0395b4da1a998c23fb.png"
+src="/assets/984a1d142eab42c5896ce8badc82b48a4861c28038750f0395b4da1a998c23fb.png"
 alt="support-contextual-syntax" />
 <figcaption aria-hidden="true">support-contextual-syntax</figcaption>
 </figure>
@@ -318,7 +318,7 @@ The testing result is shown as the following:
 
 <figure>
 <img
-src="https://raw.little-train.com/078ae032b20b54d33dbe30d284936afd729d76500ff0f398feba9b23427115f9.png"
+src="/assets/078ae032b20b54d33dbe30d284936afd729d76500ff0f398feba9b23427115f9.png"
 alt="support-contextual-syntax-functional" />
 <figcaption
 aria-hidden="true">support-contextual-syntax-functional</figcaption>

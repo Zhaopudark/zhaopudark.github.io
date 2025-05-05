@@ -169,7 +169,7 @@ Install-Module -Name PSComputerManagementZp -Force
 
   <figure>
   <img
-  src="https://raw.little-train.com/b85bef1e665fdfc90a3de5910d2333e8bae28a9761fc4a44099948fa7811cfa4.png"
+  src="/assets/b85bef1e665fdfc90a3de5910d2333e8bae28a9761fc4a44099948fa7811cfa4.png"
   alt="Windows计划程序" />
   <figcaption aria-hidden="true">Windows计划程序</figcaption>
   </figure>

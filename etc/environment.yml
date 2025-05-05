@@ -5,4 +5,4 @@ dependencies:
   - nodejs>=20.9 -c conda-forge
   - pandoc>=3.1 -c conda-forge
   - pip:
-      - pandoc-filter>=0.2.15
+      - pandoc-filter>=0.2.16

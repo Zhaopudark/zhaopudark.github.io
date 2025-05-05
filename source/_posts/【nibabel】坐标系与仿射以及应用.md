@@ -126,7 +126,7 @@ readers, but it is a respect for copyright.
 
   <figure>
   <img
-  src="https://raw.little-train.com/e3b51814d86377c006ab5aaef7b62c42c92508a3942d937e09367cce38ec7b98.svg"
+  src="/assets/e3b51814d86377c006ab5aaef7b62c42c92508a3942d937e09367cce38ec7b98.svg"
   alt="scanner-subject-reference-space" />
   <figcaption
   aria-hidden="true">scanner-subject-reference-space</figcaption>
@@ -161,7 +161,7 @@ readers, but it is a respect for copyright.
 
   <figure>
   <img
-  src="https://raw.little-train.com/897ed1cc0ae48f4ad36f5d30ac760500c821c9acd4b159c830bf71c7f35b73a2.svg"
+  src="/assets/897ed1cc0ae48f4ad36f5d30ac760500c821c9acd4b159c830bf71c7f35b73a2.svg"
   alt="scanner-subject-reference-space-2" />
   <figcaption
   aria-hidden="true">scanner-subject-reference-space-2</figcaption>
@@ -308,7 +308,7 @@ readers, but it is a respect for copyright.
 
   <figure>
   <img
-  src="https://raw.little-train.com/73be5e51de7a6155294848f0dbb38830eaa62991f0a2654f1927a2093aae1c3e.jpg"
+  src="/assets/73be5e51de7a6155294848f0dbb38830eaa62991f0a2654f1927a2093aae1c3e.jpg"
   alt="The-directions-that-the-neurologist-and-radiologist-are-thinking" />
   <figcaption
   aria-hidden="true">The-directions-that-the-neurologist-and-radiologist-are-thinking</figcaption>
@@ -721,7 +721,7 @@ Let’s divide these operations into 3 parts, i.e., “read”, “save” and
 
   <figure>
   <img
-  src="https://raw.little-train.com/12ba764f783dcf7951596a13b3d1745d8eed0dd32c49797e592fbbdeeb71c3f9.png"
+  src="/assets/12ba764f783dcf7951596a13b3d1745d8eed0dd32c49797e592fbbdeeb71c3f9.png"
   alt="Center-slices-for-example-image" />
   <figcaption
   aria-hidden="true">Center-slices-for-example-image</figcaption>

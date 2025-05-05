@@ -45,7 +45,7 @@ as the following:
 
 <figure>
 <img
-src="https://raw.little-train.com/f33a62f89edc6928ddf90107ebcf33a9dc2cf251d57037694915b1afb1918fee.png"
+src="/assets/f33a62f89edc6928ddf90107ebcf33a9dc2cf251d57037694915b1afb1918fee.png"
 alt="check windows update settings" />
 <figcaption aria-hidden="true">check windows update
 settings</figcaption>

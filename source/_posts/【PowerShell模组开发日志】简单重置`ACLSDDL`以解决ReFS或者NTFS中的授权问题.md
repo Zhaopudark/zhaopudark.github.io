@@ -308,7 +308,7 @@ Reset-Authorization 'X:\' -Recurse
 
 <figure>
 <img
-src="https://raw.little-train.com/d8384747c72f974c741362cff3adbf3d59551fe32af274884ee731c4aa7797cb.png"
+src="/assets/d8384747c72f974c741362cff3adbf3d59551fe32af274884ee731c4aa7797cb.png"
 alt="递归的重置NTFS或ReFS磁盘X:/中所有内容的SDDL" />
 <figcaption
 aria-hidden="true">递归的重置NTFS或ReFS磁盘<code>X:/</code>中所有内容的SDDL</figcaption>

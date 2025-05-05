@@ -125,7 +125,7 @@ behavior. Let’s elaborate some prerequisites:
   [Hyper-V](https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-on-windows-server)
   with Window-11 Enterprise Evaluation (developer). Here is a example:
 
-  <img src="https://raw.little-train.com/393a4bf6d54e55efa041b8ab181dcfa3b987712669d8960e9c814e0a02dd5de1.png" alt="Hyper-V-with-D" style="zoom:50%;"/>
+  <img src="/assets/393a4bf6d54e55efa041b8ab181dcfa3b987712669d8960e9c814e0a02dd5de1.png" alt="Hyper-V-with-D" style="zoom:50%;"/>
 
 - Provided that we have `${Home}="C:\Users\User"` a drive `D:\` with
   NTFS.
@@ -447,7 +447,7 @@ We repeat all the above testing operations and report key results:
 
   - Drive `D:\` is formatted to ReFS instead of NTFS. As the following:
 
-  <img src="https://raw.little-train.com/0000bc01ce6a3cfabd268485b8be6ad7f37926d292832b30849ab509d062fe64.png" alt="Hyper-V-with-D-ReFS" style="zoom: 50%;"/>
+  <img src="/assets/0000bc01ce6a3cfabd268485b8be6ad7f37926d292832b30849ab509d062fe64.png" alt="Hyper-V-with-D-ReFS" style="zoom: 50%;"/>
 
 - Test Basic Attributes
 

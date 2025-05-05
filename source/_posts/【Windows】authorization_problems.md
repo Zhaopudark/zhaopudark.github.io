@@ -660,7 +660,7 @@ Details about my solution.
   [Hyper-V](https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-on-windows-server)
   with Window-11 system. Here is a example:
 
-  <img src="https://raw.little-train.com/05f6aa4a9d87e1f3af36f0f4453dfcf6a4c5a98ecd65871eaf60cea9f79f6744.png" alt="Hyper-V-with-D-NTFS-E-REFS" style="zoom:50%;"/>
+  <img src="/assets/05f6aa4a9d87e1f3af36f0f4453dfcf6a4c5a98ecd65871eaf60cea9f79f6744.png" alt="Hyper-V-with-D-NTFS-E-REFS" style="zoom:50%;"/>
 
   **NOTICE**: We suggest using a normal Microsoft Account to log in to
   this Windows system. Because:
@@ -670,7 +670,7 @@ Details about my solution.
 
     <figure>
     <img
-    src="https://raw.little-train.com/9c1a31c671d589f12754f393465956695d746b67176885b87922520a7d0fd161.png"
+    src="/assets/9c1a31c671d589f12754f393465956695d746b67176885b87922520a7d0fd161.png"
     alt="none-group" />
     <figcaption aria-hidden="true">none-group</figcaption>
     </figure>
