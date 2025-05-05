@@ -101,7 +101,6 @@ The crucial environment statements are as the following:
 - `TensorFlow`: 2.11
 
 <!-- endtab -->
-
 <!-- tab On Win11 -->
 
 - `shell`: PowerShell 7.3
@@ -143,7 +142,6 @@ conda activate compile
 ```
 
 <!-- endtab -->
-
 <!-- tab On Win11 -->
 
 Create a conda env named `compile` as:
@@ -280,7 +278,6 @@ directly connected to windows and mounted to WSL2, instead of directly
 connected to WSL2)
 
 <!-- endtab -->
-
 <!-- tab On Win11 -->
 
 We can refer to [CUDA Installation Guide for Microsoft Windows
@@ -471,7 +468,6 @@ conda.
   ```
 
 <!-- endtab -->
-
 <!-- tab On Win11 -->
 
 - Install `zlib-wapi` as [Installing Zlib on
@@ -608,7 +604,6 @@ bazel --version
 ```
 
 <!-- endtab -->
-
 <!-- tab On Win11 -->
 
 ``` powershell
@@ -746,7 +741,6 @@ pip install ~/tensorflow_pkg/cuda11.8/tensorflow-tensorflow-version-tags.whl --f
 ```
 
 <!-- endtab -->
-
 <!-- tab On Win11 -->
 
 ``` powershell
@@ -1010,7 +1004,6 @@ We also partition debug methods according to different platforms.
       to check if the versions of `REQUIRED_PACKAGES` are compatible.
 
 <!-- endtab -->
-
 <!-- tab On Win11 -->
 
 - `Setting up VC environment variables failed`
@@ -1205,7 +1198,7 @@ We also partition debug methods according to different platforms.
   - [linux - Anaconda libstdc++.so.6: version \`GLIBCXX_3.4.20’ not
     found - Stack
     Overflow](https://stackoverflow.com/questions/48453497/anaconda-libstdc-so-6-version-glibcxx-3-4-20-not-found)
-  - [解决 libstdc++.so.6: version ‘GLIBCXX_3.4.30‘ not found
+  - [解决 libstdc++.so.6: version ’GLIBCXX_3.4.30‘ not found
     问题-CSDN博客](https://blog.csdn.net/bohrium/article/details/126546521)
   - [解决/usr/lib/libstdc++.so.6: version \`GLIBCXX_3.4.21’ not
     found的问题方法总结_jack_ooneil的博客-CSDN博客](https://blog.csdn.net/haoyuedangkong_fei/article/details/50787016)

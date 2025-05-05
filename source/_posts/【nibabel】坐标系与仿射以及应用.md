@@ -211,21 +211,18 @@ readers, but it is a respect for copyright.
   matrix gives the transformation from scanner RAS+ coordinates to voxel
   coordinates in the image data.
 
-  Consider we have a affine array $`A`$ for `img_a`, and affine array
-  $`B`$ for `img_b`. $`A`$ gives the mapping from voxels in the image
-  data array of `img_a` to millimeters in scanner RAS+. $`B`$ gives the
-  mapping from voxels in the image data array of `img_b` to millimeters
-  in scanner RAS+. Now let’s say we have a particular voxel coordinate
-  $`(i,j,k)`$ in the data array of `img_a` and we want to find the voxel
-  in `img_b` that is in the same spatial position. Call this matching
-  voxel coordinate $`(i^{'},j^{'},k^{'})`$. We first apply the transform
-  from `img_a` voxels to scanner RAS+ ($`A`$) and then apply the
-  transform from scanner RAS+ to voxels in `someones_anatomy.nii.gz`
-  ($`B^{-1}`$):
-  ``` math
-
+  Consider we have a affine array $A$ for `img_a`, and affine array $B$
+  for `img_b`. $A$ gives the mapping from voxels in the image data array
+  of `img_a` to millimeters in scanner RAS+. $B$ gives the mapping from
+  voxels in the image data array of `img_b` to millimeters in scanner
+  RAS+. Now let’s say we have a particular voxel coordinate $(i,j,k)$ in
+  the data array of `img_a` and we want to find the voxel in `img_b`
+  that is in the same spatial position. Call this matching voxel
+  coordinate $(i^{'},j^{'},k^{'})$. We first apply the transform from
+  `img_a` voxels to scanner RAS+ ($A$) and then apply the transform from
+  scanner RAS+ to voxels in `someones_anatomy.nii.gz` ($B^{-1}$): $$
   \begin{bmatrix} i^{'} \\ j^{'} \\ k^{'} \\ 1 \\ \end{bmatrix}=B^{-1}A\begin{bmatrix} i \\ j \\ k \\ 1 \\ \end{bmatrix}
-  ```
+  $$
 
 - **[other reference
   spaces](https://nipy.org/nibabel/coordinate_systems.html#other-reference-spaces)**:
