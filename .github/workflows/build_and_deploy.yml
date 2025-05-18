@@ -8,6 +8,8 @@ on:
 jobs:
   build_and_upload:
     runs-on: ubuntu-latest
+    environment:
+      name: oss
     name: Build and Deploy Job
     steps:
       - uses: actions/checkout@v4
@@ -17,7 +19,7 @@ jobs:
           python-version: 3.12
           activate-environment: blog_dev
           environment-file: ./etc/environment.yml
-      - name: Build
+      - name: Build For GithHub Pages
         shell: pwsh
         run: |
           npm ci && npm install -g hexo-cli
@@ -27,22 +29,29 @@ jobs:
           hexo clean
           hexo generate
      
-      # ## Upload to OSS
-      # - uses: manyuanrong/setup-ossutil@v3.0
-      #   with:
-      #     endpoint: ${{ secrets.OSS_ENDPOINT }}
-      #     access-key-id: ${{ secrets.OSS_ACCESS_KEY_ID}}
-      #     access-key-secret: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
-      #     # sts-token:
-      #   # https://help.aliyun.com/zh/oss/developer-reference/synchronize-local-files-to-oss?spm=a2c4g.11186623.0.i5
-      # - run: ossutil sync ./public/ oss://${{ secrets.OSS_BUCKET_NAME }}/ -f --delete
-      
       ## Upload to GitHub Pages
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
           path: "public/"
+  
+      - name: Build For Aliyun OSS
+        shell: pwsh
+        run: |
+          hexo clean
+          (Get-Content "_config.yml") -replace 'url: https://zhaopudark.github.io', 'url: https://little-train.com' | Set-Content "_config.yml"
+          "little-train.com`nwww.little-train.com" > CNAME
+          hexo generate
+      ## Upload to OSS
+      - uses: manyuanrong/setup-ossutil@v3.0
+        with:
+          endpoint: ${{ secrets.OSS_ENDPOINT }}
+          access-key-id: ${{ secrets.OSS_ACCESS_KEY_ID}}
+          access-key-secret: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+          # sts-token:
+        # https://help.aliyun.com/zh/oss/developer-reference/synchronize-local-files-to-oss?spm=a2c4g.11186623.0.i5
+      - run: ossutil sync ./public/ oss://${{ secrets.OSS_BUCKET_NAME }}/ -f --delete
 
   deploy_to_github_pages:
     # Add a dependency to the build job
