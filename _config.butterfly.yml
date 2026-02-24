@@ -13,6 +13,7 @@ nav:
   # Navigation bar logo image
   logo: "/assets/984fd1e5a6459a2307d37d44d79ac77d9bbc9c1ad655d01b5a6fa7a3fd1788c5.svg"
   display_title: true
+  display_post_title: true
   # Whether to fix navigation bar
   fixed: false
 
@@ -71,10 +72,10 @@ social:
 # Image Settings
 # --------------------------------------
 
-favicon: "/assets/092534d8067017a220ae8445d08d7108ff254422e5e86808cd778c08570ba356.svg"
+favicon: /assets/092534d8067017a220ae8445d08d7108ff254422e5e86808cd778c08570ba356.svg
 
 avatar:
-  img: "/assets/f3e9635c25819f061b3cf199e416ebc6a21b98bc3f27fa9a64bd550cb84ab74d.svg"
+  img: /assets/f3e9635c25819f061b3cf199e416ebc6a21b98bc3f27fa9a64bd550cb84ab74d.svg
   effect: false
 
 # Disable all banner images
@@ -86,10 +87,8 @@ default_top_img: /assets/9e691dbd7ba25c0eb9c62ce7ebfadbbd8b008a97ff58576608290ea
 # The banner image of index page
 index_img: /assets/9e691dbd7ba25c0eb9c62ce7ebfadbbd8b008a97ff58576608290eab51adbf24.png
 
-
 # The banner image of archive page
 archive_img: /assets/aca07ed9812e9cd25abbd71daf690d268eba23dac9d8f59f186ec55e3bb656a2.png
-
 
 # Note: tag page, not tags page
 tag_img:
@@ -111,7 +110,8 @@ category_per_img:
 footer_img: false
 
 # Website Background
-# Can set it to color or image url
+# Can set it to color, image URL or an array containing colors and/or image URLs
+# If an array is provided, a random background will be selected from the array on each load
 background:
 
 cover:
@@ -132,7 +132,7 @@ error_img:
 error_404:
   enable: false
   subtitle: 'Page Not Found'
-  background: "/assets/3272cfa2c99d62e519cafe92a364bba6d8a8e5c0ef4f5f1ad33e19556e6593f6.svg"
+  background: /assets/3272cfa2c99d62e519cafe92a364bba6d8a8e5c0ef4f5f1ad33e19556e6593f6.svg
 
 post_meta:
   # Home Page
@@ -179,7 +179,7 @@ subtitle:
   # Choose: false/1/2/3
   # false - disable the function
   # 1 - hitokoto.cn
-  # 2 - yijuzhan.com
+  # 2 - https://api.aa1.cn/doc/yiyan.html
   # 3 - jinrishici.com
   source: false
   # If you close the typewriter effect, the subtitle will only show the first line of sub
@@ -228,12 +228,12 @@ post_copyright:
 # Sponsor/reward
 reward:
   enable: true
-  text: "支持作者"
+  text: 支持作者
   QR_code:
-    - img: "/assets/410ad8d1d7b52c0c35df9869fb69096bbb69de79aed44f1ca16d6181ad1b2e32.png"
+    - img: /assets/410ad8d1d7b52c0c35df9869fb69096bbb69de79aed44f1ca16d6181ad1b2e32.png
       link:
       text: wechat
-    - img: "/assets/e6065e0d90c954e59445bd4fdb2ec7a49856232fa6a68000b531cbefd7bb83cf.png"
+    - img: /assets/e6065e0d90c954e59445bd4fdb2ec7a49856232fa6a68000b531cbefd7bb83cf.png
       link:
       text: alipay
 
@@ -261,7 +261,7 @@ post_pagination: 1
 
 # Displays outdated notice for a post
 noticeOutdate:
-  enable: true
+  enable: false
   # Style: simple / flat
   style: flat
   # When will it be shown
@@ -275,12 +275,15 @@ noticeOutdate:
 # Footer Settings
 # --------------------------------------
 footer:
+  nav:
   owner:
     enable: true
     since: 2022
-  custom_text:
   # Copyright of theme and framework
-  copyright: true
+  copyright:
+    enable: true
+    version: true
+  custom_text:
 
 # --------------------------------------
 # Aside Settings
@@ -305,16 +308,16 @@ aside:
       enable: true
       icon: fab fa-github
       text: Follow Me
-      link: https://github.com/Zhaopudark
+      link: https://github.com/xxxxxx
   card_announcement:
     enable: true
-    content: "不定时更新。"
+    content: This is my Blog
   card_recent_post:
     enable: true
     # If set 0 will show all
     limit: 5
     # Sort: date / updated
-    sort: updated
+    sort: date
     sort_order:
   card_newest_comments:
     enable: false
@@ -335,6 +338,7 @@ aside:
     # If set 0 will show all
     limit: 40
     color: false
+    custom_colors:
     # Order of tags, random/name/length
     orderby: random
     # Sort of order. 1, asc for ascending; -1, desc for descending
@@ -345,7 +349,7 @@ aside:
     # Type: monthly / yearly
     type: monthly
     # Eg: YYYY年MM月
-    format: YYYY年MM月
+    format: YYY年MM月
     # Sort of order. 1, asc for ascending; -1, desc for descending
     order: -1
     # If set 0 will show all
@@ -367,7 +371,7 @@ aside:
     # Time difference between publish date and now
     # Formal: Month/Day/Year Time or Year/Month/Day Time
     # Leave it empty if you don't enable this feature
-    runtime_date: 06/01/2022 00:00:00
+    runtime_date:
 
 # --------------------------------------
 # Bottom right button
@@ -378,9 +382,9 @@ rightside_bottom:
 
 # Conversion between Traditional and Simplified Chinese
 translate:
-  enable: true
+  enable: false
   # The text of a button
-  default: 簡
+  default: 繁
   # the language of website (1 - Traditional Chinese/ 2 - Simplified Chinese）
   defaultEncoding: 2
   # Time delay
@@ -420,13 +424,16 @@ rightside_item_order:
   # Default: toc,chat,comment
   show:
 
+# Animation for the bottom right config button
+rightside_config_animation: true
+
 # --------------------------------------
 # Global Settings
 # --------------------------------------
 
 anchor:
   # When you scroll, the URL will update according to header id.
-  auto_update: true
+  auto_update: false
   # Click the headline to scroll and update the anchor
   click_to_scroll: false
 
@@ -441,7 +448,7 @@ copy:
 
 # Need to install the hexo-wordcount plugin
 wordcount:
-  enable: true
+  enable: false
   # Display the word count of the article in post meta
   post_wordcount: true
   # Display the time to read the article in post meta
@@ -502,6 +509,11 @@ search:
     top_n_per_article: 1
     # Unescape html strings to the readable one.
     unescape: false
+    # Enable pagination for search results
+    pagination:
+      enable: false
+      # Number of search results per page
+      hitsPerPage: 8
     CDN:
 
   # Docsearch
@@ -524,12 +536,12 @@ share:
   # Share.js
   # https://github.com/overtrue/share.js
   sharejs:
-    sites: facebook,twitter,wechat,weibo,qq
+    sites: facebook,x,wechat,weibo,qq
 
   # AddToAny
   # https://www.addtoany.com/
   addtoany:
-    item: facebook,twitter,wechat,sina_weibo,facebook_messenger,email,copy_link
+    item: facebook,x,wechat,sina_weibo,facebook_messenger,email,copy_link
 
 # --------------------------------------
 # Comments System
@@ -623,7 +635,7 @@ facebook_comments:
   pageSize: 10
   # Choose: social / time / reverse_time
   order_by: social
-  lang: zh_TW
+  lang: en_US
 
 # Twikoo
 # https://github.com/imaegoo/twikoo
@@ -637,9 +649,9 @@ twikoo:
 # Giscus
 # https://giscus.app/
 giscus:
-  repo: "Zhaopudark/zhaopudark.github.io"
-  repo_id: "R_kgDOLKsTeg"
-  category_id: "DIC_kwDOLKsTes4CcwC6"
+  repo: Zhaopudark/zhaopudark.github.io
+  repo_id: R_kgDOLKsTeg
+  category_id: DIC_kwDOLKsTes4CcwC6
   light_theme: light
   dark_theme: dark
   js:
@@ -673,7 +685,7 @@ artalk:
 # --------------------------------------
 
 chat:
-  # Choose: chatra/tidio/daovoice/crisp
+  # Choose: chatra/tidio/crisp
   # Leave it empty if you don't need chat
   use:
   # Chat Button [recommend]
@@ -689,10 +701,6 @@ chatra:
 # https://www.tidio.com/
 tidio:
   public_key:
-
-# http://dashboard.daovoice.io/app
-daovoice:
-  app_id:
 
 # https://crisp.chat/en/
 crisp:
@@ -719,6 +727,7 @@ umami_analytics:
   enable: false
   # For self-hosted setups, configure the hostname of the Umami instance
   serverURL:
+  script_name: script.js
   website_id:
   option:
   UV_PV:
@@ -727,6 +736,12 @@ umami_analytics:
     page_pv: false
     # Umami Cloud (API key) / self-hosted Umami (token)
     token:
+
+# https://www.googletagmanager.com/
+google_tag_manager:
+  tag_id:
+  # optional
+  domain:
 
 # --------------------------------------
 # Advertisement
@@ -944,13 +959,36 @@ abcjs:
 # Mermaid
 # https://github.com/mermaid-js/mermaid
 mermaid:
-  enable: true
+  enable: false
   # Write Mermaid diagrams using code blocks
-  code_write: true
+  code_write: false
   # built-in themes: default / forest / dark / neutral
   theme:
     light: default
     dark: dark
+  # Enable "Open in New Tab" button to view diagram in a separate window
+  open_in_new_tab: false
+  # Enable zoom and pan interactions on diagrams
+  zoom_pan: false
+
+# chartjs
+# see https://www.chartjs.org/docs/latest/
+chartjs:
+  enable: false
+  # Do not modify unless you understand how they work.
+  # The default settings are only used when the MD syntax is not specified.
+  # General font color for the chart
+  fontColor:
+    light: 'rgba(0, 0, 0, 0.8)'
+    dark: 'rgba(255, 255, 255, 0.8)'
+  # General border color for the chart
+  borderColor:
+    light: 'rgba(0, 0, 0, 0.1)'
+    dark: 'rgba(255, 255, 255, 0.2)'
+  # Background color for scale labels on radar and polar area charts
+  scale_ticks_backdropColor:
+    light: 'transparent'
+    dark: 'transparent'
 
 # Note - Bootstrap Callout
 note:
@@ -996,17 +1034,12 @@ snackbar:
 # https://instant.page/
 instantpage: false
 
-# Pangu - Insert a space between Chinese character and English character
-# https://github.com/vinta/pangu.js
-pangu:
-  enable: true
-  # Specify the field to use pangu (site or post)
-  field: site
-
 # Lazyload
 # https://github.com/verlok/vanilla-lazyload
 lazyload:
   enable: false
+  # Use browser's native lazyload instead of vanilla-lazyload
+  native: false
   # Specify the field to use lazyload (site or post)
   field: site
   placeholder:
@@ -1036,6 +1069,14 @@ Open_Graph_meta:
     # fb_admins:
     # fb_app_id:
 
+# Structured Data
+# https://developers.google.com/search/docs/guides/intro-structured-data
+structured_data:
+  enable: false
+  # Alternate name for the site, used in structured data
+  # Format: ['name1', 'name2']
+  alternate_name:
+
 # Add the vendor prefixes to ensure compatibility
 css_prefix: true
 
@@ -1058,7 +1099,7 @@ CDN:
   third_party_provider: jsdelivr
 
   # Add version number to url, true or false
-  version: false
+  version: true
 
   # Custom format
   # For example: https://cdn.staticfile.org/${cdnjs_name}/${version}/${min_cdnjs_file}
@@ -1078,6 +1119,7 @@ CDN:
     # canvas_fluttering_ribbon:
     # canvas_nest:
     # canvas_ribbon:
+    # chartjs:
     # click_heart:
     # clickShowText:
     # disqusjs:
@@ -1093,7 +1135,6 @@ CDN:
     # gitalk_css:
     # giscus:
     # instantpage:
-    # instantsearch:
     # katex:
     # katex_copytex:
     # lazyload:
@@ -1104,7 +1145,6 @@ CDN:
     # medium_zoom:
     # mermaid:
     # meting_js:
-    # pangu:
     # prismjs_autoloader:
     # prismjs_js:
     # prismjs_lineNumber_js:
