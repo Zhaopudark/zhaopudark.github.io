@@ -12,8 +12,7 @@ hexo.extend.injector.register('body_end', '<script src="/js/custom_any_theme_hea
 // https://mermaid.js.org/config/usage.html
 // hexo.extend.injector.register('head_begin',`
 // <script type="module">
-//     import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-//     mermaid.initialize({ startOnLoad: true });
+//     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.12.3/+esm'
 // </script>`, 'default');
 
 
