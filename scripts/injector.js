@@ -10,10 +10,10 @@ hexo.extend.injector.register('body_end', '<script src="/js/custom_any_theme_hea
 // fluid 主题已经支持 
 // Butterfly主题时已经支持 
 // https://mermaid.js.org/config/usage.html
-// hexo.extend.injector.register('head_begin',`
-// <script type="module">
-//     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.12.3/+esm'
-// </script>`, 'default');
+hexo.extend.injector.register('head_begin',`
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.12.3/+esm'
+</script>`, 'default');
 
 
 // 文章过期提醒 fluid 主题已经支持, butterfly 主题也已经支持
